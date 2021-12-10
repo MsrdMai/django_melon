@@ -1,0 +1,16 @@
+{% extends "TopnavUser.html" %} {% load static %} {% block content %}
+
+    {% if msg %}
+    <script>
+      swal("{{msg}}", "บันทึกข้อมูลสำเร็จ", "success");
+    </script>
+    {%endif%}
+
+    {% if successfulFarm %}
+    <script>
+      swal("{{successfulFarm}}", "บันทึกข้อมูลสำเร็จ", "success");
+    </script>
+    {%endif%}
+    
+    <h1><b>หน้าหลัก</b></h1>
+    {% endblock %}

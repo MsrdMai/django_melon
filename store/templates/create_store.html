@@ -1,0 +1,190 @@
+{% extends "TopnavUser.html" %} {% load static %} {% block content %}
+
+
+    <div id="Storeform" class="col">
+        <h1 style="text-align: left;">สร้างข้อมูลฟาร์ม</h1>
+        <hr>
+      <form  class="form-info" method="POST" enctype="multipart/form-data" action="{% url 'create_store' %}">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label float-start">โลโก้ฟาร์ม</label>
+           
+            <input type="file" class="form-control-file" name="store_logo" id="file" accept="image/png, image/jpeg"
+             onchange="loadFile(event)">	<br><br>
+             {% if error_logo %}
+             <div class="invalid-feedback d-block">{{error_logo}}</div>
+             {%endif%}
+              <img id="output" width="300px" height="250px"/>
+          </div>
+
+  
+          <div class="row">
+            <div class="col">
+                <br><br>
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark float-start" onclick="getLocation()">ตำแหน่งฟาร์มของคุณ</button><br><br>
+                    <small id="emailHelp" class="form-text text-muted float-start">กรุณาคลิกที่ปุ่มเพื่อระบุตำแหน่งฟาร์ม</small><br><br>
+                   
+                    <div id="map">
+            
+                        <label  class="form-label float-start">ละติจูด (Latitude) :</label>
+                         <input type="number" step="any" disabled="disabled"  class="form-control" id='latitude' name="latitude" value=''/>
+                        <label  class="form-label float-start">ลองจิจูด (Longitude) :</label>
+                         <input type="number" step="any" disabled="disabled"  class="form-control" id='longitude' name="longitude" value='' /><br>
+                        {% if error_latitude %}
+                        <div class="invalid-feedback d-block">{{error_latitude}}</div>
+                        {%endif%}
+                    </div>
+                  </div>
+          <div class="mb-3">
+            <label class="form-label float-start">ชื่อร้านค้า</label>
+            <input type="text" class="form-control" name="store_name" placeholder="ชื่อร้านค้า" required>
+            {% if error_storename %}
+            <div class="invalid-feedback d-block">{{error_storename}}</div>
+            {%endif%}
+          </div>
+          <div class="mb-3">
+            <label  class="form-label float-start">รายละเอียดร้านค้า</label>
+            <textarea  class="form-control" name="store_description" rows="3" required></textarea>
+            {% if error_description %}
+            <div class="invalid-feedback d-block">{{error_description}}</div>
+            {%endif%}
+          </div>
+        
+        <div class="mb-3">
+            <label  class="form-label float-start">ที่อยู่ร้านค้า</label>
+            <textarea  type="textarea" class="form-control" name="store_address" rows="3" required></textarea>
+            {% if error_address %}
+            <div class="invalid-feedback d-block">{{error_address}}</div>
+            {%endif%}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label float-start">เบอร์โทรศัพท์</label>
+            <input type="tel" class="form-control" name="store_phone" placeholder="หมายเลขโทรศัพท์ต้องมี 10 หลัก" required>
+            {% if error_phone %}
+            <div class="invalid-feedback d-block">{{error_phone}}</div>
+            {%endif%}
+          </div>
+        
+           
+        </div>
+
+        <div class="col">
+            <br><br>
+            <div class="mb-3">
+              <br><label class="form-label float-start">บรรยากาศฟาร์ม</label>
+             
+              <input type="file" class="form-control-file" name="store_img" id="file2" accept="image/png, image/jpeg"
+               onchange="loadFile2(event)">	<br><br> <br><br> <br><br>
+               {% if error_img %}
+               <div class="invalid-feedback d-block">{{error_img}}</div>
+               {%endif%}
+                <img id="output2" width="600px" height="400px"/>
+            </div>
+            
+           
+          </div>
+
+        </div>
+        <div class="col">
+            <br><br>
+            <h4 style="text-align: left;">ข้อมูลสำหรับการชำระเงินของลูกค้า</h4>
+            <hr>
+            
+            <div class="mb-3 col-sm-6 my-1">
+                <label class="form-label float-start">ชื่อบัญชี</label>
+                <input type="text" class="form-control" name="bank_account" placeholder="ชื่อเจ้าของบัญชี" required>
+                {% if error_account %}
+                <div class="invalid-feedback d-block">{{error_account}}</div>
+                {%endif%}
+            </div>
+            <div class="mb-3 col-sm-6 my-1">
+                <label class="form-label float-start">ชื่อธนาคาร</label>
+                <select class="form-control" name="name_bank">
+                  <option value="0">เลือกธนาคาร</option>
+                  <option value="พร้อมเพย์">พร้อมเพย์</option>
+                  <option value="ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร">ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</option>
+                  <option value="ธ.ธนาคารออมสิน">ธ.ธนาคารออมสิน</option>
+                  <option value="ธ.กรุงศรีอยุธยา จำกัด (มหาชน)">ธ.กรุงศรีอยุธยา จำกัด (มหาชน)</option>
+                  <option value="ธ.กรุงเทพ จำกัด (มหาชน)">ธ.กรุงเทพ จำกัด (มหาชน)</option>
+                  <option value="ธ.กรุงไทย จำกัด (มหาชน)">ธ.กรุงไทย จำกัด (มหาชน)</option>
+                  <option value="ธ.กสิกรไทย จำกัด (มหาชน)">ธ.กสิกรไทย จำกัด (มหาชน)</option>
+                  <option value="ธ.เกียรตินาคิน จำกัด (มหาชน)">ธ.เกียรตินาคิน จำกัด (มหาชน)</option>
+                  <option value="ธ.ซีไอเอ็มบี ไทย จำกัด (มหาชน)">ธ.ซีไอเอ็มบี ไทย จำกัด (มหาชน)</option>
+                  <option value="ธ.ทหารไทยธนชาต จำกัด (มหาชน)">ธ.ทหารไทยธนชาต จำกัด (มหาชน)</option>
+                  <option value="ธ.ทิสโก้ จำกัด (มหาชน)">ธ.ทิสโก้ จำกัด (มหาชน)</option>
+                  <option value="ธ.ไทยพาณิชย์ จำกัด (มหาชน)">ธ.ไทยพาณิชย์ จำกัด (มหาชน)</option>
+                  <option value="ธ.ยูโอบี จำกัด (มหาชน)">ธ.ยูโอบี จำกัด (มหาชน)</option>
+                  <option value="ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)">ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)</option>
+                </select>
+              
+                {% if error_namebank %}
+                <div class="invalid-feedback d-block">{{error_namebank}}</div>
+                {%endif%}
+              
+            </div>
+             <div class="mb-3 col-sm-6 my-1">
+                <label class="form-label float-start">เลขบัญชี</label>
+                <input type="text" class="form-control" name="bank_id" placeholder="หมายเลขบัญชีต้องเป็น 10 หรือ 13 หลัก" required>
+              </div>
+              {% if error_bankid %}
+              <div class="invalid-feedback d-block">{{error_bankid}}</div>
+              {%endif%}
+         </div>
+  
+         
+          <button type="submit" class="btn btn-lg btn-block float-end" id='btn-create-store'>
+            <img src="{% static "icon/store.png" %}" width="70px" height="70px"
+            class="d-inline-block align-top" ><br>  
+            เปิดร้านเลย</button>
+          <br><br><br>  
+        </form>
+        <br><br><br>  
+           
+        </div>  
+
+
+       
+
+      <script>
+
+        
+        var x = document.getElementById("map");
+        function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        }
+        function showPosition(position) {
+            document.getElementById("latitude").disabled=false;
+            document.getElementById("longitude").disabled=false;
+            document.getElementById("latitude").value = position.coords.latitude;
+            document.getElementById("longitude").value = position.coords.longitude;
+        
+        }
+
+
+      var loadFile = function(event) {
+	    var image = document.getElementById('output');
+ 
+        document.getElementById('output').style.border = '2px solid #34D399';
+
+	    image.src = URL.createObjectURL(event.target.files[0]);
+        
+        }
+        var loadFile2 = function(event) {
+	    var image = document.getElementById('output2');
+        document.getElementById('output2').style.border = '2px solid #34D399';
+
+	    image.src = URL.createObjectURL(event.target.files[0]);
+        
+        }
+
+        </script>
+
+{% endblock %}

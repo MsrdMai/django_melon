@@ -1,0 +1,39 @@
+{% extends "TopnavUser.html" %} {% load static %}{% load socialaccount %} {% block content %}
+      <h1><b>Sign In</b></h1>
+
+      <br/>
+      <center>
+      <div id="loginform" class="col-sm-5">
+        <form  class="form-info" method="POST" action="{% url 'login_page' %}">
+            {% csrf_token %}
+    
+            <div class="mb-3">
+              <label for="Username" class="form-label float-start">Username</label>
+              <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label float-start">Password</label>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            {% if error %}
+            <div class="invalid-feedback d-block">{{error}}</div>
+            <br/>
+            {% endif %}
+
+    
+    
+            <div class="d-grid gap-2">
+            <button type="submit" class="btn my-2 my-sm-0 btn-lg btn-block" style="background-color: #34D399;color: white;">เข้าสู่ระบบ</button>
+          </form>
+        
+          <br/> <br/>
+        <a class="btn btn-light my-2 my-sm-0 btn-lg btn-block" href="{% provider_login_url 'google'%}" style="border-style: solid;border-color: black;">
+            <img src="{% static "icon/google.png" %}" width="30px" height="auto"/>
+            Sign in With Google</a>
+  
+            <br>  
+          </div>  
+        </center>
+       
+        {% endblock %}
+    

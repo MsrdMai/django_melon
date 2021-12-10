@@ -1,0 +1,37 @@
+{% extends "TopnavUser.html" %} {% load static %} {% block content %}
+
+        
+    <div class="col">
+      <h1><b>ลงทะเบียนผู้ใช้งาน</b></h1>
+
+      <br/>
+      <center>
+      <div id="loginform" class="col-sm-5">
+        <form  class="form-info" method="POST" action="{% url 'register_type' %}">
+            {% csrf_token %}
+    
+            <div class="col">
+            
+              
+                <div class="d-grid gap-2">
+                     {% for i in list_typeUser %}
+                     <button type="submit" name="accountType" class="btn my-2 my-sm-0 btn-lg btn-block"  value= "{{i.id}}"
+                     style="background-color: #34D399;color: white;">{{i.type_name}}</button>
+                    </br>
+                     {% endfor %}
+                   
+                        </br>
+              </div>
+            
+           
+          </form>
+
+          <br />
+          
+  
+            <br>  
+          </div>  
+        </center>
+        </div>
+  
+        {% endblock %}

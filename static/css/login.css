@@ -1,0 +1,30 @@
+body {
+    font-family: 'Prompt', sans-serif;
+    text-align: center;
+    
+}
+
+li {
+    margin-left:"20px";
+    margin-right:"20px";
+}
+
+nav {
+    text-align: center;
+    align-items: center;
+    display: inline-block;
+    float: none;
+}
+
+#loginform {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    padding: 5%;
+    background-color: white;
+    border-radius: 5px;
+    border-color: black;
+    border-style: solid;
+    margin: 10px;
+}
+

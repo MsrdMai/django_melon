@@ -1,0 +1,38 @@
+{% extends "TopnavUser.html" %} {% load static %} {% block content %}
+
+
+
+<h1>ข้อมูลส่วนตัว</h1>
+<hr>
+<img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="300px" height="300px"/>
+</br></br>
+
+    <div class="col-sm-9 md-3">
+        
+      <table
+        class="table table-light table-bordered "
+        style=" font-size: 16px ;"
+      >
+      
+        <tbody>
+           
+              <tr>
+                <td><b>ชื่อ</b></td>
+                <td> <b>{{user.first_name}} {{ user.last_name }}</b></td>
+              </tr>
+              <tr>
+                <td><b>Email</b></td>
+                <td> <b>{{user.email}}</b></td>
+              </tr>
+          <tr>
+            <td><b>ประเภทผู้ใช้</b></td>
+            <td> <b>{{user_info.Typeuser_id}}</b></td>
+          </tr>
+         
+  
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
