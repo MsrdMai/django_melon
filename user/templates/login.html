@@ -1,19 +1,32 @@
 {% extends "TopnavUser.html" %} {% load static %}{% load socialaccount %} {% block content %}
+<br/> <br/>
+<div class="container">
+
       <h1><b>Sign In</b></h1>
 
       <br/>
       <center>
-      <div id="loginform" class="col-sm-5">
+      <div id="loginform" class="col-sm-5" 
+      style="
+      display: flex;
+      padding: 5%;
+      padding-left: 8%;
+      padding-right: 4%;
+      background-color: white;
+      border-radius: 10%;
+      border-color: black;
+      border-style: solid;
+      margin: 10px;">
         <form  class="form-info" method="POST" action="{% url 'login_page' %}">
             {% csrf_token %}
     
             <div class="mb-3">
               <label for="Username" class="form-label float-start">Username</label>
-              <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+              <input type="text" class="form-control " name="username" >
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label float-start">Password</label>
-              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+              <label for="Password1" class="form-label float-start">Password</label>
+              <input type="password" name="password" class="form-control" >
             </div>
             {% if error %}
             <div class="invalid-feedback d-block">{{error}}</div>
@@ -34,6 +47,6 @@
             <br>  
           </div>  
         </center>
-       
+       </div>
         {% endblock %}
     

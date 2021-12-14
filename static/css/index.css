@@ -1,7 +1,5 @@
-body {
-    font-family: 'Prompt', sans-serif;
-    text-align: center;
-}
+@import url('https://fonts.googleapis.com/css?family=Prompt:400&display=swap');
+
 
 li {
     margin-left:"20px";
@@ -18,4 +16,7 @@ nav {
 .nav-item {
     padding: 20px;
 }
+
+
+
 
