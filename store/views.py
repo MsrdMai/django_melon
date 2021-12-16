@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from user.models import TypeUser, UserInType
-from .models import Store, TypeeOrder, Quality, Product, State
+from order.models import State, Order, Review
+from .models import Store, TypeeOrder, Quality, Product
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
@@ -113,11 +114,14 @@ def my_store(request, id):
         return redirect(to='create_store')
     else:
         myStore = Store.objects.get(user_id=user)
+        totel_product = Product.objects.filter(store_id=myStore)
+        totel_product = len(totel_product)
         latitude = myStore.latitude
         longitude = myStore.longitude
         context = {'myStore' : myStore,
         'latitude' : latitude,
         'longitude' : longitude,
+        'totel_product' : totel_product,
         }
     
     return render(request, template_name='my_store.html', context=context)

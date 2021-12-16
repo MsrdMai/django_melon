@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Permission
-from store.models import Store, TypeeOrder, Quality, Product, State
+from store.models import Store, TypeeOrder, Quality, Product
 # Register your models here.
 
 class StoreAdmin(admin.ModelAdmin):

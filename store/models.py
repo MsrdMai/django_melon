@@ -38,7 +38,7 @@ class Quality(models.Model):
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
-    Store_id = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store_id = models.ForeignKey(Store, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=20)
     melon_color = models.CharField(max_length=10)    
     product_description = models.CharField(max_length=255)   
@@ -61,10 +61,3 @@ class Product(models.Model):
         managed = True
         db_table = "Product"
 
-
-class State(models.Model):
-    id = models.AutoField(primary_key=True)
-    state_name = models.CharField(max_length=20)
-    class Meta:
-        managed = True
-        db_table = "State"
