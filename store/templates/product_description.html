@@ -1,17 +1,19 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
 
-<div id="TabFarmer" style="background-color: #f5f5f4; padding: 1%; width: 100%;">
-   
+<div id="TabFarmer" style="background-color: #f5f5f4; ">
+    <br><br>
+
     <div class="row">
-        <div class="col-sm-5" style="margin-right: 5px">
+        <div class="col-1"></div>
+        <div class="col" style="margin-left: 5px">
             <img
             src=" {{myStore.store_logo.url}} "
 
-            style="width: 60%; height: auto;">
+            style="width: 50%; height: auto;">
             </img>
         </div>
-    <div class="col-sm-6" style="margin: 10px;">
-         <h1 style="margin: 5%;color: #10b981; border: 2px solid;border-color:#86efac;background-color:white;">{{myStore.store_name}}</h1>
+    <div class="col">
+         <h1 style="color: #10b981; border: 2px solid;border-color:#86efac;background-color:white;">{{myStore.store_name}}</h1>
          <br>
          <p style="text-align: left;">คะแนนร้านค้า : <i class="bi bi-star-fill" ></i><i class="bi bi-star-fill" ></i></p>
          <p style="text-align: left;">ที่อยู่ร้านค้า : {{myStore.store_address}}</p>
@@ -19,10 +21,13 @@
          <p style="text-align: left;">รายการสินค้า : {{totel_product}} รายการ</p>
          <p style="text-align: left;">ขายแล้ว : 0 รายการ</p>
 
-    </div>   
+    </div>
+    <div class="col-1"></div>
 </div>
-   <div class="row" style="background-color: #f5f5f4; margin: 5px;">
-   <a href="" class="col-sm btn btn-lg btn-block "
+
+
+   <div class="row">
+   <a href="" class="col-sm-3 btn btn-lg btn-block "
    style="color: white; background-color: #34D399; border: 4px solid;border-color:#bbf7d0;"> 
    <img
    src="{% static "icon/farm.png" %}"
@@ -30,7 +35,7 @@
    </img> เกี่ยวกับฟาร์ม
    </a>
 
-   <a href="" class="col-sm btn  btn-lg btn-block"
+   <a href="" class="col-sm-3 btn  btn-lg btn-block"
    style="color: white; background-color: #34D399 ;border: 4px solid;border-color:#bbf7d0;"> 
    <img
    src="{% static "icon/product.png" %}"
@@ -38,7 +43,7 @@
    </img> รายการสินค้า
    </a>
 
-   <a href="" class="col-sm btn  btn-lg btn-block"
+   <a href="" class="col-sm-3 btn  btn-lg btn-block"
    style="color: white; background-color: #34D399;border: 4px solid;border-color:#bbf7d0;"> 
    <img
    src="{% static "icon/order.png" %}"
@@ -46,7 +51,7 @@
    </img> คำสั่งซื้อ
    </a>
 
-   <a href="" class="col-sm btn btn-lg btn-block"
+   <a href="" class="col-sm-3 btn btn-lg btn-block"
    style="color: white; background-color: #34D399;border: 4px solid;border-color:#bbf7d0;"> 
    <img
    src="{% static "icon/reviews.png" %}"
@@ -55,47 +60,24 @@
    </a>
 </div>
 </div>
-
+<br><br>
 
 <div class="container">
 <br></br>
 
 
 <div  style="background-color: white; ">
-<br></br>    
-<h4>ที่ตั้งฟาร์ม</h4>
+<br>
+<h4>ชื่อสินค้า</h4>
 <hr>
 <br></br>
-<div class="row">
-<div class="col-sm-1"></div>
-<div class="col">
-    <div class="map-responsive">
-<iframe src="https://maps.google.com/maps?q={{latitude}}, {{longitude}}&z=15&output=embed"  width="100%" height="100%" frameborder="0" style="border:0"></iframe>
-</div>
-</div>
-<div class="col-sm-1"></div>
-</div>
+
+
 <br></br>
-<h4>เกี่ยวกับฟาร์ม</h4>
-<hr>
-<div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-5 " style="margin-right: 10px">
-        <img
-        src=" {{myStore.store_img.url}} "
 
-        style="width: 100%; height: auto;">
-        </img>
-    </div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-4" style="margin-right: 10px">
-        <br></br>
-       <p>" {{myStore.store_description}} "</p>
-    </div>
-    <div class="col-sm-1"></div>
 
-</div>
-</br><br></br>
+
+
 </div>
 
 

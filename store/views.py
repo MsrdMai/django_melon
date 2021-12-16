@@ -125,3 +125,15 @@ def my_store(request, id):
         }
     
     return render(request, template_name='my_store.html', context=context)
+
+
+@login_required
+def product_description(request):
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        }
+    return render(request, template_name='product_description.html', context=context)
