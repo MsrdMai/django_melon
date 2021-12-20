@@ -137,3 +137,17 @@ def product_description(request):
         'totel_product' : totel_product,
         }
     return render(request, template_name='product_description.html', context=context)
+
+@login_required
+def product_store(request, id):
+    all_product = Product.objects.filter(store_id=id)
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+    type_product = TypeeOrder.objects.all()
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        'all_product' : all_product,
+        'type_product' :type_product}
+    return render(request, template_name='product_store.html', context=context)

@@ -42,50 +42,53 @@
 </div>
 <br><br>
 
-
-<div class="container">
-<br></br>
-
-
-<div  style="background-color: white; ">
-<br></br>    
-<h4>ที่ตั้งฟาร์ม</h4>
-<hr>
-<br></br>
-<div class="row">
-<div class="col-sm-1"></div>
-<div class="col">
-    <div class="map-responsive">
-<iframe src="https://maps.google.com/maps?q={{latitude}}, {{longitude}}&z=15&output=embed"  width="100%" height="100%" frameborder="0" style="border:0"></iframe>
-</div>
-</div>
-<div class="col-sm-1"></div>
-</div>
-<br></br>
-<h4>เกี่ยวกับฟาร์ม</h4>
-<hr>
-<div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-5 " style="margin-right: 10px">
-        <img
-        src=" {{myStore.store_img.url}} "
-
-        style="width: 100%; height: auto;">
-        </img>
-    </div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-4" style="margin-right: 10px">
-        <br></br>
-       <p>" {{myStore.store_description}} "</p>
-    </div>
-    <div class="col-sm-1"></div>
-
-</div>
-</br><br></br>
-</div>
+        <div class="container">
+                <br></br>
 
 
-</div>
+            <div style="background-color: white; ">
+                <br>
+                    <h4>รายการสินค้าในฟาร์ม</h4>
+                <hr>
+                <br>
+                
+               
+                <form method="POST" action=""> 
+                    <div class="row g-4 align-items-center" style="padding: 2%; ">
+                    <div class="col-sm-1"></div>
+                    <div class="form-group col-sm-4">
+                      <div class="col-sm"><label class="form-label float-start">ค้นหาสินค้า</label></div>
+                      <input type="text" class="form-control  ml-3" id="inputSearch" name="inputSearch" placeholder="Enter Product" value="{{search_txt}}">
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <div class="col-sm"><label class="form-label float-start" style="text-align: left;">ค้นหาประเภทสินค้า</label></div>
+                        <select class="form-control" name="input_Typeproduct">
+                            <option>ทั้งหมด</option>
+                            {% for i in  type_product %}
+                            <option  value="{{ i.id }}" {% if input_Typeproduct ==  i.id  %}selected{% endif %}>{{ i.name }}</option>
+                            {% endfor %}
+                          </select>
+                      </div>
+                    
+                      <div class="form-group col-sm">
+                        <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-outline-warning col-sm-12  my-2 my-sm-0 ">ค้นหา</button>
+                </div>
+                </div>
+                  
+                  <div class="col-sm-1"></div>
+                </div>
+            </form>
+                <br></br>
+
+
+
+
+            </div>
+
+
+        </div>
 
 <br><br> <br><br>
 {% endblock %}
