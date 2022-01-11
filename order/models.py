@@ -119,4 +119,13 @@ class Review(models.Model):
     class Meta:
         managed = True
         db_table = "Review"
-     
+
+class Message(models.Model):
+    id = models.AutoField(primary_key=True)
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    content = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+    User_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    class Meta:
+        managed = True
+        db_table = "Message"
