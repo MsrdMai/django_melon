@@ -7,7 +7,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
-# from .models import 
+
 # Create your views here.
 
 @login_required
