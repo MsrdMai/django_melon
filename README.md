@@ -2,6 +2,8 @@
 ### ขั้นตอนการติดตั้ง
 
 - python -m pip install django
+- python -m pip install django-allauth
+- python -m pip install mysqlclient
 
 เพื่อติดตั้งหรือมีการเปลี่ยนแปลงฐานข้อมูล
 - python manage.py makemigrations
