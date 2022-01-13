@@ -151,3 +151,15 @@ def product_store(request, id):
         'all_product' : all_product,
         'type_product' :type_product}
     return render(request, template_name='product_store.html', context=context)
+
+
+@login_required
+def create_product(request):
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        }
+    return render(request, template_name='create_product.html', context=context)
