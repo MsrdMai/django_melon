@@ -1,7 +1,8 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
 
 <div class="container">
-    <div id="Storeform" class="col">
+  <br>
+    <div id="Storeform" class="col" style="background-color: white; padding: 5%;">
         <h1 style="text-align: left;">สร้างข้อมูลฟาร์ม</h1>
         <hr>
       <form  class="form-info" method="POST" enctype="multipart/form-data" action="{% url 'create_store' %}">
@@ -143,7 +144,9 @@
         </form>
         <br><br><br>  
            
-     </div>   </div>  
+     </div>   
+     <br>
+    </div>  
 
 
        
