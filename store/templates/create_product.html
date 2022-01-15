@@ -1,16 +1,132 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
 
 
-<br><br>
+<br>
 
-        <div class="container" style="background-color: white;">
-            <br></br>
+        <div class="container">
+            <div id="productform" class="col" style="background-color: white; padding: 5%;">
                     <h4>เพิ่มรายการสินค้าใหม่</h4>
                 <hr>
-                <br>  
-             <div class="col-sm">
 
-                <br></br> <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>
+             <div class="col-sm">
+                <div class="mb-3">
+                   <label class="form-label float-start"><b>รูปภาพสินค้า</b></label>
+                    <input type="file" class="form-control-file" name="product_img" id="file2" accept="image/png, image/jpeg"
+                     onchange="loadFile(event)"> <br><br>
+                    
+                      <img id="output" width="600px" height="400px"/>
+                  </div>
+                <br></br>  
+ 
+          <div class="row">
+            <div class="col-sm">
+                <div class="mb-3 ">
+                    <label class="form-label float-start">ชื่อสินค้า</label>
+                    <input type="text" class="form-control" name="product_name" placeholder="ชื่อสินค้า" required>
+                  </div>
+                  <div class="mb-3 ">
+                    <label class="form-label float-start">สีเนื้อเมล่อน</label>
+                    <select class="form-control" name="melon_color">
+                      <option value="สีเนื้อ">สีเนื้อ</option>
+                      <option value="สีเขียว">สีเขียว</option>
+                    </select>
+                </div>
+                <div class="mb-3 ">
+                    <label class="form-label float-start">ราคาสินค้า</label>
+                    <input type="number" min="0" max="20000" class="form-control" name="product_price" placeholder="ราคาสินค้า" required>
+                  </div>
+                  <div class="mb-3 ">
+                    <label class="form-label float-start">จำนวนสินค้าที่มี</label>
+                    <input type="number" min="1" max="1000" class="form-control" name="product_amount" placeholder="จำนวนสินค้าที่มี" required>
+                </div> 
+
+
+                <div class="mb-3 ">
+                    <label class="form-label float-start">สถานที่ปลูก</label>
+                    <select class="form-control" name="plant_place">
+                      <option value="โรงเรือน">โรงเรือน</option>
+                      <option value="กลางแจ้ง">กลางแจ้ง</option>
+                    </select>
+                </div>
+
+                
+                <div class="mb-3 ">
+                    <label class="form-label float-start">แหล่งน้ำ</label>
+                    <select class="form-control" name="water_source">
+                      <option value="น้ำประปา">น้ำประปา</option>
+                      <option value="น้ำบาดาล">น้ำบาดาล</option>
+                    </select>
+                </div>
+
+                </div> 
+            
+         
+
+                <div class="col-sm">
+
+                    <div class="mb-3 ">
+                        <label class="form-label float-start">คุณภาพ</label>
+
+                        <select class="form-control" name="quality_id">
+                            <option>ทั้งหมด</option>
+                            {% for i in  quality_list %}
+                            <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.quality_name }}</option>
+                            {% endfor %}
+                          </select>
+
+                    </div>
+
+                <div class="mb-3">
+                    <label  class="form-label float-start">รายละเอียดสินค้า</label>
+                    <textarea  class="form-control" name="product_description" rows="3" required></textarea>
+                  </div>
+
+                  <br>
+                  <img src="{% static "icon/dateharvest.png" %}" width="70px" height="70px"
+                  class="d-inline-block align-top" />
+                  <br>
+
+                <div class="mb-3">
+                    <label  class="form-label float-start">วันที่ปลูก</label>
+                    <input type="date" class="form-control"  name="date_plant" required></input>
+                  </div>
+                <div class="mb-3">
+                    <label  class="form-label float-start">วันที่เก็บเกี่ยว</label>
+                    <input type="date" class="form-control"  name="date_harvest" required></input>
+                  </div>
+
+                  <div class="mb-3 ">
+                    <label class="form-label float-start">ราคาค่าส่งสินค้า/ลูก</label>
+                    <input type="number" min="1" max="1000" class="form-control" name="shipping_cost" placeholder="ราคาค่าส่งสินค้า/ลูก" required>
+                </div> 
+                </div> 
+            </div>
+        <br>
+             <hr>
+
+             <div class="row">
+                <div class="col-sm-2 md-3">
+                  <label class="form-label">ประเภทการสั่งสินค้า</label>
+                </div>
+                <div class="col-sm-5 md-3">
+                  <div class="form-radio">
+                   
+                      {% for type in type_list %}
+                      <input
+                        type="radio"
+                        id="radio-type-{{type.id}}"
+                        name="type_id"
+                        value="{{type.id}}"
+                      />
+                      <label for="radio-type-{{type.id}}">{{type.name}}</label>
+                      {%endfor%}
+                   
+                  </div>
+                </div>
+              </div>
+ 
+ 
+ <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>
 
             </div> 
             
@@ -19,4 +135,15 @@
         </div>
 
 <br><br> <br><br>
+
+<script>
+  var loadFile = function(event) {
+	    var image = document.getElementById('output');
+        document.getElementById('output').style.border = '2px solid #34D399';
+
+	    image.src = URL.createObjectURL(event.target.files[0]);
+        
+        }
+</script>
+</div>
 {% endblock %}

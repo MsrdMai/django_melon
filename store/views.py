@@ -159,7 +159,11 @@ def create_product(request):
     myStore = Store.objects.get(user_id=user)
     totel_product = Product.objects.filter(store_id=myStore)
     totel_product = len(totel_product)
+    quality_list = Quality.objects.all()
+    type_list = TypeeOrder.objects.all()
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'quality_list' :quality_list,
+        'type_list' : type_list,
         }
     return render(request, template_name='create_product.html', context=context)
