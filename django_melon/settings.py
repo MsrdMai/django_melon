@@ -46,12 +46,15 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     'django.contrib.sites',
     'user',
     'store',
     'order'
 
 ]
+
+ACCOUNT_DEFAULT_HTTP_PROTOCAL = 'https'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -140,7 +143,12 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
-    }
+    },
+      'facebook':
+            { 'SCOPE': ['email', 'publish_stream'],
+              'AUTH_PARAMS': { 'auth_type': 'reauthenticate' },
+              'METHOD': 'oauth2' ,
+              'LOCALE_FUNC': 'path.to.callable'} 
 }
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

@@ -1,4 +1,4 @@
-{% extends "TopnavUser.html" %} {% load static %}{% load socialaccount %} {% block content %}
+{% extends "TopnavUser.html" %} {% load static %}{% load socialaccount %}{% providers_media_js %} {% block content %}
 <br/> <br/>
 <div class="container">
 
@@ -41,8 +41,12 @@
         
           <br/> <br/>
         <a class="btn btn-light my-2 my-sm-0 btn-lg btn-block" href="{% provider_login_url 'google'%}" style="border-style: solid;border-color: black;">
-            <img src="{% static "icon/google.png" %}" width="30px" height="auto"/>
+            <img src="{% static "icon/google.png" %}" width="30px" height="auto"  class="float-start"/>
             Sign in With Google</a>
+
+        <a class="btn btn-light my-2 my-sm-0 btn-lg btn-block" href="{% provider_login_url 'facebook' %}" style="border-style: solid;border-color: black;">
+              <img src="{% static "icon/facebook.png" %}" width="30px" height="auto"  class="float-start"/>
+              Sign in With Facebook</a>
   
             <br>  
           </div>  
