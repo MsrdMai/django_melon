@@ -44,11 +44,11 @@ def create_store(request):
         if len(store_name) > 30 or len(store_name) <= 0:
             error_storename = 'ชื่อร้านค้าต้องไม่เกิน 30 ตัวอักษร'
             count_error += 1
-        if len(store_description) > 255 or len(store_description) <= 0:
-            error_description = 'รายละเอียดร้านค้าต้องไม่เกิน 100 ตัวอักษร'
+        if (len(store_description) > 255) or len(store_description) <= 0:
+            error_description = 'รายละเอียดร้านค้าต้องไม่เกิน 255 ตัวอักษรและมากกว่า 0'
             count_error += 1
-        if len(store_address) > 255 or len(store_address) <= 0:
-            error_address = 'รายละเอียดร้านค้าต้องไม่เกิน 100 ตัวอักษร'
+        if (len(store_address) > 255) or len(store_address) <= 0:
+            error_address = 'รายละเอียดร้านค้าต้องไม่เกิน 255 ตัวอักษรและมากกว่า 0'
             count_error += 1
         if len(store_phone) > 10 or len(store_phone) < 10 or len(store_phone) <= 0 or store_phone.isnumeric() == False:
             error_phone = 'หมายเลขโทรศัพท์ต้องมี 10 หลัก'

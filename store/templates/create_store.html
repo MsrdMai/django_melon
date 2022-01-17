@@ -47,7 +47,7 @@
           </div>
           <div class="mb-3">
             <label  class="form-label float-start">รายละเอียดร้านค้า</label>
-            <textarea  class="form-control" name="store_description" rows="3" required></textarea>
+            <textarea  class="form-control" name="store_description" rows="3" maxlength="255" required></textarea>
             {% if error_description %}
             <div class="invalid-feedback d-block">{{error_description}}</div>
             {%endif%}
@@ -55,7 +55,7 @@
         
         <div class="mb-3">
             <label  class="form-label float-start">ที่อยู่ร้านค้า</label>
-            <textarea  type="textarea" class="form-control" name="store_address" rows="3" required></textarea>
+            <textarea  type="textarea" class="form-control" name="store_address" rows="3" maxlength="255" required></textarea>
             {% if error_address %}
             <div class="invalid-feedback d-block">{{error_address}}</div>
             {%endif%}
