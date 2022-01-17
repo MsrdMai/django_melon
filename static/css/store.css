@@ -102,3 +102,11 @@ input[type="radio"]#radio-type-2:focus + label{
   background-color: #84cc16;
   color: #FFFFFF
 }
+
+#recode-product {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: #2d3436;
+  padding: 2%;
+  background-color: #f3f4f6;
+}

@@ -145,9 +145,25 @@
             <a class="nav-link dropdown-toggle btn-light my-2 my-sm-0 btn-lg btn-block" href="" style="color: white; background-color: #FBBF24" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ user.username}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="">{{ user.email }}</a></li>
-              <li><a class="dropdown-item" href="{% url 'profile' id=user.id %}">ข้อมูลส่วนตัว</a></li>
+            <ul class="dropdown-menu " aria-labelledby="navbarDropdown" style="overflow: hidden;">
+              <li><a class="dropdown-item" href="">
+                <i class="bi bi-envelope"></i>
+                {{ user.email }}</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile' id=user.id %}">
+                <i class="bi bi-person-square " ></i>
+                ข้อมูลส่วนตัว</a></li>
+
+              {% for group in  request.user.groups.all %}
+              {% if group.name == 'Farmer' %}
+
+              <li>
+                 <a class="dropdown-item" href="">
+                  <i class="bi bi-tree-fill"></i>
+                   แก้ไขข้อมูลฟาร์ม</a>
+              </li>
+              {% endif %}
+              {% endfor %}
+
                 <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'logout' %}">
                 <i class="bi bi-box-arrow-left"></i>
@@ -157,6 +173,10 @@
              
             </ul>
             <ul class="navbar-nav mb-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+              </li>  
+              <li class="nav-item">
+              </li>  
               <li class="nav-item">
               </li>  
             </ul>
