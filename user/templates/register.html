@@ -3,7 +3,8 @@
 <br><br>
 <div class="container">
 
-      <h1><b>ลงทะเบียนผู้ใช้งาน</b></h1>
+      <h1 style="color: #22c55e;"><b>ลงทะเบียนผู้ใช้งาน</b></h1>
+      <h3 style="color: #fbbf24;"><b>( Select user type )</b></h3>
       <br/>
       <center>
 
@@ -20,15 +21,16 @@
                               <br>
                     
                               <h4 style="color: #15803d;">{{i.type_name}}</h4>
-                              
-                             <br> 
+                            
                     
                                       {% if i.type_name == 'ผู้ซื้อออนไลน์' %}
+                                      <p style="color: #fbbf24;"><b>Customer </p>
                                       <br>
                                           <img src="{% static "img/shoppingOnline.png" %}" width="150px" height="auto" style="position: sticky;"/>
                                       <br>
                                       {% endif %}
                                       {% if i.type_name == 'เจ้าของฟาร์ม' %}
+                                      <p style="color: #fbbf24;"><b>Farmer</b></p>
                                       <img src="{% static "img/test.png" %}" width="200px" height="auto" style="position: sticky;"/>
                                   {% endif %}
                 
@@ -51,11 +53,10 @@
                      <div class="col-sm-2"></div>
           </br>
           </form>
-          <br/>
-  
-            <br>  
+          <br><br>  
          
         </center>
       
    </div>
+   
         {% endblock %}
