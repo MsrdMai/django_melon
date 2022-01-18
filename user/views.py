@@ -72,7 +72,7 @@ def register_type(request):
     else:
         return redirect(to='login_page')
 
-    context = {'list_typeUser': list_typeUser,}    
+    context = {'list_typeUser': list_typeUser, 'userInType':userInType}    
 
     return render(request, template_name='register.html', context=context)
 

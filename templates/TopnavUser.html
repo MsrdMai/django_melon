@@ -18,7 +18,6 @@
 
     <!-- CSS  -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/store.css'%}">
 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">    
    
@@ -32,11 +31,15 @@
 
 </head>
 
+<!-- background : url('{% static "img/bg.jpg" %}') no-repeat; 
+background-size : cover; -->
+
 <body style="
   text-align: center;
   font-family: 'Prompt', sans-serif;
-  background : url('{% static "img/bg.jpg" %}') no-repeat; 
-  background-size : cover;">
+  background-color:#d1fae5;;
+ 
+  ">
 
   
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -125,9 +128,11 @@
             <a class="nav-link dropdown-toggle btn-light my-2 my-sm-0 btn-lg btn-block" href="" style="color: white; background-color: #FBBF24" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ user.username}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="overflow: hidden;">
               <li><a class="dropdown-item" href="">{{ user.email }}</a></li>
+              {% if userInType != 0 %}
               <li><a class="dropdown-item" href="{% url 'profile' id=user.id %}">ข้อมูลส่วนตัว</a></li>
+              {% endif %}
                 <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'logout' %}">
                 <i class="bi bi-box-arrow-left"></i>
@@ -137,6 +142,10 @@
              
             </ul>
             <ul class="navbar-nav mb-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+              </li>  
+              <li class="nav-item">
+              </li>  
               <li class="nav-item">
               </li>  
             </ul>

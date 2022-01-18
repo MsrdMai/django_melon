@@ -1,37 +1,61 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
 
+<br><br>
 <div class="container">
-    <div class="col">
-      <h1><b>ลงทะเบียนผู้ใช้งาน</b></h1>
 
+      <h1><b>ลงทะเบียนผู้ใช้งาน</b></h1>
       <br/>
       <center>
-      <div id="loginform" class="col-sm-5">
+
         <form  class="form-info" method="POST" action="{% url 'register_type' %}">
             {% csrf_token %}
     
-            <div class="col">
-            
-              
-                <div class="d-grid gap-2">
+            <div class="row">
+              <div class="col-sm-2"></div>
                      {% for i in list_typeUser %}
-                     <button type="submit" name="accountType" class="btn my-2 my-sm-0 btn-lg btn-block"  value= "{{i.id}}"
-                     style="background-color: #34D399;color: white;">{{i.type_name}}</button>
-                    </br>
-                     {% endfor %}
                    
-                        </br>
-              </div>
-            
-           
-          </form>
+                     <div class="col-sm-4">
+                          <div id="box-account-type" style="background-color: white; border-radius: 20px; height:500px; margin: 5%;">
+                              <br>
+                              <br>
+                    
+                              <h4 style="color: #15803d;">{{i.type_name}}</h4>
+                              
+                             <br> 
+                    
+                                      {% if i.type_name == 'ผู้ซื้อออนไลน์' %}
+                                      <br>
+                                          <img src="{% static "img/shoppingOnline.png" %}" width="150px" height="auto" style="position: sticky;"/>
+                                      <br>
+                                      {% endif %}
+                                      {% if i.type_name == 'เจ้าของฟาร์ม' %}
+                                      <img src="{% static "img/test.png" %}" width="200px" height="auto" style="position: sticky;"/>
+                                  {% endif %}
+                
+                    
+                               <br><br><br>
 
-          <br />
-          
+                     <button type="submit" name="accountType" class="col-10  btn btn-lg btn-block"  value= "{{i.id}}" id="account-type"
+                     style=" 
+                     background-color: #34D399;
+                     color: white; 
+                     padding: 5%;
+                     "
+                     >เลือก</button>
+                   
+                      </div>
+                    </div>
+                   
+                     {% endfor %}
+                     
+                     <div class="col-sm-2"></div>
+          </br>
+          </form>
+          <br/>
   
             <br>  
-          </div>  
+         
         </center>
-        </div>
+      
    </div>
         {% endblock %}

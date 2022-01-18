@@ -17,6 +17,24 @@ nav {
     padding: 20px;
 }
 
+#account-type{
+    background-color: #34D399;
+    color: white; 
+    padding: 5%;
+}
+
+#account-type:hover{
+    background-color: #d4d4d8;
+    color: #34D399; 
+    padding: 5%;
+}
+
+#box-account-type{
+    background-color: white;
+    border-radius: 20px; 
+    height:500px; 
+    margin: 5%;
+}
 
 
 
