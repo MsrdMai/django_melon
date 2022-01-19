@@ -129,10 +129,25 @@ background-size : cover; -->
               {{ user.username}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="overflow: hidden;">
-              <li><a class="dropdown-item" href="">{{ user.email }}</a></li>
+              <li><a class="dropdown-item" href="">
+                <i class="bi bi-envelope"></i>
+                {{ user.email }}</a></li>
               {% if userInType != 0 %}
-              <li><a class="dropdown-item" href="{% url 'profile' id=user.id %}">ข้อมูลส่วนตัว</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile' id=user.id %}">
+                <i class="bi bi-person-square " ></i> ข้อมูลส่วนตัว</a></li>
               {% endif %}
+
+              {% for group in  request.user.groups.all %}
+              {% if group.name == 'Farmer' %}
+
+              <li>
+                 <a class="dropdown-item" href="">
+                  <i class="bi bi-tree-fill"></i>
+                   แก้ไขข้อมูลฟาร์ม</a>
+              </li>
+              {% endif %}
+              {% endfor %}
+
                 <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'logout' %}">
                 <i class="bi bi-box-arrow-left"></i>
@@ -160,6 +175,11 @@ background-size : cover; -->
                   <i class="bi bi-person-circle"></i> Sign in
                 </a>
               </div>
+              <li class="nav-item">
+              </li>  
+              <li class="nav-item">
+              </li>  
+             
             </ul>
 
             {% endif%}
