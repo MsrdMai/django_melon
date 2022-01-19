@@ -1,38 +1,80 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
 
-
-
-<h1>ข้อมูลส่วนตัว</h1>
-<hr>
-<img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="300px" height="300px"/>
-</br></br>
-
-    <div class="col-sm-9 md-3">
-        
-      <table
-        class="table table-light table-bordered "
-        style=" font-size: 16px ;"
-      >
-      
-        <tbody>
-           
-              <tr>
-                <td><b>ชื่อ</b></td>
-                <td> <b>{{user.first_name}} {{ user.last_name }}</b></td>
-              </tr>
-              <tr>
-                <td><b>Email</b></td>
-                <td> <b>{{user.email}}</b></td>
-              </tr>
-          <tr>
-            <td><b>ประเภทผู้ใช้</b></td>
-            <td> <b>{{user_info.Typeuser_id}}</b></td>
-          </tr>
-         
+<style>
   
-    </tbody>
-  </table>
-</div>
+  #ul-profile {
 
+    font-size: .85rem;
+    list-style: none;
+    margin: 0rem;
+    height: auto;
+    /* padding: 0rem; */
+    padding-bottom: 2rem;
+    text-align: center;
+    margin-right: 1rem;
+    letter-spacing: 1px;
+    line-height: 2.5rem;
+    margin-top: 1rem;
+    padding: 5%;
+  }
+
+  #div-profile {
+    background-color: white;
+    color: #525252;
+    border-color: #facc15;
+    border-width: 2%;
+    border-style: solid;
+  
+  }
+
+  #avatar {
+    border-radius: 50%;
+    display: block;
+  }
+
+  #bg-profile {
+    background : url('{% static "img/Mypersonal.png" %}') no-repeat;
+    background-size: cover;
+    margin: 5%;
+  }
+
+  #col-1-bg {
+    background-color: #f59e0b;
+    margin-left: 10px;
+    margin-right: 10px;
+
+  }
+</style>
+
+<div id="div-profile">
+
+  <div class="row">
+    <div class="col-1" id="col-1-bg"></div>
+    <div class="col" >
+      </br></br></br> </br></br></br>
+      <div id="bg-profile">
+      <img id="avatar" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="300px" height="300px" />
+      </div>
+    </br></br></br> </br></br></br></br>
+    </div>
+
+    <div class="col">
+      </br></br></br> </br>
+      <h2>ข้อมูลส่วนตัว</h2>
+      <h5>( About me )</h5>
+      <hr></br>
+      <ul id='ul-profile'>
+        <li><b>ชื่อ : </b><span>{{user.first_name}} {{ user.last_name }}</span></li>
+        <li><b>Email : </b><span>{{user.email}}</span></li>
+        <li><b>ประเภทผู้ใช้ : </b><span>{{user_info.Typeuser_id}}</span></li>
+        <li><b>Date Joined : </b><span>{{ user.socialaccount_set.all.0.date_joined}}</span></li>
+        <li><b>Last Login : </b><span>{{ user.socialaccount_set.all.0.last_login}}</span></li>
+      </ul>
+
+      </br></br></br>
+    </div>
+    <div class="col-1" id="col-1-bg"></div>
+  </div>
+</div>
 
 {% endblock %}
