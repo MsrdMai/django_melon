@@ -106,3 +106,8 @@ def profile(request, id):
     }  
 
     return render(request, template_name='profile.html', context=context)
+
+@login_required
+def productlist(request):
+
+    return render(request, template_name='productlist.html')

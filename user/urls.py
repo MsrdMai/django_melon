@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout/', views.logout_page, name='logout'),
     path('accounts/', include('allauth.urls')),
     path('profile/<int:id>/', views.profile, name='profile'),
+    path('productlist/', views.productlist, name='productlist'),
 ]
