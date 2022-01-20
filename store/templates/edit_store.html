@@ -1,11 +1,13 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
 
+
 <div class="container">
   <br>
-    <div id="Storeform" class="col" style="background-color: white; padding: 5%;">
-        <h1 style="text-align: left;">สร้างข้อมูลฟาร์ม</h1>
+
+    <div id="editStoreform" class="col" style="background-color: white; padding: 5%;">
+        <h1 style="text-align: left;">แก้ไขข้อมูลฟาร์ม</h1>
         <hr>
-      <form  class="form-info" method="POST" enctype="multipart/form-data" action="{% url 'create_store' %}">
+      <form  class="form-info" method="POST" enctype="multipart/form-data" action="{% url 'edit_store' id=user.id %}">
           {% csrf_token %}
 
           <div class="mb-3">
@@ -13,10 +15,8 @@
            
             <input type="file" class="form-control-file" name="store_logo" id="file" accept="image/png, image/jpeg"
              onchange="loadFile(event)">	<br><br>
-             {% if error_logo %}
-             <div class="invalid-feedback d-block">{{error_logo}}</div>
-             {%endif%}
-              <img id="output" width="300px" height="250px"/>
+           
+              <img id="output" width="300px" height="250px" src=" {{myStore.store_logo.url}}"/>
           </div>
 
   
@@ -30,43 +30,33 @@
                     <div id="map">
             
                         <label  class="form-label float-start">ละติจูด (Latitude) :</label>
-                         <input type="number" step="any" disabled="disabled"  class="form-control" id='latitude' name="latitude" value=''/>
+                         <input type="number"  class="form-control" id='latitude' name="latitude" value={{myStore.latitude}} />
                         <label  class="form-label float-start">ลองจิจูด (Longitude) :</label>
-                         <input type="number" step="any" disabled="disabled"  class="form-control" id='longitude' name="longitude" value='' /><br>
-                        {% if error_latitude %}
-                        <div class="invalid-feedback d-block">{{error_latitude}}</div>
-                        {%endif%}
+                         <input type="number"  class="form-control" id='longitude' name="longitude" value={{myStore.longitude}} /><br>
+                      
                     </div>
                   </div>
           <div class="mb-3">
             <label class="form-label float-start">ชื่อร้านค้า</label>
-            <input type="text" class="form-control" name="store_name" placeholder="ชื่อร้านค้า" required>
-            {% if error_storename %}
-            <div class="invalid-feedback d-block">{{error_storename}}</div>
-            {%endif%}
+            <input type="text" class="form-control" name="store_name" value={{myStore.store_name}} />
+          
           </div>
           <div class="mb-3">
             <label  class="form-label float-start">รายละเอียดร้านค้า</label>
-            <textarea  class="form-control" name="store_description" rows="3" maxlength="255" required></textarea>
-            {% if error_description %}
-            <div class="invalid-feedback d-block">{{error_description}}</div>
-            {%endif%}
+            <textarea  class="form-control" name="store_description" rows="4" maxlength="255" value="" >{{myStore.store_description}}</textarea>
+       
           </div>
         
         <div class="mb-3">
             <label  class="form-label float-start">ที่อยู่ร้านค้า</label>
-            <textarea  type="textarea" class="form-control" name="store_address" rows="3" maxlength="255" required></textarea>
-            {% if error_address %}
-            <div class="invalid-feedback d-block">{{error_address}}</div>
-            {%endif%}
+            <textarea  type="textarea" class="form-control" name="store_address" rows="3" maxlength="255" value="" >{{myStore.store_address}}</textarea>
+          
           </div>
 
           <div class="mb-3">
             <label class="form-label float-start">เบอร์โทรศัพท์</label>
-            <input type="tel" class="form-control" name="store_phone" placeholder="หมายเลขโทรศัพท์ต้องมี 10 หลัก" required>
-            {% if error_phone %}
-            <div class="invalid-feedback d-block">{{error_phone}}</div>
-            {%endif%}
+            <input type="tel" class="form-control" name="store_phone"  value={{myStore.store_phone}} />
+           
           </div>
         
            
@@ -79,10 +69,8 @@
              
               <input type="file" class="form-control-file" name="store_img" id="file2" accept="image/png, image/jpeg"
                onchange="loadFile2(event)">	<br><br> <br><br> <br><br>
-               {% if error_img %}
-               <div class="invalid-feedback d-block">{{error_img}}</div>
-               {%endif%}
-                <img id="output2" width="600px" height="300px"/>
+             
+                <img id="output2" width="600px" height="300px" src="{{myStore.store_img.url}}" />
             </div>
             
            
@@ -96,15 +84,13 @@
             
             <div class="mb-3 col-sm-6 my-1">
                 <label class="form-label float-start">ชื่อบัญชี</label>
-                <input type="text" class="form-control" name="bank_account" placeholder="ชื่อเจ้าของบัญชี" required>
-                {% if error_account %}
-                <div class="invalid-feedback d-block">{{error_account}}</div>
-                {%endif%}
+                <input type="text" class="form-control" name="bank_account" value="{{myStore.bank_account}}" />
+             
             </div>
             <div class="mb-3 col-sm-6 my-1">
                 <label class="form-label float-start">ชื่อธนาคาร</label>
-                <select class="form-control" name="name_bank">
-                  <option value="0">เลือกธนาคาร</option>
+                <select class="form-control" name="name_bank" >
+                  <option value=myStore.name_bank>{{myStore.name_bank}}</option>
                   <option value="พร้อมเพย์">พร้อมเพย์</option>
                   <option value="ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร">ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</option>
                   <option value="ธ.ธนาคารออมสิน">ธ.ธนาคารออมสิน</option>
@@ -121,39 +107,34 @@
                   <option value="ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)">ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)</option>
                 </select>
               
-                {% if error_namebank %}
-                <div class="invalid-feedback d-block">{{error_namebank}}</div>
-                {%endif%}
+              
               
             </div>
              <div class="mb-3 col-sm-6 my-1">
                 <label class="form-label float-start">เลขบัญชี</label>
-                <input type="text" class="form-control" name="bank_id" placeholder="หมายเลขบัญชีต้องเป็น 10 หรือ 13 หลัก" required>
+                <input type="text" class="form-control" name="bank_id" value={{myStore.bank_id}} />
               </div>
-              {% if error_bankid %}
-              <div class="invalid-feedback d-block">{{error_bankid}}</div>
-              {%endif%}
+            
          </div>
   
          
           <button type="submit" class="btn btn-lg btn-block float-end" id='btn-create-store'>
-            <img src="{% static "icon/storeadd.png" %}" width="70px" height="70px"
+            <img src="{% static "icon/storeedit.png" %}" width="70px" height="70px"
             class="d-inline-block align-top" ><br>  
-            เปิดร้านเลย</button>
+            แก้ไขข้อมูล</button>
           <br><br><br>  
         </form>
         <br><br><br>  
            
      </div>   
      <br>
+
+  
     </div>  
-
-
        
-
       <script>
 
-        
+       
         var x = document.getElementById("map");
         function getLocation() {
         if (navigator.geolocation) {

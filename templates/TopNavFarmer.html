@@ -155,9 +155,8 @@
 
               {% for group in  request.user.groups.all %}
               {% if group.name == 'Farmer' %}
-
               <li>
-                 <a class="dropdown-item" href="">
+                 <a class="dropdown-item" href="{% url 'edit_store' id=user.id %}">
                   <i class="bi bi-tree-fill"></i>
                    แก้ไขข้อมูลฟาร์ม</a>
               </li>

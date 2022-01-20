@@ -45,16 +45,16 @@ def create_store(request):
             error_storename = 'ชื่อร้านค้าต้องไม่เกิน 30 ตัวอักษร'
             count_error += 1
         if (len(store_description) > 255) or len(store_description) <= 0:
-            error_description = 'รายละเอียดร้านค้าต้องไม่เกิน 255 ตัวอักษรและมากกว่า 0'
+            error_description = 'รายละเอียดร้านค้าต้องไม่เกิน 255 ตัวอักษรและมากกว่า 0 ตัวอักษร'
             count_error += 1
         if (len(store_address) > 255) or len(store_address) <= 0:
-            error_address = 'รายละเอียดร้านค้าต้องไม่เกิน 255 ตัวอักษรและมากกว่า 0'
+            error_address = 'รายละเอียดร้านค้าต้องไม่เกิน 255 ตัวอักษรและมากกว่า 0 ตัวอักษร'
             count_error += 1
         if len(store_phone) > 10 or len(store_phone) < 10 or len(store_phone) <= 0 or store_phone.isnumeric() == False:
             error_phone = 'หมายเลขโทรศัพท์ต้องมี 10 หลัก'
             count_error += 1   
         if len(bank_account) > 30 or len(bank_account) <= 5:
-            error_account= 'ชื่อบัญชีต้องไม่เกิน 30 ตัวอักษร'
+            error_account= 'ชื่อบัญชีต้องไม่เกิน 30 ตัวอักษรและมากกว่า 5 ตัวอักษร'
             count_error += 1        
         if name_bank == '0':
             error_namebank = 'โปรดระบุชื่อธนาคาร'
@@ -167,3 +167,11 @@ def create_product(request):
         'type_list' : type_list,
         }
     return render(request, template_name='create_product.html', context=context)
+
+
+@login_required
+def edit_store(request, id):
+    myStore = Store.objects.get(user_id=id)
+    context = {'myStore' : myStore,}
+    return render(request, template_name='edit_store.html', context=context)
+    
