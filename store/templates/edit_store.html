@@ -1,6 +1,14 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
-
-
+{% if successfulEdit %}
+<script>
+  swal("{{successfulEdit}}", "บันทึกข้อมูลสำเร็จ", "success");
+</script>
+{%endif%}
+{% if messageEdit %}
+<script>
+  swal("{{messageEdit}}", "หากต้องการแก้ไขกรุณาเปลี่ยนแปลงข้อมูลก่อนกดปุ่ม", "warning");
+</script>
+{%endif%}
 <div class="container">
   <br>
 
@@ -13,10 +21,10 @@
           <div class="mb-3">
             <label class="form-label float-start">โลโก้ฟาร์ม</label>
            
-            <input type="file" class="form-control-file" name="store_logo" id="file" accept="image/png, image/jpeg"
-             onchange="loadFile(event)">	<br><br>
-           
-              <img id="output" width="300px" height="250px" src=" {{myStore.store_logo.url}}"/>
+            <!-- <input type="file" class="form-control-file" name="store_logo" id="file" accept="image/png, image/jpeg"
+             onchange="loadFile(event)">	<br><br> -->
+
+              <img id="output" width="300px" height="250px" src="{{myStore.store_logo.url}}"/>
           </div>
 
   
@@ -24,15 +32,15 @@
             <div class="col">
                 <br><br>
                 <div class="mb-3">
-                    <button class="btn btn-outline-dark float-start" onclick="getLocation()">ตำแหน่งฟาร์มของคุณ</button><br><br>
+                    <input type='button' class="btn btn-outline-dark float-start" onclick="getLocation()" value="ตำแหน่งฟาร์มของคุณ"></button><br><br>
                     <small id="emailHelp" class="form-text text-muted float-start">กรุณาคลิกที่ปุ่มเพื่อระบุตำแหน่งฟาร์ม</small><br><br>
                    
                     <div id="map">
             
                         <label  class="form-label float-start">ละติจูด (Latitude) :</label>
-                         <input type="number"  class="form-control" id='latitude' name="latitude" value={{myStore.latitude}} />
+                        <input type="number" step="any" disabled="disabled"  class="form-control" id='latitude' name="latitude" value={{myStore.latitude}}  />
                         <label  class="form-label float-start">ลองจิจูด (Longitude) :</label>
-                         <input type="number"  class="form-control" id='longitude' name="longitude" value={{myStore.longitude}} /><br>
+                        <input type="number" step="any" disabled="disabled"  class="form-control" id='longitude' name="longitude" value={{myStore.longitude}} /><br>
                       
                     </div>
                   </div>
@@ -67,10 +75,12 @@
             <div class="mb-3">
               <br><label class="form-label float-start">บรรยากาศฟาร์ม</label>
              
-              <input type="file" class="form-control-file" name="store_img" id="file2" accept="image/png, image/jpeg"
-               onchange="loadFile2(event)">	<br><br> <br><br> <br><br>
+              <!-- <input type="file" class="form-control-file" name="store_img" id="file2" accept="image/png, image/jpeg"
+               onchange="loadFile2(event)" >	<br><br> <br><br> <br><br> -->
+
+             <img id="output2" width="600px" height="300px" src="{{myStore.store_img.url}}"/>
              
-                <img id="output2" width="600px" height="300px" src="{{myStore.store_img.url}}" />
+
             </div>
             
            
@@ -90,7 +100,7 @@
             <div class="mb-3 col-sm-6 my-1">
                 <label class="form-label float-start">ชื่อธนาคาร</label>
                 <select class="form-control" name="name_bank" >
-                  <option value=myStore.name_bank>{{myStore.name_bank}}</option>
+                  <option value="{{myStore.name_bank}}">{{myStore.name_bank}}</option>
                   <option value="พร้อมเพย์">พร้อมเพย์</option>
                   <option value="ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร">ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</option>
                   <option value="ธ.ธนาคารออมสิน">ธ.ธนาคารออมสิน</option>
@@ -118,7 +128,7 @@
          </div>
   
          
-          <button type="submit" class="btn btn-lg btn-block float-end" id='btn-create-store'>
+          <button type="submit" class="btn btn-lg btn-block float-end" id='btn-create-store' onclick="Senddb()">
             <img src="{% static "icon/storeedit.png" %}" width="70px" height="70px"
             class="d-inline-block align-top" ><br>  
             แก้ไขข้อมูล</button>
@@ -154,21 +164,21 @@
 
 
       var loadFile = function(event) {
-	    var image = document.getElementById('output');
- 
-        document.getElementById('output').style.border = '2px solid #34D399';
 
+	    var image = document.getElementById('output');
+        document.getElementById('output').style.border = '2px solid #34D399';
 	    image.src = URL.createObjectURL(event.target.files[0]);
-        
         }
         var loadFile2 = function(event) {
 	    var image = document.getElementById('output2');
         document.getElementById('output2').style.border = '2px solid #34D399';
-
 	    image.src = URL.createObjectURL(event.target.files[0]);
-        
         }
 
+        function Senddb() {
+            document.getElementById("latitude").disabled=false;
+            document.getElementById("longitude").disabled=false;
+        }
         </script>
 
 {% endblock %}

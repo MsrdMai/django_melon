@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import render, redirect
 from user.models import TypeUser, UserInType
 from order.models import State, Order, Review
@@ -172,6 +173,51 @@ def create_product(request):
 @login_required
 def edit_store(request, id):
     myStore = Store.objects.get(user_id=id)
+
+    if request.method == 'POST':
+        countedit = 0
+        if (myStore.store_name != request.POST.get('store_name')):
+            myStore.store_name = request.POST.get('store_name')
+            countedit += 1
+        if (myStore.store_description != request.POST.get('store_description')):
+            myStore.store_description = request.POST.get('store_description')
+            countedit += 1
+        if (myStore.store_address != request.POST.get('store_address')):
+            myStore.store_address = request.POST.get('store_address')
+            countedit += 1
+        if (myStore.store_phone != request.POST.get('store_phone')):
+            myStore.store_phone = request.POST.get('store_phone')
+            countedit += 1
+        if (myStore.bank_account != request.POST.get('bank_account')):
+            myStore.bank_account = request.POST.get('bank_account')
+            countedit += 1
+        if (myStore.name_bank != request.POST.get('name_bank')):
+            myStore.name_bank = request.POST.get('name_bank')
+            countedit += 1
+        if (myStore.bank_id != request.POST.get('bank_id')):
+            myStore.bank_id = request.POST.get('bank_id')
+            countedit += 1
+        if (myStore.latitude != request.POST.get('latitude')):
+            myStore.latitude = request.POST.get('latitude')
+            countedit += 1
+        if (myStore.longitude != request.POST.get('longitude')):
+            myStore.longitude = request.POST.get('longitude')
+            countedit += 1
+        # if (myStore.store_img != request.FILES.get('store_img') and (request.FILES.get('store_img') != None)):
+        #     myStore.store_img = request.FILES.get('store_img')
+        # if (myStore.store_logo != request.FILES.get('store_logo') and (request.FILES.get('store_logo') != None)):
+        #     myStore.store_logo = request.FILES.get('store_logo')
+        if countedit == 0:
+            messageEdit = "ไม่มีการแก้ไขข้อมูล"
+            context = {'myStore' : myStore, 'messageEdit': messageEdit,}
+            return render(request, template_name='edit_store.html', context=context)
+
+        myStore.save()
+        successfulEdit = 'แก้ไขข้อมูลฟาร์มสำเร็จ'
+        context = {'myStore' : myStore,
+        'successfulEdit': successfulEdit}
+        return render(request, template_name='edit_store.html', context=context)
+    
     context = {'myStore' : myStore,}
     return render(request, template_name='edit_store.html', context=context)
     
