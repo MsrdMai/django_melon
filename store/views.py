@@ -203,10 +203,19 @@ def edit_store(request, id):
         if (myStore.longitude != request.POST.get('longitude')):
             myStore.longitude = request.POST.get('longitude')
             countedit += 1
-        # if (myStore.store_img != request.FILES.get('store_img') and (request.FILES.get('store_img') != None)):
-        #     myStore.store_img = request.FILES.get('store_img')
-        # if (myStore.store_logo != request.FILES.get('store_logo') and (request.FILES.get('store_logo') != None)):
-        #     myStore.store_logo = request.FILES.get('store_logo')
+        
+        if(request.FILES.get('store_img') == None):
+            countedit += 0
+        if(request.FILES.get('store_logo') == None):
+            countedit += 0
+
+        if (request.FILES.get('store_img') != None):
+            myStore.store_img = request.FILES.get('store_img')
+            countedit += 1
+        if (request.FILES.get('store_logo') != None):
+            myStore.store_logo = request.FILES.get('store_logo')
+            countedit += 1
+            
         if countedit == 0:
             messageEdit = "ไม่มีการแก้ไขข้อมูล"
             context = {'myStore' : myStore, 'messageEdit': messageEdit,}
