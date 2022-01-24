@@ -109,5 +109,4 @@ def profile(request, id):
 
 @login_required
 def productlist(request):
-
     return render(request, template_name='productlist.html')
