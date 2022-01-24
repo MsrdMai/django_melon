@@ -19,12 +19,12 @@
   }
 
   #div-profile {
-    background-color: white;
+    background-color: #f8fafc;
     color: #525252;
-    border-color: #facc15;
-    border-width: 2%;
+    border-color: #f8fafc;
+    border-width: 1%;
     border-style: solid;
-  
+    padding: 5%;
   }
 
   #avatar {
@@ -39,29 +39,30 @@
   }
 
   #col-1-bg {
-    background-color: #f59e0b;
+    background-color: #f8fafc;
     margin-left: 10px;
     margin-right: 10px;
 
   }
 </style>
 
+
 <div id="div-profile">
 
   <div class="row">
     <div class="col-1" id="col-1-bg"></div>
-    <div class="col" >
-      </br></br></br> </br></br></br>
-      <div id="bg-profile">
-      <img id="avatar" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="300px" height="300px" />
-      </div>
-    </br></br></br> </br></br></br></br>
+    <div class="col-sm" >
+      </br></br></br> </br>
+     
+      <img id="avatar" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="350px" height="320px" />
+     
+    </br>
     </div>
 
-    <div class="col">
+    <div class="col-sm">
       </br></br></br> </br>
       <h2>ข้อมูลส่วนตัว</h2>
-      <h5>( About me )</h5>
+      <h5>PROFILE</h5>
       <hr></br>
       <ul id='ul-profile'>
         <li><b>ชื่อ : </b><span>{{user.first_name}} {{ user.last_name }}</span></li>
@@ -70,10 +71,10 @@
         <li><b>Date Joined : </b><span>{{ user.socialaccount_set.all.0.date_joined}}</span></li>
         <li><b>Last Login : </b><span>{{ user.socialaccount_set.all.0.last_login}}</span></li>
       </ul>
-
-      </br></br></br>
+    </br>
+    
     </div>
-    <div class="col-1" id="col-1-bg"></div>
+    <div class="col-sm-1" id="col-1-bg"></div>
   </div>
 </div>
 
