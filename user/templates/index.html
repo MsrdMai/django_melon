@@ -12,41 +12,40 @@
 </script>
 {%endif%}
 
-<div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="
-      aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{% static "img/SlideImg/img2.jpg" %}" class="d-block w-100">
+      <img src="{% static "img/SlideImg/img2.jpg" %}" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Tracking Melon</h5>
         <p>เมล่อนคุณภาพ ส่งตรงจากฟาร์ม</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="{% static "img/SlideImg/img1.jpg" %}" class="d-block w-100">
+      <img src="{% static "img/SlideImg/img1.jpg" %}" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Tracking Melon</h5>
         <p>เมล่อนคุณภาพ ส่งตรงจากฟาร์ม</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="{% static "img/SlideImg/img3.jpg" %}" class="d-block w-100">
+      <img src="{% static "img/SlideImg/img3.jpg" %}" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Tracking Melon</h5>
         <p>เมล่อนคุณภาพ ส่งตรงจากฟาร์ม</p>
       </div>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
@@ -55,69 +54,115 @@
 <div class="container bg-white rounded mt-5 w-75">
   <div class="d-flex flex-wrap p-4 justify-content-center">
     <h1 style="color: #005e14;" class="align-items-center"><b>เมล่อนขายดี</b></h1>
-    <img class="mx-3" src="{% static "icon/reward.png" %}" width="50px" alt="...">
+    <img class="mx-3" src="{% static "icon/reward.png" %}" width="50px" height="50px" alt="...">
   </div>
   <div class="row d-flex justify-content-center">
     <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
       <div class="card shadow bg-white rounded">
-        <div class="card-body pb-2 px-6">
-          <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
-          <div class="py-2 head">เมล่อนคิโมจิ</div>
-          <ul class="list-group">
-            <li>An active item</li>
-            <li>A second item</li>
-            <li>A third item</li>
-            <li>A fourth item</li>
-            <li>And a fifth one</li>
+        <div class="card-body pb-0 px-6">
+          <img class="rounded" src="{% static "img/kimoji2.jpg" %}" width="150px" alt="Product" />
+          <div class="py-2 head" style="color: #007e1b;">เมล่อนคิโมจิ</div>
+          <ul class="ps-4" style="list-style: none; padding-left: 0px; text-align: left;">
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">เนื้อเขียว</span>
+            </span>
+              </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">ลายชัดเจน นูนหนา</span>
+            </span>
+          </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">นิยมแกะลาย</span>
+            </span>
+          </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">เนื้อกึ่งนุ่มกึ่งกรอบ</span>
+            </span>
+          </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">น้ำหนัก 1.4 - 1.6 kg</span>
+            </span>
+          </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
       <div class="card shadow bg-white rounded">
-        <div class="card-body pb-2 px-6">
-          <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
-          <div class="py-2 head">เมล่อนมาชิตะ</div>
-          <ul class="list-group">
-            <li>An active item</li>
-            <li>A second item</li>
-            <li>A third item</li>
-            <li>A fourth item</li>
-            <li>And a fifth one</li>
+        <div class="card-body pb-5 px-6">
+          <img class="rounded" src="{% static "img/macchita.jpg" %}" width="150px" alt="Product" />
+          <div class="py-2 head" style="color: #007e1b;">เมล่อนมาชิตะ</div>
+          <ul class="ps-4" style="list-style: none; padding-left: 0px; text-align: left;">
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">เนื้อส้ม</span>
+            </span>
+          </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">เนื้อฉ่ำ หวานหอม</span>
+            </span>             
+            </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">น้ำหนัก 1.5 - 2.0 kg</span>
+            </span>
+              </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
       <div class="card shadow bg-white rounded">
-        <div class="card-body pb-2 px-6">
-          <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
-          <div class="py-2 head">เมล่อนมิโมจิ</div>
-          <ul class="list-group">
-            <li>An active item</li>
-            <li>A second item</li>
-            <li>A third item</li>
-            <li>A fourth item</li>
-            <li>And a fifth one</li>
+        <div class="card-body pb-4 px-6">
+          <img class="rounded" src="{% static "img/momiji.jpg" %}" height="112px" alt="Product" />
+          <div class="py-2 head" style="color: #007e1b;">เมล่อนโมมิจิ</div>
+          <ul class="ps-4" style="list-style: none; padding-left: 0px; text-align: left;">
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">เนื้อส้ม</span>
+            </span>
+          </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">ลายชัดเจน นูนหนา</span>
+            </span>
+          </li>
+            <li>
+              <i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">เนื้อฉ่ำ หวานหอม</span>
+            </span>
+          </li>
+            <li><i class="fas fa-check pe-2" style="color: #00a023;"></i>
+              <span>
+                <span class="text-110">น้ำหนัก 1.6 - 2.0 kg</span>
+            </span>
+          </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
-<section>
-  <div>
-    <h2>Simple CSS check list</h2>
-    <ul class="check-list">
-      <li>Head</li>
-      <li>Shoulders</li>
-      <li>Knees</li>
-      <li>Toes</li>
-    </ul>
-  </div>
-</section>
 
+<div>
 
-
+</div>
 
 {% endblock %}
