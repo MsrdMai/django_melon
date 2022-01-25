@@ -51,18 +51,18 @@
   </button>
 </div>
 
-<div class="bg-white mt-5 w-75 container" style="border-radius: 40px;" >
+<div class="bg-white mt-5 w-75 container px-lg-5 px-md-2" style="border-radius: 40px;" >
   <div class="d-flex flex-wrap p-4 justify-content-center">
     <h1 style="color: #005e14;" class="align-items-center"><b>เมล่อนขายดี</b></h1>
     <img class="mx-3" src="{% static "icon/reward.png" %}" width="50px" height="50px" alt="...">
   </div>
   <div class="row d-flex justify-content-center">
-    <div class="col-lg-4 col-sm-4 col-xl-3 py-3 mb-4">
+    <div class="col-lg-4 col-sm-6 py-3 mb-4">
       <div class="shadow bg-white p-4" style="border-radius: 40px;">
         <div class="pb-0 px-6">
           <img class="rounded" src="{% static "img/kimoji2.jpg" %}" width="150px" alt="Product" />
           <div class="py-2 head" style="color: #007e1b;">เมล่อนคิโมจิ</div>
-          <ul class="ps-4" style="list-style: none; padding-left: 0px; text-align: left;">
+          <ul class="ps-md-4" style="list-style: none; padding-left: 0px; text-align: left;">
             <li>
               <i class="fas fa-check pe-2" style="color: #00a023;"></i>
               <span>
@@ -97,7 +97,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-4 col-xl-3 py-3">
+    <div class="col-lg-4 col-sm-6 py-3">
       <div class="shadow bg-white p-4" style="border-radius: 40px;">
         <div class="pb-5 px-6">
           <img class="rounded" src="{% static "img/macchita.jpg" %}" width="150px" alt="Product" />
@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-4 col-xl-3 py-3">
+    <div class="col-lg-4 col-sm-6 py-3">
       <div class="shadow bg-white p-4" style="border-radius: 40px;">
         <div class="pb-4 px-6">
           <img class="rounded" src="{% static "img/momiji.jpg" %}" height="112px" alt="Product" />
@@ -161,8 +161,51 @@
   </div>
 </div>
 
-<div>
+<!-- container2 -->
+<div class="mt-5 w-50 container" style="border-radius: 40px;" >
+  <div class="row mt-5">
+    <div class="col-lg-6 py-3 mb-4 d-flex">
+      <div class="d-flex">
+          <img src="{% static "icon/melonicon.png" %}" alt="" width="100px">
+          <div class="ps-4" style="text-align: left;">
+            <h2><b>เมล่อน</b></h2>
+            <h5>เมล่อนคุณภาพ สดใหม่</h5>
+          </div>
+      </div>
+  </div>
 
+    <div class="col-lg-6 py-3 mb-4 d-flex">
+      <div class="d-flex">
+        <img src="{% static "icon/melonicon2.png" %}" alt="" width="100px">
+        <div class="ps-4" style="text-align: left;">
+          <h2><b>แกะสลัก</b></h2>
+          <h5>สั่งแกะลายเมล่อน</h5>
+        </div>
+    </div>
+    </div>
+    
+    <div class="col-lg-6 py-3 mb-4 d-flex">
+      <div class="d-flex">
+        <img src="{% static "icon/boxmain.png" %}" alt="" width="100px">
+        <div class="ps-4" style="text-align: left;">
+          <h2><b>ติดตาม</b></h2>
+          <h5>ติดตามคุณภาพ ปลอดภัย</h5>
+        </div>
+    </div>
+  </div>
+
+    <div class="col-lg-6 py-3 mb-4 d-flex">
+      <div class="d-flex">
+        <img src="{% static "icon/shopping.png" %}" alt="" width="100px">
+        <div class="ps-4" style="text-align: left;">
+          <h2><b>สะดวก</b></h2>
+          <h5>สั่งได้ ไม่ต้องออกตามหา</h5>
+        </div>
+    </div>
+  </div>
+  </div>
 </div>
+
+<!-- container3 -->
 
 {% endblock %}
