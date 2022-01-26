@@ -1,10 +1,15 @@
 {% extends "TopnavUser.html" %} {% load static %}{% load socialaccount %}{% providers_media_js %} {% block content %}
-<br/>
-<div class="container">
 
-     
-      
+      <div 
+      style="background : url('{% static "img/bg2.jpg" %}') no-repeat; 
+      background-size : cover;
+      margin: 0;"
+      >
+      <br/><br/>
+
+      <div class="container">
       <center>
+       
       <div id="loginform" class="col-sm-5" 
       style="
       display: flex;
@@ -20,7 +25,7 @@
 
             <h1><b>Sign In</b></h1>
             <br/>
-            
+
             <div class="mb-3">
               <label for="Username" class="form-label float-start">Username</label>
               <input type="text" class="form-control " name="username" >
@@ -53,7 +58,10 @@
             <br>  
           </div>  
           <br>  <br>  <br>    <br>  <br>  <br>    <br>  <br>  <br>  
+        
         </center>
        </div>
+       <br/><br/>
+      </div>
         {% endblock %}
     
