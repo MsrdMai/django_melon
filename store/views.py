@@ -197,6 +197,12 @@ def edit_store(request, id):
         if (myStore.bank_id != request.POST.get('bank_id')):
             myStore.bank_id = request.POST.get('bank_id')
             countedit += 1
+
+        if(myStore.latitude == None):
+            countedit += 0
+        if(myStore.longitude == None):
+            countedit += 0
+
         if (myStore.latitude != request.POST.get('latitude')):
             myStore.latitude = request.POST.get('latitude')
             countedit += 1
