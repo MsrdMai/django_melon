@@ -11,16 +11,16 @@
 
                 <div class="row">
                     <div class="col-sm-1"> </div>
-                <div class="col-sm-4" style="padding: 1%;">
-                    <div class="d-grid gap-2">
-                <a id="btn-new-product" href="{% url 'create_product'%}" >
-                    <img src="{% static "icon/categories.png" %}" width="30px" height="auto"
-                    class="d-inline-block align-top float-start">
+                <div class="col-sm-3" style="padding: 1%;">
+                  
+                <a id="btn-new-product" href="{% url 'create_product'%}" class="btn btn-lg btn-block" >
+                    <img src="{% static "icon/new.png" %}" width="60px" height="60px"
+                    class="d-inline-block align-top">
                     เพิ่มสินค้าใหม่</a>      
-                </div>
+               
                 </div>
 
-                
+                <div class="col-sm-1"> </div>
                 <div class="col-sm-7">
                 <form method="POST" action=""> 
                     <div class="row g-4 align-items-center" style="padding: 1%; ">
@@ -42,7 +42,7 @@
                     
                       <div class="form-group col-sm">
                         <div class="d-grid gap-2">
-                            <button type="submit" id="btn-search" class="btn col-sm-12  my-2 my-sm-0 ">ค้นหา</button>
+                            <button type="submit" id="btn-search" class="btn col-sm-10  my-2 my-sm-0 ">ค้นหา</button>
                         </div>
                       </div>   
                   <div class="col-sm-1"></div>
@@ -51,12 +51,129 @@
         </div>
     </div> 
 
+        
 
-             <div class="col-sm">
+                <br></br>
+            <center>
+                <div class="col-sm-10">
+                <section class="section1 w-80 px-5 bg-light rounded mt-1" id="cards">
+                    <div class="container card-styles">
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6" >
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px"  alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6">
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6">
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6">
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6">
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6">
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6">
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
+                                <div class="card shadow bg-white rounded">
+                                    <div class="card-body pb-2 px-6">
+                                        <img class="rounded" src="{% static "img/kimoji.jpg" %}" width="150px" alt="Product" />
+                                        <div class="py-2 head">มาชิตะบรรจุกล่อง</div>
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <div class="card-text pb-2 price">250 บาท</div>
+                                            <div class="card-text quant">20 ชิ้น</div>
+                                        </div>
+                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                    </div>
+                                </div>
+                            </div>
+                     
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </center>
 
-                <br></br> <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>
+           <br></br>  <br></br>
 
-            </div> 
+            
             
 
 

@@ -9,6 +9,21 @@
   background-color: #fcd34d;
 }
 
+
+#tab-btn {
+  color: white; 
+  background-color: #34D399;
+  border: 4px solid;
+  border-color:#bbf7d0;
+}
+
+#tab-btn:hover {
+  color: #525252; 
+  background-color: #dcfce7;
+
+}
+
+
 #btn-search {
   flex: 1 1 auto;
   margin: 5px;
@@ -19,7 +34,7 @@
   background-size: 200% auto;
   color: white;
   box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
+  border-radius: 30px;
   background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
  }
 
@@ -31,27 +46,26 @@ a{
   text-decoration-line: none;
 }
 
+#btn-description{
+  border-radius: 10px;
+  background-color: #dcfce7;
+  border-radius: 30px;
 
+}
+#btn-description:hover {
+    background-color: #fff481;
 
+}
 
 #btn-new-product {
-  flex: 1 1 auto;
-  margin: 5px;
-  padding: 15px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
-  background-image: linear-gradient(to right, #ff990a 0%, #f0e737 60%, #fffac8 100%);
+  color: #ef4444;
  }
 
-#btn-new-product:hover {
-  background-position: right center;
-  color: black;
-}
+ #btn-new-product:hover {
+  color: #e11d48;
+ }
+
+
 
 @media only screen and (max-width: 700px) {
   .map-responsive {
