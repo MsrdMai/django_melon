@@ -236,3 +236,32 @@ def edit_store(request, id):
     context = {'myStore' : myStore,}
     return render(request, template_name='edit_store.html', context=context)
     
+
+@login_required
+def order_farm(request, id):
+    all_product = Product.objects.filter(store_id=id)
+    myStore = Store.objects.get(id=id)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+    type_product = TypeeOrder.objects.all()
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        'all_product' : all_product,
+        'type_product' :type_product}
+    return render(request, template_name='order_farm.html', context=context)
+
+
+@login_required
+def order_list(request, id):
+    all_product = Product.objects.filter(store_id=id)
+    myStore = Store.objects.get(id=id)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+    type_state = State.objects.all()
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        'all_product' : all_product,
+        'type_state' :type_state}
+    return render(request, template_name='order_list.html', context=context)
+
+    

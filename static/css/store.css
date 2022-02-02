@@ -47,14 +47,14 @@ a{
 }
 
 #btn-description{
-  border-radius: 10px;
-  background-color: #dcfce7;
+  background-image: linear-gradient(to right, #d9f99d 0%,  #bbf7d0 51%, #a7f3d0 100%);
   border-radius: 30px;
+  transition: 0.5s;
+  background-size: 200% auto;
 
 }
 #btn-description:hover {
-    background-color: #fff481;
-
+  background-position: right center;
 }
 
 #btn-new-product {
@@ -65,7 +65,19 @@ a{
   color: #e11d48;
  }
 
+ #btn-order{
+  background-image: linear-gradient(to right, #fdba74 0%, #fde68a 51%, #d9f99d 100%);
+  border-radius: 30px;
+  transition: 0.5s;
+  background-size: 200% auto;
 
+}
+#btn-order:hover {
+  background-position: right center;
+
+}
+
+ 
 
 @media only screen and (max-width: 700px) {
   .map-responsive {

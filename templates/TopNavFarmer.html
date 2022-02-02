@@ -77,7 +77,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid ">
       <a class="navbar-brand" href="{% url 'index' %}">
-        <img src="{% static "icon/logo.png" %}" width="60px" height="auto"
+        <img src="{% static "icon/logo.png" %}" width="40" height="40"
         class="d-inline-block align-top" alt="logo"> Melon Tracking
       </a>
 
@@ -245,7 +245,7 @@
                  <img src="{% static "icon/product.png" %}" style="width: 50px; height: 50px;"></img> 
             รายการสินค้า </a>
 
-            <a href="" class="col-sm-3 btn  btn-lg btn-block" id="tab-btn"> 
+            <a href="{% url 'order_farm' id=myStore.id %}" class="col-sm-3 btn  btn-lg btn-block" id="tab-btn"> 
                  <img src="{% static "icon/order.png" %}" style="width: 50px; height: 50px;"></img>
             คำสั่งซื้อ </a>
 
