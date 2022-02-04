@@ -139,3 +139,56 @@ input[type="radio"]#radio-type-2:focus + label{
   padding: 2%;
   background-color: #f3f4f6;
 }
+
+#target-number {
+  border-radius: 100px; 
+  background-color: #3730a3; 
+  padding: 5%; color: white; 
+  margin: 10%; 
+  text-align: center;
+}
+
+#target-status {
+  font-weight: bold; 
+  border-radius: 100px; 
+  background-color: #bbf7d0; 
+  text-align: center; 
+  padding: 2%;
+}
+
+#img-order-carving{
+  max-width: 300px; 
+  max-height: 300px; 
+  align-items: center;
+}
+
+#payment-check{
+  padding: 5px; 
+  display:inline-block; 
+  margin: 5px; 
+  align-items: center;
+}
+
+#btn-change-status{
+  border-width: 2px; 
+  border-color: #eab308; 
+  color: #eab308; 
+  background-color:#f3f4f6 ; 
+  margin:1px;
+}
+
+#btn-report-this-order{
+  border-width: 2px; 
+  border-color: #7c3aed; 
+  color: #7c3aed; 
+  background-color:#ddd6fe; 
+  margin:1px;
+}
+
+#btn-cancel-this-order{
+  border-width: 2px; 
+  border-color: #ef4444; 
+  color: #ef4444; 
+  background-color: #fee2e2; 
+  margin:1px;
+}
