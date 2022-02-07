@@ -165,6 +165,7 @@
   <div class="col-sm-5 md-3">
     <div class="form-radio">
         <input
+        onclick="offShow_Carving()"
           type="radio"
           id="radio-select_carving-1"
           name="select_carving"
@@ -172,6 +173,7 @@
         />
         <label for="radio-select_carving-1">ไม่เปิดแกะสลักลาย</label>
         <input
+        onclick="onShow_Carving()"
         type="radio"
         id="radio-select_carving-2"
         name="select_carving"
@@ -181,7 +183,7 @@
     </div>
   </div>
 
-  <div class="col-sm-5 md-3">
+  <div class="col-sm-5 md-3" id="cost_carving" style="display: none;">
     <label class="form-label float-start">ค่าแกะสลักลาย</label>
     <input type="number" min="1" max="5000" class="form-control" name="cost_carving" placeholder="ค่าแกะสลักลายที่บวกเพิ่ม" required>
   </div> 
@@ -191,12 +193,9 @@
 
 
  
- <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>
+ <br></br>  <br></br>  <br></br>
 
             </div> 
-            
-
-
         </div>
 
 <br><br> <br><br>
@@ -209,6 +208,16 @@
 	    image.src = URL.createObjectURL(event.target.files[0]);
         
         }
+
+        function offShow_Carving() {
+        document.getElementById("cost_carving").style.display = "none";
+        }
+        
+
+        function onShow_Carving() {
+        document.getElementById("cost_carving").style.display = "block";
+        }
+    
 </script>
 </div>
 {% endblock %}
