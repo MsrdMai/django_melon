@@ -44,15 +44,18 @@
                     <input type="number" min="0" max="20000" class="form-control" name="product_price" placeholder="ราคาสินค้า" required>
                   </div>
                 </div>
-               
-                  <div class="mb-3 ">
-                    <label class="form-label float-start">จำนวนสินค้าที่มี</label>
-                    <input type="number" min="1" max="1000" class="form-control" name="product_amount" placeholder="จำนวนสินค้าที่มี" required>
-                </div> 
-                </div> 
-            
-         
 
+                <div class="mb-3">
+                  <label class="form-label float-start">น้ำหนัก</label>
+                  <input type="number" min="1" max="20" class="form-control" name="product_weight" placeholder="น้ำหนักของเมล่อนต่อลูก" required>
+                </div> 
+
+                <div class="mb-3 ">
+                  <label class="form-label float-start">จำนวนในคลัง</label>
+                  <input type="number" min="1" max="1000" class="form-control" name="product_amount" placeholder="จำนวนสินค้าที่มี" required>
+              </div> 
+               
+                </div> 
                 <div class="col-sm">
 
                     <div class="mb-3 ">
@@ -152,7 +155,43 @@
               </div>
  
  
- <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>
+ <br></br>
+ 
+
+<div class="row">
+  <div class="col-sm-2 md-3">
+    <label class="form-label">การแกะสลักลาย</label>
+  </div>
+  <div class="col-sm-5 md-3">
+    <div class="form-radio">
+        <input
+          type="radio"
+          id="radio-select_carving-1"
+          name="select_carving"
+          value=0
+        />
+        <label for="radio-select_carving-1">ไม่เปิดแกะสลักลาย</label>
+        <input
+        type="radio"
+        id="radio-select_carving-2"
+        name="select_carving"
+        value=1
+      />
+      <label for="radio-select_carving-2">เปิดแกะสลักลาย</label>
+    </div>
+  </div>
+
+  <div class="col-sm-5 md-3">
+    <label class="form-label float-start">ค่าแกะสลักลาย</label>
+    <input type="number" min="1" max="5000" class="form-control" name="cost_carving" placeholder="ค่าแกะสลักลายที่บวกเพิ่ม" required>
+  </div> 
+</div>
+
+
+
+
+ 
+ <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>
 
             </div> 
             

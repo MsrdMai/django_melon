@@ -43,6 +43,7 @@ class Product(models.Model):
     melon_color = models.CharField(max_length=10)    
     product_description = models.CharField(max_length=255)   
     product_price = models.IntegerField()
+    product_weight = models.FloatField(null=True, blank=True, default=None)
     product_amount = models.IntegerField()
     range = models.IntegerField()
     product_image = models.ImageField(upload_to='product_image/', null=True)
