@@ -97,7 +97,7 @@ DATABASES = {
             'NAME': 'melon_system',
             'USER' : 'root',
             'HOST' : '127.0.0.1',
-            'PASSWORD' : 'Maimsrd',
+            'PASSWORD' : 'ploy30725',
             'PORT' : '3306',
             'OPTIONS': {
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -129,7 +129,7 @@ AUTHENTICATION_BACKENDS = (
 
 )
 
-SITE_ID = 1
+SITE_ID = 6
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

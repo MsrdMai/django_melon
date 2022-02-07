@@ -135,10 +135,10 @@
 
              <div class="row">
                 <div class="col-sm-2 md-3">
-                  <label class="form-label">ประเภทการสั่งสินค้า</label>
+                  <label class="form-label">ประเภท<br>การสั่งสินค้า</label>
                 </div>
-                <div class="col-sm-5 md-3">
-                  <div class="form-radio">
+                <div class="col-sm-5 md-3 ">
+                  <div class="form-radio d-flex justify-content-around">
                    
                       {% for type in type_list %}
                       <input
@@ -147,7 +147,7 @@
                         name="type_id"
                         value="{{type.id}}"
                       />
-                      <label for="radio-type-{{type.id}}">{{type.name}}</label>
+                      <label class="w-100" for="radio-type-{{type.id}}">{{type.name}}</label>
                       {%endfor%}
                    
                   </div>
@@ -155,14 +155,14 @@
               </div>
  
  
- <br></br>
+ <br>
  
 
 <div class="row">
-  <div class="col-sm-2 md-3">
+  <div class="col-sm-2 md-3 d-flex justify-content-center align-self-center">
     <label class="form-label">การแกะสลักลาย</label>
   </div>
-  <div class="col-sm-5 md-3">
+  <div class="col-sm-5 md-3 d-flex align-self-center justify-content-center justify-content-md-start">
     <div class="form-radio">
         <input
         onclick="offShow_Carving()"
@@ -171,7 +171,7 @@
           name="select_carving"
           value=0
         />
-        <label for="radio-select_carving-1">ไม่เปิดแกะสลักลาย</label>
+        <label class="w-100" for="radio-select_carving-1">ไม่เปิดแกะสลักลาย</label>
         <input
         onclick="onShow_Carving()"
         type="radio"
@@ -179,11 +179,11 @@
         name="select_carving"
         value=1
       />
-      <label for="radio-select_carving-2">เปิดแกะสลักลาย</label>
+      <label class="w-100" for="radio-select_carving-2">เปิดแกะสลักลาย</label>
     </div>
   </div>
 
-  <div class="col-sm-5 md-3" id="cost_carving" style="display: none;">
+  <div class="col-sm-5 md-3 align-self-end pb-2 flex-grow-1" id="cost_carving" style="display: none;">
     <label class="form-label float-start">ค่าแกะสลักลาย</label>
     <input type="number" min="1" max="5000" class="form-control" name="cost_carving" placeholder="ค่าแกะสลักลายที่บวกเพิ่ม" required>
   </div> 
