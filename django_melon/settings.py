@@ -97,7 +97,7 @@ DATABASES = {
             'NAME': 'melon_system',
             'USER' : 'root',
             'HOST' : '127.0.0.1',
-            'PASSWORD' : 'ploy30725',
+            'PASSWORD' : 'ploy30725', #แก้ตรง site id ด้วยนะใหม่ ตอนนี้แก้ให้เป็นเลข1ไม่ได้อะะะ
             'PORT' : '3306',
             'OPTIONS': {
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
