@@ -8,6 +8,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
+from django.db.models import Max
 
 # Create your views here.
 
@@ -144,31 +145,15 @@ def product_store(request, id):
     all_product = Product.objects.filter(store_id=id)
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
+    list_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(list_product)
     type_product = TypeeOrder.objects.all()
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'all_product' : all_product,
-        'type_product' :type_product}
+        'type_product' :type_product,
+        'list_product' : list_product}
     return render(request, template_name='product_store.html', context=context)
-
-
-@login_required
-def create_product(request):
-    user = request.user
-    myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
-    quality_list = Quality.objects.all()
-    type_list = TypeeOrder.objects.all()
-    context = {'myStore' : myStore,
-        'totel_product' : totel_product,
-        'quality_list' :quality_list,
-        'type_list' : type_list,
-        }
-    return render(request, template_name='create_product.html', context=context)
-
 
 @login_required
 def edit_store(request, id):
@@ -236,6 +221,148 @@ def edit_store(request, id):
     context = {'myStore' : myStore,}
     return render(request, template_name='edit_store.html', context=context)
     
+
+
+@login_required
+def create_product(request):
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+    quality_list = Quality.objects.all()
+    type_list = TypeeOrder.objects.all()
+    range_product = Product.objects.all().count()
+
+    if request.method == 'POST':
+        counterror = 0
+        product_name = request.POST.get('product_name')
+        product_img = request.FILES.get('product_img')
+        melon_color = request.POST.get('melon_color')
+        product_price = request.POST.get('product_price')
+        product_weight = request.POST.get('product_weight')
+        product_amount = request.POST.get('product_amount')
+        quality_id = request.POST.get('quality_id')
+        product_description = request.POST.get('product_description')
+        shipping_cost = request.POST.get('shipping_cost')
+        date_plant = request.POST.get('date_plant')
+        date_harvest = request.POST.get('date_harvest')
+        plant_place = request.POST.get('plant_place')
+        water_source = request.POST.get('water_source')
+        type_id = request.POST.get('type_id')
+# คิโมจิเนื้อหอมหวาน บรรจุกล่อง
+        if (request.FILES.get('product_img') == None):
+            counterror += 1
+            checkImg = 'กรุณาอัปโหลดรูปภาพสินค้า !'
+            context = {'myStore' : myStore,
+                'totel_product' : totel_product,
+                'quality_list' :quality_list,
+                'type_list' : type_list,
+                'checkImg' : checkImg
+                }
+            return render(request, template_name='create_product.html', context=context)
+
+        if (date_harvest < date_plant):
+            counterror += 1
+            checkd = 'วันที่เก็บเกี่ยวไม่สามารถเลือกก่อนวันที่ปลูกได้ !'
+            context = {'myStore' : myStore,
+                'totel_product' : totel_product,
+                'quality_list' :quality_list,
+                'type_list' : type_list,
+                'checkd' : checkd
+                }
+            return render(request, template_name='create_product.html', context=context)
+
+        if (type_id == None):
+            counterror += 1
+            checkType = 'กรุณาเลือกประเภทสินค้า !'
+            context = {'myStore' : myStore,
+                'totel_product' : totel_product,
+                'quality_list' :quality_list,
+                'type_list' : type_list,
+                'checkType' : checkType
+                }
+            return render(request, template_name='create_product.html', context=context)
+
+        if (type_id == '2'):
+            if (request.POST.get('select_carving') == None):
+                counterror += 1
+                checkSelect = 'กรุณาเลือกการแกะสลักลาย !'
+                context = {'myStore' : myStore,
+                    'totel_product' : totel_product,
+                    'quality_list' :quality_list,
+                    'type_list' : type_list,
+                    'checkSelect' : checkSelect
+                    }
+                return render(request, template_name='create_product.html', context=context)
+            if (request.POST.get('cost_carving') == None):
+                counterror += 1
+                checkCarving = 'กรุณาระบุราคาค่าแกะสลักลาย !'
+                context = {'myStore' : myStore,
+                    'totel_product' : totel_product,
+                    'quality_list' :quality_list,
+                    'type_list' : type_list,
+                    'checkCarving' : checkCarving
+                    }
+                return render(request, template_name='create_product.html', context=context)
+            else:
+                select_carving = request.POST.get('select_carving')
+                cost_carving = request.POST.get('cost_carving')
+                
+        if (type_id == '1'):
+            select_carving = 0
+            cost_carving = 0
+
+
+        if (counterror == 0):
+            if (range_product == 0):
+                range_pd = 1
+                type_order = TypeeOrder.objects.get(id=type_id)
+                quality = Quality.objects.get(id=quality_id)
+
+                product_new = Product.objects.create(store_id=myStore,range=range_pd,product_name=product_name,
+                product_image=product_img,
+                melon_color=melon_color,product_price=product_price,product_weight=product_weight,product_amount=product_amount,
+                quality_id=quality,product_description=product_description,shipping_cost=shipping_cost,date_plant=date_plant,
+                date_harvest=date_harvest,plant_place=plant_place,water_source=water_source,type_id=type_order,
+                select_carving=select_carving,cost_carving=cost_carving)
+                product_new.save()
+                successful_NewProduct = 'สร้างข้อมูลสินค้าสำเร็จ'
+                context = {'myStore' : myStore,
+                'totel_product' : totel_product,
+                'quality_list' :quality_list,
+                'type_list' : type_list,
+                'successful_NewProduct' : successful_NewProduct,
+                }
+                return render(request, template_name='create_product.html', context=context)
+
+            if (range_product > 0):
+                type_order = TypeeOrder.objects.get(id=type_id)
+                quality = Quality.objects.get(id=quality_id)
+                range_pd = Product.objects.all().aggregate(Max('range')).get('range__max')
+                range_pd += 1
+                product_new = Product.objects.create(store_id=myStore,range=range_pd,product_name=product_name,
+                product_image=product_img,
+                melon_color=melon_color,product_price=product_price,product_weight=product_weight,product_amount=product_amount,
+                quality_id=quality,product_description=product_description,shipping_cost=shipping_cost,date_plant=date_plant,
+                date_harvest=date_harvest,plant_place=plant_place,water_source=water_source,type_id=type_order,
+                select_carving=select_carving,cost_carving=cost_carving)
+                product_new.save()
+                successful_NewProduct = 'สร้างข้อมูลสินค้าสำเร็จ'
+                context = {'myStore' : myStore,
+                'totel_product' : totel_product,
+                'quality_list' :quality_list,
+                'type_list' : type_list,
+                'successful_NewProduct' : successful_NewProduct,
+                }
+                return render(request, template_name='create_product.html', context=context)
+
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        'quality_list' :quality_list,
+        'type_list' : type_list,
+        }
+    return render(request, template_name='create_product.html', context=context)
+
 
 @login_required
 def order_farm(request, id):
