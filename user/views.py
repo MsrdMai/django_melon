@@ -110,3 +110,6 @@ def profile(request, id):
 
 def productlist(request):
     return render(request, template_name='productlist.html')
+
+def orderstatus(request):
+    return render(request, template_name='orderstatus.html')

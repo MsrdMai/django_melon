@@ -11,4 +11,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('profile/<int:id>/', views.profile, name='profile'),
     path('productlist/', views.productlist, name='productlist'),
+    path('orderstatus/', views.orderstatus, name='orderstatus'),
 ]
