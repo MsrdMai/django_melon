@@ -1,3 +1,135 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
+<style>
+    * {
+        box-sizing: border-box
+    }
 
+    /* Set height of body and the document to 100% */
+    body,
+    html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial;
+    }
+
+    /* Style tab links */
+    .tablink {
+        background-color: rgb(255, 255, 255);
+        color: rgb(27, 116, 0);
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 25%;
+    }
+
+    .tablink:hover {
+        background-color: rgb(170, 170, 170);
+    }
+
+    /* Style the tab content (and add height:100% for full page content) */
+    .tabcontent {
+        color: white;
+        display: none;
+        padding: 100px 20px;
+        height: 80vh;
+    }
+
+    p{
+        margin: 0%;
+    }
+
+    #payment {
+        background-color: green;
+    }
+
+    #waiting {
+        background-color: green;
+    }
+
+    #shipped {
+        background-color: green;
+    }
+
+    #review {
+        background-color: green;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .tablink {
+            font-size: 10px;
+            padding: 8px;
+        }
+        .statusimg{
+            width: 25px;
+        }
+        p{
+            margin: 0%;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+    <div class="container">
+        <button class="tablink" onclick="openPage('payment', this, 'rgb(170, 170, 170)')">
+            <img class="statusimg pb-2" src="{% static "icon/wallet.png" %}" width="50px" />
+            <p>ที่ต้องชำระ</p>
+        </button>
+        <button class="tablink" onclick="openPage('waiting', this, 'rgb(170, 170, 170)')" id="defaultOpen">
+            <img class="statusimg pb-2" src="{% static "icon/boxship.png" %}" width="50px" />
+            <p>ที่ต้องจัดส่ง</p>
+        </button>
+        <button class="tablink" onclick="openPage('shipped', this, 'rgb(170, 170, 170)')">
+            <img class="statusimg pb-2" src="{% static "icon/delivery.png" %}" width="50px" />
+            <p>ที่ต้องได้รับ</p>
+        </button>
+        <button class="tablink" onclick="openPage('review', this, 'rgb(170, 170, 170)')">
+            <img class="statusimg pb-2" src="{% static "icon/star.png" %}" width="50px" />
+            <p>ให้คะแนน</p>
+        </button>
+
+        <div id="payment" class="tabcontent">
+            <br><h3>ที่ต้องชำระ</h3>
+            <p>Home is where the heart is..</p>
+        </div>
+
+        <div id="waiting" class="tabcontent">
+            <br><h3>ที่ต้องจัดส่ง</h3>
+            <p>Some news this fine day!</p>
+        </div>
+
+        <div id="shipped" class="tabcontent">
+            <br><h3>ที่ต้องได้รับ</h3>
+            <p>Get in touch, or swing by for a cup of coffee.</p>
+        </div>
+
+        <div id="review" class="tabcontent">
+            <br><h3>ให้คะแนน</h3>
+            <p>Who we are and what we do.</p>
+        </div>
+    </div>
+    <script>
+        function openPage(pageName, elmnt, color) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+            document.getElementById(pageName).style.display = "block";
+            elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+
+</body>
 {% endblock %}
