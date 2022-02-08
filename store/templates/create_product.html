@@ -141,13 +141,29 @@
                   <div class="form-radio d-flex justify-content-around">
                    
                       {% for type in type_list %}
+                     
+                      {% if type.name == 'จอง' %}
+                     
                       <input
-                        type="radio"
-                        id="radio-type-{{type.id}}"
-                        name="type_id"
-                        value="{{type.id}}"
-                      />
+                      type="radio"
+                      id="radio-type-{{type.id}}"
+                      name="type_id"
+                      value="{{type.id}}"
+                      onclick="show_Carving()"
+                    />
+
+                      {% else %}
+                      <input
+                      type="radio"
+                      id="radio-type-{{type.id}}"
+                      name="type_id"
+                      value="{{type.id}}"
+                      onclick="not_show_Carving()"
+                    />
+                      {%endif%}
+
                       <label class="w-100" for="radio-type-{{type.id}}">{{type.name}}</label>
+
                       {%endfor%}
                    
                   </div>
@@ -158,7 +174,7 @@
  <br>
  
 
-<div class="row">
+<div class="row" style="display: none;" id="row-carving">
   <div class="col-sm-2 md-3 d-flex justify-content-center align-self-center">
     <label class="form-label">การแกะสลักลาย</label>
   </div>
@@ -216,6 +232,14 @@
 
         function onShow_Carving() {
         document.getElementById("cost_carving").style.display = "block";
+        }
+
+        function show_Carving(){
+        document.getElementById("row-carving").style.display = "block";
+        }
+
+        function not_show_Carving(){
+        document.getElementById("row-carving").style.display = "none";
         }
     
 </script>
