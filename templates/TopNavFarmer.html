@@ -128,7 +128,7 @@
               <a
                 class="nav-link "
                 aria-current="page"
-                href="{% url 'my_store' id=user.id %}"
+                href="{% url 'my_store' %}"
                 ><b>จัดการฟาร์ม</b></a
               >
             </li>  
@@ -237,15 +237,15 @@
 
 
         <div class="row" style="background-color: #f5f5f4; margin: 5px;">
-            <a href="{% url 'my_store' id=user.id %}" class="col-sm-3 btn btn-lg btn-block " id="tab-btn"> 
+            <a href="{% url 'my_store' %}" class="col-sm-3 btn btn-lg btn-block " id="tab-btn"> 
                 <img src="{% static "icon/farm.png" %}" style="width: 50px; height: 50px;"> </img>
             เกี่ยวกับฟาร์ม </a>
 
-            <a href="{% url 'product_store' id=myStore.id %}" class="col-sm-3 btn  btn-lg btn-block" id="tab-btn"> 
+            <a href="{% url 'product_store' %}" class="col-sm-3 btn  btn-lg btn-block" id="tab-btn"> 
                  <img src="{% static "icon/product.png" %}" style="width: 50px; height: 50px;"></img> 
             รายการสินค้า </a>
 
-            <a href="{% url 'order_farm' id=myStore.id %}" class="col-sm-3 btn  btn-lg btn-block" id="tab-btn"> 
+            <a href="{% url 'order_farm' %}" class="col-sm-3 btn  btn-lg btn-block" id="tab-btn"> 
                  <img src="{% static "icon/order.png" %}" style="width: 50px; height: 50px;"></img>
             คำสั่งซื้อ </a>
 

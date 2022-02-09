@@ -107,8 +107,8 @@ def create_store(request):
     return render(request, template_name='create_store.html')
 
 @login_required
-def my_store(request, id):
-    user = User.objects.get(pk=id)
+def my_store(request):
+    user = request.user
     checkStore = Store.objects.filter(user_id=user)
     checkStore = len(checkStore)
     context = {}
@@ -141,16 +141,15 @@ def product_description(request):
     return render(request, template_name='product_description.html', context=context)
 
 @login_required
-def product_store(request, id):
-    all_product = Product.objects.filter(store_id=id)
+def product_store(request):
     user = request.user
-    myStore = Store.objects.get(user_id=user)
+    myStore =  Store.objects.get(user_id=user.id)
     list_product = Product.objects.filter(store_id=myStore)
     totel_product = len(list_product)
     type_product = TypeeOrder.objects.all()
+
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
-        'all_product' : all_product,
         'type_product' :type_product,
         'list_product' : list_product}
     return render(request, template_name='product_store.html', context=context)
@@ -365,15 +364,30 @@ def create_product(request):
 
 
 @login_required
-def order_farm(request, id):
-    all_product = Product.objects.filter(store_id=id)
-    myStore = Store.objects.get(id=id)
+def order_farm(request):
+    user = request.user
+    myStore =  Store.objects.get(user_id=user.id)
     list_product = Product.objects.filter(store_id=myStore)
     totel_product = len(list_product)
     type_product = TypeeOrder.objects.all()
+
+
+    # search_txt = request.GET.get('inputSearch', '')
+    # print(search_txt)
+    # input_Typeproduct = request.GET.get('input_Typeproduct', '')
+
+
+    # object_list = Product.objects.filter(
+    #     name__icontains=search_txt
+    # )
+    # if semester:
+    #     object_list = object_list.filter(types=semester)
+
+
+
+
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
-        'all_product' : all_product,
         'type_product' :type_product,
         'list_product' : list_product}
     return render(request, template_name='order_farm.html', context=context)
