@@ -368,13 +368,14 @@ def create_product(request):
 def order_farm(request, id):
     all_product = Product.objects.filter(store_id=id)
     myStore = Store.objects.get(id=id)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
+    list_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(list_product)
     type_product = TypeeOrder.objects.all()
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'all_product' : all_product,
-        'type_product' :type_product}
+        'type_product' :type_product,
+        'list_product' : list_product}
     return render(request, template_name='order_farm.html', context=context)
 
 
