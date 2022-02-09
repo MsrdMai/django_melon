@@ -130,3 +130,6 @@ def product_book(request):
 
 def orderstatus(request):
     return render(request, template_name='orderstatus.html')
+
+def product_desc(request):
+    return render(request, template_name='product_desc.html')
