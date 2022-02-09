@@ -1,8 +1,11 @@
+from itertools import product
 from django.shortcuts import render, redirect
 from .models import TypeUser, UserInType
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
+from store.models import Product
+
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 
@@ -108,8 +111,12 @@ def profile(request, id):
     return render(request, template_name='profile.html', context=context)
 
 
-def productlist(request):
-    return render(request, template_name='productlist.html')
+def product_buy(request):
+    product_list = Product.objects.filter(type_id=1)
+    context = {
+        'product_list' : product_list
+    }
+    return render(request, template_name='product_buy.html', context=context)
 
 def orderstatus(request):
     return render(request, template_name='orderstatus.html')
