@@ -143,15 +143,32 @@ def product_description(request):
 @login_required
 def product_store(request):
     user = request.user
-    myStore =  Store.objects.get(user_id=user.id)
+    myStore =  Store.objects.get(user_id=user)
     list_product = Product.objects.filter(store_id=myStore)
     totel_product = len(list_product)
     type_product = TypeeOrder.objects.all()
 
+
+    search_txt = request.GET.get('inputSearch', '')
+    print(search_txt)
+    input_Typeproduct = request.GET.get('input_Typeproduct', '')
+
+
+    object_list = Product.objects.filter(
+        product_name__icontains=search_txt,
+        store_id = myStore,
+    )
+   
+    if input_Typeproduct:
+        object_list = object_list.filter(type_id=input_Typeproduct)
+
+
+
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'type_product' :type_product,
-        'list_product' : list_product}
+        'list_product' : list_product,
+        'object_list' : object_list,}
     return render(request, template_name='product_store.html', context=context)
 
 @login_required
@@ -248,7 +265,7 @@ def create_product(request):
         plant_place = request.POST.get('plant_place')
         water_source = request.POST.get('water_source')
         type_id = request.POST.get('type_id')
-# คิโมจิเนื้อหอมหวาน บรรจุกล่อง
+
         if (request.FILES.get('product_img') == None):
             counterror += 1
             checkImg = 'กรุณาอัปโหลดรูปภาพสินค้า !'
@@ -372,16 +389,18 @@ def order_farm(request):
     type_product = TypeeOrder.objects.all()
 
 
-    # search_txt = request.GET.get('inputSearch', '')
-    # print(search_txt)
-    # input_Typeproduct = request.GET.get('input_Typeproduct', '')
+    search_txt = request.GET.get('inputSearch', '')
+    print(search_txt)
+    input_Typeproduct = request.GET.get('input_Typeproduct', '')
 
 
-    # object_list = Product.objects.filter(
-    #     name__icontains=search_txt
-    # )
-    # if semester:
-    #     object_list = object_list.filter(types=semester)
+    object_list = Product.objects.filter(
+        product_name__icontains=search_txt,
+        store_id = myStore,
+    )
+   
+    if input_Typeproduct:
+        object_list = object_list.filter(type_id=input_Typeproduct)
 
 
 
@@ -389,7 +408,8 @@ def order_farm(request):
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'type_product' :type_product,
-        'list_product' : list_product}
+        'list_product' : list_product,
+        'object_list': object_list,}
     return render(request, template_name='order_farm.html', context=context)
 
 
