@@ -110,12 +110,12 @@
           <br>
               <div class="col-sm">
                 <div class="mb-3">
-                    <label  class="form-label float-start">วันที่ปลูก</label>
-                    <input type="date" class="form-control"  name="date_plant" required></input>
-                  </div>
-                <div class="mb-3">
                     <label  class="form-label float-start">วันที่เก็บเกี่ยว</label>
                     <input type="date" class="form-control"  name="date_harvest" required></input>
+                  </div>
+                <div class="mb-3">
+                    <label  class="form-label float-start">วันที่หมดอายุ</label>
+                    <input type="date" class="form-control"  name="date_expire" required></input>
                   </div>
                 </div> 
                 {% if checkd %}
@@ -222,6 +222,7 @@
     <label class="form-label float-start">ค่าแกะสลักลาย</label>
     <input type="number" min="0" max="5000" class="form-control" name="cost_carving" value="0" placeholder="ค่าแกะสลักลายที่บวกเพิ่ม" required>
   </div> 
+  <br>
   {% if checkCarving %}
   <div class="invalid-feedback d-block">{{checkCarving}}</div>
   {%endif%}

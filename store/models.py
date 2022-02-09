@@ -48,7 +48,7 @@ class Product(models.Model):
     range = models.IntegerField()
     product_image = models.ImageField(upload_to='product_image/', null=True)
     date_create = models.DateTimeField(auto_now=True)
-    date_plant = models.DateField(null=True)
+    date_expire = models.DateField(null=True)
     date_harvest = models.DateField(null=True)
     plant_place = models.CharField(max_length=255)
     water_source = models.CharField(max_length=255)

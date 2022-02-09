@@ -244,7 +244,7 @@ def create_product(request):
         quality_id = request.POST.get('quality_id')
         product_description = request.POST.get('product_description')
         shipping_cost = request.POST.get('shipping_cost')
-        date_plant = request.POST.get('date_plant')
+        date_expire = request.POST.get('date_expire')
         date_harvest = request.POST.get('date_harvest')
         plant_place = request.POST.get('plant_place')
         water_source = request.POST.get('water_source')
@@ -261,9 +261,9 @@ def create_product(request):
                 }
             return render(request, template_name='create_product.html', context=context)
 
-        if (date_harvest < date_plant):
+        if (date_expire < date_harvest):
             counterror += 1
-            checkd = 'วันที่เก็บเกี่ยวไม่สามารถเลือกก่อนวันที่ปลูกได้ !'
+            checkd = 'วันที่เก็บเกี่ยวไม่สามารถเลือกก่อนวันที่หมดอายุได้ !'
             context = {'myStore' : myStore,
                 'totel_product' : totel_product,
                 'quality_list' :quality_list,
@@ -322,8 +322,8 @@ def create_product(request):
                 product_new = Product.objects.create(store_id=myStore,range=range_pd,product_name=product_name,
                 product_image=product_img,
                 melon_color=melon_color,product_price=product_price,product_weight=product_weight,product_amount=product_amount,
-                quality_id=quality,product_description=product_description,shipping_cost=shipping_cost,date_plant=date_plant,
-                date_harvest=date_harvest,plant_place=plant_place,water_source=water_source,type_id=type_order,
+                quality_id=quality,product_description=product_description,shipping_cost=shipping_cost,plant_place=plant_place,
+                date_harvest=date_harvest,date_expire=date_expire,water_source=water_source,type_id=type_order,
                 select_carving=select_carving,cost_carving=cost_carving)
                 product_new.save()
                 successful_NewProduct = 'สร้างข้อมูลสินค้าสำเร็จ'
@@ -343,8 +343,8 @@ def create_product(request):
                 product_new = Product.objects.create(store_id=myStore,range=range_pd,product_name=product_name,
                 product_image=product_img,
                 melon_color=melon_color,product_price=product_price,product_weight=product_weight,product_amount=product_amount,
-                quality_id=quality,product_description=product_description,shipping_cost=shipping_cost,date_plant=date_plant,
-                date_harvest=date_harvest,plant_place=plant_place,water_source=water_source,type_id=type_order,
+                quality_id=quality,product_description=product_description,shipping_cost=shipping_cost,plant_place=plant_place,
+                date_harvest=date_harvest,date_expire=date_expire,water_source=water_source,type_id=type_order,
                 select_carving=select_carving,cost_carving=cost_carving)
                 product_new.save()
                 successful_NewProduct = 'สร้างข้อมูลสินค้าสำเร็จ'
