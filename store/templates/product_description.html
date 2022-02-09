@@ -3,20 +3,104 @@
 
 
 <div class="container">
-<br></br>
-
-
 <div  style="background-color: white; ">
 <br>
-<h4>ชื่อสินค้า</h4>
+<h4>ชื่อสินค้า {{product_des.product_name}}</h4>
 <hr>
-<br></br>
+<div class="row border-indigo-600" style="margin: 2%;">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4">
+      <br></br>
+      <img
+      src="{{product_des.product_image.url}}"
+      style="width: 100%; height: auto; align-items: center; padding: 1%;"
+      ></img>
+      
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-5 col-12">
+      <br></br>
+      <div class="row">
+        <div class="col">
+          <h3 style="color: brown;">
+            {{product_des.product_name}}
+          </h3>
+        </div>
 
 
-<br></br>
+        {% if product_des.type_id_id == 2  %}
+                {% if product_des.select_carving == 0 %}
+                <div class="col">
+                    <h5 style="color:#ea580c; align-items:center; border-width:4px; border-color: #ea580c; border-style: solid; padding: 1%;">
+                    จอง
+                    </h5>
+                </div>
+                {% endif %}
+
+            {% if product_des.select_carving == 1 %}
+                <div class="col">
+                <h5 style="color:#166534; align-items:center; border-width:4px; border-color: #166534; border-style: solid; padding: 1%;">
+                    แกะสลัก
+                </h5>
+                </div>
+            {% endif %}
+
+        {% endif %}
 
 
 
+      </div>
+      <div class="row">
+        <div class="col">
+         <br>
+          <p style="color:#1f2937; text-align: left;">ขนาด :  {{product_des.product_weight}} kg</p>
+          <p style="color:#1f2937; text-align: left;">เนื้อ : {{product_des.melon_color}}</p>
+          <p style="color:#1f2937; text-align: left;">
+            จำนวนในคลัง : {{product_des.product_amount}}
+          </p>
+
+
+          {% if product_des.type_id_id == 2 and product_des.select_carving == 1 %}
+          <p style="color:#1f2937; text-align: left;">
+            ราคาค่าบริการแกะลาย : {{product_des.cost_carving}}
+          </p>
+          {% endif %}
+
+
+        </div>
+        <div class="col">
+          <br>
+          <p style="color:#1f2937; text-align: left;">
+            คุณภาพ : {{product_des.quality_id.quality_name}}
+          </p>
+          <p style="color:#1f2937; text-align: left;">ราคา : {{product_des.product_price}} ฿</p>
+          <p style="color:#1f2937; text-align: left;">
+            รอบตัด : {{product_des.date_harvest}}
+          </p>
+          <p style="color:#1f2937; text-align: left;">
+            วันหมดอายุ : {{product_des.date_expire}}
+          </p>
+        </div>
+      </div>
+
+      <br>
+      <div class="col">
+        <p style="color:#1f2937; text-align: left;">
+          รายละเอียดสินค้า : {{product_des.product_description}}
+        </p>
+      </div>
+
+      <a href="{% url 'product_promote' id=product_des.id %}" class="col-12 btn btn-lg btn-block  btn-primary" style="margin: 1px;">
+        <img src="{% static "icon/megaphone.png" %}" style="width: 30px; height: 30px;"class="float-start"> </img>
+        โปรโมท</a>
+      <a href="" class="col-12 btn btn-lg btn-block  btn-outline-danger" style="margin: 1px;">
+        <img src="{% static "icon/cancel.png" %}" style="width: 30px; height: 30px;" class="float-start"> </img>
+        ปิดการขาย</a>
+      
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+  <br>
 
 </div>
 

@@ -113,10 +113,20 @@ def profile(request, id):
 
 def product_buy(request):
     product_list = Product.objects.filter(type_id=1)
+    product_list = product_list.order_by('-range')
     context = {
         'product_list' : product_list
     }
     return render(request, template_name='product_buy.html', context=context)
+
+def product_book(request):
+    product_list = Product.objects.filter(type_id=2)
+    product_list = product_list.order_by('-range')
+    context = {
+        'product_list' : product_list
+    }
+    return render(request, template_name='product_book.html', context=context)
+
 
 def orderstatus(request):
     return render(request, template_name='orderstatus.html')

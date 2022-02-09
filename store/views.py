@@ -130,17 +130,6 @@ def my_store(request):
 
 
 @login_required
-def product_description(request):
-    user = request.user
-    myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
-    context = {'myStore' : myStore,
-        'totel_product' : totel_product,
-        }
-    return render(request, template_name='product_description.html', context=context)
-
-@login_required
 def product_store(request):
     user = request.user
     myStore =  Store.objects.get(user_id=user)
@@ -162,14 +151,36 @@ def product_store(request):
     if input_Typeproduct:
         object_list = object_list.filter(type_id=input_Typeproduct)
 
-
-
+    object_list = object_list.order_by('-range')
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'type_product' :type_product,
         'list_product' : list_product,
         'object_list' : object_list,}
     return render(request, template_name='product_store.html', context=context)
+
+
+@login_required
+def product_description(request, id):
+    # tabfarmer
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+
+    # product_description
+    product_des = Product.objects.get(id=id)
+
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        'product_des' : product_des
+        }
+    return render(request, template_name='product_description.html', context=context)
+
+
+
+
+
 
 @login_required
 def edit_store(request, id):
@@ -287,6 +298,7 @@ def create_product(request):
                 'checkd' : checkd
                 }
             return render(request, template_name='create_product.html', context=context)
+
 
         if (type_id == None):
             counterror += 1
@@ -426,4 +438,18 @@ def order_list(request, id):
         'type_state' :type_state}
     return render(request, template_name='order_list.html', context=context)
 
-    
+@login_required
+def product_promote(request, id):
+    # product_promote
+    product = Product.objects.get(id=id)
+    range_pd = Product.objects.all().aggregate(Max('range')).get('range__max')
+    value = range_pd
+    value = value + 1
+    product.range = value
+    product.save()
+    text_promote = 'สินค้าของคุณได้ทำการโปรโมท อยู่ในอันดับล่าสุดแล้ว'
+
+    context = {
+        'text_promote' : text_promote,
+        }
+    return render(request, template_name='index.html', context=context)

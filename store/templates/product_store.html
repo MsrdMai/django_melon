@@ -1,6 +1,4 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
-
-
 <br><br>
 
         <div class="container" style="background-color: white;">
@@ -71,7 +69,8 @@
                                             <div class="card-text pb-2 price">{{pd.product_price}} บาท</div>
                                             <div class="card-text quant">{{pd.product_amount}} ชิ้น</div>
                                         </div>
-                                        <div href="#" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</div>
+                                        <a href="{% url 'product_description' id=pd.id %}" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</a>
+                                       
                                     </div>
                                 </div>
                             </div>
