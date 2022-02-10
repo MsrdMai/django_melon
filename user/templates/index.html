@@ -18,6 +18,11 @@
 </script>
 {%endif%}
 
+{% if text_close %}
+<script>
+  swal("{{text_close}}", "บันทึกข้อมูลสำเร็จ", "success");
+</script>
+{%endif%}
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">

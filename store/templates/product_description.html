@@ -93,7 +93,7 @@
       <a href="{% url 'product_promote' id=product_des.id %}" class="col-12 btn btn-lg btn-block  btn-primary" style="margin: 1px;">
         <img src="{% static "icon/megaphone.png" %}" style="width: 30px; height: 30px;"class="float-start"> </img>
         โปรโมท</a>
-      <a href="" class="col-12 btn btn-lg btn-block  btn-outline-danger" style="margin: 1px;">
+      <a href="{% url 'product_close' id=product_des.id %}" class="col-12 btn btn-lg btn-block  btn-outline-danger" style="margin: 1px;">
         <img src="{% static "icon/cancel.png" %}" style="width: 30px; height: 30px;" class="float-start"> </img>
         ปิดการขาย</a>
       

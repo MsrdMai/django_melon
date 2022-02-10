@@ -453,3 +453,17 @@ def product_promote(request, id):
         'text_promote' : text_promote,
         }
     return render(request, template_name='index.html', context=context)
+
+
+@login_required
+def product_close(request, id):
+    # product_promote
+    product = Product.objects.get(id=id)
+    product.product_amount = 0
+    product.save()
+    text_close = 'สินค้าของคุณได้ทำการปิดการขายเรียบร้อยแล้ว'
+
+    context = {
+        'text_close' : text_close,
+        }
+    return render(request, template_name='index.html', context=context)
