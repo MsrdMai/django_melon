@@ -67,18 +67,18 @@
   });
   </script>
 
-<!-- <body style="
+<body style="
   text-align: center;
   font-family: 'Prompt', sans-serif;
-  background : url('{% static "img/bg.jpg" %}') no-repeat; 
-  background-size : cover;"> -->
+  background : url('{% static "img/bg3.jpg" %}') no-repeat; 
+  background-size : cover;">
 
-  <body style="
+  <!-- <body style="
   text-align: center;
   font-family: 'Prompt', sans-serif;
   background-image: linear-gradient(to right, #fed7aa 0%, #ccfbf1 100%);
 
-  ">
+  "> -->
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid ">
@@ -255,7 +255,7 @@
                  <img src="{% static "icon/order.png" %}" style="width: 50px; height: 50px;"></img>
             คำสั่งซื้อ </a>
 
-            <a href="" class="col-sm-3 btn btn-lg btn-block" id="tab-btn"> 
+            <a href="{% url 'review_farm' %}" class="col-sm-3 btn btn-lg btn-block" id="tab-btn"> 
                  <img src="{% static "icon/reviews.png" %}" style="width: 50px; height: 50px;"></img>
             รีวิว </a>
     </div>

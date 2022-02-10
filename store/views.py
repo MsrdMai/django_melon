@@ -467,3 +467,17 @@ def product_close(request, id):
         'text_close' : text_close,
         }
     return render(request, template_name='index.html', context=context)
+
+
+
+@login_required
+def review_farm(request):
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,
+        }
+    return render(request, template_name='review_farm.html', context=context)
