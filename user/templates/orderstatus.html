@@ -34,8 +34,9 @@
     .tabcontent {
         color: rgb(27, 116, 0);
         display: none;
-        padding: 100px 20px;
+        padding: 140px 40px;
         height: 100vh;
+        border-bottom: 2px;
     }
 
     p{
@@ -94,9 +95,22 @@
             <p><b>ให้คะแนน</b></p>
         </button>
         </div>
+
+
         <div id="payment" class="tabcontent">
-            <br><h3>ที่ต้องชำระ</h3>
-            <p>Home is where the heart is..</p>
+            <div class="row shadow rounded border border-2 py-2 mb-2 px-2">
+                <br>
+                    <div class="col">
+                        <div class="d-flex">
+                            <img class="rounded" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="ps-4" style="margin-top: 20px; text-align: left;"><b>คิโมจิ<br/>x1</b></h3>
+                        </div>
+                    </div>
+                    <div class="col d-flex flex-column">
+                        <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p>
+                        <h3 class="ps-4 d-flex justify-content-end" style="font-size: 50px; margin-top: 20px; color: red;"><b>300 ฿</b></h3>
+                    </div>
+        </div>
         </div>
 
         <div id="waiting" class="tabcontent">
