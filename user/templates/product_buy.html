@@ -15,13 +15,13 @@
             <div class="col-lg-4 col-sm-6 col-xl-3 py-3">
                 <div class="card shadow bg-white rounded">
                     <div class="card-body pb-2 px-6">
-                        <img class="rounded" src="{{pd.product_image.url}}" height="150px" alt="Product" />
+                        <img class="rounded " src="{{pd.product_image.url}}" height="180px" width="180px" style="object-fit: scale-down;" alt="Product" />
                         <div class="py-2 head">{{pd.product_name}}</div>
                         <div class="d-flex justify-content-between align-content-center">
                             <div class="card-text pb-2 price">{{pd.product_price}} บาท</div>
                             <div class="card-text quant">{{pd.product_amount}} ชิ้น</div>
                         </div>
-                        <div href="{id=pd.id %}" class="btn btn-danger mb-2 mt-2 w-100" data-bs-toggle="modal"
+                        <div href="#" class="btn btn-danger mb-2 mt-2 w-100" data-bs-toggle="modal"
                             data-bs-target="#Modal1">สั่งซื้อ</div>
                     </div>
                 </div>
@@ -40,17 +40,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pt-0">
+                <h2 class="d-flex justify-content-center" style="color: rgb(0, 107, 0);">
+                    <b> {{pd.product_name}}</b>
+                </h2>
                 <div class="row">
                     <div class="col-lg-4">
                         <img src="{{pd.product_image.url}}"
-                            style="width: 100%; height: auto; align-items: center; padding: 1%;"></img>
+                        height="200px" width="200px" style="align-items: center; padding: 1%; object-fit: scale-down;"></img>
                     </div>
-                    <div class="col-lg-4">
-                        <h2 class="d-flex justify-content-center justify-content-sm-center justify-content-md-end" style="color: rgb(0, 107, 0);">
-                            <b> {{pd.product_name}}</b>
-                        </h2>
+                    <div class="col-lg-4 mt-2">
                         <p
-                            style="color:rgb(0, 107, 0); padding-left: 16px; text-align: left; margin-top: 36px; margin-bottom: 12px;">
+                            style="color:rgb(0, 107, 0); padding-left: 16px; text-align: left; margin-bottom: 12px;">
                             <b>ขนาด : </b> {{pd.product_weight}} kg</p>
                         <p style="color:rgb(0, 107, 0); padding-left: 16px; text-align: left; margin-bottom: 12px;">
                             <b>เนื้อ :</b> {{pd.melon_color}}</p>
@@ -58,32 +58,32 @@
                             <b>จำนวนในคลัง :</b> {{pd.product_amount}}
                         </p>
                     </div>
-                    <div class="col-lg-4 mt-5 pt-4 ">
-                        <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+                    <div class="col-lg-4 mt-2">
+                        <p style="color:rgb(0, 107, 0);  padding-left: 16px; text-align: left; margin-bottom: 12px;">
                             <b>คุณภาพ : </b>{{pd.quality_id.quality_name}}
                         </p>
-                        <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+                        <p style="color:rgb(0, 107, 0);  padding-left: 16px; text-align: left; margin-bottom: 12px;">
                             <b>รอบตัด :</b> {{pd.date_harvest}}
                         </p>
-                        <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+                        <p style="color:rgb(0, 107, 0);  padding-left: 16px; text-align: left; margin-bottom: 12px;">
                             <b>วันหมดอายุ :</b> {{pd.date_expire}}
                         </p>
                         <div class="row" style="margin-top: 2rem;">
                             <div class="col px-0 pe-2 pt-3">
-                                <p style="color:rgb(122, 0, 0); margin-bottom: 0px; text-align: right; "><b>ราคา </p></b>
+                                <p style="color:rgb(218, 0, 0); margin-bottom: 0px; text-align: right; "><b>ราคา </p></b>
                             </div>
-                            <div class="col px-0">
-                                <h1 style="color:rgb(122, 0, 0);"><b>{{pd.product_price}}</b></h1> 
+                            <div class="col px-0 pt-1">
+                                <h1 style="color:rgb(218, 0, 0); margin-bottom: 0px;"><b>{{pd.product_price}}</b></h1> 
                             </div>
                             <div class="col px-0 ps-2 pt-3">
-                                <p style="color:rgb(122, 0, 0); margin-bottom: 0px; text-align: left;"><b>฿</p></b>
+                                <p style="color:rgb(218, 0, 0); margin-bottom: 0px; text-align: left;"><b>฿</p></b>
                             </div>
                     </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer border-top-0 justify-content-center">
-                <button type="button" class="btn btn-primary w-50">
+                <button type="button" class="btn btn-primary w-100">
                     <h3 style="margin-top: 0.5rem;"><b>สั่งซื้อ</b></h3>
                 </button>
             </div>
