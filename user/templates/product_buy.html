@@ -7,7 +7,11 @@
     <div class="text">สินค้าทั้งหมด</div>
     <img class="mx-3" src="{% static " icon/765556.png" %}" width="50px" alt="">
 </div>
-
+<style>
+    .btns {
+    background-color: #ff7373;
+  }
+</style>
 <section class="section1 w-75 px-2 bg-light rounded mt-1" id="cards">
     <div class="container card-styles">
         <div class="row">
@@ -21,7 +25,7 @@
                             <div class="card-text pb-2 price">{{pd.product_price}} บาท</div>
                             <div class="card-text quant">{{pd.product_amount}} ชิ้น</div>
                         </div>
-                        <div href="#" class="btn btn-danger mb-2 mt-2 w-100" data-bs-toggle="modal"
+                        <div href="#" class="btn btn-danger btns mb-2 mt-2 w-100" data-bs-toggle="modal"
                             data-bs-target="#Modal1">สั่งซื้อ</div>
                     </div>
                 </div>
@@ -36,7 +40,6 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header border-bottom-0 pb-0">
-                <!-- <h5 class="modal-title justify-content-end" id="ModalLabel">{{pd.product_name}}</h5> -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pt-0">
@@ -83,7 +86,7 @@
                 </div>
             </div>
             <div class="modal-footer border-top-0 justify-content-center">
-                <button type="button" class="btn btn-primary w-100">
+                <button type="button" class="btn btn-danger btns w-100">
                     <h3 style="margin-top: 0.5rem;"><b>สั่งซื้อ</b></h3>
                 </button>
             </div>
