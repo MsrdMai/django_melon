@@ -35,7 +35,7 @@
         </div>
     </div>
 </section><br>
-
+{% for pd in product_list %}
 <div class="modal fade" id="Modal-{{pd.id}}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -93,5 +93,5 @@
         </div>
     </div>
 </div>
-
+{% endfor %}
 {% endblock %}
