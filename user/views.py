@@ -4,7 +4,7 @@ from .models import TypeUser, UserInType
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
-from store.models import Product
+from store.models import Product, Store
 
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
@@ -137,3 +137,17 @@ def product_desc(request,id):
         'data_product' : data_product
     }
     return render(request, template_name='product_desc.html', context=context)
+
+def farm_detail(request,id):
+    farm_detail = Store.objects.get(id=id)
+    latitude = farm_detail.latitude
+    longitude = farm_detail.longitude
+    totel_product = Product.objects.filter(store_id=farm_detail)
+    totel_product = len(totel_product)
+    context = {
+        'farm_detail' : farm_detail,
+        'latitude' :latitude,
+        'longitude':longitude,
+        'totel_product' : totel_product
+    }
+    return render(request, template_name='farm_detail.html', context=context)    
