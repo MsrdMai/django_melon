@@ -123,11 +123,11 @@
 
     <div class="container">
         <div class="border border-1">
-        <button class="tablink" onclick="openPage('payment', this, 'rgb(149, 192, 137)')">
+        <button class="tablink" onclick="openPage('payment', this, 'rgb(149, 192, 137)')" id="defaultOpen">
             <img class="statusimg pb-2" src="{% static "icon/wallet.png" %}" width="50px" />
             <p><b>ที่ต้องชำระ</b></p>
         </button>
-        <button class="tablink" onclick="openPage('waiting', this, 'rgb(149, 192, 137)')" id="defaultOpen">
+        <button class="tablink" onclick="openPage('waiting', this, 'rgb(149, 192, 137)')">
             <img class="statusimg pb-2" src="{% static "icon/boxship.png" %}" width="50px" />
             <p><b>ที่ต้องจัดส่ง</b></p>
         </button>
@@ -143,7 +143,7 @@
 
 
         <div id="payment" class="tabcontent">
-            <div class="row shadow rounded border border-2 py-2 mb-4 px-2">
+            <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
                 <div class="d-flex justify-content-between flex-wrap date">
                 <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
@@ -160,31 +160,7 @@
                             <button type="button" class="button1 mx-1" style="margin-right: 0px;">
                                 <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>แจ้งยกเลิก</b></h3>
                             </button>
-                            <button type="button" class="button2 mx-1">
-                                <h3 class="mx-2" style="margin-top: 0.5rem; font-size: 15px;"><b>แจ้งชำระเงิน</b></h3>
-                            </button>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="row shadow rounded border border-2 py-2 mb-2 px-2">
-                <br>
-                <div class="d-flex justify-content-between flex-wrap date">
-                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
-                <p class="date ps-4 d-flex"><b>ชำระภายใน 15/02/65</b></p>
-            </div>
-                    <div class="col d-flex justify-content-md-start justify-content-between">
-                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ<br/>x1</b></h3>
-                    </div>
-                    <div class="col-md-6 d-flex flex-column">
-                        <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
-                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>300 ฿</b></h3>
-                        <div class="d-flex flex-wrap justify-content-end mt-1">
-                            <button type="button" class="button1 mx-1" style="margin-right: 0px;">
-                                <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>แจ้งยกเลิก</b></h3>
-                            </button>
-                            <button type="button" class="button2 mx-1">
+                            <button type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#paymentform">
                                 <h3 class="mx-2" style="margin-top: 0.5rem; font-size: 15px;"><b>แจ้งชำระเงิน</b></h3>
                             </button>
                         </div>
@@ -207,6 +183,90 @@
             <p>Who we are and what we do.</p>
         </div>
     </div>
+
+   
+
+<div class="modal fade" id="paymentform" tabindex="-1" aria-labelledby="paymentformlabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentformlabel">แจ้งชำระเงิน</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <!-- <div class="modal-body d-flex">
+        <form class="row" style="text-align: left;">
+          <div class="col-sm-6 mb-2">
+            <label for="recipient-name" class="col-form-label">ชื่อ</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="col-sm-6 mb-2">
+            <label for="recipient-name" class="col-form-label">เบอร์โทรศัพท์</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="col-sm-6 mb-2">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div> -->
+
+      <form class="modal-body row g-3" style="text-align: left;">
+        <div class="col-md-6">
+          <label for="inputname" class="form-label">ชื่อ</label>
+          <input type="text" class="form-control mb-2" id="inputname">
+          <label for="inputtel" class="form-label">โทรศัพท์</label>
+          <input type="text" class="form-control" id="inputAddress">
+        </div>
+        <div class="col-md-6">
+          <label rows="1" for="inputadd" class="form-label">ที่อยู่</label>
+          <textarea class="form-control form-control-lg" id="message-text"></textarea>
+        </div>
+        <div class="col-12">
+            <label for="inputState" class="form-label">ธนาคาร</label>
+            <select id="inputState" class="form-select">
+              <option selected value="0">เลือกธนาคาร</option>
+              <option value="พร้อมเพย์">พร้อมเพย์</option>
+              <option value="ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร">ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</option>
+              <option value="ธ.ธนาคารออมสิน">ธ.ธนาคารออมสิน</option>
+              <option value="ธ.กรุงศรีอยุธยา จำกัด (มหาชน)">ธ.กรุงศรีอยุธยา จำกัด (มหาชน)</option>
+              <option value="ธ.กรุงเทพ จำกัด (มหาชน)">ธ.กรุงเทพ จำกัด (มหาชน)</option>
+              <option value="ธ.กรุงไทย จำกัด (มหาชน)">ธ.กรุงไทย จำกัด (มหาชน)</option>
+              <option value="ธ.กสิกรไทย จำกัด (มหาชน)">ธ.กสิกรไทย จำกัด (มหาชน)</option>
+              <option value="ธ.เกียรตินาคิน จำกัด (มหาชน)">ธ.เกียรตินาคิน จำกัด (มหาชน)</option>
+              <option value="ธ.ซีไอเอ็มบี ไทย จำกัด (มหาชน)">ธ.ซีไอเอ็มบี ไทย จำกัด (มหาชน)</option>
+              <option value="ธ.ทหารไทยธนชาต จำกัด (มหาชน)">ธ.ทหารไทยธนชาต จำกัด (มหาชน)</option>
+              <option value="ธ.ทิสโก้ จำกัด (มหาชน)">ธ.ทิสโก้ จำกัด (มหาชน)</option>
+              <option value="ธ.ไทยพาณิชย์ จำกัด (มหาชน)">ธ.ไทยพาณิชย์ จำกัด (มหาชน)</option>
+              <option value="ธ.ยูโอบี จำกัด (มหาชน)">ธ.ยูโอบี จำกัด (มหาชน)</option>
+              <option value="ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)">ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)</option>
+            </select>
+          </div>
+        <div class="col-md-6">
+          <label for="inputAddress2" class="form-label">วันที่ชำระ</label>
+          <input type="text" class="form-control" id="inputAddress2">
+        </div>
+        <div class="col-md-6">
+          <label for="inputbank" class="form-label">เวลาที่ชำระ</label>
+          <input type="text" class="form-control" id="inputbank">
+        </div>
+        <div class="col-md-12">
+            <label for="inputState" class="form-label">หลักฐานการชำระ</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-primary">ยืนยัน</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <script>
         function openPage(pageName, elmnt, color) {
             var i, tabcontent, tablinks;
