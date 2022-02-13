@@ -133,10 +133,9 @@ def my_store(request):
 def product_store(request):
     user = request.user
     myStore =  Store.objects.get(user_id=user)
-    list_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(list_product)
-    type_product = TypeeOrder.objects.all()
-
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
+    type_product = TypeeOrder.objects.all()  
 
     search_txt = request.GET.get('inputSearch', '')
     print(search_txt)
@@ -152,11 +151,17 @@ def product_store(request):
         object_list = object_list.filter(type_id=input_Typeproduct)
 
     object_list = object_list.order_by('-range')
+
+    outofstock = []
+    for i in object_list:
+        if i.product_amount == 0:
+            outofstock.append(i.id)
+
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'type_product' :type_product,
-        'list_product' : list_product,
-        'object_list' : object_list,}
+        'object_list' : object_list,
+        'outofstock' : outofstock,}
     return render(request, template_name='product_store.html', context=context)
 
 
@@ -396,8 +401,8 @@ def create_product(request):
 def order_farm(request):
     user = request.user
     myStore =  Store.objects.get(user_id=user.id)
-    list_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(list_product)
+    totel_product = Product.objects.filter(store_id=myStore)
+    totel_product = len(totel_product)
     type_product = TypeeOrder.objects.all()
 
 
@@ -413,29 +418,38 @@ def order_farm(request):
    
     if input_Typeproduct:
         object_list = object_list.filter(type_id=input_Typeproduct)
-
+    
+    object_list = object_list.order_by('-range')
+    outofstock = []
+    for i in object_list:
+        if i.product_amount == 0:
+            outofstock.append(i.id)
 
 
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'type_product' :type_product,
-        'list_product' : list_product,
-        'object_list': object_list,}
+        'object_list': object_list,
+        'outofstock': outofstock}
     return render(request, template_name='order_farm.html', context=context)
 
 
 @login_required
 def order_list(request, id):
-    all_product = Product.objects.filter(store_id=id)
-    myStore = Store.objects.get(id=id)
-    totel_product = Product.objects.filter(store_id=myStore)
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore.id)
     totel_product = len(totel_product)
+
     type_state = State.objects.all()
+    product_order = Product.objects.get(id=id)
+
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
-        'all_product' : all_product,
-        'type_state' :type_state}
+        'product_order' : product_order,
+        'type_state' :type_state,}
+
     return render(request, template_name='order_list.html', context=context)
 
 @login_required

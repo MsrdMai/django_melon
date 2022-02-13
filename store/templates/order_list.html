@@ -9,73 +9,77 @@
 <div class="row border border-indigo-600" style="margin: 2%;">
   <div class="col-lg-1"></div>
   <div class="col-lg-4">
-    <br></br>
+    <br>
     <img
-    src="{% static "img/kimoji.jpg" %}"
+    src="{{product_order.product_image.url}}"
     style="width: 100%; height: auto; align-items: center; padding: 1%;"
     ></img>
-    
+    <br><br>
   </div>
+  
   <div class="col-lg-1"></div>
   <div class="col-lg-5 col-12">
     <br></br>
     <div class="row">
       <div class="col">
         <h3 style="color: brown;">
-          คูนามิบรรจุกล่อง
+          {{product_order.product_name}}
         </h3>
       </div>
-      <div class="col">
-        <h5 style="color:#166534; align-items:center; border-width:4px; border-color: #166534; border-style: solid; padding: 1%;">
-          แกะสลัก
-        </h5>
-      </div>
+
+      {% if product_order.type_id_id == 2  %}
+                {% if product_order.select_carving == 0 %}
+                <div class="col">
+                    <h5 style="color:#ea580c; align-items:center; border-width:4px; border-color: #ea580c; border-style: solid; padding: 1%;">
+                    จอง
+                    </h5>
+                </div>
+                {% endif %}
+
+            {% if product_order.select_carving == 1 %}
+                <div class="col">
+                <h5 style="color:#166534; align-items:center; border-width:4px; border-color: #166534; border-style: solid; padding: 1%;">
+                    แกะสลัก
+                </h5>
+                </div>
+            {% endif %}
+
+        {% endif %}
+
+
+
+
     </div>
     <div class="row">
       <div class="col">
        <br>
-        <p style="color:#1f2937; text-align: left;">ขนาด : 1.5 kg</p>
-        <p style="color:#1f2937; text-align: left;">เนื้อ : ส้ม</p>
+        <p style="color:#1f2937; text-align: left;">ขนาด : {{product_order.product_weight}} kg</p>
+        <p style="color:#1f2937; text-align: left;">เนื้อ : {{product_order.melon_color}}</p>
         <p style="color:#1f2937; text-align: left;">
-          จำนวนในคลัง : 5
+          จำนวนในคลัง : {{product_order.product_amount}}
         </p>
       </div>
       <div class="col">
         <br>
         <p style="color:#1f2937; text-align: left;">
-          คุณภาพ : รอการเติบโต
+          คุณภาพ : {{product_order.date_harvest}}
         </p>
-        <p style="color:#1f2937; text-align: left;">ราคา : 450 ฿</p>
+        <p style="color:#1f2937; text-align: left;">ราคา : {{product_order.product_price}} ฿</p>
         <p style="color:#1f2937; text-align: left;">
-          รอบตัด : 5/9/64
+          รอบตัด : {{product_order.date_harvest}}
         </p>
       </div>
     </div>
     <div class="col">
       <p style="color:#1f2937; text-align: left;">
-        รายละเอียดสินค้า : เนื้อส้ม ลายชัดเจน นูนหนา เนื้อฉ่ำ
-        หวานหอม จากฟาร์มออลแกรนิต
+        รายละเอียดสินค้า : {{product_order.product_description}}
       </p>
     </div>
   </div>
   <div class="col-lg-1"></div>
+  <br>
 </div>
 <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <div class="row">
@@ -119,7 +123,7 @@
 <br></br>
 <center>
 <div class="col-sm-10">
-  <table class="table table-borderless">
+  <table class="table table-borderless" style="margin: 1%;">
     <thead></thead>
     <tbody> 
       <tr style="background-color: #bfdbfe; text-align: center;">

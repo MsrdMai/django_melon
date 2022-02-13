@@ -5,7 +5,7 @@
 <div class="container">
 <div  style="background-color: white; ">
 <br>
-<h4>ชื่อสินค้า {{product_des.product_name}}</h4>
+<h4>รายละเอียดสินค้า {{product_des.product_name}}</h4>
 <hr>
 <div class="row border-indigo-600" style="margin: 2%;">
     <div class="col-lg-1"></div>
@@ -90,18 +90,34 @@
         </p>
       </div>
 
+
+        {% if product_des.product_amount > 0 %}
+
       <a href="{% url 'product_promote' id=product_des.id %}" class="col-12 btn btn-lg btn-block  btn-primary" style="margin: 1px;">
         <img src="{% static "icon/megaphone.png" %}" style="width: 30px; height: 30px;"class="float-start"> </img>
         โปรโมท</a>
       <a href="{% url 'product_close' id=product_des.id %}" class="col-12 btn btn-lg btn-block  btn-outline-danger" style="margin: 1px;">
         <img src="{% static "icon/cancel.png" %}" style="width: 30px; height: 30px;" class="float-start"> </img>
         ปิดการขาย</a>
+
+        {% else %}
+        <br>
+        <h5 style="color:brown; align-items:center; border-width:4px; border-color: brown; border-style: solid; padding: 1%;">
+                    Out of stock
+                    </h5>
+        
+        {% endif %}
+
       
     </div>
     <div class="col-lg-1"></div>
+
   </div>
   <br>
-
+  <br>
+  <small class="float-end" style="padding: 1%;">สร้างเมื่อวันที่ : {{product_des.date_create}}</small>
+  <br>
+  <br>
 </div>
 
 

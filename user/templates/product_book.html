@@ -23,7 +23,11 @@
                         <div class="py-2 head">{{pd.product_name}}</div>
                         <div class="d-flex justify-content-between align-content-center">
                             <div class="card-text pb-2 price">{{pd.product_price}} บาท</div>
+                            {% if pd.product_amount <= 10 %}
+                            <div class="card-text quant" style="color:#f97316">{{pd.product_amount}} ชิ้น</div>
+                            {% else %}
                             <div class="card-text quant">{{pd.product_amount}} ชิ้น</div>
+                            {% endif %}
                         </div>
                         <div href="#" class="btn btn-danger btns mb-2 mt-2 w-100" data-bs-toggle="modal"
                             data-bs-target="#Modal-{{pd.id}}">สั่งซื้อ</div>
