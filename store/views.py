@@ -304,6 +304,16 @@ def create_product(request):
                 }
             return render(request, template_name='create_product.html', context=context)
 
+        if ((product_weight.replace('.','',1).isdigit()) != True ):
+            counterror += 1
+            checkw = 'กรุณาใส่เป็นตัวเลขหรือเลขทศนิยม'
+            context = {'myStore' : myStore,
+                'totel_product' : totel_product,
+                'quality_list' :quality_list,
+                'type_list' : type_list,
+                'checkw' : checkw
+                }
+            return render(request, template_name='create_product.html', context=context)
 
         if (type_id == None):
             counterror += 1
