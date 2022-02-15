@@ -66,6 +66,9 @@
         margin-top: 20px; 
         color: red;
     }
+    .txtresp{
+        font-size: 15px;
+    }
 
     @media only screen and (max-width: 768px) {
         .tablink {
@@ -81,7 +84,7 @@
         p{
             margin: 0%;
         }
-        .date{
+        .date, .txtresp{
             font-size: 10px;
         }
         .productimg{
@@ -95,6 +98,18 @@
         .producttext{
             text-align: right;
         }
+    }
+
+
+    .button4 {
+        background-color: #4CAF50;
+        color: white;
+        border: 2px solid #4CAF50;
+    }
+    .button3 {
+        background-color: #81a546;
+        color: white;
+        border: 2px solid #81a546;
     }
 
     .button2 {
@@ -151,7 +166,7 @@
             </div>
                     <div class="col d-flex justify-content-md-start justify-content-between">
                             <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ<br/>x1</b></h3>
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
                         <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
@@ -169,13 +184,56 @@
         </div>
 
         <div id="waiting" class="tabcontent">
-            <br><h3>ที่ต้องจัดส่ง</h3>
-            <p>Some news this fine day!</p>
+            <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
+                <br>
+                <div class="d-flex justify-content-between flex-wrap date">
+                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+                <p class="date ps-4 d-flex"><b>จัดส่งวันที่ 20/02/65</b></p>
+            </div>
+                    <div class="col d-flex justify-content-md-start justify-content-between">
+                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column flex-grow-1">
+                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>300 ฿</b></h3>
+                        <div class="d-flex flex-wrap justify-content-end mt-1">
+                            <button type="button" class="button1 mx-1" style="margin-right: 0px;" data-bs-toggle="modal" data-bs-target="#cancelform">
+                                <h3 class="mx-3 mb-2 txtresp" style="margin-top: 0.5rem;"><b>แจ้งยกเลิก/คืนเงิน</b></h3>
+                            </button>
+                            <button type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#track">
+                                <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ติดตามผลผลิต</b></h3>
+                            </button>
+                        </div>
+                    </div>
+            </div>
         </div>
 
         <div id="shipped" class="tabcontent">
-            <br><h3>ที่ต้องได้รับ</h3>
-            <p>Get in touch, or swing by for a cup of coffee.</p>
+            <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
+                <br>
+                <div class="d-flex justify-content-between flex-wrap date">
+                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+                <p class="date ps-4 d-flex"><b>จะถึงภายในวันที่ 27/02/65</b></p>
+            </div>
+                    <div class="col d-flex justify-content-md-start justify-content-between">
+                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column">
+                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>300 ฿</b></h3>
+                        <div class="d-flex justify-content-end mt-1">
+                            <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>เลขพัสดุ</b></h3>
+                            <button type="button" class="button3 mx-1" style="margin-right: 0px;">
+                                <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>ABC12345678TH</b></h3>
+                            </button>
+                        </div>
+                        <div class="mt-2 d-flex justify-content-end">
+                            <button type="button" class="button1 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#track">
+                                <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ยืนยันการรับสินค้า</b></h3>
+                            </button>
+                        </div>
+                    </div>
+            </div>
         </div>
 
         <div id="review" class="tabcontent">
