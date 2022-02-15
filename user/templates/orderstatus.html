@@ -100,6 +100,7 @@
         }
     }
 
+    
 
     .button4 {
         background-color: #4CAF50;
@@ -237,8 +238,27 @@
         </div>
 
         <div id="review" class="tabcontent">
-            <br><h3>ให้คะแนน</h3>
-            <p>Who we are and what we do.</p>
+            <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
+                <br>
+                <div class="d-flex justify-content-between flex-wrap date">
+                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+            </div>
+                    <div class="col d-flex justify-content-md-start justify-content-between">
+                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column">
+                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>ให้ดาว</b></h3>
+                        <div class="d-flex justify-content-end mt-1">
+                            
+                        </div>
+                        <div class="mt-2 d-flex justify-content-end">
+                            <button type="button" class="button2 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#track">
+                                <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ยืนยัน</b></h3>
+                            </button>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 
