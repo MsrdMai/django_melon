@@ -142,12 +142,21 @@ def farm_detail(request,id):
     farm_detail = Store.objects.get(id=id)
     latitude = farm_detail.latitude
     longitude = farm_detail.longitude
-    totel_product = Product.objects.filter(store_id=farm_detail)
-    totel_product = len(totel_product)
+    product_list = Product.objects.filter(store_id=farm_detail)
+    totel_product = len(product_list)
+
+    product_list = product_list.order_by('-range')
+    outofstock = []
+    for i in product_list:
+        if i.product_amount == 0:
+            outofstock.append(i.id)
+
     context = {
         'farm_detail' : farm_detail,
         'latitude' :latitude,
         'longitude':longitude,
-        'totel_product' : totel_product
+        'totel_product' : totel_product,
+        'product_list' :product_list,
+        'outofstock' : outofstock,
     }
     return render(request, template_name='farm_detail.html', context=context)    
