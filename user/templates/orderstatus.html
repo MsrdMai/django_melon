@@ -157,7 +157,7 @@
                         <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
                         <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>300 ฿</b></h3>
                         <div class="d-flex flex-wrap justify-content-end mt-1">
-                            <button type="button" class="button1 mx-1" style="margin-right: 0px;">
+                            <button type="button" class="button1 mx-1" style="margin-right: 0px;" data-bs-toggle="modal" data-bs-target="#cancelform">
                                 <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>แจ้งยกเลิก</b></h3>
                             </button>
                             <button type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#paymentform">
@@ -193,25 +193,6 @@
         <h5 class="modal-title" id="paymentformlabel">แจ้งชำระเงิน</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
-
-      <!-- <div class="modal-body d-flex">
-        <form class="row" style="text-align: left;">
-          <div class="col-sm-6 mb-2">
-            <label for="recipient-name" class="col-form-label">ชื่อ</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="col-sm-6 mb-2">
-            <label for="recipient-name" class="col-form-label">เบอร์โทรศัพท์</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="col-sm-6 mb-2">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div> -->
-
       <form class="modal-body row g-3" style="text-align: left;">
         <div class="col-md-6">
           <label for="inputname" class="form-label">ชื่อ</label>
@@ -244,12 +225,12 @@
             </select>
           </div>
         <div class="col-md-6">
-          <label for="inputAddress2" class="form-label">วันที่ชำระ</label>
-          <input type="text" class="form-control" id="inputAddress2">
+          <label for="inputdate" class="form-label float-start">วันที่ชำระ</label>
+          <input type="date" class="form-control" id="inputdate">
         </div>
         <div class="col-md-6">
-          <label for="inputbank" class="form-label">เวลาที่ชำระ</label>
-          <input type="text" class="form-control" id="inputbank">
+          <label for="inputbank" class="form-label float-start">เวลาที่ชำระ</label>
+          <input type="time" class="form-control" id="inputbank">
         </div>
         <div class="col-md-12">
             <label for="inputState" class="form-label">หลักฐานการชำระ</label>
@@ -259,13 +240,29 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-        <button type="button" class="btn btn-primary">ยืนยัน</button>
+        <button type="button" class="btn btn-success">ยืนยัน</button>
       </div>
     </div>
   </div>
 </div>
 
-
+<div class="modal fade" id="cancelform" tabindex="-1" aria-labelledby="cancelformlabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cancelformlabel">แจ้งยกเลิก</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row g-3">
+            <p>เหตุผลที่ต้องการยกเลิก</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <button type="button" class="btn btn-danger">ยืนยัน</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <script>
         function openPage(pageName, elmnt, color) {
