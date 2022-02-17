@@ -446,23 +446,6 @@ def order_farm(request):
 
 
 @login_required
-def order_list(request, id):
-    user = request.user
-    myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore.id)
-    totel_product = len(totel_product)
-
-    type_state = State.objects.all()
-    product_order = Product.objects.get(id=id)
-
-    context = {'myStore' : myStore,
-        'totel_product' : totel_product,
-        'product_order' : product_order,
-        'type_state' :type_state,}
-
-    return render(request, template_name='order_list.html', context=context)
-
-@login_required
 def product_promote(request, id):
     # product_promote
     product = Product.objects.get(id=id)

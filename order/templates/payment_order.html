@@ -1,0 +1,69 @@
+{% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
+
+<br><br>
+<div class="container">
+<br></br>
+<div  style="background-color: white; padding: 1%;">
+    <br> 
+        <div class="row">
+            <div class="col-sm-5">
+                    <img
+                    src="{% static "img/scb.jpg" %}"
+                    width="80%" height="auto"
+                    ></img>
+            </div>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-5">
+                <br>
+                    <h1>Order#.1</h1>
+                        <hr>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                              <th scope="col"><br>ชำระผ่านธนาคาร<br></th>
+                              <th scope="col"><br>SCB<br></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <th scope="col"><br>จำนวนเงินที่ต้องจ่าย<br></th>
+                                <th scope="col"><br>560<br></th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <a
+                                    class="col-sm-12  btn btn-light btn-lg btn-block"
+                                    id="btn-change-status"
+                                    href=""
+                                  >
+                                  ตรวจสอบเรียบร้อย
+                                  <img
+                                  src="{% static "icon/check.png" %}"
+                                  width="30px"
+                                  height="30px"
+                                  id="payment-check"
+                                ></img>
+                                </a>
+
+
+                                </th>
+                              
+                            </tr>
+
+
+                    </table>
+                   
+
+            </div>
+            <div class="col-sm-1">
+        </div>
+        </div>
+
+<br><br>
+</div>
+</div>
+
+<br><br> <br><br>
+{% endblock %}
