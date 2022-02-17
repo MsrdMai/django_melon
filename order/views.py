@@ -64,10 +64,11 @@ def report_order(request):
     myStore = Store.objects.get(user_id=user)
     totel_product = Product.objects.filter(store_id=myStore.id)
     totel_product = len(totel_product)
-
+    quality_list = Quality.objects.all()
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'quality_list' :quality_list,
 
        }
     return render(request, template_name='report_order.html', context=context)

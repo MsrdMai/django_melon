@@ -1,26 +1,230 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
 
+
+<style>
+
+#btn-add-report{
+  color: white; 
+  background-color: #3730a3;
+  border: 4px solid;
+  border-color:#fecaca;
+  border-radius: 30px;
+}
+
+#btn-add-report:hover {
+  color: #3730a3; 
+  background-color: #fce7f3;
+  border-color:#3730a3;
+
+}
+
+
+
+</style>
+
 <br><br>
 <div class="container">
 
-
 <div  style="background-color: white; border-radius: 30px;padding: 1%;">
 <br></br>    
-<h4>รายงาน</h4>
+<h4>รายงานผลผลิต #Order ....</h4>
 <hr>
-<br></br>
 
+<div class="row">
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-3" style="padding: 1%;">
+        <small  class="form-text text-muted">จำนวนครั้งที่รายงาน : 2 ครั้ง</small>
+    </div>
+    
 
+    <div class="col-sm-3"> </div>
+    <div class="col-sm-4">
 
-
-
-
-
-
-</br><br></br>
+        
+            <button type="button" data-toggle="modal" data-target="#exampleModal" class="col-sm-10 btn btn-lg btn-block " id="btn-add-report" 
+            data-whatever="Id125">
+                <img src="{% static "icon/report.png" %}" style="width: 50px; height: 50px;"></img> 
+            เพิ่มรายงาน </button>
+       
+    </div>   
+  <div class="col-sm-1"></div>
 </div>
 
 
-</div>
+<div class="row">
+<div class="col-sm-1"></div>
 
-<br><br> <br><br>
+                <div class="col-sm-5">
+                        <img src="{% static "img/test1.jpg" %}" height="300px" width="300px" style="object-fit: scale-down;" />
+                </div>
+
+                <div class="col-sm-1"></div>
+
+                <div class="col-sm-4" style="text-align: start; margin: 1%;">
+                      <br>
+                    <p>ครั้งที่ : 1</p>
+                    <p>บันทึกเมื่อ : 12/08/2565</p>
+                    <p>รายละเอียด : ระยะที่2 เกรสเริ่มออก</p>
+                    <p>น้ำหนัก :0</p>
+                    <p>ความหวาน : 0</p>
+                    <p>คุณภาพ : กำลังเติบโต</p>
+
+                </div>
+
+<div class="col-sm-1"></div>
+
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    
+                    <div class="col-sm-5">
+                            <img src="{% static "img/test2.jpg" %}" height="300px" width="300px" style="object-fit: scale-down;" />
+                    </div>
+    
+                    <div class="col-sm-1"></div>
+    
+                    <div class="col-sm-4" style="text-align: start; margin: 1%;">
+                          <br>
+                        <p>ครั้งที่ : 2</p>
+                        <p>บันทึกเมื่อ : 20/08/2565</p>
+                        <p>รายละเอียด : ระยะที่2 </p>
+                        <p>น้ำหนัก :0</p>
+                        <p>ความหวาน : 0</p>
+                        <p>คุณภาพ : กำลังเติบโต</p>
+    
+                    </div>
+    
+    <div class="col-sm-1"></div>
+    
+    </div>
+    <hr>
+
+
+
+
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="modal fade" id="model-form" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">รายงานผลผลิต</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                        <form  method="POST" enctype="multipart/form-data" action="">
+                            {% csrf_token %}
+
+        
+                    <div class="form-group">
+                    <label class="form-label float-start"><b>รูปภาพ</b></label>
+                        <input type="file" class="form-control-file" name="recode_image" id="file" accept="image/png, image/jpeg"
+                        onchange="loadFile(event)"> <br><br>
+                        <img id="output" width="300px" height="300px"/>
+                    </div>
+                    
+
+             
+                    <div class="form-group">
+                        <label class="form-label float-start">รายละเอียด</label>
+                        <textarea  class="form-control" name="recode_description" rows="5" maxlength="255" required></textarea>
+                      </div>
+               
+                
+                     
+                      <div class="form-group">
+                        <label class="form-label float-start">น้ำหนัก</label>
+                        <input type="number" step="0.01" min="1" max="20" class="form-control" name="recode_weight" placeholder="น้ำหนักของเมล่อน" required>
+                      </div> 
+
+                      <div class="form-group">
+                        <label class="form-label float-start">คุณภาพ</label>
+                        <select class="form-control" name="quality_id">
+                           
+                            {% for i in  quality_list %}
+                            <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.quality_name }}</option>
+                            {% endfor %}
+                          </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label float-start">ความหวาน</label>
+                        <input type="number" min="1" max="1000" class="form-control" name="sweetness" placeholder="ความหวานที่วัดได้" required>
+                    </div> 
+
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+
+          </div>
+        </div>
+      </div> -->
+
+  
+
+
+
+</div></br><br></br>
+</div><br><br> <br><br>
+
+
+<script>
+    var loadFile = function(event) {
+          var image = document.getElementById('output');
+          document.getElementById('output').style.border = '2px solid #34D399';
+  
+          image.src = URL.createObjectURL(event.target.files[0]);
+          
+          }
+  </script>
+
+{% endblock %}
