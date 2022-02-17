@@ -160,3 +160,14 @@ def farm_detail(request,id):
         'outofstock' : outofstock,
     }
     return render(request, template_name='farm_detail.html', context=context)    
+
+def review_detail(request,id):
+    farm_detail = Store.objects.get(id=id)
+    product_list = Product.objects.filter(store_id=farm_detail)
+    totel_product = len(product_list)
+
+    context = {
+        'farm_detail' : farm_detail,
+        'totel_product' : totel_product,
+    }
+    return render(request, template_name='review_detail.html', context=context)    

@@ -17,6 +17,18 @@
 
                 </div>
         </div>
+
+
+        
+        <div class="row" style="background-color: #f5f5f4; margin: 5px;">
+            <a href="{% url 'farm-detail' id=farm_detail.id %}" class="col-sm-6 btn btn-lg btn-block " id="tab-btn"> 
+                <img src="{% static "icon/farm.png" %}" style="width: 50px; height: 50px;"> </img>
+            เกี่ยวกับฟาร์ม </a>
+
+            <a href="{% url 'review_detail' id=farm_detail.id %}" class="col-sm-6 btn btn-lg btn-block" id="tab-btn"> 
+                 <img src="{% static "icon/reviews.png" %}" style="width: 50px; height: 50px;"></img>
+            รีวิว </a>
+    </div>
 </div>
 
 
@@ -87,7 +99,7 @@
                                 {% endif %}
 
                             </div>
-                            <a href="{% url 'product_desc' id=pd.id %}" id="btn-description" class="btn mb-2 mt-2 w-100">รายละเอียด</a>
+                            <a href="{% url 'product_desc' id=pd.id %}" id="btn-description" class="btn mb-2 mt-2 w-100">สั่งเลย</a>
                            
                         </div>
                     </div>
