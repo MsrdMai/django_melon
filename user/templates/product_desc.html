@@ -153,10 +153,15 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         </p>
       </div>
 
+      <div class="col" style="background-color: #f3f4f6; padding: 5%;">
+       <p>สั่ง</p>
 
-    
-
-      
+       <div class="col-sm">
+        <span id="numberstyle-decrement">–</span>
+        <input id="numberstyle" type="number" min="0" max="5000" name="cost_carving" value="0" required>
+        <span id="numberstyle-increment">+</span>
+      </div> 
+      </div>
     </div>
     <div class="col-lg-1"></div>
 
@@ -167,9 +172,58 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
   <br>
   <br>
 </div>
-
-
 </div>
-
 <br><br> <br><br>
+
+<script>
+( function() {
+ 
+  window.inputNumber = function(el) {
+
+    var min = el.attr('min') || false;
+    var max = el.attr('max') || false;
+
+    var els = {};
+
+    els.dec = el.prev();
+    els.inc = el.next();
+
+    el.each(function() {
+      init($(this));
+    });
+
+    function init(el) {
+
+      els.dec.on('click', decrement);
+      els.inc.on('click', increment);
+
+      function decrement() {
+        var value = el[0].value;
+        value--;
+        if(!min || value >= min) {
+          el[0].value = value;
+        }
+      }
+
+      function increment() {
+        var value = el[0].value;
+        value++;
+        if(!max || value <= max) {
+          el[0].value = value++;
+        }
+      }
+    }
+  }
+  })();
+
+  inputNumber($('#numberstyle'));
+
+</script>
+
+
+
+
+
+
+
 {% endblock %}
