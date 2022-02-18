@@ -206,7 +206,7 @@
           name="select_carving"
           value=0
         />
-        <label class="w-100" for="radio-select_carving-1">ไม่เปิดแกะสลักลาย</label>
+        <label class="w-100" for="radio-select_carving-1">ไม่เปิด</label>
         <input
         onclick="onShow_Carving()"
         type="radio"
@@ -214,32 +214,48 @@
         name="select_carving"
         value=1
       />
-      <label class="w-100" for="radio-select_carving-2">เปิดแกะสลักลาย</label>
+      <label class="w-100" for="radio-select_carving-2">เปิด</label>
     </div>
   </div>
   {% if checkSelect %}
   <div class="invalid-feedback d-block">{{checkSelect}}</div>
   {%endif%}
 
-  <div class="col-sm-5 md-3 align-self-end pb-2 flex-grow-1" id="cost_carving" style="display: none;">
-    <label class="form-label float-start">ค่าแกะสลักลาย</label>
-    <input type="number" min="0" max="5000" class="form-control" name="cost_carving" value="0" placeholder="ค่าแกะสลักลายที่บวกเพิ่ม" required>
-  </div> 
-  <br>
+
   {% if checkCarving %}
   <div class="invalid-feedback d-block">{{checkCarving}}</div>
   {%endif%}
 </div>
+
+
+
+<br>  <br>
+<div class="row-carving-2" id="cost_carving" style="display: none;">
+<div class="row">
+
+  <div class="col-sm-2 md-3 d-flex justify-content-center align-self-center">
+    <label class="form-label">ค่าแกะสลักลาย</label>
+  </div>
+
+  <div class="col-sm-2">
+    <span id="numberstyle-decrement">–</span>
+    <input id="numberstyle" type="number" min="0" max="5000" name="cost_carving" value="0" required>
+    <span id="numberstyle-increment">+</span>
+  </div> 
+</div>
 </div>
 
-            </div> 
-            <br> <br>
-            <button type="submit" class="col-sm-2 btn btn-lg btn-block float-end  btn-outline-danger">
-              ขายเลย</button>
-            <br><br><br>  <br>
-          </form>
 
-        </div>
+</div>
+    </div> 
+            <br><br>
+           
+            <button type="submit" id="btn-send" class="col-sm-2 btn-lg btn-block float-end">
+              ขายเลย</button>
+        
+            <br><br>
+          </form>
+  </div>
         
 
 <br><br> <br><br>
@@ -260,6 +276,7 @@
 
         function onShow_Carving() {
         document.getElementById("cost_carving").style.display = "block";
+
         }
 
         function show_Carving(){
@@ -269,6 +286,50 @@
         function not_show_Carving(){
         document.getElementById("row-carving").style.display = "none";
         }
+
+
+
+        ( function() {
+ 
+        window.inputNumber = function(el) {
+
+          var min = el.attr('min') || false;
+          var max = el.attr('max') || false;
+
+          var els = {};
+
+          els.dec = el.prev();
+          els.inc = el.next();
+
+          el.each(function() {
+            init($(this));
+          });
+
+          function init(el) {
+
+            els.dec.on('click', decrement);
+            els.inc.on('click', increment);
+
+            function decrement() {
+              var value = el[0].value;
+              value--;
+              if(!min || value >= min) {
+                el[0].value = value;
+              }
+            }
+
+            function increment() {
+              var value = el[0].value;
+              value++;
+              if(!max || value <= max) {
+                el[0].value = value++;
+              }
+            }
+          }
+        }
+        })();
+
+        inputNumber($('#numberstyle'));
     
 </script>
 </div>

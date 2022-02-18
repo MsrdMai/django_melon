@@ -22,6 +22,16 @@
 
 }
 
+#btn-send{
+  background-color: #22c55e;
+  border-radius: 30px;
+  border-color: #f4f4f5;
+  border-style: solid;
+  border-width: 1px;
+  color: #f4f4f5;
+}
+
+
 
 #btn-search {
   flex: 1 1 auto;
@@ -60,11 +70,11 @@ a{
   color: #ef4444;
  }
 
- #btn-new-product:hover {
+#btn-new-product:hover {
   color: #e11d48;
  }
 
- #btn-order{
+#btn-order{
   background-image: linear-gradient(to right, #fdba74 0%, #fde68a 51%, #d9f99d 100%);
   border-radius: 30px;
   transition: 0.5s;
@@ -101,7 +111,7 @@ input[type="radio"]#radio-type-1:hover + label,
 input[type="radio"]#radio-type-1:checked + label,
 input[type="radio"]#radio-type-1:focus + label{
   cursor: pointer;
-  background-color: black;
+  background-color: #334155;
   color: #FFFFFF
 }
 
@@ -116,12 +126,12 @@ input[type="radio"]#radio-type-2:hover + label,
 input[type="radio"]#radio-type-2:checked + label,
 input[type="radio"]#radio-type-2:focus + label{
   cursor: pointer;
-  background-color: black;
+  background-color: #334155;
   color: #FFFFFF
 }
 
 #recode-product {
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 2%;
   background-color: #f3f4f6;
 }
@@ -191,7 +201,7 @@ input[type="radio"]#radio-select_carving-1:hover + label,
 input[type="radio"]#radio-select_carving-1:checked + label,
 input[type="radio"]#radio-select_carving-1:focus + label{
   cursor: pointer;
-  background-color: black;
+  background-color: #334155;
   color: #FFFFFF
 }
 
@@ -205,7 +215,7 @@ input[type="radio"]#radio-select_carving-2:hover + label,
 input[type="radio"]#radio-select_carving-2:checked + label,
 input[type="radio"]#radio-select_carving-2:focus + label{
   cursor: pointer;
-  background-color: black;
+  background-color: #334155;
   color: #FFFFFF
 }
 
@@ -227,3 +237,46 @@ input[type="radio"]#radio-select_carving-2:focus + label{
 #btn-cheack-payment:hover #paychecked{
   display:inline-block; 
 }
+
+
+/* //////// */
+*{
+  box-sizing: border-box;
+}
+
+#numberstyle{
+  width: 80px;
+  padding: 0 12px;
+  vertical-align: top;
+  text-align: center;
+  outline: none;
+}
+#numberstyle,
+#numberstyle-decrement,
+#numberstyle-increment {
+  border: 1px solid #ccc;
+  height: 40px;
+  user-select: none;
+}
+
+#numberstyle-decrement, #numberstyle-increment {
+  display: inline-block;
+  width: 30px;
+  line-height: 38px;
+  background: #f1f1f1;
+  color: #444;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;}
+
+  &:active {
+    background: #ddd; }
+
+  #numberstyle-decrement{
+  
+  border-radius: 4px 0 0 4px;
+}
+
+  #numberstyle-increment{
+  
+  border-radius: 0 4px 4px 0;}
