@@ -1,9 +1,8 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
 
-<br><br>
 <div class="container">
 <br></br>
-<div  style="background-color: white; padding: 1%;">
+<div  style="background-color: white; padding: 1%; border-radius: 30px;">
     <br> 
         <div class="row">
             <div class="col-sm-5">
@@ -23,7 +22,7 @@
                         <thead>
                             <tr>
                               <th scope="col"><br>ชำระผ่านธนาคาร<br></th>
-                              <th scope="col"><br>SCB<br></th>
+                              <th scope="col"><br>ธ.ไทยพาณิชย์ จำกัด (มหาชน)<br></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -35,7 +34,7 @@
                                 <th colspan="2">
                                     <a
                                     class="col-sm-12  btn btn-light btn-lg btn-block"
-                                    id="btn-change-status"
+                                    id="btn-cheack-payment"
                                     href=""
                                   >
                                   ตรวจสอบเรียบร้อย
@@ -43,7 +42,7 @@
                                   src="{% static "icon/check.png" %}"
                                   width="30px"
                                   height="30px"
-                                  id="payment-check"
+                                  id="paychecked"
                                 ></img>
                                 </a>
 

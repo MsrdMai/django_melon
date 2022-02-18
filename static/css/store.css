@@ -76,17 +76,6 @@ a{
 
 }
 
- 
-
-@media only screen and (max-width: 700px) {
-  .map-responsive {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-
-
 input[type="radio"] {
   position: relativ;
   display: none;
@@ -174,6 +163,7 @@ input[type="radio"]#radio-type-2:focus + label{
   margin:1px;
 }
 
+
 #btn-report-this-order{
   border-width: 2px; 
   border-color: #7c3aed; 
@@ -217,4 +207,23 @@ input[type="radio"]#radio-select_carving-2:focus + label{
   cursor: pointer;
   background-color: black;
   color: #FFFFFF
+}
+
+#btn-cheack-payment {
+  border-width: 2px; 
+  border-color: #eab308; 
+  color: #eab308; 
+  background-color:#f3f4f6 ; 
+  margin:1px;
+}
+
+#paychecked{
+  padding: 5px; 
+  margin: 5px; 
+  align-items: center;
+  display: none;
+}
+
+#btn-cheack-payment:hover #paychecked{
+  display:inline-block; 
 }
