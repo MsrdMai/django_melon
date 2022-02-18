@@ -114,16 +114,31 @@ def profile(request, id):
 def product_buy(request):
     product_list = Product.objects.filter(type_id=1)
     product_list = product_list.order_by('-range')
+
+    outofstock = []
+    for i in product_list:
+        if i.product_amount == 0:
+            outofstock.append(i.id)
+
     context = {
-        'product_list' : product_list
+        'product_list' : product_list,
+        'outofstock' : outofstock,
     }
     return render(request, template_name='product_buy.html', context=context)
 
 def product_book(request):
     product_list = Product.objects.filter(type_id=2)
     product_list = product_list.order_by('-range')
+
+    outofstock = []
+    for i in product_list:
+        if i.product_amount == 0:
+            outofstock.append(i.id)
+
+
     context = {
-        'product_list' : product_list
+        'product_list' : product_list,
+        'outofstock' : outofstock,
     }
     return render(request, template_name='product_book.html', context=context)
 

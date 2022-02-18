@@ -1,4 +1,25 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
+<style>
+
+.map-responsive {
+  padding: 10%;
+  background : url('{% static "img/mapfarm.JPG" %}') no-repeat; 
+  background-size : cover;
+  border-radius: 40px;
+}
+iframe {
+      padding: 10%;
+}
+
+@media only screen and (max-width: 600px) {
+  iframe {
+      padding: 0%;
+}
+.map-responsive {
+  padding: 0%
+}}
+</style>
+
 
 <br><br>
 <div class="container">
@@ -6,7 +27,7 @@
 <br></br>    
 <h4>ที่ตั้งฟาร์ม</h4>
 <hr>
-<br></br>
+<br>
 <div class="row">
 <div class="col-sm-1"></div>
 <div class="col">

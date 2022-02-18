@@ -9,26 +9,6 @@
   background-color: #fcd34d;
 }
 
-
-
-
-.map-responsive {
-  padding: 10%;
-  background : url('{% static "img/map_frame.png" %}') no-repeat; 
-  background-size : cover;
-}
-iframe {
-      padding: 10%;
-}
-@media only screen and (max-width: 600px) {
-  iframe {
-      padding: 0%;
-}
-.map-responsive {
-  padding: 0%
-}
-
-
 #tab-btn {
   color: white; 
   background-color: #34D399;
