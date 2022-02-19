@@ -98,6 +98,11 @@
         .producttext{
             text-align: right;
         }
+        .rating{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     
@@ -131,6 +136,36 @@
     .button1:hover {
         background-color: #f44336;
         color: white;
+    }
+
+    /* review */
+    .rating {
+        position: relative;
+        gap: .3em;
+        padding: 5px;
+        overflow: hidden;
+    }
+
+    .rating__result {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-10px) translateX(-5px);
+        z-index: -9;
+        font: 3em Arial, Helvetica, sans-serif;
+        color: #ebebeb8e;
+        pointer-events: none;
+    }
+
+    .rating__star {
+        font-size: 1.3em;
+        cursor: pointer;
+        color: #dabd18b2;
+        transition: filter linear .3s;
+    }
+
+    .rating__star:hover {
+        filter: drop-shadow(1px 1px 4px gold);
     }
 </style>
 </head>
@@ -248,12 +283,18 @@
                             <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
-                        <div class="d-flex justify-content-end my-1 flex-wrap">
-                            <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                        <div class="rating d-flex  my-1 flex-wrap">
+                            <span class="rating__result"></span> 
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                            <!-- <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" /> -->
                         </div>
                         <textarea class="form-control form-control-lg my-2" id="message-text" placeholder="เขียนรีวิว"></textarea>
                         <div class="mt-2 d-flex justify-content-end">
@@ -266,6 +307,40 @@
         </div>
     </div>
 
+ <!-- script for review -->
+    <script>
+        const ratingStars = [...document.getElementsByClassName("rating__star")];
+        const ratingResult = document.querySelector(".rating__result");
+
+        printRatingResult(ratingResult);
+
+        function executeRating(stars, result) {
+            const starClassActive = "rating__star fas fa-star";
+            const starClassUnactive = "rating__star far fa-star";
+            const starsLength = stars.length;
+            let i;
+            stars.map((star) => {
+                star.onclick = () => {
+                    i = stars.indexOf(star);
+
+                    if (star.className.indexOf(starClassUnactive) !== -1) {
+                        printRatingResult(result, i + 1);
+                        for (i; i >= 0; --i) stars[i].className = starClassActive;
+                    } else {
+                        printRatingResult(result, i);
+                        for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+                    }
+                };
+            });
+        }
+
+        function printRatingResult(result, num = 0) {
+            result.textContent = `${num}/5`;
+        }
+
+        executeRating(ratingStars, ratingResult);
+
+    </script>
    
 
 <div class="modal fade" id="paymentform" tabindex="-1" aria-labelledby="paymentformlabel" aria-hidden="true">
