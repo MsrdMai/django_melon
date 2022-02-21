@@ -8,6 +8,38 @@
 <h4>รีวิวฟาร์ม</h4>
 <br><br>
 
+<div class="col-sm"> 
+    <center>
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    </center>
+    <script>
+        var xValues = ["ดีมาก", "ดี", "ปานกลาง", "แย่", "แย่มาก"];
+        var yValues = [55, 49, 44, 21, 18];
+        var barColors = ["#22c55e", "#bef264","orange","#f97316","#dc2626"];
+        
+        new Chart("myChart", {
+          type: "bar",
+          data: {
+            labels: xValues,
+            datasets: [{
+              backgroundColor: barColors,
+              data: yValues
+            }]
+          },
+          options: {
+            legend: {display: false},
+            title: {
+              display: true,
+              text: "ความนิยมของฟาร์มจากผู้รีวิว"
+            }
+          }
+        });
+        </script>
+</div>
+
+
+
+<br><br>
 <div class="col-sm"  style="margin-left:10%;margin-right:10%;"> 
 
     <div id="review" class="tabcontent">
