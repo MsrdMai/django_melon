@@ -133,8 +133,6 @@
         <th>
           <br>รายการสั่งซื้อ<br>
         </th>
-        <th>
-        </th>
       </tr>
 
 
@@ -193,10 +191,10 @@
             <div class="col">
 
               <a
-                class="col-12  btn btn-light btn-lg btn-block"
-                id="btn-change-status"
+                class="col-12 btn btn-warning btn-lg btn-block"
                 href=""
               >
+              <!-- id="btn-change-status" -->
                 <img
                   src="{% static "icon/box.png" %}"
                   width="30px"
@@ -206,10 +204,10 @@
                 แจ้งเลขพัสดุ
               </a>
               <a
-              class="col-12 btn btn-light btn-lg btn-block"
-              id="btn-report-this-order"
+              class="col-12 btn btn btn-success btn-lg btn-block"
               href="{% url 'report_order'%}"
             >
+            <!-- id="btn-report-this-order" -->
               <img
                 src="{% static "icon/report.png" %}"
                 width="30px"
@@ -219,10 +217,11 @@
               รายงานผลผลิต
             </a>
               <a
-                class="col-12 btn btn-light btn-lg btn-block"
+                class="col-12 btn btn-secondary btn-lg btn-block"
                 href=""
-                id="btn-cancel-this-order"
+                
               >
+              <!-- id="btn-cancel-this-order" -->
                 <img
                   src="{% static "icon/cancel.png" %}"
                   width="30px"
@@ -235,8 +234,7 @@
           </div>
           <hr>
         </td>
-        <td>
-        </td>
+       
       </tr>
 
 
@@ -315,8 +313,7 @@
           </div>
           <hr>
         </td>
-        <td>
-        </td>
+     
       </tr>
 
 
@@ -382,8 +379,7 @@
           </div>
           <hr>
         </td>
-        <td>
-        </td>
+     
       </tr>
 
       {% endif %}
