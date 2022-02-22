@@ -50,6 +50,66 @@
   font-size: 16px;
   padding: 16px 32px;
 }
+form {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.value-button {
+  display: inline-block;
+  border: 1px solid #ddd;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 11px 0;
+  margin-top: -2px;
+  background: #eee;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+  margin-right: -5px;
+  border-radius: 8px 0 0 8px;
+}
+
+form #increase {
+  margin-left: -6px;
+  border-radius: 0 8px 8px 0;
+}
+
+form #input-wrap {
+  margin: 0px;
+  padding: 0px;
+}
+
+input#number {
+  text-align: center;
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 </style>
 
 <div class="container">
@@ -118,9 +178,6 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
          <br>
           <p style="color:#1f2937; text-align: left;">ขนาด :  {{data_product.product_weight}} kg</p>
           <p style="color:#1f2937; text-align: left;">เนื้อ : {{data_product.melon_color}}</p>
-          <p style="color:#1f2937; text-align: left;">
-            จำนวนในคลัง : {{data_product.product_amount}}
-          </p>
 
 
           {% if data_product.type_id_id == 2 and data_product.select_carving == 1 %}
@@ -136,7 +193,6 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
           <p style="color:#1f2937; text-align: left;">
             คุณภาพ : {{data_product.quality_id.quality_name}}
           </p>
-          <p style="color:#1f2937; text-align: left;">ราคา : {{data_product.product_price}} ฿</p>
           <p style="color:#1f2937; text-align: left;">
             รอบตัด : {{data_product.date_harvest}}
           </p>
@@ -145,7 +201,6 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
           </p>
         </div>
       </div>
-
       <br>
       <div class="col">
         <p style="color:#1f2937; text-align: left;">
@@ -155,12 +210,29 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 
       <div class="col" style="background-color: #f3f4f6; padding: 5%;">
        <p>สั่ง</p>
-
        <div class="col-sm">
-        <span id="numberstyle-decrement">–</span>
+        <!-- <span id="numberstyle-decrement">–</span>
         <input id="numberstyle" type="number" min="0" max="5000" name="cost_carving" value="0" required>
-        <span id="numberstyle-increment">+</span>
-      </div> 
+        <span id="numberstyle-increment">+</span> -->
+        <form class="mb-4">
+          <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+          <input type="number" id="number" value="0" />
+          <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+        </form>
+      </div>
+      
+      <p style="color:#1f2937; text-align: end;">
+        จำนวนในคลัง : {{data_product.product_amount}}
+      </p>
+      <p style="color:#1f2937; text-align: end;">
+        ราคา : {{data_product.product_price}} ฿
+      </p>
+      <p style="color:#1f2937; text-align: end;">
+        ค่าส่ง : {{data_product.shipping_cost}} ฿
+      </p>
+      <p style="color:#b90000; font-size: 30px; text-align: end;">
+        รวม : {{data_product.product_price}} ฿ 
+      </p>
       </div>
     </div>
     <div class="col-lg-1"></div>
@@ -176,47 +248,61 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 <br><br> <br><br>
 
 <script>
-( function() {
- 
-  window.inputNumber = function(el) {
 
-    var min = el.attr('min') || false;
-    var max = el.attr('max') || false;
+  function increaseValue() {
+  var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  document.getElementById('number').value = value;
+}
 
-    var els = {};
+function decreaseValue() {
+  var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value < 1 ? value = 1 : '';
+  value--;
+  document.getElementById('number').value = value;
+}
+// ( function() {
+//   window.inputNumber = function(el) {
 
-    els.dec = el.prev();
-    els.inc = el.next();
+//     var min = el.attr('min') || false;
+//     var max = el.attr('max') || false;
 
-    el.each(function() {
-      init($(this));
-    });
+//     var els = {};
 
-    function init(el) {
+//     els.dec = el.prev();
+//     els.inc = el.next();
 
-      els.dec.on('click', decrement);
-      els.inc.on('click', increment);
+//     el.each(function() {
+//       init($(this));
+//     });
 
-      function decrement() {
-        var value = el[0].value;
-        value--;
-        if(!min || value >= min) {
-          el[0].value = value;
-        }
-      }
+//     function init(el) {
 
-      function increment() {
-        var value = el[0].value;
-        value++;
-        if(!max || value <= max) {
-          el[0].value = value++;
-        }
-      }
-    }
-  }
-  })();
+//       els.dec.on('click', decrement);
+//       els.inc.on('click', increment);
 
-  inputNumber($('#numberstyle'));
+//       function decrement() {
+//         var value = el[0].value;
+//         value--;
+//         if(!min || value >= min) {
+//           el[0].value = value;
+//         }
+//       }
+
+//       function increment() {
+//         var value = el[0].value;
+//         value++;
+//         if(!max || value <= max) {
+//           el[0].value = value++;
+//         }
+//       }
+//     }
+//   }
+//   })();
+
+//   inputNumber($('#numberstyle'));
 
 </script>
 
