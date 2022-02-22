@@ -216,7 +216,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         <span id="numberstyle-increment">+</span> -->
         <form class="mb-4">
           <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-          <input type="number" id="number" value="0" />
+          <input type="number" id="number" value="1"/>
           <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
         </form>
       </div>
@@ -231,8 +231,9 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         ค่าส่ง : {{data_product.shipping_cost}} ฿
       </p>
       <p style="color:#b90000; font-size: 30px; text-align: end;">
-        รวม : {{data_product.product_price}} ฿ 
+        รวม : <span class="product-total-price" data-price="{{data_product.product_price}}"></span> ฿ 
       </p>
+      
       </div>
     </div>
     <div class="col-lg-1"></div>
@@ -248,12 +249,12 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 <br><br> <br><br>
 
 <script>
-
   function increaseValue() {
   var value = parseInt(document.getElementById('number').value, 10);
   value = isNaN(value) ? 0 : value;
   value++;
   document.getElementById('number').value = value;
+  pricetotal();
 }
 
 function decreaseValue() {
@@ -262,6 +263,16 @@ function decreaseValue() {
   value < 1 ? value = 1 : '';
   value--;
   document.getElementById('number').value = value;
+  pricetotal();
+}
+
+function pricetotal() {
+  var totalPrice = document.querySelector('product-total-price');
+  var price = totalPrice.dataset.price;
+  var quantity = document.getElementById('number').value;
+  var sum = price * quantity;
+  sum = Math.round(sum * 100) / 100;
+  totalPrice.innerHTML = '$' + sum;
 }
 // ( function() {
 //   window.inputNumber = function(el) {
