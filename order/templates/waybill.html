@@ -1,37 +1,47 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta charset="UTF-8"> -->
+    <meta http-equiv="Content-Language" content="th">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WayBill</title>
-    <style>
+
+    <title>Invoice Id.#{{product.id}}</title>
+    <style type='text/css'>
         h1 {
           text-align: center;
         }
         td, th {
           text-align: center;
         }
+        @font-face {
+            font-family: 'Kanit', sans-serif;
+            src: url({% static 'fonts/Kodchasan-Medium.ttf' %})
+            }
+
+            body {
+              
+                font-family: 'Kanit', sans-serif;
+            }
+      
       </style>
 </head>
 <body>
     
-      <h1>Test</h1>
+      <h1>Invoice Id.#{{product.id}}</h1>
     
 
-      <table>
+      <table  class="table table-bordered">
        
           <tr>
             
-            
-            <td>Name</td>
-            <td>{{store.store_name}}</td>
-            <td>{{store.store_address}}</td>
-           
+            <td>Bill to: {{user.first_name}} {{user.last_name}}</td>
+            <td>{{product.product_name}}</td>
+            <td>{{product.product_amount}}</td>
           </tr>
 
       </table>
+      <hr>
      
 </body>
 </html>

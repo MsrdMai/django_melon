@@ -11,12 +11,10 @@ from .process import html_to_pdf
 from django.template.loader import render_to_string
 
 class GeneratePdf(View):
-    def get(self, request, *args, **kwargs):
-        # pk = kwargs.get('pk')
-        # order = get_object_or_404(Order, pk=pk)
+    def get(self, request, id, *args, **kwargs):
+        product = Product.objects.get(id=id)
         user = request.user
-        store = Store.objects.get(user_id=user)
-        open('templates/temp.html', "w").write(render_to_string('waybill.html', {'store': store}))
+        open('templates/temp.html', "w", encoding='UTF-8').write(render_to_string('waybill.html', {'product': product, 'user' : user}))
         # Converting the HTML template into a PDF file
         pdf = html_to_pdf('temp.html')
          # rendering the template

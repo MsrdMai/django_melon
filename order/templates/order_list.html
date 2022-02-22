@@ -1,10 +1,8 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
 
 <br><br>
-<div class="container">
-<br></br>
-<div  style="background-color: white; ">
-<br> 
+<div class="container" style="background-color: white; ">
+<br>
 
 <div class="row border border-indigo-600" style="margin: 2%;">
   <div class="col-lg-1"></div>
@@ -83,7 +81,7 @@
 
 
 <div class="row">
-    <div class="col-sm-1"> </div>
+<div class="col-sm-1"> </div>
 <div class="col-sm-3" style="padding: 1%;">
 </div>
 
@@ -153,14 +151,29 @@
                 อีเมล : tester@test.com <br>
                 ที่อยู่จัดส่ง : 1 ลาดกระบัง <br>
                 รายละเอียด : แกะไม่จำเป็นต้องเหมือนมาก
-                ของลายไม่คดมาก<br></br>
+                ของลายไม่คดมาก<br>
               </p>
-              <br></br>
 
               <img
+              src="{% static "icon/print.png" %}"
+              width="30px"
+              height="30px"
+              style="display:inline-block;"
+            />
+
+              <a
+              class="col-sm-6 btn btn-dark "
+              href="{% url 'orderPdf' id=product_order.id %}"
+              >พิมพ์ใบจัดส่ง (Invoice)</a>
+            
+              <br></br><br>
+
+              <img 
                 src="{% static "img/muku.jpg" %}"
                 id="img-order-carving"
               ></img>
+
+
             <br>
             </div>
              
@@ -171,10 +184,10 @@
             </h5>
             </div>
           </div>
-          <div class="row">
 
+          <br><br><br>
+          <div class="row">
             <div class="col-sm-3 col-md-6">
-             <br>
               <a style="color: #991b1b; display:inline-block;"
               href="{% url 'payment_order'%}"
               >
@@ -258,7 +271,20 @@
                 อีเมล : tester2@test.com <br></br>
                 ที่อยู่จัดส่ง : 2 ลาดกระบัง <br></br>
               </p>
-              <br></br>
+            
+              <img
+              src="{% static "icon/print.png" %}"
+              width="30px"
+              height="30px"
+              style="display:inline-block;"
+            />
+
+              <a
+              class="col-sm-6 btn btn-dark "
+              href="{% url 'orderPdf' id=product_order.id %}"
+              >พิมพ์ใบจัดส่ง (Invoice)</a>
+            
+              <br></br><br>
             </div>
             <div class="col-sm-2 col-md-6">
               <h5 style="font-weight: bold; border-radius: 100px; background-color: #bbf7d0; text-align: center; padding: 2%;">                รอยืนยันคำสั่งซื้อ
@@ -390,9 +416,9 @@
 </center>
 
 <br></br>  <br></br>
-</br><br></br>
+
 </div>
-</div>
+
 
 <br><br> <br><br>
 {% endblock %}

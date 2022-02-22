@@ -156,6 +156,9 @@ input[type="radio"]#radio-type-2:focus + label{
   max-width: 300px; 
   max-height: 300px; 
   align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #334155;
 }
 
 #payment-check{

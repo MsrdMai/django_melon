@@ -9,7 +9,6 @@ urlpatterns = [
     path('payment_order/', views.payment_order, name='payment_order'),
     path('report_order/', views.report_order, name='report_order'),
     path('chatroom/<int:id>/', views.chatroom, name='chatroom'),
-    path('pdf/', GeneratePdf.as_view()), 
-    # path('pdf/<pk>', GeneratePdf.as_view(), name="orderPdf"), 
+    path('pdf/<int:id>/', GeneratePdf.as_view(), name="orderPdf"), 
 
 ]
