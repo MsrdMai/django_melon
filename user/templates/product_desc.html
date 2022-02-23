@@ -216,8 +216,9 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         <span id="numberstyle-increment">+</span> -->
         <form class="mb-4">
           <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-          <input type="number" id="number" value="1"/>
+          <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
           <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+          <input type="submit">
         </form>
       </div>
       
