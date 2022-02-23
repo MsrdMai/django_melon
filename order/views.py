@@ -4,7 +4,7 @@ from .models import State, Order, Review
 from store.models import Store, TypeeOrder, Quality, Product
 from .models import Message
 from django.contrib.auth.decorators import login_required
-
+import datetime
 from django.http import HttpResponse
 from django.views.generic import View
 from .process import html_to_pdf 
@@ -14,7 +14,12 @@ class GeneratePdf(View):
     def get(self, request, id, *args, **kwargs):
         product = Product.objects.get(id=id)
         user = request.user
-        open('templates/temp.html', "w", encoding='UTF-8').write(render_to_string('waybill.html', {'product': product, 'user' : user}))
+        today = datetime.date.today()
+        open('templates/temp.html', "w", encoding='UTF-8').write(render_to_string('waybill.html', 
+        {'product': product,
+         'user' : user,
+         'today': today,}
+        ))
         # Converting the HTML template into a PDF file
         pdf = html_to_pdf('temp.html')
          # rendering the template
