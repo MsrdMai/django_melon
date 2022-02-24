@@ -209,12 +209,11 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </div>
 
       <div class="col" style="background-color: #f3f4f6; padding: 5%;">
-       <p>สั่ง</p>
        <div class="col-sm">
         <!-- <span id="numberstyle-decrement">–</span>
         <input id="numberstyle" type="number" min="0" max="5000" name="cost_carving" value="0" required>
         <span id="numberstyle-increment">+</span> -->
-        <form class="mb-4">
+        <form class="mb-4 pt-1">
           <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
           <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
           <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
