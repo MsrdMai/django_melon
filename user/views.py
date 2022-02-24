@@ -186,3 +186,6 @@ def review_detail(request,id):
         'totel_product' : totel_product,
     }
     return render(request, template_name='review_detail.html', context=context)    
+
+def report(request):
+    return render(request, template_name='report.html')
