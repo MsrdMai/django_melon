@@ -1,5 +1,71 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
 
+<style>
+  /* From cssbuttons.io by @adamgiebl */
+  #btn-change-status {
+    background: #a5ff93;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+  }
+
+  #btn-change-status:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+  }
+
+  #btn-change-status:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+  }
+
+  #btn-report-this-order {
+    background: #fdff97;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+  }
+
+  #btn-report-this-order:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+  }
+
+  #btn-report-this-order:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+  }
+
+  #btn-cancel-this-order {
+    background: #ff8d8d;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+  }
+
+  #btn-cancel-this-order:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+  }
+
+  #btn-cancel-this-order:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+  }
+</style>
+
 <br><br>
 <div class="container" style="background-color: white; ">
 <br>
@@ -202,45 +268,20 @@
             </div>
 
             <div class="col">
-
-              <a
-                class="col-12 btn btn-warning btn-lg btn-block"
-                href=""
-              >
-              <!-- id="btn-change-status" -->
-                <img
-                  src="{% static "icon/box.png" %}"
-                  width="30px"
-                  height="30px"
-                  style="display:inline-block;"
-                />
+            
+              <a class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-change-status" href="" style="color: black;">
+                
+                <img src="{% static "icon/box.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 แจ้งเลขพัสดุ
               </a>
-              <a
-              class="col-12 btn btn btn-success btn-lg btn-block"
-              href="{% url 'report_order'%}"
-            >
-            <!-- id="btn-report-this-order" -->
-              <img
-                src="{% static "icon/report.png" %}"
-                width="30px"
-                height="30px"
-                style="display:inline-block;"
-              />
-              รายงานผลผลิต
-            </a>
-              <a
-                class="col-12 btn btn-secondary btn-lg btn-block"
-                href=""
+              <a class="col-12 btn btn btn-success btn-lg btn-block mb-1" id="btn-report-this-order" href="{% url 'report_order'%}" style="color: black;">
                 
-              >
-              <!-- id="btn-cancel-this-order" -->
-                <img
-                  src="{% static "icon/cancel.png" %}"
-                  width="30px"
-                  height="30px"
-                  style="display:inline-block;"
-                />
+                <img src="{% static "icon/report.png" %}" width="30px" height="30px" style="display:inline-block;" />
+                รายงานผลผลิต
+              </a>
+              <a class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
+                
+                <img src="{% static "icon/cancel.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 ยกเลิกคำสั่งซื้อ
               </a>
             </div>

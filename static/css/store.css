@@ -169,13 +169,12 @@ input[type="radio"]#radio-type-2:focus + label{
 }
 
 #btn-change-status{
-  border-width: 2px; 
+  /* border-width: 2px;  */
   border-color: #eab308; 
   color: #eab308; 
-  background-color:#f3f4f6 ; 
+  background-color:#ffe8a3 ; 
   margin:1px;
 }
-
 
 #btn-report-this-order{
   border-width: 2px; 
