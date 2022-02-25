@@ -243,7 +243,6 @@
                     </div>
             </div>
         </div>
-
         <div id="shipped" class="tabcontent">
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
@@ -264,7 +263,7 @@
                             </button>
                         </div>
                         <div class="mt-2 d-flex justify-content-end">
-                            <button type="button" class="button1 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#track">
+                            <button type="button" class="button1 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#confirmorder">
                                 <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ยืนยันการรับสินค้า</b></h3>
                             </button>
                         </div>
@@ -290,15 +289,10 @@
                             <i class="rating__star far fa-star"></i>
                             <i class="rating__star far fa-star"></i>
                             <i class="rating__star far fa-star"></i>
-                            <!-- <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                            <img class="rating__star rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" /> -->
                         </div>
                         <textarea class="form-control form-control-lg my-2" id="message-text" placeholder="เขียนรีวิว"></textarea>
                         <div class="mt-2 d-flex justify-content-end">
-                            <button type="button" class="button2 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#track">
+                            <button type="button" class="button2 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#confirm">
                                 <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ยืนยัน</b></h3>
                             </button>
                         </div>
@@ -381,14 +375,6 @@
               <option value="ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)">ธ.ไอซีบีซี (ไทย) จำกัด (มหาชน)</option>
             </select>
           </div>
-        <div class="col-md-6">
-          <label for="inputdate" class="form-label float-start">วันที่ชำระ</label>
-          <input type="date" class="form-control" id="inputdate">
-        </div>
-        <div class="col-md-6">
-          <label for="inputbank" class="form-label float-start">เวลาที่ชำระ</label>
-          <input type="time" class="form-control" id="inputbank">
-        </div>
         <div class="col-md-12">
             <label for="inputState" class="form-label">หลักฐานการชำระ</label>
             <input class="form-control" type="file" id="formFile">
@@ -421,6 +407,130 @@
     </div>
   </div>
 
+<div class="modal fade" id="track" tabindex="-1" aria-labelledby="trackmelon" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container">
+                <div  style="background-color: white; border-radius: 30px;padding: 1%;">
+                <br></br>    
+                <h4>รายงานผลผลิต #Order ....</h4>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-1"> </div>
+                    <div class="col-sm-3" style="padding: 1%;">
+                        <small  class="form-text text-muted">จำนวนครั้งที่รายงาน : 2 ครั้ง</small>
+                    </div>
+                    <div class="col-sm-3"> </div>
+                  <div class="col-sm-1"></div>
+                </div>
+                <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5">
+                    <img src="{% static "img/test1.jpg" %}" height="300px" width="300px" style="object-fit: scale-down;" />
+                </div> 
+                <div class="col-sm-1"></div> 
+                <div class="col-sm-4" style="text-align: start; margin: 1%;">
+                    <br>
+                    <p>ครั้งที่ : 1</p>
+                    <p>บันทึกเมื่อ : 12/08/2565</p>
+                    <p>รายละเอียด : ระยะที่2 เกรสเริ่มออก</p>
+                    <p>น้ำหนัก :0</p>
+                    <p>ความหวาน : 0</p>
+                    <p>คุณภาพ : กำลังเติบโต</p>
+                </div>
+                <div class="col-sm-1"></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                        <img src="{% static "img/test2.jpg" %}" height="300px" width="300px" style="object-fit: scale-down;" />
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4" style="text-align: start; margin: 1%;">
+                        <br>
+                        <p>ครั้งที่ : 2</p>
+                        <p>บันทึกเมื่อ : 20/08/2565</p>
+                        <p>รายละเอียด : ระยะที่2 </p>
+                        <p>น้ำหนัก :0</p>
+                        <p>ความหวาน : 0</p>
+                        <p>คุณภาพ : กำลังเติบโต</p>
+                    </div>
+                    <div class="col-sm-1"></div> 
+                    </div>
+                    <div class="modal fade" id="model-form" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">รายงานผลผลิต</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                        <form  method="POST" enctype="multipart/form-data" action="">
+                                            {% csrf_token %}
+                                    <div class="form-group">
+                                    <label class="form-label float-start"><b>รูปภาพ</b></label>
+                                        <input type="file" class="form-control-file" name="recode_image" id="file" accept="image/png, image/jpeg"
+                                        onchange="loadFile(event)"> <br><br>
+                                        <img id="output" width="300px" height="300px"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label float-start">รายละเอียด</label>
+                                        <textarea  class="form-control" name="recode_description" rows="5" maxlength="255" required></textarea>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="form-label float-start">น้ำหนัก</label>
+                                        <input type="number" step="0.01" min="1" max="20" class="form-control" name="recode_weight" placeholder="น้ำหนักของเมล่อน" required>
+                                      </div> 
+                                      <div class="form-group">
+                                        <label class="form-label float-start">คุณภาพ</label>
+                                        <select class="form-control" name="quality_id">
+                                           
+                                            {% for i in  quality_list %}
+                                            <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.quality_name }}</option>
+                                            {% endfor %}
+                                          </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label float-start">ความหวาน</label>
+                                        <input type="number" min="1" max="1000" class="form-control" name="sweetness" placeholder="ความหวานที่วัดได้" required>
+                                    </div> 
+                                </form>
+                            </div>              
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmorder" tabindex="-1" aria-labelledby="confirmorder" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmorder">ยืนยันการรับสินค้า</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row g-3">
+                <p>ยืนยันว่าจะรับสินค้า</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-danger">ยืนยัน</button>
+            </div>
+        </div>
+    </div>
+</div>
     <script>
         function openPage(pageName, elmnt, color) {
             var i, tabcontent, tablinks;

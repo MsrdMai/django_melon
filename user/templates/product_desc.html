@@ -209,12 +209,11 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </div>
 
       <div class="col" style="background-color: #f3f4f6; padding: 5%;">
-       <p>สั่ง</p>
        <div class="col-sm">
         <!-- <span id="numberstyle-decrement">–</span>
         <input id="numberstyle" type="number" min="0" max="5000" name="cost_carving" value="0" required>
         <span id="numberstyle-increment">+</span> -->
-        <form class="mb-4">
+        <form class="mb-4 pt-1">
           <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
           <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
           <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
@@ -229,10 +228,10 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         ราคา : {{data_product.product_price}} ฿
       </p>
       <p style="color:#1f2937; text-align: end;">
-        ค่าส่ง : {{data_product.shipping_cost}} ฿
+        ค่าส่ง : <span class="ship_price" data-price="{{data_product.shipping_cost}}">{{data_product.shipping_cost}}</span> ฿
       </p>
       <p style="color:#b90000; font-size: 30px; text-align: end;">
-        รวม : <span class="product-total-price" data-price="{{data_product.product_price}}"></span> ฿ 
+        รวม : <span class="product-total-price" data-price="{{data_product.product_price}}">{{data_product.product_price}}</span> ฿ 
       </p>
       
       </div>
@@ -253,6 +252,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
   function increaseValue() {
   var value = parseInt(document.getElementById('number').value, 10);
   value = isNaN(value) ? 0 : value;
+  // value > 6 ? value = 6 : '';
   value++;
   document.getElementById('number').value = value;
   pricetotal();
@@ -268,12 +268,13 @@ function decreaseValue() {
 }
 
 function pricetotal() {
-  var totalPrice = document.querySelector('product-total-price');
+  var totalPrice = document.querySelector('.product-total-price');
+  var shipprice = document.querySelector('.ship_price');
   var price = totalPrice.dataset.price;
   var quantity = document.getElementById('number').value;
-  var sum = price * quantity;
+  var sum = (price * quantity);
   sum = Math.round(sum * 100) / 100;
-  totalPrice.innerHTML = '$' + sum;
+  totalPrice.innerHTML = sum;
 }
 // ( function() {
 //   window.inputNumber = function(el) {
