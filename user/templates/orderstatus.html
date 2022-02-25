@@ -291,6 +291,15 @@
                             <i class="rating__star far fa-star"></i>
                         </div>
                         <textarea class="form-control form-control-lg my-2" id="message-text" placeholder="เขียนรีวิว"></textarea>
+                        <div class="mb-3">
+                            <label class="form-label float-start"><b>รูปภาพสินค้า</b></label>
+                             <input type="file" class="form-control-file" name="product_img" id="file2" accept="image/png, image/jpeg"
+                              onchange="loadFile(event)"> <br><br>
+                              {% if checkImg %}
+                              <div class="invalid-feedback d-block">{{checkImg}}</div>
+                              {%endif%}
+                               <img id="output" width="100px" height="100px"/>
+                           </div>
                         <div class="mt-2 d-flex justify-content-end">
                             <button type="button" class="button2 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#confirm">
                                 <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ยืนยัน</b></h3>
@@ -303,6 +312,14 @@
 
  <!-- script for review -->
     <script>
+        var loadFile = function(event) {
+	    var image = document.getElementById('output');
+        document.getElementById('output').style.border = '2px solid #34D399';
+
+	    image.src = URL.createObjectURL(event.target.files[0]);
+        
+        }
+        
         const ratingStars = [...document.getElementsByClassName("rating__star")];
         const ratingResult = document.querySelector(".rating__result");
 
