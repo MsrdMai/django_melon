@@ -208,6 +208,12 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         </p>
       </div>
 
+
+
+      {% if user.is_authenticated %} 
+      {% for group in  request.user.groups.all %}
+      {% if group.name == 'Customer' %}
+      
       <div class="col" style="background-color: #f3f4f6; padding: 5%;">
        <div class="col-sm">
         <!-- <span id="numberstyle-decrement">–</span>
@@ -235,6 +241,12 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </p>
       
       </div>
+
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+
     </div>
     <div class="col-lg-1"></div>
 

@@ -9,6 +9,11 @@ from django.http import HttpResponse
 from django.views.generic import View
 from .process import html_to_pdf 
 from django.template.loader import render_to_string
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from .utils import get_filtered_image
+
 
 class GeneratePdf(View):
     def get(self, request, id, *args, **kwargs):
@@ -69,9 +74,20 @@ def report_order(request):
     totel_product = len(totel_product)
     quality_list = Quality.objects.all()
 
+
+    # img = cv2.imread(myStore.store_logo.url, 0)
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # img = cv2.imshow('image', img)
+
+    # cv2.imwrite('data/dst/lena_opencv_red.jpg', im)
+
+
+
+
+
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'quality_list' :quality_list,
-
+        
        }
     return render(request, template_name='report_order.html', context=context)

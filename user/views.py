@@ -8,6 +8,7 @@ from store.models import Product, Store
 
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
+import pandas as pd
 
 # Create your views here.
 
@@ -189,3 +190,22 @@ def review_detail(request,id):
 
 def report(request):
     return render(request, template_name='report.html')
+
+def admin_manager(request):
+
+    store = Product.objects.all().values()
+    df = pd.DataFrame(store)
+    product_name = df.product_name.tolist()
+    price = df['product_price'].tolist()
+    quality = df['quality_id_id'].tolist()
+ 
+ 
+    context = {
+        'store' : store,
+        "price": price,
+        "product_name" : product_name,
+        "quality" : quality,
+       
+    }
+
+    return render(request, template_name='admin_manager.html', context=context)
