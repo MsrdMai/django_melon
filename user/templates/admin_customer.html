@@ -77,22 +77,52 @@
         
         <div class="container">
         <div class="col-sm" style="background-color: #f5f5f4;padding: 1%; width: 100%; ">
-                <h3 style="text-align: start; padding: 1%;">DASHBOARD</h3>
+                <h3 style="text-align: start; padding: 1%;">แก้ไขข้อมูลลูกค้า</h3>
                 <hr>
 
                 <br><br>
                 <center>
-                <div style="border-color: black; border-width: 1px; border-style: solid;width:100%;max-width:600px">
-                <canvas id="price_name" style="width:100%;max-width:600px"></canvas>
-                </div>
+                <div style="width:100%;max-width:1000px">
+               
 
-                <div style="border-color: black; border-width: 1px; border-style: solid;width:100%;max-width:600px">
-                <canvas id="product_quality" style="width:100%;max-width:600px"></canvas>
-                </div>                
+                    <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Firstname Lastname</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Type User</th>
+                            <th scope="col">ลบข้อมูล</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in user_list %}
+                            {% if user.user_id.is_superuser == False %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                        
+                            <td>{{user.user_id.first_name}} {{ user.user_id.last_name }}</td>
+                            <td>{{user.user_id.email}}</td>
+                            
+                            {% if user.Typeuser_id_id == 1 %}
+                            <td>เจ้าของฟาร์ม</td>
+                            {% endif %}
+                            {% if user.Typeuser_id_id == 2 %}
+                            <td>ผู้ซื้อออนไลน์</td>
+                            {% endif %}   
+
+                            <td><button class="btn btn-danger">ลบข้อมูล</button></td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
+                        </tbody>
+                      </table>
+
+                </div>    
                 </center>
             <br><br><br>
         </div> 
-        <br> 
+        <br>  <br><br><br>
     </div>
 
   </div>
@@ -110,63 +140,6 @@
     document.body.style.backgroundColor = "white";
   }
 
-
-
-
-    var price = {{price|safe}};
-    var product_name = {{product_name|safe}};
-    var quality = {{quality|safe}}
-    new Chart("price_name", {
-    type: "line",
-    data: {
-        labels: product_name,
-        datasets: [{
-        fill: false,
-        lineTension: 0,
-        backgroundColor: "rgba(0,0,255,1.0)",
-        borderColor: "rgba(0,0,255,0.1)",
-        data: price
-        }]
-    },
-    options: {
-        legend: {display: false},
-        scales: {
-        yAxes: [{ticks: {min: 0, max:1000}}],
-        },
-            title: {
-              display: true,
-              text: "ราคาเฉลี่ยเมล่อนตามสายพันธุ์"
-            }
-    }
-    });
-
-
-    var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-        ];
-
-    new Chart("product_quality", {
-    type: "pie",
-    data: {
-        labels: product_name,
-        datasets: [{
-
-        backgroundColor: barColors,
-        data: quality
-        }]
-    },
-    options: {
-      
-            title: {
-              display: true,
-              text: "คุณภาพเฉลี่ยของสายพันธุ์"
-            }
-    }
-    });
   </script>
 
 {% endblock %}

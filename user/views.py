@@ -198,14 +198,20 @@ def admin_manager(request):
     product_name = df.product_name.tolist()
     price = df['product_price'].tolist()
     quality = df['quality_id_id'].tolist()
- 
- 
+
     context = {
         'store' : store,
         "price": price,
         "product_name" : product_name,
         "quality" : quality,
-       
     }
 
     return render(request, template_name='admin_manager.html', context=context)
+
+def admin_customer(request):
+    user_list = UserInType.objects.all()
+    context = {
+        'user_list' : user_list,
+
+    } 
+    return render(request, template_name='admin_customer.html', context=context)
