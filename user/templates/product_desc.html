@@ -45,10 +45,10 @@
 }
 
 .text {
-  background-color: #facc15;
-  color: white;
+  /* background-color: #facc15; */
+  color: rgb(31, 128, 31);
   font-size: 16px;
-  padding: 16px 32px;
+  /* padding: 16px 32px; */
 }
 form {
   width: 300px;
@@ -112,10 +112,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 </style>
 
-<div class="container">
+<div class="container w-75">
 <div  style="background-color: white; ">
 
-<div class="opacity-img">
+<!-- <div class="opacity-img">
 <img
 src="{{data_product.store_id.store_logo.url}}" id="logo-farm" class="img-farm"></img>
 <img
@@ -125,15 +125,10 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
        เยี่ยมชม {{data_product.store_id.store_name}}
     </a>
   </div>
-</div>
-<br>
-<br>
-<h4>รายละเอียดสินค้า {{data_product.product_name}}</h4>
-<hr>
-<div class="row border-indigo-600" style="margin: 2%;">
+</div> -->
+<div class="row" style="margin: 2%;">
     <div class="col-lg-1"></div>
-    <div class="col-lg-4">
-      <br></br>
+    <div class="col-lg-4 mt-3 mt-sm-5">
       <img
       src="{{data_product.product_image.url}}"
       style="width: 100%; height: auto; align-items: center; padding: 1%;"
@@ -144,10 +139,18 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
     <div class="col-lg-5 col-12">
       <br></br>
       <div class="row">
-        <div class="col">
-          <h3 style="color: brown;">
+        <div class="col d-flex">
+          <h3 style="color: brown; font-weight: 800;">
             {{data_product.product_name}}
           </h3>
+        </div>
+        <div class="py-2 d-flex justify-content-between" style="background-color: #f3f4f6;">
+          <a class="text" style="font-weight: 600;" href="{% url 'farm-detail' id=data_product.store_id.id %}">
+            ร้าน{{data_product.store_id.store_name}}
+         </a>
+         <a class="text" href="{% url 'farm-detail' id=data_product.store_id.id %}">
+          ดูร้านค้า
+       </a>
         </div>
 
 
@@ -173,8 +176,16 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 
 
       </div>
+      <div class="col mt-3 mb-0">
+        <p style="color:#1f2937; text-align: left; margin-bottom: 0px;">
+          รายละเอียดสินค้า
+        </p><hr>
+        <!-- <p style="color:#1f2937; text-align: left; margin-bottom: 0px;">
+          {{data_product.product_description}}
+        </p> -->
+      </div>
       <div class="row">
-        <div class="col">
+        <div class="col-12 col-sm-6">
          <br>
           <p style="color:#1f2937; text-align: left;">ขนาด :  {{data_product.product_weight}} kg</p>
           <p style="color:#1f2937; text-align: left;">เนื้อ : {{data_product.melon_color}}</p>
@@ -200,25 +211,25 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
             วันหมดอายุ : {{data_product.date_expire}}
           </p>
         </div>
-      </div>
-      <br>
-      <div class="col">
-        <p style="color:#1f2937; text-align: left;">
-          รายละเอียดสินค้า : {{data_product.product_description}}
-        </p>
-      </div>
+        </div>
+        <hr>
+        <div class="col mt-3 mb-0">
+          <p style="color:#1f2937; text-align: left; margin-bottom: 0px;">
+            {{data_product.product_description}}
+          </p>
+        </div>
+        <hr>
 
-
-
+<!-- 
       {% if user.is_authenticated %} 
       {% for group in  request.user.groups.all %}
       {% if group.name == 'Customer' %}
       
       <div class="col" style="background-color: #f3f4f6; padding: 5%;">
-       <div class="col-sm">
-        <!-- <span id="numberstyle-decrement">–</span>
-        <input id="numberstyle" type="number" min="0" max="5000" name="cost_carving" value="0" required>
-        <span id="numberstyle-increment">+</span> -->
+         <p style="color:#1f2937; text-align: end;">
+        ราคา : {{data_product.product_price}} ฿
+      </p>
+      <div class="col-sm">
         <form class="mb-4 pt-1">
           <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
           <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
@@ -228,23 +239,22 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </div>
       
       <p style="color:#1f2937; text-align: end;">
-        จำนวนในคลัง : {{data_product.product_amount}}
-      </p>
-      <p style="color:#1f2937; text-align: end;">
-        ราคา : {{data_product.product_price}} ฿
-      </p>
-      <p style="color:#1f2937; text-align: end;">
+        คลัง : {{data_product.product_amount}} -->
+      <!-- </p> -->
+    
+      <!-- <p style="color:#1f2937; text-align: end;">
         ค่าส่ง : <span class="ship_price" data-price="{{data_product.shipping_cost}}">{{data_product.shipping_cost}}</span> ฿
       </p>
       <p style="color:#b90000; font-size: 30px; text-align: end;">
         รวม : <span class="product-total-price" data-price="{{data_product.product_price}}">{{data_product.product_price}}</span> ฿ 
-      </p>
-      
+      </p> -->
+      <div href="#" class="btn btn-danger btns mt-2 w-100 mb-4" data-bs-toggle="modal"
+      data-bs-target="#Modal-{{data_product.id}}">สั่งซื้อ</div>
       </div>
 
-      {% endif %}
+      <!-- {% endif %}
       {% endfor %}
-      {% endif %}
+      {% endif %} -->
 
 
     </div>
@@ -259,6 +269,52 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 </div>
 </div>
 <br><br> <br><br>
+
+<!-- modal -->
+  <div class="modal fade" id="Modal-{{data_product.id}}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+              <div class="modal-header border-bottom-0 pb-0">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body pt-0">
+                  <h2 class="d-flex justify-content-center" style="color: rgb(0, 107, 0);">
+                      <b> {{data_product.product_name}}</b>
+                  </h2>
+                  <div class="row">
+                      <div class="col-lg-6 d-flex justify-content-center">
+                          <img src="{{data_product.product_image.url}}"
+                          height="150px" width="150px" style="align-items: center; padding: 1%; object-fit: scale-down;"></img>
+                      </div>
+                      <div class="col-lg-6 mt-1 d-flex justify-content-sm-start justify-content-center">
+                          <div class="row d-flex justify-content-end" style="margin-top: 1rem;">
+                              <div class="col px-5">
+                                <h1 style="color:rgb(218, 0, 0); text-align: right; margin-bottom: 0px;"><b>฿ {{data_product.product_price}}</b></h1> 
+                            </div>
+                              <p class="px-5 pt-1" style="color:rgb(0, 107, 0); text-align: right; margin-bottom: 12px;">
+                                <b>คลัง :</b> {{data_product.product_amount}}
+                            </p>
+                            <div>
+                            <form class="mb-4 pt-1" style="text-align: right;">
+                              <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                              <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
+                              <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                            </form>
+                          </div>
+                      </div>
+                      </div>
+                      
+                  </div>
+              </div>
+              <div class="modal-footer border-top-0 justify-content-center">
+                  <a href="#" class="btn btn-danger btns w-100">
+                      <h3 style="margin-top: 0.5rem;"><b>สั่งซื้อ</b></h3>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+<!-- modal -->
 
 <script>
   function increaseValue() {
@@ -288,47 +344,6 @@ function pricetotal() {
   sum = Math.round(sum * 100) / 100;
   totalPrice.innerHTML = sum;
 }
-// ( function() {
-//   window.inputNumber = function(el) {
-
-//     var min = el.attr('min') || false;
-//     var max = el.attr('max') || false;
-
-//     var els = {};
-
-//     els.dec = el.prev();
-//     els.inc = el.next();
-
-//     el.each(function() {
-//       init($(this));
-//     });
-
-//     function init(el) {
-
-//       els.dec.on('click', decrement);
-//       els.inc.on('click', increment);
-
-//       function decrement() {
-//         var value = el[0].value;
-//         value--;
-//         if(!min || value >= min) {
-//           el[0].value = value;
-//         }
-//       }
-
-//       function increment() {
-//         var value = el[0].value;
-//         value++;
-//         if(!max || value <= max) {
-//           el[0].value = value++;
-//         }
-//       }
-//     }
-//   }
-//   })();
-
-//   inputNumber($('#numberstyle'));
-
 </script>
 
 
