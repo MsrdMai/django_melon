@@ -154,6 +154,9 @@ def product_desc(request,id):
     }
     return render(request, template_name='product_desc.html', context=context)
 
+def product_total(request):
+    return render(request, template_name='product_total.html')
+
 def farm_detail(request,id):
     farm_detail = Store.objects.get(id=id)
     latitude = farm_detail.latitude
@@ -187,9 +190,6 @@ def review_detail(request,id):
         'totel_product' : totel_product,
     }
     return render(request, template_name='review_detail.html', context=context)    
-
-def producttotal(request):
-    return render(request, template_name='producttotal.html')
 
 
 @user_passes_test(lambda s: s.is_staff)

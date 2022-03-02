@@ -50,66 +50,71 @@
   font-size: 16px;
   /* padding: 16px 32px; */
 }
-form {
-  width: 300px;
-  margin: 0 auto;
-  text-align: center;
-  padding-top: 50px;
+.quantity-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px; 
+  height: 40px;
+  margin: 0 auto;    
 }
 
-.value-button {
-  display: inline-block;
+.quantity-field .value-button{ 
   border: 1px solid #ddd;
   margin: 0px;
   width: 40px;
-  height: 40px;
-  text-align: center;
-  vertical-align: middle;
-  padding: 11px 0;
-  margin-top: -2px;
-  background: #eee;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.value-button:hover {
+  height: 100%;   
+  padding: 0;
+  background: #eee; 
+  outline: none;
   cursor: pointer;
 }
 
-form #decrease {
-  margin-right: -5px;
+.quantity-field .value-button:hover {
+  background: rgb(230, 230, 230);
+}
+
+.quantity-field .value-button:active{
+  background: rgb(210, 210, 210);
+}
+
+.quantity-field .decrease-button {
+  margin-right: -4px;
   border-radius: 8px 0 0 8px;
 }
 
-form #increase {
-  margin-left: -6px;
+.quantity-field .increase-button {
+  margin-left: -4px;
   border-radius: 0 8px 8px 0;
 }
-
-form #input-wrap {
-  margin: 0px;
-  padding: 0px;
-}
-
-input#number {
+ 
+.quantity-field .number{
+  display: inline-block;
   text-align: center;
   border: none;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   margin: 0px;
   width: 40px;
-  height: 40px;
+  height: 100%;
+  line-height: 40px;
+  font-size: 11pt;
+  box-sizing: border-box; 
+  background: white;
+  font-family: calibri;
 }
 
+.quantity-field .number::selection{
+  background: none;
+}
+
+/*
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+*/
 </style>
 
 <div class="container w-75">
@@ -214,12 +219,55 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         </div>
         <hr>
         <div class="col mt-3 mb-0">
-          <p style="color:#1f2937; text-align: left; margin-bottom: 0px;">
+          <p style="color:#1f2937; text-align: left;">
             {{data_product.product_description}}
           </p>
         </div>
         <hr>
-
+        <div class="col mt-1 d-flex justify-content-center">
+          <div class="row d-flex ms-5" style="margin-top: 1rem;">
+              <div class="col px-5">
+                <h1 style="color:rgb(218, 0, 0); text-align: right;"><b>฿ {{data_product.product_price}}</b></h1> 
+            </div>
+              <p class="px-5 pt-1 mb-4" style="color:rgb(218, 0, 0); text-align: right;">
+                <b>คลัง :</b> {{data_product.product_amount}}
+            </p>
+            <div class="d-flex px-5 pt-1">
+              <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+                <b>จำนวน</b>
+            </p>
+            <div class="quantity-field" style="margin-right: 0px;">
+              <button 
+                class="value-button decrease-button" 
+                onclick="decreaseValue(this, 1)" 
+                title="Azalt">-</button>
+                <div class="number" id="number">1</div>
+              <button 
+                class="value-button increase-button" 
+                onclick="increaseValue(this, {{data_product.product_amount}})"
+                title="Arrtır"
+              >+
+              </button>
+            </div>
+          </div>
+          <div class="d-flex px-5 pt-3 justify-content-between">
+            <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+              <b>การจัดส่ง</b>
+          </p>
+          <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+            <b>฿ {{data_product.shipping_cost}}</b>
+        </p>
+        </div>
+        <div class="d-flex px-5 pt-1 justify-content-between">
+          <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+            <b>รวมทั้งหมด</b>
+        </p>
+        <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+          <b><span class="product-total-price" data-price="{{data_product.product_price}}">฿ {{data_product.product_price}}</span></b>
+      </p>
+      </div>
+      </div>
+      </div>
 <!-- 
       {% if user.is_authenticated %} 
       {% for group in  request.user.groups.all %}
@@ -271,7 +319,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 <br><br> <br><br>
 
 <!-- modal -->
-  <div class="modal fade" id="Modal-{{data_product.id}}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="Modal-{{data_product.id}}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
               <div class="modal-header border-bottom-0 pb-0">
@@ -304,6 +352,16 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
                               <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
                             </form>
                           </div>
+                          <div class="d-flex px-5 pt-1 justify-content-between">
+                            <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+                              <b>การจัดส่ง</b>
+                          </p>
+                          <form class="mb-4 pt-1">
+                            <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                            <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
+                            <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                          </form>
+                        </div>
                       </div>
                       </div>
                       
@@ -316,25 +374,26 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
               </div>
           </div>
       </div>
-  </div>
+  </div> -->
 <!-- modal -->
 
 <script>
-  function increaseValue() {
-  var value = parseInt(document.getElementById('number').value, 10);
-  value = isNaN(value) ? 0 : value;
-  // value > 6 ? value = 6 : '';
-  value++;
-  document.getElementById('number').value = value;
+  function increaseValue(button, limit) {
+  const numberInput = button.parentElement.querySelector('.number');
+  var value = parseInt(numberInput.innerHTML, 10);
+  if(isNaN(value)) value = 0;
+  if(limit && value >= limit) return;
+  numberInput.innerHTML = value+1;
   pricetotal();
 }
 
-function decreaseValue() {
-  var value = parseInt(document.getElementById('number').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value < 1 ? value = 1 : '';
-  value--;
-  document.getElementById('number').value = value;
+
+function decreaseValue(button) {
+  const numberInput = button.parentElement.querySelector('.number');
+  var value = parseInt(numberInput.innerHTML, 10);
+  if(isNaN(value)) value = 0;  
+  if(value < 1) return;
+  numberInput.innerHTML = value-1;
   pricetotal();
 }
 
@@ -342,11 +401,42 @@ function pricetotal() {
   var totalPrice = document.querySelector('.product-total-price');
   var shipprice = document.querySelector('.ship_price');
   var price = totalPrice.dataset.price;
-  var quantity = document.getElementById('number').value;
+  var quantity = document.querySelector('.number').value;
   var sum = (price * quantity);
   sum = Math.round(sum * 100) / 100;
   totalPrice.innerHTML = sum;
 }
+
+// function total(){
+// 	let totalDisplay = document.getElementById("total_display");
+// 	let sum = 0;
+// 	let tbody = document.getElementById("all_products");
+// 	for (let i = 0; i < tbody.rows.length; i++) {
+// 		sum = sum + parseFloat(tbody.rows[i].cells[3].innerHTML);
+// 	}
+// 	let total = sum.toFixed(2);
+// 	totalDisplay.innerHTML = "฿" + total;
+// }
+//   function increaseValue() {
+//   var value = parseInt(document.getElementById('number').value, 10);
+//   value = isNaN(value) ? 0 : value;
+//   // value > 6 ? value = 6 : '';
+//   value++;
+//   document.getElementById('number').value = value;
+//   pricetotal();
+// }
+
+// function decreaseValue() {
+//   var value = parseInt(document.getElementById('number').value, 10);
+//   value = isNaN(value) ? 0 : value;
+//   value < 1 ? value = 1 : '';
+//   value--;
+//   document.getElementById('number').value = value;
+//   pricetotal();
+// }
+
+
+
 </script>
 
 

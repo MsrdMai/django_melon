@@ -1,0 +1,189 @@
+{% extends "TopnavUser.html" %} {% load static %} {% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: white;
+	background-color: #333; 
+	width: 100%;
+	margin: 0; 
+}
+
+p, button, input {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+	padding: 5px 10px;
+	margin: 1px;
+}
+
+h2 {
+	text-align: center;
+}
+
+table {
+	width: 100%;
+	text-align: left;
+}
+
+table, th, td {
+	border: 1px solid slategrey;
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+tbody button {
+	color: white;
+	background-color: tomato;
+	border: none;
+	border-radius: 3px;
+}
+
+tbody button:hover {
+	background-color: #da472d;
+}
+
+input[type="number"] {
+	width: 50px;
+}
+
+#price_product {
+	width: 100px;
+}
+
+.container {
+	width: 90%;
+	margin: auto;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	margin-top: 5em;
+}
+
+.structure {
+	width: 80%;
+	background-color: black;
+	border-radius: 10px;
+	padding: 20px;
+	margin: auto;
+}
+
+</style>
+<div class="container flex">
+  <div class="structure">
+    <h1>Shopping cart</h1>
+
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Product name</th>
+          <th>Unit price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="all_products">
+        <tr>
+          <td>This is a product name</td>
+          <td>1.80</td>
+          <td class="quantity"><input type="number" placeholder="Unit price" min="0" value="2" contenteditable></td>
+          <td>3.60</td>
+          <td class="remove"><button type="button">Remove</button></td>
+        </tr>
+        <tr>
+          <td>Postcard</td>
+          <td>2.99</td>
+          <td class="quantity"><input type="number" placeholder="Unit price" min="0" value="1" contenteditable></td>
+          <td>2.99</td>
+          <td class="remove"><button type="button">Remove</button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td><input type="text" id="name_product" placeholder="Name of the product" contenteditable></td>
+          <td><input  type="number" step="0.01" id="price_product" value="0.50" contenteditable></td>
+          <td></td>
+          <td></td>
+          <td><button type="button" id="add_button">Add product</button></td>
+        </tr>
+      </tfoot>
+    </table>
+    <h2>Total : <span id="total_display">0 euros</span></h2>
+  </div>
+</div>
+<script>
+  document.getElementById("add_button").addEventListener("click", checkInput);
+document.querySelectorAll(".remove").forEach(removebtn => removebtn.addEventListener("click", removeProduct));
+document.querySelectorAll(".quantity").forEach(qty => qty.addEventListener("change", changeSubtotal));
+total();
+
+// Check if input is empty
+function checkInput(){
+	let nameProduct = document.getElementById("name_product");
+	let priceProduct = document.getElementById("price_product");
+	if (nameProduct.value != "" && priceProduct.value != "") {
+		addProduct();
+		total();
+	}
+}
+
+// Add a product
+function addProduct(){
+	let nameProduct = document.getElementById("name_product");
+	let priceProduct = document.getElementById("price_product");
+
+	let tbody = document.getElementById("all_products");
+	let tr = tbody.insertRow();
+	let td1 = tr.insertCell(0);
+	let td2 = tr.insertCell(1);
+	let td3 = tr.insertCell(2);
+	let td4 = tr.insertCell(3);
+	let td5 = tr.insertCell(4);
+
+	td1.innerHTML = nameProduct.value;
+	td2.innerHTML = priceProduct.value;
+	td3.innerHTML = '<input type="number" class="quantity" value="1" min="0">';
+	td4.innerHTML = priceProduct.value;
+	td5.innerHTML = '<button type="button" class="remove">Remove</i></button>';
+
+	td3.addEventListener("change", changeSubtotal);
+	td5.addEventListener("click", removeProduct);
+
+	nameProduct.value = "";
+	priceProduct.value = "";
+}
+
+// Change subtotal
+function changeSubtotal(element) {
+	let price = this.previousElementSibling.innerHTML;
+	let quantity = element.target.value; 
+	let subtotal = parseFloat(price * quantity).toFixed(2);
+	this.nextElementSibling.innerHTML = subtotal;
+	total();
+}
+
+// Remove a product
+function removeProduct() {
+	this.parentElement.parentElement.removeChild(this.parentElement);
+	total();
+}
+
+// Sum total
+function total(){
+	let totalDisplay = document.getElementById("total_display");
+	let sum = 0;
+	let tbody = document.getElementById("all_products");
+	for (let i = 0; i < tbody.rows.length; i++) {
+		sum = sum + parseFloat(tbody.rows[i].cells[3].innerHTML);
+	}
+	let total = sum.toFixed(2);
+	totalDisplay.innerHTML = total + " euros";
+}
+
+</script>
+{% endblock %}
