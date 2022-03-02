@@ -5,11 +5,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
 from store.models import Product, Store
-
+from order.models import Order
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 import pandas as pd
-
+from datetime import datetime, timedelta
 # Create your views here.
 
 
@@ -199,11 +199,23 @@ def admin_manager(request):
     price = df['product_price'].tolist()
     quality = df['quality_id_id'].tolist()
 
+    count_product =Product.objects.all().count()
+    count_user = User.objects.all().count()
+    count_user = count_user - 1
+    count_store = Store.objects.all().count()
+    count_order  =Order.objects.all().count()
+
+
     context = {
         'store' : store,
         "price": price,
         "product_name" : product_name,
         "quality" : quality,
+        'count_product' : count_product,
+        'count_user' : count_user,
+        'count_store' : count_store,
+        'count_order' : count_order,
+
     }
 
     return render(request, template_name='admin_manager.html', context=context)
@@ -212,6 +224,24 @@ def admin_customer(request):
     user_list = UserInType.objects.all()
     context = {
         'user_list' : user_list,
-
     } 
     return render(request, template_name='admin_customer.html', context=context)
+    
+def delete_customer(request, id):
+    user = User.objects.get(id=id)
+    user_list = UserInType.objects.all()
+
+    try:
+        user.delete()
+        txt = 'ลบรายชื่อสำเร็จแล้ว'
+    except:
+        txt = 'ลบรายชื่อสำเร็จแล้ว'
+
+    context = {
+            'txt' : txt,
+            'user_list' : user_list,
+        }
+    return render(request, template_name='admin_customer.html', context=context)
+        
+
+

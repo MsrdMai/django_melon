@@ -1,4 +1,13 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
+
+{% if txt %}
+<script>
+  swal("{{txt}}", "บันทึกข้อมูลสำเร็จ", "success");
+</script>
+{%endif%}
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 <style>
@@ -52,6 +61,13 @@
       .sidenav a {font-size: 18px;}
     }
 
+    #welcome{
+      font-size:30px;
+      cursor:pointer; 
+      position: absolute; 
+      left: 10%;
+      
+    }
     </style>
 
 <div id="mySidenav" class="sidenav">
@@ -70,8 +86,9 @@
   
   <div id="main" >
     <br>
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()"><i class="bi bi-arrow-left-square-fill"></i>
-        Welcome Admin !</span>
+    <span id="welcome" onclick="openNav()"><i class="bi bi-justify"></i>
+      Welcome Admin Site  <img src="{% static "icon/admin.png" %}" style="width: 50px; height: 50px;"> </img>
+    </span>
         <br><br>
     
         
@@ -89,7 +106,8 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Firstname Lastname</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Fullname</th>
                             <th scope="col">Email</th>
                             <th scope="col">Type User</th>
                             <th scope="col">ลบข้อมูล</th>
@@ -100,7 +118,7 @@
                             {% if user.user_id.is_superuser == False %}
                           <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                        
+                            <td>{{user.user_id.username}}</td>
                             <td>{{user.user_id.first_name}} {{ user.user_id.last_name }}</td>
                             <td>{{user.user_id.email}}</td>
                             
@@ -111,7 +129,7 @@
                             <td>ผู้ซื้อออนไลน์</td>
                             {% endif %}   
 
-                            <td><button class="btn btn-danger">ลบข้อมูล</button></td>
+                            <td><a data-bs-toggle="modal" data-bs-target="#dropUser-{{user.user_id.id}}" class="btn btn-danger">ลบข้อมูล</a></td>
                           </tr>
                           {% endif %}
                           {% endfor %}
@@ -120,7 +138,7 @@
 
                 </div>    
                 </center>
-            <br><br><br>
+            <br><br><br><br><br><br>
         </div> 
         <br>  <br><br><br>
     </div>
@@ -131,15 +149,41 @@
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("welcome").style.marginLeft = "8%";
+
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
   }
   
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
+    document.getElementById("welcome").style.marginLeft = "0";
     document.body.style.backgroundColor = "white";
   }
 
   </script>
 
+
+<!-- Modal -->
+{% for user in user_list %}
+<div class="modal fade" id="dropUser-{{user.user_id.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">ลบผู้ใช้</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้นี้
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        
+        <a type="button" class="btn btn-danger" href="{% url 'delete_customer' id=user.user_id.id %}">ยืนยัน</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}
