@@ -286,16 +286,19 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
                           <img src="{{data_product.product_image.url}}"
                           height="150px" width="150px" style="align-items: center; padding: 1%; object-fit: scale-down;"></img>
                       </div>
-                      <div class="col-lg-6 mt-1 d-flex justify-content-sm-start justify-content-center">
-                          <div class="row d-flex justify-content-end" style="margin-top: 1rem;">
+                      <div class="col-lg-6 mt-1 d-flex justify-content-center">
+                          <div class="row d-flex ms-5" style="margin-top: 1rem;">
                               <div class="col px-5">
-                                <h1 style="color:rgb(218, 0, 0); text-align: right; margin-bottom: 0px;"><b>฿ {{data_product.product_price}}</b></h1> 
+                                <h1 style="color:rgb(218, 0, 0); text-align: left; margin-bottom: 0px;"><b>฿ {{data_product.product_price}}</b></h1> 
                             </div>
-                              <p class="px-5 pt-1" style="color:rgb(0, 107, 0); text-align: right; margin-bottom: 12px;">
+                              <p class="px-5 pt-1 mb-4" style="color:rgb(218, 0, 0); text-align: left;">
                                 <b>คลัง :</b> {{data_product.product_amount}}
                             </p>
-                            <div>
-                            <form class="mb-4 pt-1" style="text-align: right;">
+                            <div class="d-flex px-5 pt-1 justify-content-between">
+                              <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+                                <b>จำนวน</b>
+                            </p>
+                            <form class="mb-4 pt-1">
                               <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
                               <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
                               <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>

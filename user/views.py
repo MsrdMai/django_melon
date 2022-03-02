@@ -188,8 +188,8 @@ def review_detail(request,id):
     }
     return render(request, template_name='review_detail.html', context=context)    
 
-def report(request):
-    return render(request, template_name='report.html')
+def producttotal(request):
+    return render(request, template_name='producttotal.html')
 
 
 @user_passes_test(lambda s: s.is_staff)
