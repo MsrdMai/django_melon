@@ -9,7 +9,7 @@ from order.models import Order
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 import pandas as pd
-from datetime import datetime, timedelta
+from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
 
@@ -191,8 +191,10 @@ def review_detail(request,id):
 def report(request):
     return render(request, template_name='report.html')
 
-def admin_manager(request):
 
+@user_passes_test(lambda s: s.is_staff)
+@login_required
+def admin_manager(request):
     store = Product.objects.all().values()
     df = pd.DataFrame(store)
     product_name = df.product_name.tolist()
@@ -220,13 +222,17 @@ def admin_manager(request):
 
     return render(request, template_name='admin_manager.html', context=context)
 
+@user_passes_test(lambda s: s.is_staff)
+@login_required
 def admin_customer(request):
     user_list = UserInType.objects.all()
     context = {
         'user_list' : user_list,
     } 
     return render(request, template_name='admin_customer.html', context=context)
-    
+
+@user_passes_test(lambda s: s.is_staff)
+@login_required
 def delete_customer(request, id):
     user = User.objects.get(id=id)
     user_list = UserInType.objects.all()
