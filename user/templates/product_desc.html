@@ -263,7 +263,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
               <b>การจัดส่ง</b>
           </p>
           <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
-            <b>฿ <span class="ship_price" data-price="{{data_product.shipping_cost}}">{{data_product.shipping_cost}}</span></b>
+            <b><span class="ship_price" data-price="{{data_product.shipping_cost}}">{{data_product.shipping_cost}}</span></b>
         </p>
         </div>
         <div class="d-flex px-5 pt-1 justify-content-between">
@@ -327,22 +327,24 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 <br><br> <br><br>
 
 <script>
-  function increaseValue() {
+  function increaseValue(button, limit) {
   var value = parseInt(document.getElementById('number').value, 10);
   value = isNaN(value) ? 0 : value;
   value++;
   document.getElementById('number').value = value;
   pricesubtotal()
+  cost_ship()
   pricetotal()
 }
 
-function decreaseValue() {
+function decreaseValue(button) {
   var value = parseInt(document.getElementById('number').value, 10);
   value = isNaN(value) ? 0 : value;
   value < 1 ? value = 1 : '';
   value--;
   document.getElementById('number').value = value;
   pricesubtotal()
+  cost_ship()
   pricetotal()
 }
 function pricesubtotal() {
@@ -354,6 +356,15 @@ function pricesubtotal() {
   subtotalPrice.innerHTML = '฿ ' + sum;
 }
 
+function cost_ship() {
+  var ship_cost = document.querySelector('.ship_price')
+  var shipcost = ship_cost.dataset.price;
+  var shipcost2 = parseInt(shipcost);
+  var quantity = document.getElementById('number').value;
+  var sum = (shipcost2 * quantity);
+  sum = Math.round(sum * 100) / 100;
+  ship_cost.innerHTML = '฿ ' + sum;
+}
 
 function pricetotal() {
   var totalPrice = document.querySelector('.product-total-price');
@@ -362,7 +373,7 @@ function pricetotal() {
   var shipcost = ship_cost.dataset.price;
   var shipcost2 = parseInt(shipcost);
   var quantity = document.getElementById('number').value;
-  var sum = (price * quantity + shipcost2);
+  var sum = (price * quantity + (shipcost2 * quantity));
   sum = Math.round(sum * 100) / 100;
   totalPrice.innerHTML = '฿ ' + sum;
 }
