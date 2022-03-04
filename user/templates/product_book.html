@@ -34,8 +34,9 @@
                             <div class="card-text quant">{{pd.product_amount}} ชิ้น</div>
                             {% endif %}
                         </div>
-                        <div href="#" class="btn btn-danger btns mb-2 mt-2 w-100" data-bs-toggle="modal"
-                            data-bs-target="#Modal-{{pd.id}}">สั่งจอง</div>
+                        <!-- <div href="#" class="btn btn-danger btns mb-2 mt-2 w-100" data-bs-toggle="modal"
+                            data-bs-target="#Modal-{{pd.id}}">สั่งจอง</div> -->
+                            <a href="{% url 'product_desc' id=pd.id %}" class="btn btn-danger btns mb-2 mt-2 w-100">สั่งจอง</a>   
                     </div>
                 </div>
             </div>
@@ -45,7 +46,7 @@
         </div>
     </div>
 </section><br>
-{% for pd in product_list %}
+<!-- {% for pd in product_list %}
 <div class="modal fade" id="Modal-{{pd.id}}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -103,5 +104,5 @@
         </div>
     </div>
 </div>
-{% endfor %}
+{% endfor %} -->
 {% endblock %}

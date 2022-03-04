@@ -267,10 +267,10 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         </p>
         </div>
         <div class="d-flex px-5 pt-1 justify-content-between">
-          <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+          <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px; font-size: 25px; font-weight: 900;">
             <b>รวมทั้งหมด</b>
         </p>
-        <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
+        <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px; font-size: 25px; font-weight: 900;">
           <b><span class="product-total-price" data-price="{{data_product.product_price}}">฿ {{data_product.product_price}}</span></b>
       </p>
       </div>
@@ -304,8 +304,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       <p style="color:#b90000; font-size: 30px; text-align: end;">
         รวม : <span class="product-total-price" data-price="{{data_product.product_price}}">{{data_product.product_price}}</span> ฿ 
       </p> -->
-      <div href="#" class="btn btn-danger btns mt-2 w-100 mb-4" data-bs-toggle="modal"
-      data-bs-target="#Modal-{{data_product.id}}">สั่งซื้อ</div>
+      <div href="#" class="btn btn-danger btns mt-2 w-100 mb-4"  data-bs-toggle="modal" data-bs-target="#confirmorder">สั่งซื้อ</div>
       </div>
 
       <!-- {% endif %}
@@ -325,6 +324,24 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 </div>
 </div>
 <br><br> <br><br>
+
+<div class="modal fade" id="confirmorder" tabindex="-1" aria-labelledby="confirmorder" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="confirmorder">ยืนยันการสั่งซื้อสินค้า</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body row g-3">
+              <p>ยืนยันการสั่งซื้อสินค้า</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <a href="#" type="button" class="btn btn-danger">ยืนยัน</a>
+          </div>
+      </div>
+  </div>
+</div>
 
 <script>
   function increaseValue(button, limit) {
