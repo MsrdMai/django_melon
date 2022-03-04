@@ -116,77 +116,6 @@
 </div>
 <hr>
 
-<div class="row">
-    <div class="col-sm-1"></div>
-    
-                    <div class="col-sm-5">
-                            <img src="{% static "img/test2.jpg" %}" height="300px" width="300px" style="object-fit: scale-down;" />
-                    </div>
-    
-                    <div class="col-sm-1"></div>
-    
-                    <div class="col-sm-4" style="text-align: start; margin: 1%;">
-                          <br>
-                        <p>ครั้งที่ : 2</p>
-                        <p>บันทึกเมื่อ : 20/08/2565</p>
-                        <p>รายละเอียด : ระยะที่2 </p>
-                        <p>น้ำหนัก :0</p>
-                        <p>ความหวาน : 0</p>
-                        <p>คุณภาพ : กำลังเติบโต</p>
-    
-                    </div>
-    
-    <div class="col-sm-1"></div>
-    
-    </div>
-    <hr>
-
-
-
-
-
-
-
-    <!-- <div class="modal fade" id="addreport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Recipient:</label>
-                  <input type="text" class="form-control" id="recipient-name">
-                </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Message:</label>
-                  <textarea class="form-control" id="message-text"></textarea>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
-            </div>
-          </div>
-        </div>
-      </div>
- -->
-
-
-
-
-
-
-
-
-
-
-
     <div class="modal fade" id="addreport" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -215,11 +144,13 @@
                       </div>
                
                 
-                     
+                     <br>
+
                       <div class="form-group">
                         <label class="form-label float-start">น้ำหนัก</label>
                         <input type="number" step="0.01" min="1" max="20" class="form-control" name="recode_weight" placeholder="น้ำหนักของเมล่อน" required>
                       </div> 
+                    <br>
 
                       <div class="form-group">
                         <label class="form-label float-start">คุณภาพ</label>
@@ -231,6 +162,7 @@
                           </select>
                     </div>
 
+                    <br>
                     <div class="form-group">
                         <label class="form-label float-start">ความหวาน</label>
                         <input type="number" min="1" max="1000" class="form-control" name="sweetness" placeholder="ความหวานที่วัดได้" required>
@@ -239,8 +171,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <button type="button" class="btn btn-primary">รายงาน</button>
             </div>
 
           </div>
