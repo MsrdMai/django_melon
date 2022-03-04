@@ -1,11 +1,12 @@
 from itertools import product
+from sre_parse import State
 from django.shortcuts import render, redirect
 from .models import TypeUser, UserInType
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
 from store.models import Product, Quality, Store
-from order.models import Order
+from order.models import Order, State 
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 import pandas as pd
@@ -283,6 +284,9 @@ def delete_customer(request, id):
         
 @user_passes_test(lambda s: s.is_staff)
 @login_required
-def admin_chat(request):
-    return render(request, template_name='admin_chat.html')
-
+def admin_editOrder(request):
+    type_state = State.objects.all()
+    context = {
+            'type_state' : type_state,
+        }
+    return render(request, template_name='admin_editOrder.html', context=context)

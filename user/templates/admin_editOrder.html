@@ -1,0 +1,94 @@
+{% extends "NavAdmin.html" %} {% load static %} {% block admin_content %}
+
+
+<h3 style="text-align: start; padding: 1%;">แก้ไขคำสั่งซื้อ</h3>
+<hr>
+<br>
+
+
+<div class="row">
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-3" style="padding: 1%;">
+    </div>
+    
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-7">
+    <form method="POST" action=""> 
+        <div class="row g-4 align-items-center" style="padding: 1%; ">
+        <div class="col-sm-1"></div>
+        <div class="form-group col-sm-4">
+          <div class="col-sm"><label class="form-label float-start">ค้นหา Username ลูกค้า</label></div>
+          <input type="text" class="form-control  ml-3" id="inputSearch" name="inputSearch" placeholder="ใส่ Username" value="{{search_txt}}">
+        </div>
+    
+        <div class="form-group col-sm-4">
+            <div class="col-sm"><label class="form-label float-start" style="text-align: left;">ค้นหาประเภทสถานะ</label></div>
+            <select class="form-control" name="input_type_state">
+                <option>ทั้งหมด</option>
+                {% for i in  type_state %}
+                <option  value="{{ i.id }}" {% if input_type_state ==  i.id  %}selected{% endif %}>{{ i.state_name }}</option>
+                {% endfor %}
+              </select>
+          </div>
+        
+          <div class="form-group col-sm">
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">ค้นหา</button>
+            </div>
+          </div>   
+      <div class="col-sm-1"></div>
+    </div>
+    </form>
+    </div>
+    </div> 
+
+<br><br>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">OrderId#</th>
+        <th scope="col">Username</th>
+        <th scope="col">ฟาร์ม</th>
+        <th scope="col">จำนวนเงิน</th>
+        <th scope="col">สถานะ</th>
+        <th scope="col">สถานะใหม่</th>
+        <th scope="col">แก้ไขสถานะ</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <th scope="row">1</th>
+        <td>Msrd</td>
+        <td>เมล่อนกรอบกรอบ</td>
+        <td>500 ฿</td>
+        <td>ร้านค้าส่งสินค้าแล้ว</td>
+        <td>
+            <form method="POST" action=""> 
+    
+                <div class="form-group col-sm">
+                    <select class="form-control" name="input_type_state">
+                        <option>ทั้งหมด</option>
+                        {% for i in  type_state %}
+                        <option  value="{{ i.id }}" {% if input_type_state ==  i.id  %}selected{% endif %}>{{ i.state_name }}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+            </form>
+
+        </td>
+        <td><a href="" class="btn btn-warning">ยืนยัน</a></td>
+      </tr>
+    
+  </table>
+
+
+
+
+
+
+
+
+
+{% endblock %}

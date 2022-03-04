@@ -19,6 +19,6 @@ urlpatterns = [
     path('review_detail/<int:id>/', views.review_detail, name='review_detail'),          
     path('admin_manager/', views.admin_manager, name='admin_manager'), 
     path('admin_customer/', views.admin_customer, name='admin_customer'),
-    path('admin_chat/', views.admin_chat, name='admin_chat'),  
+    path('admin_editOrder/', views.admin_editOrder, name='admin_editOrder'), 
     path('delete_customer/<int:id>/', views.delete_customer, name='delete_customer'),    
 ]

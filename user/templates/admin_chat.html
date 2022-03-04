@@ -1,5 +1,59 @@
 {% extends "NavAdmin.html" %} {% load static %} {% block admin_content %}
 
+<h3 style="text-align: start; padding: 1%;">การสนทนา</h3>
+<hr>
+<br>
 
-NavAdmin
+
+<div class="row">
+
+    <div class="col-sm-4" style="background-color: #475569;">
+        <br>
+        <h4 style="color: white;">Chat</h4>
+        <hr style="color: white;">
+        <br>
+        <!-- <div class="search">
+            <input type="text" placeholder="search" />
+            <i class="fa fa-search"></i>
+          </div> -->
+         <div style="overflow:auto;">
+          {% for user in user %}
+          {% if user.id > 1 %}
+
+          <div class="people-list" id="people-list" style="background-color: white; border-radius: 20px; margin: 5%;">
+            <br><br>
+            <div class="row">
+
+                <div class="col-sm-1">
+                    <img id="avatar" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="50px" height="50px" style="border-radius: 100%;"/>
+                </div>
+                <div class="col-sm-1">
+                    <span style="background-color: white;border-radius: 20px;padding: 10%;">{{user.username }}</span>                
+                </div>
+
+
+
+            <br><br>
+        </div>
+    </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+        <br><br>
+    </div>
+
+
+
+    <div class="col-sm" style="background-color: #312e81; ">
+
+
+        ddddd
+
+    
+    </div>
+
+
+
+</div>
+
 {% endblock %}
