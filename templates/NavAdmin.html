@@ -64,13 +64,17 @@
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="{% url 'admin_manager' %}">DASHBOARD</a>
+    <br><br><br><br><br><br><br><br><br>
+    <a href="{% url 'admin_manager' %}">
+      <i class="bi bi-clipboard-data"></i>
+      DASHBOARD</a>
     <hr>
-    <a href="#">ดูรายงานการขาย</a>
+    <a href="{% url 'admin_customer' %}">
+      <i class="bi bi-person-fill"></i>
+      ข้อมูลลูกค้า</a>
     <hr>
-    <a href="{% url 'admin_customer' %}">แก้ไขข้อมูลลูกค้า</a>
-    <hr>
-    <a href="{% url 'admin_chat' %}">การสนทนา</a>
+    <a href="{% url 'admin_chat' %}">
+      <i class="bi bi-chat-left-dots"></i> การสนทนา</a>
     <hr>
    
   </div>
