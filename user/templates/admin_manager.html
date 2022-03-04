@@ -95,11 +95,11 @@
                 <div class="row">
 
                 <div class="col-sm" style="border-color: black; border-width: 1px; border-style: solid;width:100%;max-width:600px">
-                <canvas id="price_name" style="width:100%;max-width:600px"></canvas>
+                <canvas id="price_name" style="width:100%;"></canvas>
                 </div>
 
                 <div class="col-sm" style="border-color: black; border-width: 1px; border-style: solid;width:100%;max-width:600px">
-                <canvas id="product_quality" style="width:100%;max-width:600px"></canvas>
+                <canvas id="product_quality" style="width:100%;"></canvas>
                 </div>   
               </div>               
                
@@ -111,7 +111,10 @@
   <script>
     var price = {{price|safe}};
     var product_name = {{product_name|safe}};
-    var quality = {{quality|safe}}
+    var q = {{q|safe}}
+    var v = {{v|safe}}
+    var count_product_amont = {{count_product_amont|safe}}
+    var max_pd = {{max_pd|safe}}
     new Chart("price_name", {
     type: "line",
     data: {
@@ -127,40 +130,36 @@
     options: {
         legend: {display: false},
         scales: {
-        yAxes: [{ticks: {min: 0, max:1000}}],
+        yAxes: [{ticks: {min: 0, max:max_pd}}],
         },
             title: {
               display: true,
-              text: "ราคาเฉลี่ยเมล่อนตามสายพันธุ์"
+              text: "กราฟราคาเมล่อน"
             }
     }
     });
 
 
-    var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-        ];
+    var barColors = ["#7c3aed", "#2563eb","#22d3ee"];
 
     new Chart("product_quality", {
     type: "bar",
     data: {
-        labels: product_name,
+        labels: q,
         datasets: [{
-
         backgroundColor: barColors,
-        data: quality
+        data: v
         }]
     },
     options: {
-      
-            title: {
-              display: true,
-              text: "คุณภาพเฉลี่ยของสายพันธุ์"
-            }
+      legend: {display: false},
+      title: {
+            display: true,
+            text: "คุณภาพทั้งหมดของเมล่อน"
+            },
+      scales: {
+      yAxes: [{ticks: {min: 0, max: count_product_amont}}],
+        },
     }
     });
   </script>

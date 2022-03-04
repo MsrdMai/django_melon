@@ -4,11 +4,12 @@ from .models import TypeUser, UserInType
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
-from store.models import Product, Store
+from store.models import Product, Quality, Store
 from order.models import Order
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 import pandas as pd
+from django.db.models import Max
 from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
@@ -199,24 +200,55 @@ def admin_manager(request):
     df = pd.DataFrame(store)
     product_name = df.product_name.tolist()
     price = df['product_price'].tolist()
-    quality = df['quality_id_id'].tolist()
-
     count_product =Product.objects.all().count()
     count_user = User.objects.all().count()
     count_user = count_user - 1
     count_store = Store.objects.all().count()
     count_order  =Order.objects.all().count()
+    product =Product.objects.all()
+    qulity = Quality.objects.all()
 
+    q = []
+    for i in qulity:
+        q.append(i.quality_name)
+
+    count_product_amont = 0
+    product = Product.objects.all()
+    for i in product:
+        count_product_amont += i.product_amount
+
+    qulitydict = {}
+
+    for j in qulity:
+        qulitydict[j.quality_name] = 0
+
+    for i in product:
+        for j in qulity:
+            if i.quality_id_id == j.id:
+                qulitydict[j.quality_name] += i.product_amount
+
+    # เรียงใหม่
+    sorded_qulitydict = sorted(qulitydict.items(), key=lambda x: x[1], reverse=True)
+    v = []
+    # จำยัดใส่ List
+    for i in qulitydict:
+        for values in qulitydict.values():
+            v.append(values)
+
+    max_pd = Product.objects.all().aggregate(Max('product_price')).get('product_price__max')
 
     context = {
         'store' : store,
         "price": price,
         "product_name" : product_name,
-        "quality" : quality,
         'count_product' : count_product,
         'count_user' : count_user,
         'count_store' : count_store,
         'count_order' : count_order,
+        'q' : q,
+        'v' : v,
+        'count_product_amont' : count_product_amont,
+        'max_pd' : max_pd
 
     }
 
