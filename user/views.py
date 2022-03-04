@@ -249,5 +249,8 @@ def delete_customer(request, id):
         }
     return render(request, template_name='admin_customer.html', context=context)
         
-
+@user_passes_test(lambda s: s.is_staff)
+@login_required
+def admin_chat(request):
+    return render(request, template_name='admin_chat.html')
 
