@@ -220,30 +220,14 @@
                 ของลายไม่คดมาก<br>
               </p>
 
-              <img
-              src="{% static "icon/print.png" %}"
-              width="30px"
-              height="30px"
-              style="display:inline-block;"
-            />
-
-              <a
-              class="col-sm-6 btn btn-dark "
-              href="{% url 'orderPdf' id=product_order.id %}"
-              >พิมพ์ใบจัดส่ง (Invoice)</a>
-            
-              <br></br><br>
-
               <img 
                 src="{% static "img/muku.jpg" %}"
                 id="img-order-carving"
               ></img>
 
-
             <br>
             </div>
-             
-              
+
             <div class="col-sm-2 col-md-6">
               <h5 id="target-status">
                 เตรียมส่งสินค้า
@@ -265,6 +249,26 @@
                 height="30px"
                 id="payment-check"
               ></img>
+
+              <br><br>
+              <a
+              class="col-sm-6 btn btn-outline-dark" 
+              href="{% url 'orderPdf' id=product_order.id %}"
+              >
+              <img
+              src="{% static "icon/print.png" %}"
+              width="30px"
+              height="30px"
+              style="display:inline-block;"
+            />
+              พิมพ์ใบจัดส่ง (Invoice)</a>
+
+
+              <br>
+              <a
+              class="col-sm-6 btn btn-outline-info "
+              href="{% url 'chatroom' id=product_order.id %}"
+              ><i class="bi bi-chat-dots"></i> การสนทนา</a>
             </div>
 
             <div class="col">

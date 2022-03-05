@@ -33,7 +33,17 @@ class GeneratePdf(View):
 # Create your views here.
 @login_required
 def chatroom(request, id):
-    return render(request, template_name='chatroom.html')
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore.id)
+    totel_product = len(totel_product)
+
+
+    
+    context = {'myStore' : myStore,
+        'totel_product' : totel_product,}
+
+    return render(request, template_name='chatroom.html', context=context)
 
 @login_required
 def order_list(request, id):
