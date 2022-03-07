@@ -238,6 +238,7 @@
           <br><br><br>
           <div class="row">
             <div class="col-sm-3 col-md-6">
+      
               <a style="color: #991b1b; display:inline-block;"
               href="{% url 'payment_order'%}"
               >
@@ -251,6 +252,8 @@
               ></img>
 
               <br><br>
+
+            
               <a
               class="col-sm-6 btn btn-outline-dark" 
               href="{% url 'orderPdf' id=product_order.id %}"
@@ -261,14 +264,21 @@
               height="30px"
               style="display:inline-block;"
             />
-              พิมพ์ใบจัดส่ง (Invoice)</a>
-
-
-              <br>
+              พิมพ์ใบจัดส่ง</a>
+           
               <a
               class="col-sm-6 btn btn-outline-info "
               href="{% url 'chatroom' id=product_order.id %}"
-              ><i class="bi bi-chat-dots"></i> การสนทนา</a>
+              >
+              <img
+              src="{% static "icon/bubble-chat.png" %}"
+              width="30px"
+              height="30px"
+              style="display:inline-block;"
+            />
+              
+              การสนทนา</a>
+           
             </div>
 
             <div class="col">
@@ -283,7 +293,7 @@
                 <img src="{% static "icon/report.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 รายงานผลผลิต
               </a>
-              <a class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
+              <a data-bs-toggle="modal" data-bs-target="#orderCancel-id"  class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
                 
                 <img src="{% static "icon/cancel.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 ยกเลิกคำสั่งซื้อ
@@ -466,4 +476,125 @@
 
 
 <br><br> <br><br>
+
+
+
+<!-- orderCancel -->
+
+
+<div class="modal fade" id="orderCancel-id" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ยกเลิกคำสั่งซื้อ OrderID#..</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          
+          <div class="modal-body">
+                  <form  method="POST" enctype="multipart/form-data" action="">
+                      {% csrf_token %}
+
+              <div class="form-group">
+                  <label class="form-label float-start">สาเหตุที่ต้องการยกเลิก</label>
+                  <textarea  class="form-control" name="cancel_description" rows="5" maxlength="255" required></textarea>
+                </div>
+         
+          
+               <br>
+
+                <div class="form-group">
+                  <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
+                  <textarea  class="form-control" name="refund_contact" rows="3" maxlength="255" required></textarea>                </div> 
+              <br>
+
+                <div class="form-group">
+                  <label class="form-label float-start">แมลงที่เกี่ยวข้อง</label>
+                  <select class="form-control" name="bug_id">
+                     
+                      {% for i in  bug %}
+                      <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.bug_name }}</option>
+                      {% endfor %}
+                    </select>
+              </div>
+
+              <br>
+              <div class="form-group">
+                <label class="form-label float-start">โรคที่เกี่ยวข้อง</label>
+                <select class="form-control" name="disease_id">
+                   
+                    {% for i in  disease %}
+                    <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.disease_name }}</option>
+                    {% endfor %}
+                  </select>
+            </div>
+
+              <br>
+
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-danger">แจ้ง</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- orderCancel -->
+
+
+<!-- Portage -->
+
+
+<div class="modal fade" id="Portage-id" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">แจ้งเลขพัสดุ OrderID#..</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          
+          <div class="modal-body">
+                  <form  method="POST" enctype="multipart/form-data" action="">
+                      {% csrf_token %}
+
+              <div class="form-group">
+                  <label class="form-label float-start">หมายเลขพัสดุ</label>
+                  <input type="text"  class="form-control" name="portage_number" required></textarea>
+                </div>
+         
+          
+               <br>
+                <div class="form-group">
+                  <label class="form-label float-start">ชื่อขนส่ง</label>
+                  <select class="form-control" name="portage_name">
+                    
+                      {% for i in  bug %}
+                      <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.bug_name }}</option>
+                      {% endfor %}
+                    </select>
+              </div>
+              <br>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-success">แจ้ง</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Portage -->
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

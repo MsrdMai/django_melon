@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from user.models import TypeUser, UserInType
-from .models import State, Order, Review
+from .models import State, Order, Review, Message, Disease, Bug
 from store.models import Store, TypeeOrder, Quality, Product
-from .models import Message
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponse
@@ -54,11 +53,15 @@ def order_list(request, id):
 
     type_state = State.objects.all()
     product_order = Product.objects.get(id=id)
-
+    bug = Bug.objects.all()
+    disease = Disease.objects.all()
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'product_order' : product_order,
-        'type_state' :type_state,}
+        'type_state' :type_state,
+        'bug' : bug,
+        'disease' : disease,
+        }
 
     return render(request, template_name='order_list.html', context=context)
 

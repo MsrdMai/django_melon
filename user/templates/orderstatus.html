@@ -415,6 +415,21 @@
         </div>
         <div class="modal-body row g-3">
             <p>เหตุผลที่ต้องการยกเลิก</p>
+
+                <form  method="POST" enctype="multipart/form-data" action="">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-label float-start">สาเหตุที่ต้องการยกเลิก</label>
+                        <textarea  class="form-control" name="cancel_description" rows="3" maxlength="255" required></textarea>
+                    </div>
+            <br>
+                    <div class="form-group">
+                        <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
+                        <textarea  class="form-control" name="refund_contact" rows="2" maxlength="255" required></textarea></div> 
+            <br>
+                </form>
+            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
