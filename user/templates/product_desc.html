@@ -218,15 +218,62 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
           </p>
         </div>
         <hr>
-        <div class="col mt-1 d-flex justify-content-center">
-          <div class="row d-flex ms-5" style="margin-top: 1rem;">
-              <div class="col px-5">
+
+        <!-- แกะลาย -->
+        {% if data_product.type_id_id == 2 and data_product.select_carving == 1 %}
+          <div class="col d-flex align-self-center justify-content-center">
+            <div class="form-radio d-flex w-100">
+              <input onclick="onShow_Carving()" type="radio" id="radio-select_carving-2" name="select_carving" value=1 />
+              <label class="w-100 p-2" for="radio-select_carving-2">แกะลาย</label>
+              <input onclick="offShow_Carving()" type="radio" id="radio-select_carving-1" class="radio-select_carving-1" name="select_carving" value=0 data-price="0"/>
+              <label class="w-100 p-2" for="radio-select_carving-1">ไม่แกะลาย</label>
+            </div>
+          </div>
+          {%endif%}
+
+          {% if checkSelect %}
+          <div class="invalid-feedback d-block">{{checkSelect}}</div>
+          {%endif%}
+
+          {% if checkCarving %}
+          <div class="invalid-feedback d-block">{{checkCarving}}</div>
+          {%endif%}
+
+
+          <div class="row-carving-2 mt-3" id="cost_carving" style="display: none;">
+            <div class="row">
+              <div class="col-sm-3 md-3 d-flex justify-content-center align-self-center">
+                <label class="form-label">ลาย</label>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control w-100" id="Inputcarving">
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-sm-3 md-3 d-flex justify-content-center align-self-start">
+                <label class="form-label">แนบรูปภาพ</label>
+              </div>
+              <div class="col mb-3">
+                <input type="file" class="form-control" name="carving_img" id="file2" accept="image/png, image/jpeg"
+                onchange="loadFile(event)">
+                {% if checkImg %}
+                <div class="invalid-feedback d-block">{{checkImg}}</div>
+                {%endif%}
+                <img id="output" class="mt-2" width="100px" height="100px"/>
+              </div>
+            </div>
+          </div>
+          <!-- แกะลาย -->
+
+        <!-- <div class="col mt-1 d-flex justify-content-center"> -->
+          <div class="row d-flex" style="margin-top: 1rem;">
+              <div class="col px-2">
                 <h1 style="color:rgb(218, 0, 0); text-align: right;"><b>฿ {{data_product.product_price}}</b></h1> 
             </div>
-              <p class="px-5 pt-1 mb-4" style="color:rgb(218, 0, 0); text-align: right;">
+              <p class="px-2 pt-1 mb-4" style="color:rgb(218, 0, 0); text-align: right;">
                 <b>คลัง :</b> {{data_product.product_amount}}
             </p>
-            <div class="d-flex px-5 pt-1">
+            <div class="d-flex px-2 pt-1">
               <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
                 <b>จำนวน</b>
             </p>
@@ -250,7 +297,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
             </div> -->
             
           </div>
-          <div class="d-flex px-5 pt-5 justify-content-between">
+          <div class="d-flex px-2 pt-5 justify-content-between">
             <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
               <b>รวมการสั่งซื้อ</b>
           </p>
@@ -258,7 +305,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
             <b><span class="product-subtotal-price" data-price="{{data_product.product_price}}">฿ {{data_product.product_price}}</span></b>
         </p>
         </div>
-          <div class="d-flex px-5 pt-1 justify-content-between">
+          <div class="d-flex px-2 pt-1 justify-content-between">
             <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
               <b>การจัดส่ง</b>
           </p>
@@ -267,7 +314,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         </p>
         </div>
         {% if data_product.type_id_id == 2 and data_product.select_carving == 1 %}
-        <div class="d-flex px-5 pt-1 justify-content-between">
+        <div class="d-flex px-2 pt-1 justify-content-between">
           <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
             <b>ราคาค่าบริการแกะลาย</b>
         </p>
@@ -276,7 +323,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </p>
       </div>
       {% endif %}
-        <div class="d-flex px-5 pt-1 justify-content-between">
+        <div class="d-flex px-2 pt-1 justify-content-between">
           <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px; font-size: 25px; font-weight: 900;">
             <b>รวมทั้งหมด</b>
         </p>
@@ -288,7 +335,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       <div class="type_id" data-price="{{data_product.type_id_id}}" hidden>{{data_product.type_id_id}}</div>
       <div class="select_carv" hidden>{{data_product.select_carving}}</div>
       </div>
-      </div>
+      <!-- </div> -->
 <!-- 
       {% if user.is_authenticated %} 
       {% for group in  request.user.groups.all %}
@@ -358,11 +405,32 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 
 
 <script>
+  var loadFile = function(event) {
+	    var image = document.getElementById('output');
+        document.getElementById('output').style.border = '2px solid #34D399';
+
+	    image.src = URL.createObjectURL(event.target.files[0]);
+        
+        }
+        
   
+  function offShow_Carving() {
+        document.getElementById("cost_carving").style.display = "none";
+        }
+        
+
+        function onShow_Carving() {
+        document.getElementById("cost_carving").style.display = "block";
+
+        }
+
   var type_id1 = document.querySelector('.type_id')
   var type_id2 = type_id1.dataset.price;
-  // var select_carv = document.querySelector('.select_carv');
-  // alert(type_id2);
+  
+  var radioselect_carving1 = document.querySelector('.radio-select_carving-1');
+  var radioselect_carving2 = radioselect_carving1.dataset.price;
+
+  // alert(radioselect_carving2);
   
   if (type_id2 == 2){
     pricetotal_carv()
