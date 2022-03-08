@@ -272,7 +272,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
             <b>ราคาค่าบริการแกะลาย</b>
         </p>
         <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
-          <b><span class="ship_price" data-price="{{data_product.shipping_cost}}">฿ {{data_product.cost_carving}}</span></b>
+          <b><span class="carving_price" data-price="{{data_product.cost_carving}}">฿ {{data_product.cost_carving}}</span></b>
       </p>
       </div>
       {% endif %}
@@ -284,6 +284,9 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
           <b><span class="product-total-price" data-price="{{data_product.product_price}}">฿ {{data_product.product_price}}</span></b>
       </p>
       </div>
+      
+      <div class="type_id" data-price="{{data_product.type_id_id}}" hidden>{{data_product.type_id_id}}</div>
+      <div class="select_carv" hidden>{{data_product.select_carving}}</div>
       </div>
       </div>
 <!-- 
@@ -353,7 +356,20 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
   </div>
 </div>
 
+
 <script>
+  
+  var type_id1 = document.querySelector('.type_id')
+  var type_id2 = type_id1.dataset.price;
+  // var select_carv = document.querySelector('.select_carv');
+  // alert(type_id2);
+  
+  if (type_id2 == 2){
+    pricetotal_carv()
+  }else{
+    pricetotal()
+  }
+  
   function increaseValue(button, limit) {
   var value = parseInt(document.getElementById('number').value, 10);
   value = isNaN(value) ? 0 : value;
@@ -361,7 +377,11 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
   document.getElementById('number').value = value;
   pricesubtotal()
   cost_ship()
-  pricetotal()
+  if (type_id2 == 2){
+    pricetotal_carv()
+  }else{
+    pricetotal()
+  }
 }
 
 function decreaseValue(button) {
@@ -372,7 +392,11 @@ function decreaseValue(button) {
   document.getElementById('number').value = value;
   pricesubtotal()
   cost_ship()
-  pricetotal()
+  if (type_id2 == 2){
+    pricetotal_carv()
+  }else{
+    pricetotal()
+  }
 }
 function pricesubtotal() {
   var subtotalPrice = document.querySelector('.product-subtotal-price');
@@ -401,6 +425,21 @@ function pricetotal() {
   var shipcost2 = parseInt(shipcost);
   var quantity = document.getElementById('number').value;
   var sum = (price * quantity + (shipcost2 * quantity));
+  sum = Math.round(sum * 100) / 100;
+  totalPrice.innerHTML = '฿ ' + sum;
+}
+
+function pricetotal_carv() {
+  var totalPrice = document.querySelector('.product-total-price');
+  var price = totalPrice.dataset.price;
+  var ship_cost = document.querySelector('.ship_price')
+  var shipcost = ship_cost.dataset.price;
+  var shipcost2 = parseInt(shipcost);
+  var carving = document.querySelector('.carving_price')
+  var carving2 = carving.dataset.price;
+  var carving3 = parseInt(carving2);
+  var quantity = document.getElementById('number').value;
+  var sum = (price * quantity + (shipcost2 * quantity) + carving3);
   sum = Math.round(sum * 100) / 100;
   totalPrice.innerHTML = '฿ ' + sum;
 }
