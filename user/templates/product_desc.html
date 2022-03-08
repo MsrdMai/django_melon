@@ -385,6 +385,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 </div>
 <br><br> <br><br>
 
+<!-- ยืนยันสั่งซื้อสินค้า -->
 <div class="modal fade" id="confirmorder" tabindex="-1" aria-labelledby="confirmorder" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -393,7 +394,15 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body row g-3">
-              <p>ยืนยันการสั่งซื้อสินค้า</p>
+            <div class="mb-3 d-flex flex-column">
+              <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ที่อยู่</label>
+              <textarea class="form-control" id="FormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="mb-3 d-flex flex-column">
+              <label for="FormControlInput1" class="form-label" style="text-align: left;">เบอร์โทรศัพท์</label>
+              <input type="email" class="form-control" id="FormControlInput1">
+            </div>
+            
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
@@ -402,9 +411,10 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </div>
   </div>
 </div>
-
+<!-- ยืนยันสั่งซื้อสินค้า -->
 
 <script>
+  // showIMG
   var loadFile = function(event) {
 	    var image = document.getElementById('output');
         document.getElementById('output').style.border = '2px solid #34D399';
@@ -413,7 +423,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         
         }
         
-  
+  // select_carving
   function offShow_Carving() {
         document.getElementById("cost_carving").style.display = "none";
         }
@@ -424,11 +434,12 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 
         }
 
+
   var type_id1 = document.querySelector('.type_id')
   var type_id2 = type_id1.dataset.price;
   
-  var radioselect_carving1 = document.querySelector('.radio-select_carving-1');
-  var radioselect_carving2 = radioselect_carving1.dataset.price;
+  // var radioselect_carving1 = document.querySelector('.radio-select_carving-1');
+  // var radioselect_carving2 = radioselect_carving1.dataset.price;
 
   // alert(radioselect_carving2);
   
