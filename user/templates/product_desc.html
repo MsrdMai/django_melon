@@ -231,10 +231,11 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
               <p style="color:rgb(0, 107, 0); text-align: left; margin-bottom: 12px;">
                 <b>จำนวน</b>
             </p>
+
             <form class="p-0 d-flex justify-content-end">
               <div class="value-button" id="decrease" style="margin-bottom: 2px;" onclick="decreaseValue(this, 1)" value="Decrease Value">-</div>
               <input type="number" id="number" value="1" min="1" />
-              <div class="value-button" id="increase" style="margin-bottom: 2px;" onclick="increaseValue(this, 1)" value="Increase Value">+</div>
+              <div class="value-button" id="increase" style="margin-bottom: 2px;" onclick="increaseValue(this, {{data_product.product_amount}})" value="Increase Value">+</div>
             </form>
             <!-- <div class="quantity-field" style="margin-right: 0px;">
               <button 
@@ -287,7 +288,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </div>
       
       <div class="type_id" data-price="{{data_product.type_id_id}}" hidden>{{data_product.type_id_id}}</div>
-      <div class="select_carv" hidden>{{data_product.select_carving}}</div>
+      <div class="select_carv" id="select_carv" data-price="{{data_product.select_carving}}" hidden>{{data_product.select_carving}}</div>
       </div>
       <!-- </div> -->
 <!-- 
@@ -452,59 +453,57 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         }
         
   // select_carving
-  function offShow_Carving() {
-        document.getElementById("cost_carving").style.display = "none";
-        }
-        
-
-        function onShow_Carving() {
-        document.getElementById("cost_carving").style.display = "block";
-
-        }
-
-
   var type_id1 = document.querySelector('.type_id')
   var type_id2 = type_id1.dataset.price;
   
-  // var radioselect_carving1 = document.querySelector('.radio-select_carving-1');
-  // var radioselect_carving2 = radioselect_carving1.dataset.price;
+  var select_carv1 = document.querySelector('.select_carv');
+  var select_carv2 = select_carv1.dataset.price;
 
-  // alert(radioselect_carving2);
+  // alert(select_carv2);
   
-  if (type_id2 == 2){
+  if (type_id2 == 2 && select_carv2 == 'True'){
     pricetotal_carv()
   }else{
     pricetotal()
   }
   
-  function increaseValue(button, limit) {
-  var value = parseInt(document.getElementById('number').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value++;
-  document.getElementById('number').value = value;
-  pricesubtotal()
-  cost_ship()
-  if (type_id2 == 2){
-    pricetotal_carv()
-  }else{
+  if (type_id2 == 1 || select_carv2 == 'False') {
+    function increaseValue(button, limit) {
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(limit && value >= limit) return;
+    value++;
+    document.getElementById('number').value = value;
+    pricesubtotal()
+    cost_ship()
+    // if (type_id2 == 2 && select_carv2 == 'True'){
+    //   pricetotal_carv()
+    // }else{
+    //   pricetotal()
+    // }
     pricetotal()
   }
 }
 
-function decreaseValue(button) {
-  var value = parseInt(document.getElementById('number').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value < 1 ? value = 1 : '';
-  value--;
-  document.getElementById('number').value = value;
-  pricesubtotal()
-  cost_ship()
-  if (type_id2 == 2){
-    pricetotal_carv()
-  }else{
+if (type_id2 == 1 || select_carv2 == 'False') {
+  function decreaseValue(button) {
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value < 1 ? value = 1 : '';
+    if(value == 1) return;
+    value--;
+    document.getElementById('number').value = value;
+    pricesubtotal()
+    cost_ship()
+    // if (type_id2 == 2 && select_carv2 == 'True'){
+    //   pricetotal_carv()
+    // }else{
+    //   pricetotal()
+    // }
     pricetotal()
   }
 }
+
 function pricesubtotal() {
   var subtotalPrice = document.querySelector('.product-subtotal-price');
   var price = subtotalPrice.dataset.price;
