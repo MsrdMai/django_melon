@@ -155,7 +155,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 
         {% if data_product.type_id_id == 2  %}
                 {% if data_product.select_carving == 0 %}
-                <div class="col">
+                <div class="col mt-1" style="padding-left: 0px;padding-right: 0px;">
                     <h5 style="color:#ea580c; align-items:center; border-width:4px; border-color: #ea580c; border-style: solid; padding: 1%;">
                     จอง
                     </h5>
@@ -163,7 +163,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
                 {% endif %}
 
             {% if data_product.select_carving == 1 %}
-                <div class="col">
+                <div class="col mt-1" style="padding-left: 0px;padding-right: 0px;">
                 <h5 style="color:#166534; align-items:center; border-width:4px; border-color: #166534; border-style: solid; padding: 1%;">
                     แกะสลัก
                 </h5>
@@ -218,52 +218,6 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
           </p>
         </div>
         <hr>
-
-        <!-- แกะลาย -->
-        {% if data_product.type_id_id == 2 and data_product.select_carving == 1 %}
-          <div class="col d-flex align-self-center justify-content-center">
-            <div class="form-radio d-flex w-100">
-              <input onclick="onShow_Carving()" type="radio" id="radio-select_carving-2" name="select_carving" value=1 />
-              <label class="w-100 p-2" for="radio-select_carving-2">แกะลาย</label>
-              <input onclick="offShow_Carving()" type="radio" id="radio-select_carving-1" class="radio-select_carving-1" name="select_carving" value=0 data-price="0"/>
-              <label class="w-100 p-2" for="radio-select_carving-1">ไม่แกะลาย</label>
-            </div>
-          </div>
-          {%endif%}
-
-          {% if checkSelect %}
-          <div class="invalid-feedback d-block">{{checkSelect}}</div>
-          {%endif%}
-
-          {% if checkCarving %}
-          <div class="invalid-feedback d-block">{{checkCarving}}</div>
-          {%endif%}
-
-
-          <div class="row-carving-2 mt-3" id="cost_carving" style="display: none;">
-            <div class="row">
-              <div class="col-sm-3 md-3 d-flex justify-content-center align-self-center">
-                <label class="form-label">ลาย</label>
-              </div>
-              <div class="col">
-                <input type="text" class="form-control w-100" id="Inputcarving">
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col-sm-3 md-3 d-flex justify-content-center align-self-start">
-                <label class="form-label">แนบรูปภาพ</label>
-              </div>
-              <div class="col mb-3">
-                <input type="file" class="form-control" name="carving_img" id="file2" accept="image/png, image/jpeg"
-                onchange="loadFile(event)">
-                {% if checkImg %}
-                <div class="invalid-feedback d-block">{{checkImg}}</div>
-                {%endif%}
-                <img id="output" class="mt-2" width="100px" height="100px"/>
-              </div>
-            </div>
-          </div>
-          <!-- แกะลาย -->
 
         <!-- <div class="col mt-1 d-flex justify-content-center"> -->
           <div class="row d-flex" style="margin-top: 1rem;">
@@ -394,7 +348,47 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body row g-3">
-            <div class="mb-3 d-flex flex-column">
+
+            <!-- <div class="row-carving-2 mt-3 mb-3 d-flex flex-column" id="cost_carving">
+              <div class="row">
+                <div class="col-sm-3 md-3 d-flex justify-content-center align-self-center">
+                  <label class="form-label">ลาย</label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control w-100" id="Inputcarving">
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-sm-3 md-3 d-flex justify-content-center align-self-start">
+                  <label class="form-label">แนบรูปภาพ</label>
+                </div>
+                <div class="col mb-3">
+                  <input type="file" class="form-control" name="carving_img" id="file2" accept="image/png, image/jpeg"
+                  onchange="loadFile(event)">
+                  {% if checkImg %}
+                  <div class="invalid-feedback d-block">{{checkImg}}</div>
+                  {%endif%}
+                  <img id="output" class="mt-2" width="100px" height="100px"/>
+                </div>
+              </div>
+            </div> -->
+            <div class="d-flex flex-column">
+              <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ลายที่ต้องการแกะสลัก</label>
+              <input type="text" class="form-control w-100" id="Inputcarving">
+            </div>
+            <div class="mb-5 d-flex flex-column justify-content-center">
+              <label for="FormControlTextarea1" class="form-label" style="text-align: left;">แนบรูปภาพ</label>
+              <input type="file" class="form-control" name="carving_img" id="file2" accept="image/png, image/jpeg"
+                  onchange="loadFile(event)">
+                  {% if checkImg %}
+                  <div class="invalid-feedback d-block">{{checkImg}}</div>
+                  {%endif%}
+                  <div class="mt-2 d-flex justify-content-center">
+                  <img id="output" class="mt-2" width="200px" height="200px"/>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column">
               <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ที่อยู่</label>
               <textarea class="form-control" id="FormControlTextarea1" rows="3"></textarea>
             </div>
