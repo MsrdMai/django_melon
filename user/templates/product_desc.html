@@ -222,7 +222,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         <!-- <div class="col mt-1 d-flex justify-content-center"> -->
           <div class="row d-flex" style="margin-top: 1rem;">
               <div class="col px-2">
-                <h1 style="color:rgb(218, 0, 0); text-align: right;"><b>฿ {{data_product.product_price}}</b></h1> 
+                <h2 style="color:rgb(218, 0, 0); text-align: right;"><b>฿ {{data_product.product_price}}</b></h2> 
             </div>
               <p class="px-2 pt-1 mb-4" style="color:rgb(218, 0, 0); text-align: right;">
                 <b>คลัง :</b> {{data_product.product_amount}}
@@ -340,7 +340,7 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
 <br><br> <br><br>
 
 <!-- ยืนยันสั่งซื้อสินค้า -->
-<div class="modal fade" id="confirmorder" tabindex="-1" aria-labelledby="confirmorder" aria-hidden="true">
+<!-- <div class="modal fade" id="confirmorder" tabindex="-1" aria-labelledby="confirmorder" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
@@ -348,30 +348,6 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body row g-3">
-
-            <!-- <div class="row-carving-2 mt-3 mb-3 d-flex flex-column" id="cost_carving">
-              <div class="row">
-                <div class="col-sm-3 md-3 d-flex justify-content-center align-self-center">
-                  <label class="form-label">ลาย</label>
-                </div>
-                <div class="col">
-                  <input type="text" class="form-control w-100" id="Inputcarving">
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col-sm-3 md-3 d-flex justify-content-center align-self-start">
-                  <label class="form-label">แนบรูปภาพ</label>
-                </div>
-                <div class="col mb-3">
-                  <input type="file" class="form-control" name="carving_img" id="file2" accept="image/png, image/jpeg"
-                  onchange="loadFile(event)">
-                  {% if checkImg %}
-                  <div class="invalid-feedback d-block">{{checkImg}}</div>
-                  {%endif%}
-                  <img id="output" class="mt-2" width="100px" height="100px"/>
-                </div>
-              </div>
-            </div> -->
             <div class="d-flex flex-column">
               <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ลายที่ต้องการแกะสลัก</label>
               <input type="text" class="form-control w-100" id="Inputcarving">
@@ -404,8 +380,66 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
           </div>
       </div>
   </div>
-</div>
+</div> -->
 <!-- ยืนยันสั่งซื้อสินค้า -->
+
+<div class="modal fade" id="confirmorder" aria-hidden="true" aria-labelledby="confirmorder" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmorder">ยืนยันการสั่งซื้อสินค้า</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body row g-3">
+        <div class="d-flex flex-column">
+          <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ลายที่ต้องการแกะสลัก</label>
+          <input type="text" class="form-control w-100" id="Inputcarving">
+        </div>
+        <div class="mb-2 d-flex flex-column justify-content-center">
+          <label for="FormControlTextarea1" class="form-label" style="text-align: left;">แนบรูปภาพ</label>
+          <input type="file" class="form-control" name="carving_img" id="file2" accept="image/png, image/jpeg"
+              onchange="loadFile(event)">
+              {% if checkImg %}
+              <div class="invalid-feedback d-block">{{checkImg}}</div>
+              {%endif%}
+              <div class="mt-2 d-flex justify-content-center">
+              <img id="output" class="mt-2" width="200px" height="200px"/>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-danger" data-bs-target="#ModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">ต่อไป</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="ModalToggle2" aria-hidden="true" aria-labelledby="confirmorder2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmorder2">ยืนยันการสั่งซื้อสินค้า</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-column">
+          <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ที่อยู่</label>
+          <textarea class="form-control" id="FormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="mb-2 d-flex flex-column">
+          <label for="FormControlInput1" class="form-label" style="text-align: left;">เบอร์โทรศัพท์</label>
+          <input type="email" class="form-control" id="FormControlInput1">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-target="#confirmorder" data-bs-toggle="modal" data-bs-dismiss="modal">ย้อนกลับ</button>
+        <a href="#" type="button" class="btn btn-danger">ยืนยัน</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#ModalToggle" role="button">Open first modal</a> -->
 
 <script>
   // showIMG
