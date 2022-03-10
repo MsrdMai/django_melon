@@ -233,8 +233,11 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
             </p>
 
             <form class="p-0 d-flex justify-content-end">
+
+              <!-- ลดน้อยสุดเท่ากับ 1 -->
               <div class="value-button" id="decrease" style="margin-bottom: 2px;" onclick="decreaseValue(this, 1)" value="Decrease Value">-</div>
-              <input type="number" id="number" value="1" min="1" />
+              <input type="number" id="number" value="1" min="1" name="amount" form="confirmInput" readonly/>
+              <!-- เพิ่มมากสุดเท่ากับ คงคลัง -->
               <div class="value-button" id="increase" style="margin-bottom: 2px;" onclick="increaseValue(this, {{data_product.product_amount}})" value="Increase Value">+</div>
             </form>
           </div>
@@ -285,9 +288,6 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       </div>
       <!-- </div> -->
 <!-- 
-      {% if user.is_authenticated %} 
-      {% for group in  request.user.groups.all %}
-      {% if group.name == 'Customer' %}
       
       <div class="col" style="background-color: #f3f4f6; padding: 5%;">
          <p style="color:#1f2937; text-align: end;">
@@ -312,12 +312,23 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
       <p style="color:#b90000; font-size: 30px; text-align: end;">
         รวม : <span class="product-total-price" data-price="{{data_product.product_price}}">{{data_product.product_price}}</span> ฿ 
       </p> -->
-      <div href="#" class="btn btn-danger btns mt-2 w-100 mb-4"  data-bs-toggle="modal" data-bs-target="#confirmorder">สั่งซื้อ</div>
-      </div>
+      
+      {% if user.is_authenticated %} 
+      {% for group in  request.user.groups.all %}
+      {% if group.name == 'Customer' %}
 
-      <!-- {% endif %}
+     
+      <div href="#" class="btn btn-danger btns mt-2 w-100 mb-4"  data-bs-toggle="modal" data-bs-target="#confirmorder">
+        สั่งซื้อ <i class="bi bi-cart-plus-fill"></i>
+      </div>
+      <br><br><br>
+
+      </div>
+      
+
+      {% endif %}
       {% endfor %}
-      {% endif %} -->
+      {% endif %}
 
 
     </div>
@@ -341,55 +352,49 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         <h5 class="modal-title" id="confirmorder">ยืนยันการสั่งซื้อสินค้า</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form  method="POST" enctype="multipart/form-data" action="{% url 'order_product' id=data_product.id %}" id="confirmInput">
+        {% csrf_token %}
+
+
       <div class="modal-body row g-3">
         <div class="d-flex flex-column">
+          <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ที่อยู่</label>
+          <textarea class="form-control" maxlength="255" name="address" id="FormControlTextarea1" rows="3" required></textarea>
+        </div>
+        <div class="mb-2 d-flex flex-column">
+          <label for="FormControlInput1" class="form-label" style="text-align: left;">เบอร์โทรศัพท์</label>
+          <input type="tel" class="form-control" name="tel" id="FormControlInput1" required>
+        </div>
+
+        {% if data_product.type_id_id == 2 and data_product.select_carving == 1 %}
+
+        <div class="d-flex flex-column">
           <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ลายที่ต้องการแกะสลัก</label>
-          <input type="text" class="form-control w-100" id="Inputcarving">
+          <input type="text" name="carving_description" class="form-control w-100" id="Inputcarving" required>
         </div>
         <div class="mb-2 d-flex flex-column justify-content-center">
           <label for="FormControlTextarea1" class="form-label" style="text-align: left;">แนบรูปภาพ</label>
           <input type="file" class="form-control" name="carving_img" id="file2" accept="image/png, image/jpeg"
               onchange="loadFile(event)">
-              {% if checkImg %}
-              <div class="invalid-feedback d-block">{{checkImg}}</div>
-              {%endif%}
+             
               <div class="mt-2 d-flex justify-content-center">
-              <img id="output" class="mt-2" width="200px" height="200px"/>
+              <img id="output" class="mt-2" width="300px" height="200px"/>
             </div>
+            <br> <br>
         </div>
+        {% endif %}
       </div>
-
+    
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-        <button type="button" class="btn btn-danger" data-bs-target="#ModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">ต่อไป</button>
+        <button type="submit" class="btn btn-danger">สั่งเลย</button>
       </div>
+    </form>
     </div>
+  
   </div>
 </div>
-<div class="modal fade" id="ModalToggle2" aria-hidden="true" aria-labelledby="confirmorder2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmorder2">ยืนยันการสั่งซื้อสินค้า</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="d-flex flex-column">
-          <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ที่อยู่</label>
-          <textarea class="form-control" id="FormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div class="mb-2 d-flex flex-column">
-          <label for="FormControlInput1" class="form-label" style="text-align: left;">เบอร์โทรศัพท์</label>
-          <input type="email" class="form-control" id="FormControlInput1">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-target="#confirmorder" data-bs-toggle="modal" data-bs-dismiss="modal">ย้อนกลับ</button>
-        <a href="#" type="button" class="btn btn-danger">ยืนยัน</a>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 <script>

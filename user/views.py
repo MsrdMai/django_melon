@@ -2,6 +2,8 @@ from itertools import product
 from sre_parse import State
 from django.shortcuts import render, redirect
 from .models import TypeUser, UserInType
+from order.models import State, Order, Review, Message, OrderCarving
+from store.models import Store, TypeeOrder, Quality, Product
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User, Group
@@ -147,7 +149,23 @@ def product_book(request):
 
 
 def orderstatus(request):
-    return render(request, template_name='orderstatus.html')
+    user = request.user
+    myorder = Order.objects.filter(User_id=user)
+    all_carving = OrderCarving.objects.all()
+    list_carving = []
+
+    for j in myorder:
+        for i in all_carving:
+            if i.order_id == j.id:
+                list_carving.append(i.id)
+
+    context = {
+        'myorder' : myorder,
+        'list_carving' : list_carving,
+
+    }
+
+    return render(request, template_name='orderstatus.html', context=context)
 
 def product_desc(request,id):
     data_product = Product.objects.get(id=id)

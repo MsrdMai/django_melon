@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'user',
     'store',
-    'order'
+    'order',
+    'mathfilters',
 
 ]
 

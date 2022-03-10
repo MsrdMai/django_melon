@@ -1,6 +1,5 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
 
-
 <br />
 <br />
 <div class="container w-75 d-flex flex-wrap mb-2">
@@ -35,7 +34,7 @@
                             <div class="badge" style="background-color: red;">แกะลาย</div>
                         {% endif %}
                         {% if pd.type_id_id == 2 and pd.select_carving == 0 %}
-                            <div class="badge" style="background-color: green;">จอง</div>
+                            <div class="badge" style="background-color: #f97316;">จอง</div>
                         {% endif %}
                         <img class="rounded " src="{{pd.product_image.url}}" height="180px" width="180px" style="object-fit: scale-down;" alt="Product" />
                         <div class="py-2 head">{{pd.product_name}}</div>

@@ -1,4 +1,4 @@
-{% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
+{% extends "TopNavFarmer.html" %} {% load static %} {% load mathfilters %}{% block content %}
 
 <div class="container">
 <br></br>
@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-sm-5">
                     <img
-                    src="{% static "img/scb.jpg" %}"
+                    src="{{payment.payment_image.url}}"
                     width="80%" height="auto"
                     ></img>
             </div>
@@ -15,39 +15,27 @@
             </div>
             <div class="col-sm-5">
                 <br>
-                    <h1>Order#.1</h1>
+                    <h1>Order#. {{order.id}}</h1>
                         <hr>
 
                     <table class="table table-bordered">
                         <thead>
+
+                            <tr>
+                                <th scope="col"><br>ชื่อ<br></th>
+                                <th scope="col"><br>{{order.User_id.first_name}} {{order.User_id.last_name}}<br></th>
+                              </tr>
                             <tr>
                               <th scope="col"><br>ชำระผ่านธนาคาร<br></th>
-                              <th scope="col"><br>ธ.ไทยพาณิชย์ จำกัด (มหาชน)<br></th>
+                              <th scope="col"><br>{{payment.bank_name}}<br></th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                                 <th scope="col"><br>จำนวนเงินที่ต้องจ่าย<br></th>
-                                <th scope="col"><br>560<br></th>
+                                <th scope="col"><br>{{order.total_price|add:order.shipping_cost}} ฿<br></th>
                             </tr>
-                            <tr>
-                                <th colspan="2">
-                                    <a
-                                    class="col-sm-12  btn btn-light btn-lg btn-block"
-                                    id="btn-cheack-payment"
-                                    href=""
-                                  >
-                                  ตรวจสอบเรียบร้อย
-                                  <img
-                                  src="{% static "icon/check.png" %}"
-                                  width="30px"
-                                  height="30px"
-                                  id="paychecked"
-                                ></img>
-                                </a>
 
-                                </th>
-                            </tr>
                     </table>
             </div>
             <div class="col-sm-1">

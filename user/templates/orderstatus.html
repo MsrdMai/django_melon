@@ -1,4 +1,4 @@
-{% extends "TopnavUser.html" %} {% load static %} {% block content %}
+{% extends "TopnavUser.html" %} {% load static %} {% load mathfilters %}{% block content %}
 <style>
     * {
         box-sizing: border-box
@@ -138,6 +138,32 @@
         color: white;
     }
 
+    .waitConfire {
+        background-color: #f97316; 
+        color: black; 
+        border: 2px solid #f97316;
+        color: white;
+        }
+
+    .waitConfire:hover {
+        background-color: #f97316;
+        color: white;
+    }
+
+    
+    .cancel {
+        background-color: #475569; 
+        color: black; 
+        border: 2px solid #475569;
+        color: white;
+        }
+
+    .cancel:hover {
+        background-color: #475569;
+        color: white;
+    }
+
+
     /* review */
     .rating {
         position: relative;
@@ -194,44 +220,128 @@
 
 
         <div id="payment" class="tabcontent">
+
+            {% for i in myorder %}
+                {% if i.State_id_id == 1 %}
+            
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
                 <div class="d-flex justify-content-between flex-wrap date">
+                {% if i.product_id.type_id.id == 2 %}
                 <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
-                <p class="date ps-4 d-flex"><b>ชำระภายใน 15/02/65</b></p>
+                {% else %}
+                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
+                {% endif %}
+                <p class="date ps-4 d-flex"><b>จำนวนชำระ</b></p>
             </div>
                     <div class="col d-flex justify-content-md-start justify-content-between">
-                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
+                            <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x1</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
                         <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
-                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>300 ฿</b></h3>
+                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                         <div class="d-flex flex-wrap justify-content-end mt-1">
-                            <button type="button" class="button1 mx-1" style="margin-right: 0px;" data-bs-toggle="modal" data-bs-target="#cancelform">
+                            <a type="button" class="button1 mx-1" style="margin-right: 0px;" data-bs-toggle="modal" data-bs-target="#cancelform-{{i.id}}">
                                 <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>แจ้งยกเลิก</b></h3>
-                            </button>
-                            <button type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#paymentform">
+                            </a>
+                            <a type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#paymentform-{{i.id}}">
                                 <h3 class="mx-2" style="margin-top: 0.5rem; font-size: 15px;"><b>แจ้งชำระเงิน</b></h3>
-                            </button>
+                        </a>
                         </div>
                     </div>
             </div>
+              {% endif %}
+            {% endfor %}
+
+
+            {% for i in myorder %}
+            {% if i.State_id_id == 2 %}
+        
+        <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
+            <br>
+            <div class="d-flex justify-content-between flex-wrap date">
+            {% if i.product_id.type_id.id == 2 %}
+            <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+            {% else %}
+            <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
+            {% endif %}
+            <p class="date ps-4 d-flex"><b>จำนวนชำระ</b></p>
+        </div>
+                <div class="col d-flex justify-content-md-start justify-content-between">
+                        <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                        <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
+                </div>
+                <div class="col-md-6 d-flex flex-column">
+                    <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
+                    <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
+                    <div class="d-flex flex-wrap justify-content-end mt-1">
+                        <a type="button" class="waitConfire mx-1" style="margin-right: 0px;" disabled>
+                            <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>รอตรวจสอบจากร้านค้า</b></h3>
+                        </a>
+                        
+                    </div>
+                </div>
+        </div>
+          {% endif %}
+        {% endfor %}
+
+
+        
+        {% for i in myorder %}
+        {% if i.State_id_id == 8 %}
+    
+    <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
+        <br>
+        <div class="d-flex justify-content-between flex-wrap date">
+        {% if i.product_id.type_id.id == 2 %}
+        <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+        {% else %}
+        <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
+        {% endif %}
+        <p class="date ps-4 d-flex"><b>จำนวนชำระ</b></p>
+    </div>
+            <div class="col d-flex justify-content-md-start justify-content-between">
+                    <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                    <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
+            </div>
+            <div class="col-md-6 d-flex flex-column">
+                <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
+                <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
+                <div class="d-flex flex-wrap justify-content-end mt-1">
+                    <a type="button" class="cancel mx-1" style="margin-right: 0px;" disabled>
+                        <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>ยกเลิกสินค้าแล้ว</b></h3>
+                    </a>
+                    
+                </div>
+            </div>
+    </div>
+      {% endif %}
+    {% endfor %}
         </div>
 
         <div id="waiting" class="tabcontent">
+
+            {% for i in myorder %}
+            {% if i.State_id_id == 3 %}
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
                 <div class="d-flex justify-content-between flex-wrap date">
-                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+                    {% if i.product_id.type_id.id == 2 %}
+                    <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+                    {% else %}
+                    <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
+                    {% endif %}
                 <p class="date ps-4 d-flex"><b>จัดส่งวันที่ 20/02/65</b></p>
             </div>
                     <div class="col d-flex justify-content-md-start justify-content-between">
-                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
+                            <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                     </div>
+
+
                     <div class="col-md-6 d-flex flex-column flex-grow-1">
-                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>300 ฿</b></h3>
+                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                         <div class="d-flex flex-wrap justify-content-end mt-1">
                             <button type="button" class="button1 mx-1" style="margin-right: 0px;" data-bs-toggle="modal" data-bs-target="#cancelform">
                                 <h3 class="mx-3 mb-2 txtresp" style="margin-top: 0.5rem;"><b>แจ้งยกเลิก/คืนเงิน</b></h3>
@@ -242,20 +352,29 @@
                         </div>
                     </div>
             </div>
+
+            {% endif %}
+            {% endfor %}
         </div>
         <div id="shipped" class="tabcontent">
+            {% for i in myorder %}
+            {% if i.State_id_id == 4 %}
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
                 <div class="d-flex justify-content-between flex-wrap date">
-                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
-                <p class="date ps-4 d-flex"><b>จะถึงภายในวันที่ 27/02/65</b></p>
+                    {% if i.product_id.type_id.id == 2 %}
+                    <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+                    {% else %}
+                    <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
+                    {% endif %}                
+                    <p class="date ps-4 d-flex"><b>จะถึงภายในวันที่ 27/02/65</b></p>
             </div>
                     <div class="col d-flex justify-content-md-start justify-content-between">
-                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
+                            <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
-                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>300 ฿</b></h3>
+                        <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                         <div class="d-flex justify-content-end mt-1">
                             <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>เลขพัสดุ</b></h3>
                             <button type="button" class="button3 mx-1" style="margin-right: 0px;">
@@ -269,9 +388,16 @@
                         </div>
                     </div>
             </div>
+
+            
+            {% endif %}
+            {% endfor %}
         </div>
 
         <div id="review" class="tabcontent">
+
+            {% for i in myorder %}
+            {% if i.State_id_id == 6 %}
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
                 <div class="d-flex justify-content-between flex-wrap date">
@@ -293,12 +419,9 @@
                         <textarea class="form-control form-control-lg my-2" id="message-text" placeholder="เขียนรีวิว"></textarea>
                         <div class="mb-3">
                             <label class="form-label float-start"><b>รูปภาพสินค้า</b></label>
-                             <input type="file" class="form-control-file" name="product_img" id="file2" accept="image/png, image/jpeg"
-                              onchange="loadFile(event)"> <br><br>
-                              {% if checkImg %}
-                              <div class="invalid-feedback d-block">{{checkImg}}</div>
-                              {%endif%}
-                               <img id="output" width="100px" height="100px"/>
+                             <input type="file" class="form-control-file" name="product_img" id="file2" accept="image/png, image/jpeg"> <br><br>
+                             
+                           
                            </div>
                         <div class="mt-2 d-flex justify-content-end">
                             <button type="button" class="button2 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#confirm">
@@ -307,19 +430,15 @@
                         </div>
                     </div>
             </div>
+
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
 
  <!-- script for review -->
     <script>
-        var loadFile = function(event) {
-	    var image = document.getElementById('output');
-        document.getElementById('output').style.border = '2px solid #34D399';
 
-	    image.src = URL.createObjectURL(event.target.files[0]);
-        
-        }
-        
         const ratingStars = [...document.getElementsByClassName("rating__star")];
         const ratingResult = document.querySelector(".rating__result");
 
@@ -353,30 +472,22 @@
 
     </script>
    
+   {% for i in myorder %}
 
-<div class="modal fade" id="paymentform" tabindex="-1" aria-labelledby="paymentformlabel" aria-hidden="true">
+<div class="modal fade" id="paymentform-{{i.id}}" tabindex="-1" aria-labelledby="paymentformlabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="paymentformlabel">แจ้งชำระเงิน</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="modal-body row g-3" style="text-align: left;">
-        <div class="col-md-6">
-          <label for="inputname" class="form-label">ชื่อ</label>
-          <input type="text" class="form-control mb-2" id="inputname">
-          <label for="inputtel" class="form-label">โทรศัพท์</label>
-          <input type="text" class="form-control" id="inputAddress">
-        </div>
-        <div class="col-md-6">
-          <label rows="1" for="inputadd" class="form-label">ที่อยู่</label>
-          <textarea class="form-control form-control-lg" id="message-text"></textarea>
-        </div>
+      <form style="text-align: left;" method="POST" enctype="multipart/form-data" action="{% url 'send_payment' id=i.id %}">
+        {% csrf_token %}
+        <div class="modal-body row g-3">
         <div class="col-12">
-            <label for="inputState" class="form-label">ธนาคาร</label>
-            <select id="inputState" class="form-select">
-              <option selected value="0">เลือกธนาคาร</option>
-              <option value="พร้อมเพย์">พร้อมเพย์</option>
+            <label for="inputState" class="form-label">โอนจากธนาคาร</label>
+            <select id="inputState" class="form-select" name="name_bank">
+              <option selected value="พร้อมเพย์">พร้อมเพย์</option>
               <option value="ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร">ธ.ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</option>
               <option value="ธ.ธนาคารออมสิน">ธ.ธนาคารออมสิน</option>
               <option value="ธ.กรุงศรีอยุธยา จำกัด (มหาชน)">ธ.กรุงศรีอยุธยา จำกัด (มหาชน)</option>
@@ -394,30 +505,34 @@
           </div>
         <div class="col-md-12">
             <label for="inputState" class="form-label">หลักฐานการชำระ</label>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control" type="file" id="formFile" name="payment_image" accept="image/png, image/jpeg">
         </div>
-      </form>
+    </div>
+      
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-        <button type="button" class="btn btn-success">ยืนยัน</button>
+        <button type="submit" class="btn btn-success">ยืนยัน</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
+{% endfor %}
 
-<div class="modal fade" id="cancelform" tabindex="-1" aria-labelledby="cancelformlabel" aria-hidden="true">
+
+{% for i in myorder %}
+<div class="modal fade" id="cancelform-{{i.id}}" tabindex="-1" aria-labelledby="cancelformlabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="cancelformlabel">แจ้งยกเลิก</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form  method="POST" enctype="multipart/form-data" action="{% url 'cancel_order' id=i.id %}">
+            {% csrf_token %}
         <div class="modal-body row g-3">
             <p>เหตุผลที่ต้องการยกเลิก</p>
-
-                <form  method="POST" enctype="multipart/form-data" action="">
-                    {% csrf_token %}
 
                     <div class="form-group">
                         <label class="form-label float-start">สาเหตุที่ต้องการยกเลิก</label>
@@ -428,16 +543,18 @@
                         <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
                         <textarea  class="form-control" name="refund_contact" rows="2" maxlength="255" required></textarea></div> 
             <br>
-                </form>
-            
+                       
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-          <button type="button" class="btn btn-danger">ยืนยัน</button>
+          <button type="submit" class="btn btn-danger">ยืนยัน</button>
         </div>
+    </form>
       </div>
     </div>
   </div>
+  {% endfor %}
+
 
 <div class="modal fade" id="track" tabindex="-1" aria-labelledby="trackmelon" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -447,7 +564,7 @@
             </div>
             <div class="container">
                 <div  style="background-color: white; border-radius: 30px;padding: 1%;">
-                <br></br>    
+               
                 <h4>รายงานผลผลิต #Order ....</h4>
                 <hr>
                 <div class="row">
@@ -493,50 +610,7 @@
                     </div>
                     <div class="col-sm-1"></div> 
                     </div>
-                    <div class="modal fade" id="model-form" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">รายงานผลผลิต</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                        <form  method="POST" enctype="multipart/form-data" action="">
-                                            {% csrf_token %}
-                                    <div class="form-group">
-                                    <label class="form-label float-start"><b>รูปภาพ</b></label>
-                                        <input type="file" class="form-control-file" name="recode_image" id="file" accept="image/png, image/jpeg"
-                                        onchange="loadFile(event)"> <br><br>
-                                        <img id="output" width="300px" height="300px"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label float-start">รายละเอียด</label>
-                                        <textarea  class="form-control" name="recode_description" rows="5" maxlength="255" required></textarea>
-                                      </div>
-                                      <div class="form-group">
-                                        <label class="form-label float-start">น้ำหนัก</label>
-                                        <input type="number" step="0.01" min="1" max="20" class="form-control" name="recode_weight" placeholder="น้ำหนักของเมล่อน" required>
-                                      </div> 
-                                      <div class="form-group">
-                                        <label class="form-label float-start">คุณภาพ</label>
-                                        <select class="form-control" name="quality_id">
-                                           
-                                            {% for i in  quality_list %}
-                                            <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.quality_name }}</option>
-                                            {% endfor %}
-                                          </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label float-start">ความหวาน</label>
-                                        <input type="number" min="1" max="1000" class="form-control" name="sweetness" placeholder="ความหวานที่วัดได้" required>
-                                    </div> 
-                                </form>
-                            </div>              
-                          </div>
-                        </div>
-                      </div>
+         
                 </div>
                 </div>
             <div class="modal-footer">

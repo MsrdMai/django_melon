@@ -24,6 +24,21 @@
 </script>
 {%endif%}
 
+{% if error_img %}
+<script>
+swal("มีข้อผิดพลาดในการสั่งซื้อ", "{{error_img}}", "error");
+</script>
+{%endif%}
+
+
+{% if order_complete_1 %}
+<script>
+  swal("{{order_complete_1}}", "{{order_complete_2}}", "success");
+</script>
+{%endif%}
+
+
+
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

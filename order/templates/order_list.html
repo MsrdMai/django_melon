@@ -153,20 +153,16 @@
 
 <div class="col-sm-1"> </div>
 <div class="col-sm-7">
-<form method="POST" action=""> 
+<form method="GET" action="{% url 'order_list' id=product_order.id %}"> 
     <div class="row g-4 align-items-center" style="padding: 1%; ">
     <div class="col-sm-1"></div>
-    <div class="form-group col-sm-4">
-      <div class="col-sm"><label class="form-label float-start">ค้นหา Username ลูกค้า</label></div>
-      <input type="text" class="form-control  ml-3" id="inputSearch" name="inputSearch" placeholder="ใส่ Username" value="{{search_txt}}">
-    </div>
 
-    <div class="form-group col-sm-3">
+    <div class="form-group col-sm-6">
         <div class="col-sm"><label class="form-label float-start" style="text-align: left;">ค้นหาประเภทสถานะ</label></div>
-        <select class="form-control" name="input_type_state">
-            <option>ทั้งหมด</option>
+        <select class="form-control" name="input_Typestate">
+          <option value="">ทั้งหมด</option>
             {% for i in  type_state %}
-            <option  value="{{ i.id }}" {% if input_type_state ==  i.id  %}selected{% endif %}>{{ i.state_name }}</option>
+            <option  value="{{ i.id }}" {% if input_Typestate ==  i.id  %}selected{% endif %}>{{ i.state_name }}</option>
             {% endfor %}
           </select>
       </div>
@@ -181,7 +177,6 @@
 </form>
 </div>
 </div> 
-
 
 
 <br></br>
@@ -200,234 +195,49 @@
       </tr>
 
 
-
-      {% if product_order.select_carving == 1 and product_order.type_id_id == 2 %}
-      <tr style="background-color: #f9fafb;">
-        <td> <h5 id="target-number">1</h5></td>
-        <td>
-          <div class="row">
-            <div class="col-sm-6 col-md-6" style="text-align: left;">
-              <p style="color: #16a34a; font-weight: bold;">
-                Username : TestTerOne
-              </p>
-              <p style="color: #1f2937;">
-                จำนวน : 1 <br>
-                ราคาทั้งหมด : 250 <br>
-                เบอร์โทร : 0123456789 <br>
-                อีเมล : tester@test.com <br>
-                ที่อยู่จัดส่ง : 1 ลาดกระบัง <br>
-                รายละเอียด : แกะไม่จำเป็นต้องเหมือนมาก
-                ของลายไม่คดมาก<br>
-              </p>
-
-              <img 
-                src="{% static "img/muku.jpg" %}"
-                id="img-order-carving"
-              ></img>
-
-            <br>
-            </div>
-
-            <div class="col-sm-2 col-md-6">
-              <h5 id="target-status">
-                เตรียมส่งสินค้า
-            </h5>
-            </div>
-          </div>
-
-          <br><br><br>
-          <div class="row">
-            <div class="col-sm-3 col-md-6">
-      
-              <a style="color: #991b1b; display:inline-block;"
-              href="{% url 'payment_order'%}"
-              >
-                หลักฐานการโอนเงิน
-              </a>
-              <img
-                src="{% static "icon/check.png" %}"
-                width="30px"
-                height="30px"
-                id="payment-check"
-              ></img>
-
-              <br><br>
-
-            
-              <a
-              class="col-sm-6 btn btn-outline-dark" 
-              href="{% url 'orderPdf' id=product_order.id %}"
-              >
-              <img
-              src="{% static "icon/print.png" %}"
-              width="30px"
-              height="30px"
-              style="display:inline-block;"
-            />
-              พิมพ์ใบจัดส่ง</a>
-           
-              <a
-              class="col-sm-6 btn btn-outline-info "
-              href="{% url 'chatroom' id=product_order.id %}"
-              >
-              <img
-              src="{% static "icon/bubble-chat.png" %}"
-              width="30px"
-              height="30px"
-              style="display:inline-block;"
-            />
-              
-              การสนทนา</a>
-           
-            </div>
-
-            <div class="col">
-            
-              <a class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-change-status" href="" style="color: black;">
-                
-                <img src="{% static "icon/box.png" %}" width="30px" height="30px" style="display:inline-block;" />
-                แจ้งเลขพัสดุ
-              </a>
-              <a class="col-12 btn btn btn-success btn-lg btn-block mb-1" id="btn-report-this-order" href="{% url 'report_order'%}" style="color: black;">
-                
-                <img src="{% static "icon/report.png" %}" width="30px" height="30px" style="display:inline-block;" />
-                รายงานผลผลิต
-              </a>
-              <a data-bs-toggle="modal" data-bs-target="#orderCancel-id"  class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
-                
-                <img src="{% static "icon/cancel.png" %}" width="30px" height="30px" style="display:inline-block;" />
-                ยกเลิกคำสั่งซื้อ
-              </a>
-            </div>
-          </div>
-          <hr>
-        </td>
-       
-      </tr>
-
-
-      {% elif product_order.select_carving == 0 and product_order.type_id_id == 2 %}
-     
-
-      <!-- {/* No.2 */} -->
-
-      <tr  style="background-color: #f9fafb;">
-        <td><h5 id="target-number">2</h5></td>
-        <td>
-          <div class="row">
-            <div class="col-sm-6 col-md-6" style="text-align: left;">
-              <p style="color: #16a34a; font-weight: bold;">
-                Username : TestTerTwo
-              </p>
-              <p style="color: #1f2937;">
-                จำนวน : 2 <br></br>
-                ราคาทั้งหมด : 250 <br></br>
-                เบอร์โทร : 0123456789 <br></br>
-                อีเมล : tester2@test.com <br></br>
-                ที่อยู่จัดส่ง : 2 ลาดกระบัง <br></br>
-              </p>
-            
-              <img
-              src="{% static "icon/print.png" %}"
-              width="30px"
-              height="30px"
-              style="display:inline-block;"
-            />
-
-              <a
-              class="col-sm-6 btn btn-dark "
-              href="{% url 'orderPdf' id=product_order.id %}"
-              >พิมพ์ใบจัดส่ง (Invoice)</a>
-            
-              <br></br><br>
-            </div>
-            <div class="col-sm-2 col-md-6">
-              <h5 style="font-weight: bold; border-radius: 100px; background-color: #bbf7d0; text-align: center; padding: 2%;">                รอยืนยันคำสั่งซื้อ
-              </h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3 col-md-6">
-              <br></br>
-              <a style="color: #991b1b; display:inline-block;"
-                href="{% url 'payment_order'%}"
-              >
-                หลักฐานการโอนเงิน
-              </a>
-              <img
-                src="{% static "icon/load.png" %}"
-                width="30px"
-                height="30px"
-                style="padding: 5px; display:inline-block; margin: 5px; align-items: center;"
-              ></img>
-            
-            </div>
-
-            <div class="col">
-              <a
-                class="col-12  btn btn-light btn-lg btn-block"
-                id="btn-change-status"                
-                href=""
-              >
-                <img
-                src="{% static "icon/harvest.png" %}"
-                width="30px"
-                height="30px"
-                style="display:inline-block;"
-                />
-                เตรียมส่งสินค้า
-              </a>
-              <a
-              class="col-12 btn btn-light btn-lg btn-block"
-              id="btn-cancel-this-order"              
-              href=""
-              >
-                <img
-                src="{% static "icon/cancel.png" %}"
-                width="30px"
-                height="30px"
-                style="display:inline-block;"
-                />
-                ยกเลิกคำสั่งซื้อ
-              </a>
-            </div>
-          </div>
-          <hr>
-        </td>
-     
-      </tr>
-
-
-      {% elif product_order.select_carving == 0 and product_order.type_id_id == 1  %}
-
-      <!-- {/* No.3 */} -->
+      {% for i in order_list %}
 
       <tr style="background-color: #f9fafb;">
-        <td><h5 id="target-number">3</h5></td>
+        <td><h5 id="target-number">{{forloop.counter}}</h5></td>
         <td>
           <div class="row">
             <div class="col-sm-6 col-md-6 text-left">
               <p class="text-2xl font-black  text-green-600 	">
-                Username : TestTerThree
+                Username : {{i.User_id.username}}
               </p>
               <p class="text-1xl text-gray-800 ">
-                จำนวน : 3 <br></br>
-                ราคาทั้งหมด : 450 <br></br>
-                เบอร์โทร : 0123456789 <br></br>
-                อีเมล : tester3@test.com <br></br>
-                ที่อยู่จัดส่ง : 3 ลาดกระบัง <br></br>
+                จำนวน : {{i.amount}} <br></br>
+                ราคาทั้งหมด : {{i.total_price|add:i.shipping_cost}} ฿ <br></br>
+                เบอร์โทร : {{i.tel}} <br></br>
+                อีเมล : {{i.User_id.email}} <br></br>
+                ที่อยู่จัดส่ง : {{i.address}} <br></br>
               </p>
+
+              <!-- {% if product_order.select_carving == 1 %} -->
+                  {% for c in order_carving %}
+                      {% if c.order_id_id == i.id %}
+                        <p>รายละเอียด : {{c.carving_description}}</p>
+                            <img 
+                              src="{{c.image.url}}"
+                              id="img-order-carving"
+                            ></img>
+                          <br>
+                      {% endif %}
+                   {% endfor %}
+             <!-- {% endif %} -->
               <br></br>
             </div>
             <div class="col-sm-2 col-md-6">
-              <h5 style="font-weight: bold; border-radius: 100px; background-color: #bbf7d0; text-align: center; padding: 2%;">                รอชำระเงิน
+              <h5 style="font-weight: bold; border-radius: 100px; background-color: #bbf7d0; text-align: center; padding: 2%;">
+                {{i.State_id.state_name}}
               </h5>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-sm-3 col-md-6">
-              <br></br>
+          <div class="col-sm-3 col-md-6">
+                        <br></br>
+            {% if i.State_id.id == 1 %}
               <p
                 href=""
                 style="display:inline-block;"
@@ -440,22 +250,111 @@
               height="30px"
               style="padding: 5px; display:inline-block; margin: 5px; align-items: center;"
               ></img>
-            </div>
-
-            <div class="col">
-              <a
-              class="col-12 btn btn-light btn-lg btn-block"
-              id="btn-cancel-this-order"
-              href=""
+           
+            {% elif i.State_id.id == 2 %}
+                       
+              <a style="color: #991b1b; display:inline-block;"
+                href="{% url 'payment_order' id=i.id %}"
               >
-                <img
-                src="{% static "icon/cancel.png" %}"
+                หลักฐานการโอนเงิน
+              </a>
+              <img
+                src="{% static "icon/load.png" %}"
                 width="30px"
                 height="30px"
-                style="display:inline-block;"
-                />
+                style="padding: 5px; display:inline-block; margin: 5px; align-items: center;"
+              ></img>
+              <br><br>
+
+              <a
+              class="col-sm-6 btn btn-outline-info "
+              href="{% url 'chatroom' id=i.id %}"
+              >
+              <img
+              src="{% static "icon/bubble-chat.png" %}"
+              width="30px"
+              height="30px"
+              style="display:inline-block;"
+            />
+              
+              การสนทนา</a>
+
+            {% elif i.State_id.id == 3 %}
+
+            <a style="color: #991b1b; display:inline-block;"
+            href="{% url 'payment_order' id=i.id %}"
+            >
+              หลักฐานการโอนเงิน
+            </a>
+            <img
+              src="{% static "icon/check.png" %}"
+              width="30px"
+              height="30px"
+              id="payment-check"
+            ></img>
+
+             <br><br>
+              <a
+              class="col-sm-6 btn btn-outline-dark" 
+              href="{% url 'orderPdf' id=product_order.id %}"
+              >
+              <img
+              src="{% static "icon/print.png" %}"
+              width="30px"
+              height="30px"
+              style="display:inline-block;"
+            />
+              พิมพ์ใบจัดส่ง</a>
+             
+           
+              <a
+              class="col-sm-6 btn btn-outline-info "
+              href="{% url 'chatroom' id=i.id %}"
+              >
+              <img
+              src="{% static "icon/bubble-chat.png" %}"
+              width="30px"
+              height="30px"
+              style="display:inline-block;"
+            />
+              
+              การสนทนา</a>
+
+            {% endif %}
+            </div>
+            <div class="col">
+
+
+              {% if i.State_id.id == 2 %}
+
+              <a data-bs-toggle="modal" data-bs-target="#check-payment-{{i.id}}" class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-change-status" style="color: black;">
+                <img src="{% static "icon/payment2.png" %}" width="30px" height="30px" style="display:inline-block;" />
+                ตรวจสอบเรียบร้อย
+              </a>
+
+              {% elif i.State_id.id == 3 %}
+              <a data-bs-toggle="modal" data-bs-target="#portage-{{i.id}}" class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-change-status" href="" style="color: black;">
+                <img src="{% static "icon/box.png" %}" width="30px" height="30px" style="display:inline-block;" />
+                แจ้งเลขพัสดุ
+              </a>
+              {% endif %}
+
+              {% if i.State_id.id == 1 or  i.State_id.id == 2 or  i.State_id.id == 3 %}
+              <a data-bs-toggle="modal" data-bs-target="#orderCancel-{{i.id}}"  class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
+                <img src="{% static "icon/cancel.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 ยกเลิกคำสั่งซื้อ
               </a>
+              {% endif %}
+
+              {% if i.State_id.id == 7 %}
+              <a data-bs-toggle="modal" data-bs-target="#orderCancel-id"  class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
+                <img src="{% static "icon/cancel.png" %}" width="30px" height="30px" style="display:inline-block;" />
+                คืนเงินเรียบร้อยแล้ว
+              </a>
+              {% endif %}
+
+              <br><br>
+              <p class="float-end" style="padding: 1%;">สั่งเมื่อ : {{i.date_time}}</p>
             </div>
           </div>
           <hr>
@@ -463,26 +362,45 @@
      
       </tr>
 
-      {% endif %}
-
+      {% endfor %}
+    
     </tbody>
   </table>
 </div>
 </center>
 
 <br></br>  <br></br>
-
 </div>
-
-
 <br><br> <br><br>
 
 
 
+
+<!-- Check-Payment -->
+{% for i in order_list %}
+<div class="modal fade" id="check-payment-{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">การตรวจสอบ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        คุณแน่ใจหรือไม่ว่าตรวจสอบเรียบร้อย
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <a type="button" class="btn btn-danger" href="{% url 'check_payment' id=i.id %}">ยืนยัน</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
 <!-- orderCancel -->
 
-
-<div class="modal fade" id="orderCancel-id" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
+{% for i in order_list %}
+<div class="modal fade" id="orderCancel-{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -540,17 +458,17 @@
     </div>
   </div>
 </div>
+{% endfor %}
 <!-- orderCancel -->
 
 
 <!-- Portage -->
-
-
-<div class="modal fade" id="Portage-id" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
+{% for i in order_list %}
+<div class="modal fade" id="portage-{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="model-formLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">แจ้งเลขพัสดุ OrderID#..</h5>
+          <h5 class="modal-title" id="exampleModalLabel">แจ้งเลขพัสดุ OrderID# {{i.id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           
@@ -562,16 +480,21 @@
                   <label class="form-label float-start">หมายเลขพัสดุ</label>
                   <input type="text"  class="form-control" name="portage_number" required></textarea>
                 </div>
-         
-          
                <br>
                 <div class="form-group">
                   <label class="form-label float-start">ชื่อขนส่ง</label>
                   <select class="form-control" name="portage_name">
-                    
-                      {% for i in  bug %}
-                      <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.bug_name }}</option>
-                      {% endfor %}
+                    <option selected value="ไปรษณีย์ไทย">ไปรษณีย์ไทย</option>
+                    <option value="KERRY EXPRESS">KERRY EXPRESS</option>
+                    <option value="BEST EXPRESS">BEST EXPRESS</option>
+                    <option value="NINJA VAN">NINJA VAN</option>
+                    <option value="J&T EXPRESS">J&T EXPRESS</option>
+                    <option value="FLASH EXPRESS">FLASH EXPRESS</option>
+                    <option value="SCG EXPRESS">SCG EXPRESS</option>
+                    <option value="DHL EXPRESS">DHL EXPRESS</option>
+                    <option value="LALAMOVE">LALAMOVE</option>
+                    <option value="DELIVEREE">DELIVEREE</option>
+                    <option value="ฟาร์มส่งสินค้าเอง">ฟาร์มส่งสินค้าเอง</option>
                     </select>
               </div>
               <br>
@@ -585,6 +508,7 @@
     </div>
   </div>
 </div>
+{% endfor %}
 <!-- Portage -->
 
 
