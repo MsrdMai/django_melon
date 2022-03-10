@@ -83,6 +83,7 @@ class Record(models.Model):
     recode_weight  = models.FloatField()
     sweetness = models.FloatField()
     quality_id = models.ForeignKey(Quality, on_delete=models.CASCADE)
+    covert_image = models.ImageField(upload_to='covert_image/', null=True)
 
     class Meta:
         managed = True
