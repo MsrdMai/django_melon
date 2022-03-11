@@ -201,6 +201,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
     .rating__star:hover {
         filter: drop-shadow(1px 1px 4px gold);
     }
+
 </style>
 </head>
 
@@ -210,19 +211,19 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         <div class="border border-1">
         <button class="tablink" onclick="openPage('payment', this, 'rgb(149, 192, 137)')" id="defaultOpen">
             <img class="statusimg pb-2" src="{% static "icon/wallet.png" %}" width="50px" />
-            <p><b>ที่ต้องชำระ</b></p>
+            <p><b>ที่ต้องชำระ</b><span class="badge badge-pill badge-danger">{{count_waitpay}}</span></p>
         </button>
         <button class="tablink" onclick="openPage('waiting', this, 'rgb(149, 192, 137)')">
             <img class="statusimg pb-2" src="{% static "icon/boxship.png" %}" width="50px" />
-            <p><b>ที่ต้องจัดส่ง</b></p>
+            <p><b>ที่ต้องจัดส่ง</b><span class="badge badge-pill badge-danger">{{count_prepar}}</span></p>
         </button>
         <button class="tablink" onclick="openPage('shipped', this, 'rgb(149, 192, 137)')">
             <img class="statusimg pb-2" src="{% static "icon/delivery.png" %}" width="50px" />
-            <p><b>ที่ต้องได้รับ</b></p>
+            <p><b>ที่ต้องได้รับ</b><span class="badge badge-pill badge-danger">{{count_portage}}</span></p>
         </button>
         <button class="tablink" onclick="openPage('review', this, 'rgb(149, 192, 137)')">
             <img class="statusimg pb-2" src="{% static "icon/star.png" %}" width="50px" />
-            <p><b>ให้คะแนน</b></p>
+            <p><b>ให้คะแนน</b><span class="badge badge-pill badge-danger">{{count_review}}</span></p>
         </button>
         </div>
 
@@ -295,7 +296,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         {% endfor %}
 
         {% for i in myorder %}
-        {% if i.State_id_id == 7 %}
+        {% if i.State_id_id == 6 %}
     
     <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
         <br>
@@ -327,7 +328,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
 
         
         {% for i in myorder %}
-        {% if i.State_id_id == 8 %}
+        {% if i.State_id_id == 7 %}
     
     <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
         <br>
@@ -344,7 +345,6 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                     <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
             </div>
             <div class="col-md-6 d-flex flex-column">
-                <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
                 <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                 <div class="d-flex flex-wrap justify-content-end mt-1">
                     <a type="button" class="cancel mx-1" style="margin-right: 0px;" disabled>
@@ -381,7 +381,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                     <div class="col-md-6 d-flex flex-column flex-grow-1">
                         <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                         <div class="d-flex flex-wrap justify-content-end mt-1">
-                            <button type="button" class="button1 mx-1" style="margin-right: 0px;" data-bs-toggle="modal" data-bs-target="#cancelform">
+                            <button type="button" class="button1 mx-1" style="margin-right: 0px;" data-bs-toggle="modal" data-bs-target="#cancelform-{{i.id}}">
                                 <h3 class="mx-3 mb-2 txtresp" style="margin-top: 0.5rem;"><b>แจ้งยกเลิก/คืนเงิน</b></h3>
                             </button>
                             <button type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#track">
@@ -396,6 +396,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         </div>
         <div id="shipped" class="tabcontent">
             {% for i in myorder %}
+                
             {% if i.State_id_id == 4 %}
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
@@ -407,43 +408,53 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                     {% endif %}                
                     <p class="date ps-4 d-flex"><b>จะถึงภายในวันที่ 27/02/65</b></p>
             </div>
+                     
                     <div class="col d-flex justify-content-md-start justify-content-between">
                             <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
                             <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
                         <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
+                        {% for p in portage %}
+                            {% if p.order_id_id == i.id %}
                         <div class="d-flex justify-content-end mt-1">
                             <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>เลขพัสดุ</b></h3>
                             <button type="button" class="button3 mx-1" style="margin-right: 0px;">
-                                <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>ABC12345678TH</b></h3>
+                                <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>{{p.portage_number}}</b></h3>
                             </button>
                         </div>
+                        <div class="d-flex justify-content-end mt-1">
+                            <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>ขนส่ง</b></h3>
+                            <button type="button" class="button3 mx-1" style="margin-right: 0px;">
+                                <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>{{p.portage_name}}</b></h3>
+                            </button>
+                        </div>
+                        {% endif %}
+                {% endfor %}
                         <div class="mt-2 d-flex justify-content-end">
-                            <button type="button" class="button1 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#confirmorder">
+                            <button type="button" class="button1 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#confirmorder-{{i.id}}">
                                 <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ยืนยันการรับสินค้า</b></h3>
                             </button>
                         </div>
                     </div>
+                    
             </div>
-
-            
-            {% endif %}
+                        {% endif %}
             {% endfor %}
         </div>
 
         <div id="review" class="tabcontent">
 
             {% for i in myorder %}
-            {% if i.State_id_id == 6 %}
+            {% if i.State_id_id == 5 %}
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
                 <div class="d-flex justify-content-between flex-wrap date">
                 <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
             </div>
                     <div class="col d-flex justify-content-md-start justify-content-between">
-                            <img class="rounded productimg" src="{% static "img/kimoji.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>
+                            <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
                         <div class="rating d-flex  my-1 flex-wrap">
@@ -626,6 +637,8 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
   {% endfor %}
 
 
+
+
 <div class="modal fade" id="track" tabindex="-1" aria-labelledby="trackmelon" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
@@ -690,7 +703,10 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
     </div>
 </div>
 
-<div class="modal fade" id="confirmorder" tabindex="-1" aria-labelledby="confirmorder" aria-hidden="true">
+
+<!-- confirmorder-->
+{% for i in myorder %}
+<div class="modal fade" id="confirmorder-{{i.id}}" tabindex="-1" aria-labelledby="confirmorder" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -702,11 +718,14 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                <button type="button" class="btn btn-danger">ยืนยัน</button>
+                <a href="{% url 'confirmorder' id=i.id %}" class="btn btn-danger">ยืนยัน</a>
             </div>
         </div>
     </div>
 </div>
+{% endfor %}
+
+
     <script>
         function openPage(pageName, elmnt, color) {
             var i, tabcontent, tablinks;

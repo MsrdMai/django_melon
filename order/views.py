@@ -1,7 +1,7 @@
 from email import message
 from django.shortcuts import render, redirect, get_object_or_404
 from user.models import TypeUser, UserInType
-from .models import State, Order, Review, Message, Disease, Bug, OrderCarving, Payment, CancelOrder
+from .models import State, Order, Review, Message, Disease, Bug, OrderCarving, Payment, CancelOrder, Portage
 from store.models import Store, TypeeOrder, Quality, Product
 from django.contrib.auth.decorators import login_required
 import datetime
@@ -118,22 +118,18 @@ def check_payment(request, id):
 
 
 @login_required
-def report_order(request):
+def report_order(request, id):
     user = request.user
     myStore = Store.objects.get(user_id=user)
     totel_product = Product.objects.filter(store_id=myStore.id)
     totel_product = len(totel_product)
     quality_list = Quality.objects.all()
 
-
-    # img = cv2.imread(myStore.store_logo.url, 0)
-    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # img = cv2.imshow('image', img)
-
-    # cv2.imwrite('data/dst/lena_opencv_red.jpg', im)
+    order = Order.objects.get(id=id)
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'quality_list' :quality_list,
+        'order' : order,
         
        }
     return render(request, template_name='report_order.html', context=context)
@@ -210,7 +206,7 @@ def cancel_order(request, id):
     order = Order.objects.get(id=id)
     cancel_description = request.POST.get('cancel_description')
     refund_contact = request.POST.get('refund_contact')
-    state = State.objects.get(id=8)
+    state = State.objects.get(id=7)
     order.State_id = state
 
     product = Product.objects.get(id=order.product_id_id)
@@ -231,7 +227,7 @@ def farmer_cancel(request, id):
     if request.method == 'POST':
         cancel_description = request.POST.get('cancel_description')
         refund_contact = request.POST.get('refund_contact')
-        state = State.objects.get(id=7)
+        state = State.objects.get(id=6)
         order.State_id = state
         product = Product.objects.get(id=order.product_id_id)
         product.product_amount = product.product_amount + order.amount
@@ -250,9 +246,28 @@ def farmer_cancel(request, id):
 @login_required
 def farm_refun(request, id):
     order = Order.objects.get(id=id)
-    state = State.objects.get(id=8)
+    state = State.objects.get(id=7)
     order.State_id = state
     order.save()
     return redirect('orderstatus')
 
+@login_required
+def send_portage(request, id):
+    order = Order.objects.get(id=id)
+    state = State.objects.get(id=4)
+    order.State_id = state
+    order.save()
+    portage_name = request.POST.get('portage_name')
+    portage_number = request.POST.get('portage_number')
+    my_portage = Portage.objects.create(order_id=order, portage_name=portage_name, portage_number=portage_number)
+    my_portage.save()
+    return redirect('order_list', id=order.product_id.id)
 
+@login_required
+def confirmorder(request, id):
+    order = Order.objects.get(id=id)
+    state = State.objects.get(id=5)
+    order.State_id = state
+    order.save()
+    return redirect('orderstatus')
+    

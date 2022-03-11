@@ -363,14 +363,14 @@ src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
         </div>
         <div class="mb-2 d-flex flex-column">
           <label for="FormControlInput1" class="form-label" style="text-align: left;">เบอร์โทรศัพท์</label>
-          <input type="tel" class="form-control" name="tel" id="FormControlInput1" required>
+          <input type="tel" class="form-control" maxlength="10" name="tel" id="FormControlInput1" required>
         </div>
 
         {% if data_product.type_id_id == 2 and data_product.select_carving == 1 %}
 
         <div class="d-flex flex-column">
           <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ลายที่ต้องการแกะสลัก</label>
-          <input type="text" name="carving_description" class="form-control w-100" id="Inputcarving" required>
+          <input type="text" maxlength="100" name="carving_description" class="form-control w-100" id="Inputcarving" required>
         </div>
         <div class="mb-2 d-flex flex-column justify-content-center">
           <label for="FormControlTextarea1" class="form-label" style="text-align: left;">แนบรูปภาพ</label>

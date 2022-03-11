@@ -12,8 +12,10 @@ urlpatterns = [
     path('payment_order/<int:id>/', views.payment_order, name='payment_order'),
     path('check_payment/<int:id>/', views.check_payment, name='check_payment'),   
     path('farmer_cancel/<int:id>/', views.farmer_cancel, name='farmer_cancel'),   
-    path('farm_refun/<int:id>/', views.farm_refun, name='farm_refun'),       
-    path('report_order/', views.report_order, name='report_order'),
+    path('farm_refun/<int:id>/', views.farm_refun, name='farm_refun'),   
+    path('send_portage/<int:id>/', views.send_portage, name='send_portage'), 
+    path('confirmorder/<int:id>/', views.confirmorder, name='confirmorder'),               
+    path('report_order/<int:id>/', views.report_order, name='report_order'),
     path('chatroom/<int:id>/', views.chatroom, name='chatroom'),
     path('pdf/<int:id>/', GeneratePdf.as_view(), name="orderPdf"), 
 
