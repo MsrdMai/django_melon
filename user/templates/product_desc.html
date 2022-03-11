@@ -114,17 +114,6 @@ input[type=number]::-webkit-outer-spin-button {
 <div class="container w-75">
 <div  style="background-color: white; ">
 
-<!-- <div class="opacity-img">
-<img
-src="{{data_product.store_id.store_logo.url}}" id="logo-farm" class="img-farm"></img>
-<img
-src="{{data_product.store_id.store_img.url}}" id="img-farm"></img>
-<div class="middle">
-    <a class="text" href="{% url 'farm-detail' id=data_product.store_id.id %}">
-       เยี่ยมชม {{data_product.store_id.store_name}}
-    </a>
-  </div>
-</div> -->
 <div class="row" style="margin: 2%;">
     <div class="col-lg-1"></div>
     <div class="col-lg-4 mt-3 mt-sm-5">
@@ -504,53 +493,6 @@ function pricetotal_carv() {
   sum = Math.round(sum * 100) / 100;
   totalPrice.innerHTML = '฿ ' + sum;
 }
-
-//   function increaseValue(button, limit) {
-//   const numberInput = button.parentElement.querySelector('.number');
-//   var value = parseInt(numberInput.innerHTML, 10);
-//   if(isNaN(value)) value = 0;
-//   if(limit && value >= limit) return;
-//   numberInput.innerHTML = value+1;
-//   pricesubtotal()
-// }
-
-
-// function decreaseValue(button) {
-//   const numberInput = button.parentElement.querySelector('.number');
-//   var value = parseInt(numberInput.innerHTML, 10);
-//   if(isNaN(value)) value = 0;  
-//   if(value < 1) return;
-//   numberInput.innerHTML = value-1;
-//   pricesubtotal()
-// }
- 
-//  function pricesubtotal() {
-//    var  subtotalPrice = document.querySelector('.product-subtotal-price');
-//  }
-
-
-
-
-//   function increaseValue(limit) {
-//   var value = parseInt(document.getElementById('number').value, 10);
-//   value = isNaN(value) ? 0 : value;
-//   // value > 6 ? value = 6 : '';
-//   value++;
-//   document.getElementById('number').value = value;
-//   pricetotal();
-// }
-
-// function decreaseValue() {
-//   var value = parseInt(document.getElementById('number').value, 10);
-//   value = isNaN(value) ? 0 : value;
-//   value < 1 ? value = 1 : '';
-//   value--;
-//   document.getElementById('number').value = value;
-//   pricetotal();
-// }
-
-
-
 </script>
 
 
