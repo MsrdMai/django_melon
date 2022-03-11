@@ -83,11 +83,19 @@ class Record(models.Model):
     recode_weight  = models.FloatField()
     sweetness = models.FloatField()
     quality_id = models.ForeignKey(Quality, on_delete=models.CASCADE)
-    covert_image = models.ImageField(upload_to='covert_image/', null=True)
-
     class Meta:
         managed = True
         db_table = "Record"
+
+class CovertImage(models.Model):
+    id = models.AutoField(primary_key=True)
+    covert_image = models.ImageField(upload_to='covert_image/', null=True)
+    recode_id = models.ForeignKey(Record, on_delete=models.CASCADE)
+
+    class Meta:
+        managed = True
+        db_table = "CovertImage"
+
 
 class CancelOrder(models.Model):
     id = models.AutoField(primary_key=True)

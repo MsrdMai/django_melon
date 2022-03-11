@@ -16,6 +16,7 @@ urlpatterns = [
     path('send_portage/<int:id>/', views.send_portage, name='send_portage'), 
     path('confirmorder/<int:id>/', views.confirmorder, name='confirmorder'),               
     path('report_order/<int:id>/', views.report_order, name='report_order'),
+    path('covert_image/<int:id>/', views.covert_image, name='covert_image'),    
     path('chatroom/<int:id>/', views.chatroom, name='chatroom'),
     path('pdf/<int:id>/', GeneratePdf.as_view(), name="orderPdf"), 
 

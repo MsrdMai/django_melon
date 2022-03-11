@@ -1,8 +1,8 @@
 from email import message
 from django.shortcuts import render, redirect, get_object_or_404
 from user.models import TypeUser, UserInType
-from .models import State, Order, Review, Message, Disease, Bug, OrderCarving, Payment, CancelOrder, Portage
-from store.models import Store, TypeeOrder, Quality, Product
+from .models import State, Order, Message, Disease, Bug, OrderCarving, Payment, CancelOrder, Portage, Record, CovertImage
+from store.models import Store, Quality, Product
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponse
@@ -10,11 +10,10 @@ from django.views.generic import View
 from .process import html_to_pdf 
 from django.template.loader import render_to_string
 from django.urls import reverse
-import cv2
-import numpy as np
 import matplotlib.pyplot as plt
 from .utils import get_filtered_image
-
+import numpy as np
+import cv2
 
 class GeneratePdf(View):
     def get(self, request, id, *args, **kwargs):
@@ -41,6 +40,7 @@ def chatroom(request, id):
 
     message = Message.objects.filter(order_id=id)
     order = Order.objects.get(id=id)
+    customer = order.User_id
 
     if request.method == 'POST':
         content = request.POST.get('content')
@@ -52,6 +52,7 @@ def chatroom(request, id):
         'totel_product' : totel_product,
         'order' : order,
         'message' : message,
+        'customer' : customer,
         }
 
     return render(request, template_name='chatroom.html', context=context)
@@ -120,20 +121,39 @@ def check_payment(request, id):
 @login_required
 def report_order(request, id):
     user = request.user
+    my_record = Record.objects.all()
     myStore = Store.objects.get(user_id=user)
     totel_product = Product.objects.filter(store_id=myStore.id)
     totel_product = len(totel_product)
     quality_list = Quality.objects.all()
-
     order = Order.objects.get(id=id)
+
+    if request.method == 'POST':
+        recode_description = request.POST.get('recode_description')
+        recode_weight = request.POST.get('recode_weight')
+        quality_id = request.POST.get('quality_id')
+        sweetness = request.POST.get('sweetness')
+        recode_image = request.FILES.get('recode_image')
+        quality = Quality.objects.get(id=quality_id)
+        new_record = Record.objects.create(order_id=order, recode_description=recode_description,recode_image=recode_image,
+        recode_weight=recode_weight, sweetness=sweetness, quality_id=quality)
+        new_record.save()
+
+        covert_image = CovertImage.objects.create(recode_id=new_record, covert_image=recode_image)
+        covert_image.save()
+        return redirect('covert_image', id=covert_image.id)
+
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'quality_list' :quality_list,
         'order' : order,
-        
+        'my_record' : my_record,
        }
     return render(request, template_name='report_order.html', context=context)
 
+@login_required
+def covert_image(request, id):
+    return render(request, template_name='covert_image.html')
 
 @login_required
 def order_product(request, id):

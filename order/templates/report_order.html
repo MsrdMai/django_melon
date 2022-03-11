@@ -67,7 +67,7 @@
 
 <div  style="background-color: white; border-radius: 30px;padding: 1%;">
 <br></br>    
-<h4>รายงานผลผลิต #Order ....</h4>
+<h4>รายงานผลผลิต #Order {{order.id}}</h4>
 <hr>
 
 <div class="row">
@@ -123,10 +123,10 @@
                 <h5 class="modal-title" id="exampleModalLabel">รายงานผลผลิต</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
-                <div class="modal-body">
-                        <form  method="POST" enctype="multipart/form-data" action="">
+                 <form  method="POST" enctype="multipart/form-data" action="">
                             {% csrf_token %}
+                <div class="modal-body">
+                       
 
         
                     <div class="form-group">
@@ -135,45 +135,35 @@
                         onchange="loadFile(event)"> <br><br>
                         <img id="output" width="200px" height="200px"/>
                     </div>
-                    
-
-             
                     <div class="form-group">
                         <label class="form-label float-start">รายละเอียด</label>
-                        <textarea  class="form-control" name="recode_description" rows="5" maxlength="255" required></textarea>
+                        <textarea  class="form-control" name="recode_description" rows="3" maxlength="255" required></textarea>
                       </div>
-               
-                
                      <br>
-
                       <div class="form-group">
                         <label class="form-label float-start">น้ำหนัก</label>
-                        <input type="number" step="0.01" min="1" max="20" class="form-control" name="recode_weight" placeholder="น้ำหนักของเมล่อน" required>
+                        <input type="number" step="0.01" min="1" max="10" class="form-control" name="recode_weight" placeholder="น้ำหนักของเมล่อน" required>
                       </div> 
                     <br>
-
                       <div class="form-group">
                         <label class="form-label float-start">คุณภาพ</label>
                         <select class="form-control" name="quality_id">
-                           
                             {% for i in  quality_list %}
                             <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.quality_name }}</option>
                             {% endfor %}
                           </select>
                     </div>
-
                     <br>
                     <div class="form-group">
                         <label class="form-label float-start">ความหวาน</label>
-                        <input type="number" min="1" max="1000" class="form-control" name="sweetness" placeholder="ความหวานที่วัดได้" required>
+                        <input type="number" min="1" max="30" class="form-control" name="sweetness" placeholder="ความหวานที่วัดได้" required>
                     </div> 
-
-                </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-              <button type="button" class="btn btn-primary">รายงาน</button>
+              <button type="submit" class="btn btn-primary">รายงาน</button>
             </div>
+          </form>
 
           </div>
         </div>

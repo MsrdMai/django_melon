@@ -183,11 +183,6 @@
         <br>
           <div style=" overflow-x: hidden;overflow-y: auto;width: 100%;height:400px;" id="scrollbar">
 
-            <div class="msg msg_from">
-              <div class="recepient"><span class="icon"><img id="persona" src="{{ user.socialaccount_set.all.0.get_avatar_url }}"></span><span class="name">{{user.username }}</span><span class="time">1 day ago</span></div>
-              <div class="content">Do not write me anymore.</div>
-            </div>
-           
               {% for txt in message %}
 
               {% if txt.User_id == user %}
@@ -199,7 +194,7 @@
               
             {% elif txt.User_id != user %}
             <div class="msg msg_from">
-              <div class="recepient"><span class="icon"><img id="persona" src="{{ txt.User_id_id.socialaccount_set.all.0.get_avatar_url }}"></span><span class="name">{{user.username }}</span><span class="time">{{txt.date_added}}</span></div>
+              <div class="recepient"><span class="icon"><img id="persona" src="{{ customer.socialaccount_set.all.0.get_avatar_url }}"></span><span class="name">{{user.username }}</span><span class="time">{{txt.date_added}}</span></div>
               <div class="content">{{txt.content}}</div>
             </div>
               {% endif %}

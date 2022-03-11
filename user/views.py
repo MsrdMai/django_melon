@@ -147,7 +147,7 @@ def product_book(request):
     }
     return render(request, template_name='product_book.html', context=context)
 
-
+@login_required
 def orderstatus(request):
     user = request.user
     myorder = Order.objects.filter(User_id=user)
@@ -179,10 +179,30 @@ def orderstatus(request):
         'count_review' : count_review,
         'count_waitpay' : count_waitpay,
         'count_prepar' : count_prepar,
-
     }
-
     return render(request, template_name='orderstatus.html', context=context)
+
+
+@login_required
+def chatTofarmer(request,id):
+    user = request.user
+    message = Message.objects.filter(order_id=id)
+    order = Order.objects.get(id=id)
+    
+    store = order.product_id.store_id
+
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        myChat = Message.objects.create(order_id=order, content=content,User_id=user)
+        myChat.save()
+        return redirect('chatTofarmer', id=order.id)
+
+    context = {
+        'message': message,
+        'order' : order,
+        'store' :store,
+    }
+    return render(request, template_name='chatTofarmer.html', context=context)
 
 def product_desc(request,id):
     data_product = Product.objects.get(id=id)
