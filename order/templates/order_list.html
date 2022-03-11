@@ -203,7 +203,7 @@
           <div class="row">
             <div class="col-sm-6 col-md-6 text-left">
               <p class="text-2xl font-black  text-green-600 	">
-                Username : {{i.User_id.username}}
+                Username : {{i.User_id.first_name}} {{ i.User_id.last_name }}
               </p>
               <p class="text-1xl text-gray-800 ">
                 จำนวน : {{i.amount}} <br></br>
@@ -346,13 +346,6 @@
               </a>
               {% endif %}
 
-              {% if i.State_id.id == 7 %}
-              <a data-bs-toggle="modal" data-bs-target="#orderCancel-id"  class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
-                <img src="{% static "icon/cancel.png" %}" width="30px" height="30px" style="display:inline-block;" />
-                คืนเงินเรียบร้อยแล้ว
-              </a>
-              {% endif %}
-
               <br><br>
               <p class="float-end" style="padding: 1%;">สั่งเมื่อ : {{i.date_time}}</p>
             </div>
@@ -407,24 +400,18 @@
           <h5 class="modal-title" id="exampleModalLabel">ยกเลิกคำสั่งซื้อ OrderID#..</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          
-          <div class="modal-body">
-                  <form  method="POST" enctype="multipart/form-data" action="">
+           <form  method="POST" enctype="multipart/form-data" action="{% url 'farmer_cancel' id=i.id %}">
                       {% csrf_token %}
-
+          <div class="modal-body">
               <div class="form-group">
                   <label class="form-label float-start">สาเหตุที่ต้องการยกเลิก</label>
                   <textarea  class="form-control" name="cancel_description" rows="5" maxlength="255" required></textarea>
                 </div>
-         
-          
                <br>
-
                 <div class="form-group">
                   <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
                   <textarea  class="form-control" name="refund_contact" rows="3" maxlength="255" required></textarea>                </div> 
               <br>
-
                 <div class="form-group">
                   <label class="form-label float-start">แมลงที่เกี่ยวข้อง</label>
                   <select class="form-control" name="bug_id">
@@ -434,7 +421,6 @@
                       {% endfor %}
                     </select>
               </div>
-
               <br>
               <div class="form-group">
                 <label class="form-label float-start">โรคที่เกี่ยวข้อง</label>
@@ -444,16 +430,13 @@
                     <option  value="{{ i.id }}" {% if quality_id ==  i.id  %}selected{% endif %}>{{ i.disease_name }}</option>
                     {% endfor %}
                   </select>
-            </div>
-
-              <br>
-
-          </form>
+            </div><br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-        <button type="button" class="btn btn-danger">แจ้ง</button>
+        <button type="submit" class="btn btn-danger">แจ้ง</button>
       </div>
+    </form>
 
     </div>
   </div>

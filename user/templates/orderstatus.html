@@ -1,4 +1,12 @@
 {% extends "TopnavUser.html" %} {% load static %} {% load mathfilters %}{% block content %}
+
+
+{% if send_payment_error %}
+<script>
+swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
+</script>
+{%endif%}
+
 <style>
     * {
         box-sizing: border-box
@@ -286,6 +294,36 @@
           {% endif %}
         {% endfor %}
 
+        {% for i in myorder %}
+        {% if i.State_id_id == 7 %}
+    
+    <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
+        <br>
+        <div class="d-flex justify-content-between flex-wrap date">
+        {% if i.product_id.type_id.id == 2 %}
+        <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
+        {% else %}
+        <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
+        {% endif %}
+        <p class="date ps-4 d-flex"><b>จำนวนชำระ</b></p>
+    </div>
+            <div class="col d-flex justify-content-md-start justify-content-between">
+                    <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                    <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
+            </div>
+            <div class="col-md-6 d-flex flex-column">
+                <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
+                <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
+                <div class="d-flex flex-wrap justify-content-end mt-1">
+                    <a type="button" class="button2 mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#farm_refun-{{i.id}}">
+                        <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>ได้รับเงินคืนจากฟาร์มแล้ว</b></h3>
+                    </a>
+                    
+                </div>
+            </div>
+    </div>
+      {% endif %}
+    {% endfor %}
 
         
         {% for i in myorder %}
@@ -472,6 +510,9 @@
 
     </script>
    
+
+   <!-- paymentform-->
+
    {% for i in myorder %}
 
 <div class="modal fade" id="paymentform-{{i.id}}" tabindex="-1" aria-labelledby="paymentformlabel" aria-hidden="true">
@@ -519,6 +560,35 @@
   </div>
 </div>
 {% endfor %}
+
+
+
+<!-- farm_refun-->
+
+{% for i in myorder %}
+<div class="modal fade" id="farm_refun-{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">ยืนยันการได้รับเงินคืนจากฟาร์ม</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        คุณแน่ใจหรือไม่ว่าตรวจสอบเรียบร้อย
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <a type="button" class="btn btn-danger" href="{% url 'farm_refun' id=i.id %}">ยืนยัน</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+
+<!-- cancelOrder-->
 
 
 {% for i in myorder %}

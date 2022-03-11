@@ -193,10 +193,15 @@ def send_payment(request, id):
     payment_image = request.FILES.get('payment_image')
     bank_name = request.POST.get('name_bank')
     state = State.objects.get(id=2)
-    order.State_id = state
-    order.save()
-    payment = Payment.objects.create(order_id=order, payment_image=payment_image, bank_name=bank_name)
-    payment.save()
+
+    if payment_image == None:
+        send_payment_error = 'กรุณาอัปโหลดรูปหลักฐานการโอนเงิน'
+        return redirect('orderstatus')
+    else:
+        order.State_id = state
+        order.save()
+        payment = Payment.objects.create(order_id=order, payment_image=payment_image, bank_name=bank_name)
+        payment.save()
 
     return redirect('orderstatus')
 
@@ -217,5 +222,37 @@ def cancel_order(request, id):
     bug_id = Bug.objects.get(id=5)
     mycancel = CancelOrder.objects.create(order_id=order,cancel_description=cancel_description, refund_contact=refund_contact,disease_id=disease_id,bug_id=bug_id)
     mycancel.save()
-
     return redirect('orderstatus')
+
+@login_required
+def farmer_cancel(request, id):
+    order = Order.objects.get(id=id)
+
+    if request.method == 'POST':
+        cancel_description = request.POST.get('cancel_description')
+        refund_contact = request.POST.get('refund_contact')
+        state = State.objects.get(id=7)
+        order.State_id = state
+        product = Product.objects.get(id=order.product_id_id)
+        product.product_amount = product.product_amount + order.amount
+        product.save()
+        order.save()
+
+        disease_id = Disease.objects.get(id=request.POST.get('disease_id'))
+        bug_id = Bug.objects.get(id=request.POST.get('bug_id'))
+        mycancel = CancelOrder.objects.create(order_id=order,cancel_description=cancel_description, refund_contact=refund_contact,disease_id=disease_id,bug_id=bug_id)
+        mycancel.save()
+        return redirect('order_list', id=order.product_id.id)
+    else:
+        return redirect('order_list', id=order.product_id.id)
+
+
+@login_required
+def farm_refun(request, id):
+    order = Order.objects.get(id=id)
+    state = State.objects.get(id=8)
+    order.State_id = state
+    order.save()
+    return redirect('orderstatus')
+
+
