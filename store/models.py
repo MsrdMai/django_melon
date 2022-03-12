@@ -27,6 +27,11 @@ class TypeeOrder(models.Model):
         managed = True
         db_table = "TypeeOrder"
 
+    # TypeeOrder = (
+    #     (ซื้อ),
+    #     (จอง),
+    # )
+
 class Quality(models.Model):
     id = models.AutoField(primary_key=True)
     quality_name = models.CharField(max_length=30)
@@ -35,6 +40,13 @@ class Quality(models.Model):
         managed = True
         db_table = "Quality"
 
+    # Quality = (
+    #     (ชั้นพิเศษ),
+    #     (ชั้นหนึ่ง),
+    #     (ชั้นสอง),
+    #     (ผลผลิตได้รับความเสียหาย), เป็นคุณภาพที่ไม่สามารถทำการซื้อจองได้อีก กรุณายกเลิกสินค้า
+    #     (รอผลผลิตโต), ผลผลิตอยู่ในช่วงการดูแลอย่างใกล้ชิด
+    # )
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)

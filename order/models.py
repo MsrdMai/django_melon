@@ -13,15 +13,14 @@ class State(models.Model):
         db_table = "State"
 
     # STATUS = (
-    #     (รอชำระเงิน, 'Waiting for payment'),
-    #     (รอการตรวจสอบจากร้านค้า, 'Waiting for verify'),
-    #     (เตรียมคำสั่งซ้ือ, '‘Prepare order'),
-    #     (ร้านค้าส่งสินค้าแล้ว, 'Product delivered'),
-    #     (ได้รับสินค้าแล้ว, 'Received the product'),
-    #     (รอการรีวิว, 'Waiting for review'),
-    #     (คำสั่งซื้อเสร็จสมบูรณ์, '‘Complete order'),
-    #     (แจ้งยกเลิกคำสั่งซื้อ รอยืนยันจากผู้ซ้ื้อ, 'Notify cancel order'),
-    #     (ยกเลิกคe สั่งซื้อแล้ว, '‘Canceled order'),
+    #     (รอชำระเงิน),
+    #     (รอการตรวจสอบจากร้านค้า),
+    #     (เตรียมคำสั่งซ้ือ),
+    #     (ร้านค้าส่งสินค้าแล้ว),
+    #     (ได้รับสินค้าแล้ว),
+    #     (แจ้งยกเลิกคำสั่งซื้อ รอยืนยัน),
+    #     (ยกเลิกคำสั่งซื้อแล้ว),
+    #     (คำสั่งซื้อเสร็จสมบูรณ์),
 
     # )
 
@@ -66,6 +65,16 @@ class Disease(models.Model):
         managed = True
         db_table = "Disease"
 
+    # Disease = (
+    #     (โรคราน้ำค้าง),
+    #     (โรคเหี่ยวจากเชื้อฟูซาเลียม),
+    #     (โรคใบด่างจากเชื้อไวรัส),
+    #     (โรคต้นแตกหรือยางไหล),
+    #     (โรคราแป้งขาว),
+    #     (ไม่มี),
+
+    # )
+
 class Bug(models.Model):
     id = models.AutoField(primary_key=True)
     bug_name = models.CharField(max_length=50)
@@ -73,6 +82,14 @@ class Bug(models.Model):
     class Meta:
         managed = True
         db_table = "Bug"
+
+        # Bug = (
+    #     (เพลี้ยไฟ),
+    #     (ด้วงเต่าแตง),
+    #     (หนอนชอนใบ),
+    #     (แมลงวันผลไม้),
+    #     (ไม่มี),
+    # )
 
 class Record(models.Model):
     id = models.AutoField(primary_key=True)

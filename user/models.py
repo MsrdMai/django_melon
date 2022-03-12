@@ -11,6 +11,12 @@ class TypeUser(models.Model):
     def __str__(self):
         return self.type_name
 
+    # TypeUser = (
+    #     (เจ้าของฟาร์ม),
+    #     (ผู้ซื้อออนไลน์),
+    # )
+
+
 
 class UserInType(models.Model):
     id = models.AutoField(primary_key=True)
