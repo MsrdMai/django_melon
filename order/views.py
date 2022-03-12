@@ -153,6 +153,29 @@ def report_order(request, id):
 
 @login_required
 def covert_image(request, id):
+
+    get_img = CovertImage.objects.get(id=id)
+    img_main  = cv2.imread(get_img.covert_image.path, flags=cv2.IMREAD_COLOR)
+    img_gray = cv2.cvtColor(img_main, cv2.COLOR_BGR2GRAY)
+    # To calculate the gradients of an image it is best not to use uint8 since you will miss some edges
+
+    # Calculate gradients using the laplacian method
+    # Convert the image to using 64 bit floats and calculate the gradients afterwards
+    lap = cv2.Laplacian(img_gray,cv2.CV_64F)  
+    lap = np.uint8(np.absolute(lap))  # Convert the image back into uint8
+    # Calculate the edges using the Sobel method
+
+    # In the Sobel method the gradients are calculated both horizontally and vertically
+    sobel_x = cv2.Sobel(img_gray, cv2.CV_64F, 1, 0)  # Remember to convert into 64 bit floats
+    sobel_y = cv2.Sobel(img_gray, cv2.CV_64F, 0, 1)
+
+    sobel_x = np.uint8(np.absolute(sobel_x))  # remember to convert back into 8 bit unsigned integers
+    sobel_y = np.uint8(np.absolute(sobel_y))
+    sobel_combined = cv2.bitwise_or(sobel_x, sobel_y)
+
+    ## Save CovertImage
+    cv2.imwrite(get_img.covert_image.path, sobel_combined)
+
     return render(request, template_name='covert_image.html')
 
 @login_required
