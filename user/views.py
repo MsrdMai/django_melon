@@ -345,3 +345,6 @@ def admin_editOrder(request):
             'type_state' : type_state,
         }
     return render(request, template_name='admin_editOrder.html', context=context)
+
+def historyorder(request):
+    return render(request, template_name='historyorder.html')

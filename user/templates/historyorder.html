@@ -1,0 +1,128 @@
+{% extends "TopnavUser.html" %} {% load static %}{% block content %}
+<head>
+    <style>
+         .tablink {
+        background-color: rgb(175, 224, 161);
+        color: rgb(27, 116, 0);
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.33%;
+    }
+
+    .tablink:hover {
+        background-color: rgb(149, 192, 137);
+        color:  rgb(27, 116, 0);
+    }
+
+    /* Style the tab content (and add height:100% for full page content) */
+    .tabcontent {
+        color: rgb(27, 116, 0);
+        display: none;
+        padding: 120px 40px;
+        height: 100vh;
+        border-bottom: 2px;
+    }
+
+    p{
+        margin: 0%;
+    }
+
+    #success, #cancelorder, #refund{
+        background-color: whitesmoke;
+    }
+    .producttext{
+        text-align: left;
+    }
+    .pricetext{
+        font-size: 50px; 
+        margin-top: 20px; 
+        color: red;
+    }
+    .txtresp{
+        font-size: 15px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .tablink {
+            font-size: 10px;
+            padding: 8px;
+        }
+        .tabcontent{
+            padding: 80px 40px; 
+        }
+        .statusimg{
+            width: 25px;
+        }
+        p{
+            margin: 0%;
+        }
+        .date, .txtresp{
+            font-size: 10px;
+        }
+        .productimg{
+            width: 100px;
+            height: 100px;
+        }
+        .pricetext{
+            margin-top: 0px;
+            font-size:30px;
+        }
+        .producttext{
+            text-align: right;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="border border-1">
+        <button class="tablink" onclick="openPage('success', this, 'rgb(149, 192, 137)')" id="defaultOpen">
+            <img class="statusimg pb-2" src="{% static "icon/checked.png" %}" width="50px" />
+            <p><b>สำเร็จ</b><span class="badge badge-pill badge-danger">{{count_waitpay}}</span></p>
+        </button>
+        <button class="tablink" onclick="openPage('cancelorder', this, 'rgb(149, 192, 137)')">
+            <img class="statusimg pb-2" src="{% static "icon/multiply.png" %}" width="50px" />
+            <p><b>ยกเลิก</b><span class="badge badge-pill badge-danger">{{count_prepar}}</span></p>
+        </button>
+        <button class="tablink" onclick="openPage('refund', this, 'rgb(149, 192, 137)')">
+            <img class="statusimg pb-2" src="{% static "icon/cashback.png" %}" width="50px" />
+            <p><b>คืนเงิน</b><span class="badge badge-pill badge-danger">{{count_portage}}</span></p>
+        </button>
+        </div>
+
+        <div id="success" class="tabcontent">
+            
+        </div>
+
+        <div id="cancelorder" class="tabcontent">
+
+        </div>
+
+        <div id="refund" class="tabcontent">
+
+        </div>
+
+
+        <script>
+            function openPage(pageName, elmnt, color) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+            document.getElementById(pageName).style.display = "block";
+            elmnt.style.backgroundColor = color;
+        }
+
+        document.getElementById("defaultOpen").click();
+        </script>
+</body>
+{% endblock %}
