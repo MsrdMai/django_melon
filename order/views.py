@@ -121,7 +121,9 @@ def check_payment(request, id):
 @login_required
 def report_order(request, id):
     user = request.user
-    my_record = Record.objects.all()
+    my_record = Record.objects.filter(order_id=id)
+    count_record = Record.objects.filter(order_id=id).count()
+    list_img = CovertImage.objects.all()
     myStore = Store.objects.get(user_id=user)
     totel_product = Product.objects.filter(store_id=myStore.id)
     totel_product = len(totel_product)
@@ -148,13 +150,21 @@ def report_order(request, id):
         'quality_list' :quality_list,
         'order' : order,
         'my_record' : my_record,
+        'list_img' : list_img,
+        'count_record' : count_record
        }
     return render(request, template_name='report_order.html', context=context)
 
 @login_required
 def covert_image(request, id):
+    user = request.user
+    myStore = Store.objects.get(user_id=user)
+    totel_product = Product.objects.filter(store_id=myStore.id)
+    totel_product = len(totel_product)
 
     get_img = CovertImage.objects.get(id=id)
+    get_order = get_img.recode_id.order_id
+
     img_main  = cv2.imread(get_img.covert_image.path, flags=cv2.IMREAD_COLOR)
     img_gray = cv2.cvtColor(img_main, cv2.COLOR_BGR2GRAY)
     # To calculate the gradients of an image it is best not to use uint8 since you will miss some edges
@@ -176,7 +186,13 @@ def covert_image(request, id):
     ## Save CovertImage
     cv2.imwrite(get_img.covert_image.path, sobel_combined)
 
-    return render(request, template_name='covert_image.html')
+    context = {'get_img' : get_img,
+        'get_order' : get_order,
+        'myStore' : myStore,
+        'totel_product' : totel_product,
+       }
+
+    return render(request, template_name='covert_image.html', context=context)
 
 @login_required
 def order_product(request, id):

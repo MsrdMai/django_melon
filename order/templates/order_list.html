@@ -339,7 +339,7 @@
               </a>
               {% endif %}
 
-              {% if product_order.select_carving == 1 and i.State_id.id == 3 %}
+              {% if product_order.select_carving == 1 or product_order.type_id_id == 2  and i.State_id.id == 3 %}
               <a href="{% url 'report_order' id=i.id %}"  class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-report-this-order" style="color: black;">
                 <img src="{% static "icon/input.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 รายงานผลผลิต

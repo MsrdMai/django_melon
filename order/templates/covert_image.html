@@ -1,0 +1,26 @@
+{% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
+
+<style>
+
+
+
+</style>
+
+
+<br><br>
+<div class="container"style="background-color: white;">
+<br></br>    
+
+
+<div class="col-sm-5">
+    <img src={{get_img.covert_image.url}} height="300px" width="300px" style="object-fit: scale-down;" />
+</div>
+
+<br></br>   
+<a href="{% url 'report_order' id=get_order.id %}"  class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-report-this-order" style="color: black;">
+        <i class="bi bi-arrow-left-square-fill"></i>กลับไปดูรายงาน
+    </a>
+</br><br></br>
+</div><br><br>
+
+{% endblock %}
