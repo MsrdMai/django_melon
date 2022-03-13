@@ -347,4 +347,9 @@ def admin_editOrder(request):
     return render(request, template_name='admin_editOrder.html', context=context)
 
 def historyorder(request):
-    return render(request, template_name='historyorder.html')
+    user = request.user
+    myorder = Order.objects.filter(User_id=user)
+    context = {
+            'myorder' : myorder,
+        }
+    return render(request, template_name='historyorder.html', context=context)
