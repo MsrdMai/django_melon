@@ -102,8 +102,9 @@
                 <br>
                 <div class="col-sm" style="border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
                 <canvas id="product_quality" style="width:100%;"></canvas>
-                </div>   
-                         
+                </div>  
+                
+             
                </center>
             <br><br><br>
         
@@ -157,13 +158,16 @@
       legend: {display: false},
       title: {
             display: true,
-            text: "คุณภาพทั้งหมดของเมล่อน"
+            text: "คุณภาพทั้งหมดของเมล่อนในเว็บไซต์ที่คงเหลือ"
             },
       scales: {
       yAxes: [{ticks: {min: 0, max: count_product_amont}}],
         },
     }
     });
+
+
+
   </script>
 
 {% endblock %}

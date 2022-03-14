@@ -257,7 +257,7 @@ def admin_manager(request):
     count_order  =Order.objects.all().count()
     product =Product.objects.all()
     qulity = Quality.objects.all()
-
+    ## Product-Qulity
     q = []
     for i in qulity:
         q.append(i.quality_name)
@@ -276,14 +276,13 @@ def admin_manager(request):
         for j in qulity:
             if i.quality_id_id == j.id:
                 qulitydict[j.quality_name] += i.product_amount
-
-    # เรียงใหม่
-    sorded_qulitydict = sorted(qulitydict.items(), key=lambda x: x[1], reverse=True)
     v = []
     # จำยัดใส่ List
     for i in qulitydict:
         for values in qulitydict.values():
             v.append(values)
+
+    ## ## ## ## ## ## 
 
     max_pd = Product.objects.all().aggregate(Max('product_price')).get('product_price__max')
 
