@@ -2,7 +2,7 @@ from itertools import product
 from sre_parse import State
 from django.shortcuts import render, redirect
 from .models import TypeUser, UserInType
-from order.models import State, Order, Review, Message, OrderCarving, Portage, CancelOrder
+from order.models import State, Order, Review, Message, OrderCarving, Portage, CancelOrder,Record, CovertImage
 from store.models import Store, TypeeOrder, Quality, Product
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
@@ -157,22 +157,31 @@ def orderstatus(request):
     count_waitpay = Order.objects.filter(User_id=user, State_id=1).count()
     count_prepar = Order.objects.filter(User_id=user, State_id=3).count()
 
-    all_carving = OrderCarving.objects.all()
-    list_carving = []
+    my_record = Record.objects.all()
+    list_img = CovertImage.objects.all()
 
-    for j in myorder:
-        for i in all_carving:
-            if i.order_id == j.id:
-                list_carving.append(i.id)
+    # for j in myorder:
+    #     for i in record:
+    #         if i.order_id == j.id:
+    #             my_record.append(i.id)
+
+    # all_carving = OrderCarving.objects.all()
+    # list_carving = []
+
+    # for j in myorder:
+    #     for i in all_carving:
+    #         if i.order_id == j.id:
+    #             list_carving.append(i.id)
 
     context = {
         'myorder' : myorder,
-        'list_carving' : list_carving,
         'portage' : portage,
         'count_review' : count_review,
         'count_waitpay' : count_waitpay,
         'count_prepar' : count_prepar,
         'count_sent' : count_sent,
+        'my_record' : my_record,
+        'list_img' : list_img,
     }
     return render(request, template_name='orderstatus.html', context=context)
 

@@ -341,7 +341,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                             </button>
 
                             {% if i.product_id.type_id.id == 2 %}
-                            <button type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#track">
+                            <button type="button" class="button2 mx-1" data-bs-toggle="modal" data-bs-target="#track-{{i.id}}">
                                 <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ติดตามผลผลิต</b></h3>
                             </button>
                             {% endif %}
@@ -587,71 +587,56 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
 
 
 
+  {% for i in myorder %}
+         {% for k in my_record %}
+                {% if k.order_id_id == i.id %}
+                        {% for j in list_img %}
+                            {% if j.recode_id.id == k.id %}
+                            <div class="modal fade" id="track-{{i.id}}" tabindex="-1" aria-labelledby="trackmelon" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-0">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="container">
+                                            <div  style="background-color: white; border-radius: 30px;padding: 1%;">
+                                        
+                                            <h4>รายงานผลผลิต #Order {{i.id}}</h4>
+                                            <hr>
 
-<div class="modal fade" id="track" tabindex="-1" aria-labelledby="trackmelon" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="container">
-                <div  style="background-color: white; border-radius: 30px;padding: 1%;">
-               
-                <h4>รายงานผลผลิต #Order ....</h4>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-1"> </div>
-                    <div class="col-sm-3" style="padding: 1%;">
-                        <small  class="form-text text-muted">จำนวนครั้งที่รายงาน : 2 ครั้ง</small>
-                    </div>
-                    <div class="col-sm-3"> </div>
-                  <div class="col-sm-1"></div>
-                </div>
-                <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5">
-                    <img src="{% static "img/test1.jpg" %}" height="300px" width="300px" style="object-fit: scale-down;" />
-                </div> 
-                <div class="col-sm-1"></div> 
-                <div class="col-sm-4" style="text-align: start; margin: 1%;">
-                    <br>
-                    <p>ครั้งที่ : 1</p>
-                    <p>บันทึกเมื่อ : 12/08/2565</p>
-                    <p>รายละเอียด : ระยะที่2 เกรสเริ่มออก</p>
-                    <p>น้ำหนัก :0</p>
-                    <p>ความหวาน : 0</p>
-                    <p>คุณภาพ : กำลังเติบโต</p>
-                </div>
-                <div class="col-sm-1"></div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-5">
-                        <img src="{% static "img/test2.jpg" %}" height="300px" width="300px" style="object-fit: scale-down;" />
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-4" style="text-align: start; margin: 1%;">
-                        <br>
-                        <p>ครั้งที่ : 2</p>
-                        <p>บันทึกเมื่อ : 20/08/2565</p>
-                        <p>รายละเอียด : ระยะที่2 </p>
-                        <p>น้ำหนัก :0</p>
-                        <p>ความหวาน : 0</p>
-                        <p>คุณภาพ : กำลังเติบโต</p>
-                    </div>
-                    <div class="col-sm-1"></div> 
-                    </div>
-         
-                </div>
-                </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">ตกลง</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+                                            <div class="row">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-3">
+                                                <img src="{{k.recode_image.url}}" height="300px" width="300px"/>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <img src={{j.covert_image.url}} height="300px" width="300px"/>
+                                            </div> 
+                                            <div class="col-sm-1"></div> 
+                                            <div class="col-sm-3" style="text-align: start; margin: 1%;">
+                                                <br>
+                                                <p>บันทึกเมื่อ : {{k.recode_date}}</p>
+                                                <p>รายละเอียด : {{k.recode_description}}</p>
+                                                <p>น้ำหนัก : {{k.recode_weight}}  กิโลกรัม</p>
+                                                <p>ความหวาน :  {{k.sweetness}} บริกซ์</p>
+                                                <p>คุณภาพ : {{k.quality_id.quality_name}}</p>
+                                            </div>
+                                         
+                                            </div>
+                                            <hr>
+                                            </div>
+                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">ตกลง</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+            {% endfor %}
+{% endfor %}
 
 <!-- confirmorder-->
 {% for i in myorder %}
