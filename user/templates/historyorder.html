@@ -107,7 +107,16 @@
         background-color: #475569;
         color: white;
     }
+    .chat {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #2f50e0;
+    }
 
+    .chat:hover {
+        background-color: #2f50e0;
+        color: white;
+    }
     </style>
 </head>
 <body>
@@ -139,7 +148,7 @@
             {% else %}
             <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
             {% endif %}
-            <p class="date ps-4 d-flex"><b>จำนวนชำระ</b></p>
+            <p class="date ps-4 d-flex"><b>หมดอายุวันที่ : {{i.product_id.date_expire}}</b></p>
         </div>
                 <div class="col d-flex justify-content-md-start justify-content-between">
                         <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
@@ -181,7 +190,7 @@
                 <div class="col-md-6 d-flex flex-column">
                     <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                     <div class="d-flex flex-wrap justify-content-end mt-1">
-                        <a type="button" class="cancel mx-1" style="margin-right: 0px;" disabled>
+                        <a type="button" class="cancel mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}">
                             <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>ยกเลิกสินค้าแล้ว</b></h3>
                         </a>
                         
@@ -214,8 +223,14 @@
                 <div class="col-md-6 d-flex flex-column">
                     <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                     <div class="d-flex flex-wrap justify-content-end mt-1">
+                        <a type="button" class="cancel mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}">
+                            <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>เหตุผลที่ยกเลิก</b></h3>
+                        </a>
                         <a type="button" class="button2 mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#farm_refun-{{i.id}}">
                             <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>ได้รับเงินคืนจากฟาร์มแล้ว</b></h3>
+                        </a>
+                        <a  class="chat mx-1" href="{% url 'chatTofarmer' id=i.id %}">
+                            <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>สนทนา</b></h3>
                         </a>
                         
                     </div>
@@ -246,6 +261,55 @@
     </div>
   </div>
 </div>
+{% endfor %}
+
+
+<!-- resonCancel -->
+{% for i in myorder %}
+  {% for c in list_cancel %}
+      {% if i.id == c.order_id_id %}
+<div class="modal fade" id="resonCancel-{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">เหตุผลที่ยกเลิก</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label float-start">สาเหตุที่ต้องการยกเลิก</label>
+          <input type="text" class="form-control" value="{{c.cancel_description}}" disabled>
+        </div>
+     
+      <br>
+      <div class="form-group">
+          <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
+          <input type="text" class="form-control" value="{{c.refund_contact}}" disabled>
+        </div>
+        <br>
+
+        <div class="row">
+        <div class="form-group col-sm">
+          <label class="form-label float-start">โรคที่เกี่ยวข้อง</label>
+          <input type="text" class="form-control" value="{{c.disease_id.disease_name}}" disabled>
+        </div>
+
+        <div class="form-group col-sm">
+          <label class="form-label float-start">แมลงที่เกี่ยวข้อง</label>
+          <input type="text" class="form-control" value="{{c.bug_id.bug_name}}" disabled>
+        </div>
+      </div>
+      
+      <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+      {% endif %}
+    {% endfor %}
 {% endfor %}
 
 

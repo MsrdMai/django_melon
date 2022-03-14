@@ -67,6 +67,7 @@ def order_list(request, id):
     product_order = Product.objects.get(id=id)
     bug = Bug.objects.all()
     disease = Disease.objects.all()
+    list_cancel = CancelOrder.objects.all()
 
     input_Typestate = request.GET.get('input_Typestate', '')
     order_list = Order.objects.filter(
@@ -85,6 +86,7 @@ def order_list(request, id):
         'disease' : disease,
         'order_list' : order_list,
         'order_carving' : order_carving,
+        'list_cancel' : list_cancel
         }
 
     return render(request, template_name='order_list.html', context=context)

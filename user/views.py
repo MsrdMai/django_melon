@@ -2,7 +2,7 @@ from itertools import product
 from sre_parse import State
 from django.shortcuts import render, redirect
 from .models import TypeUser, UserInType
-from order.models import State, Order, Review, Message, OrderCarving, Portage
+from order.models import State, Order, Review, Message, OrderCarving, Portage, CancelOrder
 from store.models import Store, TypeeOrder, Quality, Product
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
@@ -151,16 +151,9 @@ def product_book(request):
 def orderstatus(request):
     user = request.user
     myorder = Order.objects.filter(User_id=user)
-
-    count_portage = 0
     portage = Portage.objects.all()
-
-    for d in myorder:
-        for p in portage:
-            if d.id == p.order_id:
-                count_portage += 1
-
     count_review = Order.objects.filter(User_id=user, State_id=5).count()
+    count_sent = Order.objects.filter(User_id=user, State_id=4).count()
     count_waitpay = Order.objects.filter(User_id=user, State_id=1).count()
     count_prepar = Order.objects.filter(User_id=user, State_id=3).count()
 
@@ -175,10 +168,11 @@ def orderstatus(request):
     context = {
         'myorder' : myorder,
         'list_carving' : list_carving,
-        'count_portage' : count_portage,
+        'portage' : portage,
         'count_review' : count_review,
         'count_waitpay' : count_waitpay,
         'count_prepar' : count_prepar,
+        'count_sent' : count_sent,
     }
     return render(request, template_name='orderstatus.html', context=context)
 
@@ -349,7 +343,10 @@ def admin_editOrder(request):
 def historyorder(request):
     user = request.user
     myorder = Order.objects.filter(User_id=user)
+    list_cancel = CancelOrder.objects.all()
+    
     context = {
             'myorder' : myorder,
+            'list_cancel' : list_cancel,
         }
     return render(request, template_name='historyorder.html', context=context)

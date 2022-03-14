@@ -176,6 +176,15 @@ input[type="radio"]#radio-type-2:focus + label{
   margin:1px;
 }
 
+#btn-resonCancel{
+  border-width: 2px; 
+  border-color: #1e3a8a; 
+  color: #1e3a8a; 
+  background-color: #fee2e2; 
+  margin:1px;
+}
+
+
 #btn-report-this-order{
   border-width: 2px; 
   border-color: #7c3aed; 

@@ -264,22 +264,9 @@
                 height="30px"
                 style="padding: 5px; display:inline-block; margin: 5px; align-items: center;"
               ></img>
-              <br><br>
+            
 
-              <a
-              class="col-sm-6 btn btn-outline-info "
-              href="{% url 'chatroom' id=i.id %}"
-              >
-              <img
-              src="{% static "icon/bubble-chat.png" %}"
-              width="30px"
-              height="30px"
-              style="display:inline-block;"
-            />
-              
-              การสนทนา</a>
-
-            {% elif i.State_id.id == 3 %}
+            {% elif i.State_id.id == 3 or i.State_id.id == 4 or i.State_id.id == 5 or i.State_id.id == 8 %}
 
             <a style="color: #991b1b; display:inline-block;"
             href="{% url 'payment_order' id=i.id %}"
@@ -293,8 +280,10 @@
               id="payment-check"
             ></img>
 
-             <br><br>
-              <a
+
+            {% endif %}
+             <br><br><br>
+              <!-- <a
               class="col-sm-6 btn btn-outline-dark" 
               href="{% url 'orderPdf' id=product_order.id %}"
               >
@@ -304,9 +293,10 @@
               height="30px"
               style="display:inline-block;"
             />
-              พิมพ์ใบจัดส่ง</a>
+              พิมพ์ใบจัดส่ง</a> -->
              
            
+              {% if i.State_id.id == 2 or i.State_id.id == 3 or i.State_id.id == 4 or i.State_id.id == 6 %}
               <a
               class="col-sm-6 btn btn-outline-info "
               href="{% url 'chatroom' id=i.id %}"
@@ -319,8 +309,8 @@
             />
               
               การสนทนา</a>
-
             {% endif %}
+
             </div>
             <div class="col">
 
@@ -346,8 +336,16 @@
               </a>
               {% endif %}
 
+              {% if i.State_id.id == 6 or  i.State_id.id == 7 %}
+              <a data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}"  class="col-12 btn btn-dark btn-lg btn-block mb-1" id="btn-resonCancel" style="color: white;">
+                <img src="{% static "icon/information.png" %}" width="30px" height="30px" style="display:inline-block;" />
+                เหตุผลที่ยกเลิก
+              </a>
+              {% endif %}
+
+
               {% if i.State_id.id == 1 or  i.State_id.id == 2 or  i.State_id.id == 3 %}
-              <a data-bs-toggle="modal" data-bs-target="#orderCancel-{{i.id}}"  class="col-12 btn btn-secondary btn-lg btn-block mb-1" id="btn-cancel-this-order" href="" style="color: black;">
+              <a data-bs-toggle="modal" data-bs-target="#orderCancel-{{i.id}}"  class="col-12 btn btn-lg btn-block mb-1" id="btn-cancel-this-order" style="color: black;">
                 <img src="{% static "icon/cancel.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 ยกเลิกคำสั่งซื้อ
               </a>
@@ -374,7 +372,53 @@
 <br><br> <br><br>
 
 
+<!-- resonCancel -->
+{% for i in order_list %}
+  {% for c in list_cancel %}
+      {% if i.id == c.order_id_id %}
+<div class="modal fade" id="resonCancel-{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">เหตุผลที่ยกเลิก</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label float-start">สาเหตุที่ต้องการยกเลิก</label>
+          <input type="text" class="form-control" value="{{c.cancel_description}}" disabled>
+        </div>
+     
+      <br>
+      <div class="form-group">
+          <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
+          <input type="text" class="form-control" value="{{c.refund_contact}}" disabled>
+        </div>
+        <br>
 
+        <div class="row">
+        <div class="form-group col-sm">
+          <label class="form-label float-start">โรคที่เกี่ยวข้อง</label>
+          <input type="text" class="form-control" value="{{c.disease_id.disease_name}}" disabled>
+        </div>
+
+        <div class="form-group col-sm">
+          <label class="form-label float-start">แมลงที่เกี่ยวข้อง</label>
+          <input type="text" class="form-control" value="{{c.bug_id.bug_name}}" disabled>
+        </div>
+      </div>
+      
+      <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+      {% endif %}
+    {% endfor %}
+{% endfor %}
 
 <!-- Check-Payment -->
 {% for i in order_list %}
