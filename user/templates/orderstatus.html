@@ -189,16 +189,17 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         gap: .3em;
         padding: 5px;
         overflow: hidden;
+        
     }
 
     .rating__result {
-        position: absolute;
+        /* position: absolute;
         top: 0;
         left: 0;
         transform: translateY(-10px) translateX(-5px);
-        z-index: -9;
-        font: 3em Arial, Helvetica, sans-serif;
-        color: #ebebeb8e;
+        z-index: -9; */
+        font: 2em Arial, Helvetica, sans-serif;
+        color: #ff00008e;
         pointer-events: none;
     }
 
@@ -425,7 +426,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                             <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
-                        <div class="rating d-flex  my-1 flex-wrap">
+                        <div class="rating d-flex   my-1 flex-wrap">
                             <span class="rating__result"></span> 
                             <i class="rating__star far fa-star"></i>
                             <i class="rating__star far fa-star"></i>
@@ -486,6 +487,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         }
 
         executeRating(ratingStars, ratingResult);
+
 
     </script>
    
