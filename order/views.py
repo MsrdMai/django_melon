@@ -1,7 +1,7 @@
 from email import message
 from django.shortcuts import render, redirect, get_object_or_404
 from user.models import TypeUser, UserInType
-from .models import State, Order, Message, Disease, Bug, OrderCarving, Payment, CancelOrder, Portage, Record, CovertImage
+from .models import Review, State, Order, Message, Disease, Bug, OrderCarving, Payment, CancelOrder, Portage, Record, CovertImage
 from store.models import Store, Quality, Product
 from django.contrib.auth.decorators import login_required
 import datetime
@@ -332,3 +332,15 @@ def confirmorder(request, id):
     order.save()
     return redirect('orderstatus')
     
+@login_required
+def send_review(request, id):
+    order = Order.objects.get(id=id)
+    state = State.objects.get(id=8)
+    order.State_id = state
+    order.save()
+    review_description = request.POST.get('review_description')
+    review_rating = request.POST.get('review_rating')
+    review_image = request.FILES.get('review_image')
+    my_review = Review.objects.create(review_description=review_description, review_rating=review_rating, review_image=review_image, order_id=order)
+    my_review.save()
+    return redirect('orderstatus')

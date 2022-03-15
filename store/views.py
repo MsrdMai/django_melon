@@ -483,8 +483,44 @@ def review_farm(request):
     myStore = Store.objects.get(user_id=user)
     totel_product = Product.objects.filter(store_id=myStore)
     totel_product = len(totel_product)
+    list_review = Review.objects.all()
+    list_order = Order.objects.all()
+    list_product = Product.objects.filter(store_id=myStore)
 
+    zero = 0
+    one = 0
+    two = 0
+    three = 0
+    four = 0
+    five = 0
+
+    for order in list_order: 
+        for review in list_review:
+            if review.order_id.id == order.id:
+                for product in list_product:
+                    if order.product_id.id == product.id:
+                        if review.review_rating == 1:
+                            one += 1
+                        elif review.review_rating == 2:
+                            two += 1
+                        elif review.review_rating == 3:
+                            three += 1
+                        elif review.review_rating == 4:
+                            four += 1
+                        elif review.review_rating == 5:
+                            five += 1
+                        else:
+                            zero += 1
+                        
+    yValues = [five, four, three, two, one, zero]
+
+    
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'list_review' : list_review,
+        'list_order' : list_order,
+        'list_product' : list_product,
+        'yValues' : yValues,
         }
     return render(request, template_name='review_farm.html', context=context)
+

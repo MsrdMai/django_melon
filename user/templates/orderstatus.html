@@ -416,6 +416,8 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
             <a href="{% url 'historyorder'%}" class="d-flex justify-content-end mt-0 mb-2" style="color: rgb(27, 116, 0); cursor: pointer;"><b>ดูประวัติการสั่งซื้อ > </b></a>
             {% for i in myorder %}
             {% if i.State_id_id == 5 %}
+            <form style="text-align: left;" method="POST" enctype="multipart/form-data" action="{% url 'send_review' id=i.id %}">
+                {% csrf_token %}
             <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
                 <br>
                 <div class="d-flex justify-content-between flex-wrap date">
@@ -426,7 +428,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                             <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                     </div>
                     <div class="col-md-6 d-flex flex-column">
-                        <div class="rating d-flex   my-1 flex-wrap">
+                        <div class="rating d-flex my-1 flex-wrap">
                             <span class="rating__result"></span> 
                             <i class="rating__star far fa-star"></i>
                             <i class="rating__star far fa-star"></i>
@@ -434,21 +436,20 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                             <i class="rating__star far fa-star"></i>
                             <i class="rating__star far fa-star"></i>
                         </div>
-                        <textarea class="form-control form-control-lg my-2" id="message-text" placeholder="เขียนรีวิว"></textarea>
+                        <textarea class="form-control form-control-lg my-2" id="message-text" name="review_description" placeholder="เขียนรีวิว"></textarea>
                         <div class="mb-3">
                             <label class="form-label float-start"><b>รูปภาพสินค้า</b></label>
-                             <input type="file" class="form-control-file" name="product_img" id="file2" accept="image/png, image/jpeg"> <br><br>
-                             
-                           
+                             <input type="file" class="form-control-file" name="review_image" id="file2" accept="image/png, image/jpeg"> <br><br>
                            </div>
                         <div class="mt-2 d-flex justify-content-end">
-                            <button type="button" class="button2 mx-1 px-3" data-bs-toggle="modal" data-bs-target="#confirm">
+                            <button type="submit" class="button2 mx-1 px-3">
                                 <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>ยืนยัน</b></h3>
                             </button>
                         </div>
                     </div>
             </div>
-
+            <input type="hidden" id="rating" name="review_rating" value="0">
+            </form>
             {% endif %}
             {% endfor %}
         </div>
@@ -484,6 +485,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
 
         function printRatingResult(result, num = 0) {
             result.textContent = `${num}/5`;
+            document.getElementById('rating').value = num;
         }
 
         executeRating(ratingStars, ratingResult);

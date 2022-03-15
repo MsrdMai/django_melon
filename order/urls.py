@@ -18,6 +18,7 @@ urlpatterns = [
     path('report_order/<int:id>/', views.report_order, name='report_order'),
     path('covert_image/<int:id>/', views.covert_image, name='covert_image'),    
     path('chatroom/<int:id>/', views.chatroom, name='chatroom'),
-    path('pdf/<int:id>/', GeneratePdf.as_view(), name="orderPdf"), 
+    path('pdf/<int:id>/', GeneratePdf.as_view(), name="orderPdf"),
+    path('send_review/<int:id>/', views.send_review, name="send_review"),
 
 ]

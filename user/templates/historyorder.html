@@ -124,15 +124,15 @@
         <div class="border border-1">
         <button class="tablink" onclick="openPage('success', this, 'rgb(149, 192, 137)')" id="defaultOpen">
             <img class="statusimg pb-2" src="{% static "icon/checked.png" %}" width="50px" />
-            <p><b>สำเร็จ</b><span class="badge badge-pill badge-danger">{{count_waitpay}}</span></p>
+            <p><b>สำเร็จ</b><span class="badge badge-pill badge-danger">{{count_complete}}</span></p>
         </button>
         <button class="tablink" onclick="openPage('cancelorder', this, 'rgb(149, 192, 137)')">
             <img class="statusimg pb-2" src="{% static "icon/multiply.png" %}" width="50px" />
-            <p><b>ยกเลิก</b><span class="badge badge-pill badge-danger">{{count_prepar}}</span></p>
+            <p><b>ยกเลิก</b><span class="badge badge-pill badge-danger">{{count_cancel}}</span></p>
         </button>
         <button class="tablink" onclick="openPage('refund', this, 'rgb(149, 192, 137)')">
             <img class="statusimg pb-2" src="{% static "icon/cashback.png" %}" width="50px" />
-            <p><b>คืนเงิน</b><span class="badge badge-pill badge-danger">{{count_portage}}</span></p>
+            <p><b>คืนเงิน</b><span class="badge badge-pill badge-danger">{{count_refund}}</span></p>
         </button>
         </div>
 
@@ -158,7 +158,7 @@
                     <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
                     <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                     <div class="d-flex flex-wrap justify-content-end mt-1">
-                        <a type="button" class="button7 mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#farm_refun-{{i.id}}">
+                        <a type="button" class="button7 mx-1" style="margin-right: 0px;">
                             <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>คำสั่งซื้อสำเร็จแล้ว</b></h3>
                         </a>
                         
@@ -191,7 +191,7 @@
                     <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                     <div class="d-flex flex-wrap justify-content-end mt-1">
                         <a type="button" class="cancel mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}">
-                            <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>ยกเลิกสินค้าแล้ว</b></h3>
+                            <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>สาเหตุที่ยกเลิก</b></h3>
                         </a>
                         
                     </div>

@@ -14,8 +14,9 @@
     </center>
     <script>
         var xValues = ["ดีมาก", "ดี", "ปานกลาง", "แย่", "แย่มาก"];
-        var yValues = [55, 49, 44, 21, 18];
+        // var yValues = [55, 49, 44, 21, 18];
         var barColors = ["#22c55e", "#bef264","orange","#f97316","#dc2626"];
+        var yValues = {{yValues|safe}};
         
         new Chart("myChart", {
           type: "bar",
@@ -41,101 +42,74 @@
 
 <br><br>
 <div class="col-sm"  style="margin-left:10%;margin-right:10%;"> 
-
-    <div id="review" class="tabcontent">
-        <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
-            <br>
-            <div class="d-flex justify-content-between flex-wrap date">
-            <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
-        </div>
-                <div class="col d-flex justify-content-md-start justify-content-between">
-                        <img class="rounded productimg" src="{% static "img/review.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                        <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>   
-                </div>
-                <div class="col-md-6 d-flex flex-column">
-                    <div class="d-flex justify-content-end my-1 flex-wrap">
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                    </div>
-                    <br>
-                    <p class="form-control form-control-lg my-2" id="message-text">ดีมากกกกกกกกกกกกกกกกกกกกกกกก</p>
-                    <p class="d-flex justify-content-end my-1 flex-wrap ">รีวิวโดย K. sir*****</p>
-                </div> 
-        </div>
-    </div>
-
-    <div id="review" class="tabcontent">
-        <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
-            <br>
-            <div class="d-flex justify-content-between flex-wrap date">
-            <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
-        </div>
-                <div class="col d-flex justify-content-md-start justify-content-between">
-                        <img class="rounded productimg" src="{% static "img/review.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                        <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>   
-                </div>
-                <div class="col-md-6 d-flex flex-column">
-                    <div class="d-flex justify-content-end my-1 flex-wrap">
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                    </div>
-                    <br>
-                    <p class="form-control form-control-lg my-2" id="message-text">ดีมากกกกกกกกกกกกกกกกกกกกกกกก</p>
-                    <p class="d-flex justify-content-end my-1 flex-wrap ">รีวิวโดย K. sir*****</p>
-                </div> 
-        </div>
-    </div>
-
-
-
-    <div id="review" class="tabcontent">
-        <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
-            <br>
-            <div class="d-flex justify-content-between flex-wrap date">
-            <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>สั่งจอง</b></p></div>
-        </div>
-                <div class="col d-flex justify-content-md-start justify-content-between">
-                        <img class="rounded productimg" src="{% static "img/review.jpg" %}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                        <h3 class="producttext ps-4" style="margin-top: 20px;"><b>คิโมจิ</b><br/>x1</h3>   
-                </div>
-                <div class="col-md-6 d-flex flex-column">
-                    <div class="d-flex justify-content-end my-1 flex-wrap">
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                        <img class="rounded productimg mx-1" src="{% static "icon/starreview.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
-                    </div>
-                    <br>
-                    <p class="form-control form-control-lg my-2" id="message-text">ดีมากกกกกกกกกกกกกกกกกกกกกกกก</p>
-                    <p class="d-flex justify-content-end my-1 flex-wrap ">รีวิวโดย K. sir*****</p>
-                </div> 
-        </div>
-    </div>
-
-
+    {% for order in list_order %}
+        {% for review in list_review %}
+            {% if review.order_id.id == order.id %}
+                {% for product in list_product %}
+                    {% if order.product_id.id == product.id %}
+                        <div id="review" class="tabcontent">
+                            <div class="row shadow rounded border border-2 py-2 mb-4 px-2" style="background-color: white;">
+                                <br>
+                                <div class="d-flex justify-content-between flex-wrap date">
+                                <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>{{product.type_id.name}}</b></p></div>
+                            </div>
+                                    <div class="col d-flex justify-content-md-start justify-content-between">
+                                            <img class="rounded productimg" src="{{review.review_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                                            <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{product.product_name}}</b><br/>x{{order.amount}}</h3>   
+                                    </div>
+                                    <div class="col-md-6 d-flex flex-column">
+                                        <div class="d-flex justify-content-end my-1 flex-wrap">
+                                            {% if review.review_rating == 1 %}
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            {% elif review.review_rating == 2 %}
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            {% elif review.review_rating == 3 %}
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            {% elif review.review_rating == 4 %}
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            {% elif review.review_rating == 5 %}
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starfull.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            {% elif review.review_rating == 0 %}
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            <img class="rounded productimg mx-1" src="{% static "icon/starempty.png" %}" height="40px" width="40px" style="object-fit: scale-down;" alt="Product" />
+                                            {% endif %}
+                                        </div>
+                                        <br>
+                                        <p class="form-control form-control-lg my-2" id="message-text">{{review.review_description}}</p>
+                                        <p class="d-flex justify-content-end my-1 flex-wrap ">รีวิวโดย {{order.User_id.username}}</p>
+                                    </div> 
+                            </div>
+                        </div>
+                    {% endif %}     
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 </div>
 <br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </br><br></br>
 </div>

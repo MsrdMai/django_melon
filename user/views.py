@@ -244,10 +244,43 @@ def review_detail(request,id):
     farm_detail = Store.objects.get(id=id)
     product_list = Product.objects.filter(store_id=farm_detail)
     totel_product = len(product_list)
+    list_review = Review.objects.all()
+    list_order = Order.objects.all()
+
+    zero = 0
+    one = 0
+    two = 0
+    three = 0
+    four = 0
+    five = 0
+
+    for order in list_order: 
+        for review in list_review:
+            if review.order_id.id == order.id:
+                for product in product_list:
+                    if order.product_id.id == product.id:
+                        if review.review_rating == 1:
+                            one += 1
+                        elif review.review_rating == 2:
+                            two += 1
+                        elif review.review_rating == 3:
+                            three += 1
+                        elif review.review_rating == 4:
+                            four += 1
+                        elif review.review_rating == 5:
+                            five += 1
+                        else:
+                            zero += 1
+                        
+    yValues = [five, four, three, two, one, zero]
 
     context = {
         'farm_detail' : farm_detail,
         'totel_product' : totel_product,
+        'yValues' : yValues,
+        'product_list' : product_list,
+        'list_review' : list_review,
+        'list_order' : list_order,
     }
     return render(request, template_name='review_detail.html', context=context)    
 
@@ -352,9 +385,15 @@ def historyorder(request):
     user = request.user
     myorder = Order.objects.filter(User_id=user)
     list_cancel = CancelOrder.objects.all()
+    count_complete = Order.objects.filter(User_id=user, State_id=8).count()
+    count_cancel = Order.objects.filter(User_id=user, State_id=7).count()
+    count_refund = Order.objects.filter(User_id=user, State_id=6).count()
     
     context = {
             'myorder' : myorder,
             'list_cancel' : list_cancel,
+            'count_complete': count_complete,
+            'count_cancel': count_cancel,
+            'count_refund' : count_refund,
         }
     return render(request, template_name='historyorder.html', context=context)
