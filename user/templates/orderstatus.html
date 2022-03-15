@@ -214,6 +214,20 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         filter: drop-shadow(1px 1px 4px gold);
     }
 
+    /* badge red notification */
+    .badge{
+        position: absolute;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        margin-left: 9%;
+        margin-top: -20px;
+        padding: 5px 10px;
+        border-radius: 50px;
+        height: 30px;
+        width: 30px;
+    }
 </style>
 </head>
 
@@ -222,20 +236,32 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
     <div class="container">
         <div class="border border-1">
         <button class="tablink" onclick="openPage('payment', this, 'rgb(149, 192, 137)')" id="defaultOpen">
-            <img class="statusimg pb-2" src="{% static "icon/wallet.png" %}" width="50px" />
-            <p><b>ที่ต้องชำระ</b><span class="badge badge-pill badge-danger">{{count_waitpay}}</span></p>
+            {% if count_waitpay != 0 %}
+                <div class="badge" style="background-color: rgb(255, 80, 80);">{{count_waitpay}}</div>
+            {% endif %}
+                <img class="statusimg pb-2" src="{% static "icon/wallet.png" %}" width="50px" />
+                <p><b>ที่ต้องชำระ</b></p>
         </button>
         <button class="tablink" onclick="openPage('waiting', this, 'rgb(149, 192, 137)')">
-            <img class="statusimg pb-2" src="{% static "icon/boxship.png" %}" width="50px" />
-            <p><b>ที่ต้องจัดส่ง</b><span class="badge badge-pill badge-danger">{{count_prepar}}</span></p>
+            {% if count_prepar != 0 %}
+                <div class="badge" style="background-color: rgb(255, 80, 80);">{{count_prepar}}</div>
+            {% endif %}
+                <img class="statusimg pb-2" src="{% static "icon/boxship.png" %}" width="50px" />
+                <p><b>ที่ต้องจัดส่ง</b></p>
         </button>
         <button class="tablink" onclick="openPage('shipped', this, 'rgb(149, 192, 137)')">
-            <img class="statusimg pb-2" src="{% static "icon/delivery.png" %}" width="50px" />
-            <p><b>ที่ต้องได้รับ</b><span class="badge badge-pill badge-danger">{{count_sent}}</span></p>
+            {% if count_sent != 0 %}
+                <div class="badge" style="background-color: rgb(255, 80, 80);">{{count_sent}}</div>
+            {% endif %}
+                <img class="statusimg pb-2" src="{% static "icon/delivery.png" %}" width="50px" />
+                <p><b>ที่ต้องได้รับ</b></p>
         </button>
         <button class="tablink" onclick="openPage('review', this, 'rgb(149, 192, 137)')">
-            <img class="statusimg pb-2" src="{% static "icon/star.png" %}" width="50px" />
-            <p><b>ให้คะแนน</b><span class="badge badge-pill badge-danger">{{count_review}}</span></p>
+            {% if count_review != 0 %}
+                <div class="badge" style="background-color: rgb(255, 80, 80);">{{count_review}}</div>
+            {% endif %}
+                <img class="statusimg pb-2" src="{% static "icon/star.png" %}" width="50px" />
+                <p><b>ให้คะแนน</b></p>
         </button>
         </div>
         
