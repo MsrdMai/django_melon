@@ -331,7 +331,10 @@ def farmer_cancel(request, id):
 @login_required
 def farm_refun(request, id):
     order = Order.objects.get(id=id)
-    state = State.objects.get(id=7)
+    if order.State_id == 1:
+        state = State.objects.get(id=7)
+    else:
+        state = State.objects.get(id=6)
     order.State_id = state
     order.save()
     return redirect('orderstatus')
