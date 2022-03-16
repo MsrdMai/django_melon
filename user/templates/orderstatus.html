@@ -192,16 +192,16 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         
     }
 
-    .rating__result {
-        /* position: absolute;
+    /* .rating__result {
+        position: absolute;
         top: 0;
         left: 0;
         transform: translateY(-10px) translateX(-5px);
-        z-index: -9; */
+        z-index: -9;
         font: 2em Arial, Helvetica, sans-serif;
         color: #ff00008e;
         pointer-events: none;
-    }
+    } */
 
     .rating__star {
         font-size: 1.3em;
@@ -504,7 +504,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         }
 
         function printRatingResult(result, num = 0) {
-            result.textContent = `${num}/5`;
+            // result.textContent = `${num}/5`;
             document.getElementById('rating').value = num;
         }
 
