@@ -409,15 +409,9 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                                                 <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
 
                                                 <div class="d-flex justify-content-end mt-1">
-                                                    <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>เลขพัสดุ</b></h3>
+                                                    <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>{{p.portage_name}} :</b></h3>
                                                     <button type="button" class="button3 mx-1" style="margin-right: 0px;">
                                                         <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>{{p.portage_number}}</b></h3>
-                                                    </button>
-                                                </div>
-                                                <div class="d-flex justify-content-end mt-1">
-                                                    <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>ขนส่ง</b></h3>
-                                                    <button type="button" class="button3 mx-1" style="margin-right: 0px;">
-                                                        <h3 class="mx-3 txtresp" style="margin-top: 0.5rem;"><b>{{p.portage_name}}</b></h3>
                                                     </button>
                                                 </div>
                                             
