@@ -14,16 +14,25 @@ import matplotlib.pyplot as plt
 from .utils import get_filtered_image
 import numpy as np
 import cv2
+import pythainlp
+import datetime
+from pythainlp.util import thai_strftime
 
 class GeneratePdf(View):
     def get(self, request, id, *args, **kwargs):
         product = Product.objects.get(id=id)
         user = request.user
         today = datetime.date.today()
+
+        fmt = "%Aที่ %-d %B พ.ศ. %Y เวลา %H:%M น."
+        date = thai_strftime(today, fmt)
+
+
         open('templates/temp.html', "w", encoding='UTF-8').write(render_to_string('waybill.html', 
         {'product': product,
          'user' : user,
-         'today': today,}
+         'today': today,
+         'date' : date,}
         ))
         # Converting the HTML template into a PDF file
         pdf = html_to_pdf('temp.html')
@@ -65,6 +74,13 @@ def order_list(request, id):
     totel_product = len(totel_product)
     type_state = State.objects.all()
     product_order = Product.objects.get(id=id)
+
+    date_ex = product_order.date_expire
+    date_har = product_order.date_harvest
+    fmt = "%d %b %y"
+    expire = thai_strftime(date_ex, fmt)
+    harvest = thai_strftime(date_har, fmt)
+
     bug = Bug.objects.all()
     disease = Disease.objects.all()
     list_cancel = CancelOrder.objects.all()
@@ -86,7 +102,9 @@ def order_list(request, id):
         'disease' : disease,
         'order_list' : order_list,
         'order_carving' : order_carving,
-        'list_cancel' : list_cancel
+        'list_cancel' : list_cancel,
+        'expire' : expire,
+        'harvest' : harvest
         }
 
     return render(request, template_name='order_list.html', context=context)

@@ -117,7 +117,7 @@
     <div class="row">
       <div class="col">
        <br>
-        <p style="color:#1f2937; text-align: left;">ขนาด : {{product_order.product_weight}} kg</p>
+        <p style="color:#1f2937; text-align: left;">ขนาด : {{product_order.product_weight}} กิโลกรัม</p>
         <p style="color:#1f2937; text-align: left;">เนื้อ : {{product_order.melon_color}}</p>
         <p style="color:#1f2937; text-align: left;">
           จำนวนในคลัง : {{product_order.product_amount}}
@@ -126,11 +126,14 @@
       <div class="col">
         <br>
         <p style="color:#1f2937; text-align: left;">
-          คุณภาพ : {{product_order.date_harvest}}
+          คุณภาพ : {{product_order.quality_id.quality_name}}
         </p>
         <p style="color:#1f2937; text-align: left;">ราคา : {{product_order.product_price}} ฿</p>
         <p style="color:#1f2937; text-align: left;">
-          รอบตัด : {{product_order.date_harvest}}
+          รอบตัด : {{harvest}}
+        </p>
+        <p style="color:#1f2937; text-align: left;">
+          วันหมดอายุ : {{expire}}
         </p>
       </div>
     </div>
@@ -283,7 +286,9 @@
 
             {% endif %}
              <br><br><br>
-              <!-- <a
+
+             {% if i.State_id.id == 3 %}
+              <a
               class="col-sm-6 btn btn-outline-dark" 
               href="{% url 'orderPdf' id=product_order.id %}"
               >
@@ -293,8 +298,8 @@
               height="30px"
               style="display:inline-block;"
             />
-              พิมพ์ใบจัดส่ง</a> -->
-             
+              พิมพ์ใบจัดส่ง</a>
+              {% endif %}
            
               {% if i.State_id.id == 2 or i.State_id.id == 3 or i.State_id.id == 4 or i.State_id.id == 6 %}
               <a
@@ -329,7 +334,7 @@
               </a>
               {% endif %}
 
-              {% if product_order.select_carving == 1 or product_order.type_id_id == 2  and i.State_id.id == 3 %}
+              {% if product_order.type_id_id == 2 and i.State_id.id == 3 %}
               <a href="{% url 'report_order' id=i.id %}"  class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-report-this-order" style="color: black;">
                 <img src="{% static "icon/input.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 รายงานผลผลิต

@@ -3,7 +3,7 @@ from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa  
-
+import pythainlp
 # defining the function to convert an HTML file to a PDF file
 def html_to_pdf(template_src, context_dict={}):
      template = get_template(template_src)

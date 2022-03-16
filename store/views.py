@@ -9,6 +9,9 @@ from django.contrib.auth.models import User, Group
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
+import pythainlp
+import datetime
+from pythainlp.util import thai_strftime
 
 # Create your views here.
 
@@ -175,10 +178,19 @@ def product_description(request, id):
 
     # product_description
     product_des = Product.objects.get(id=id)
+    date_ex = product_des.date_expire
+    date_har = product_des.date_harvest
+    date_create = product_des.date_create
+    fmt = "%d %b %y"
+    expire = thai_strftime(date_ex, fmt)
+    harvest = thai_strftime(date_har, fmt)
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
-        'product_des' : product_des
+        'product_des' : product_des,
+        'expire' : expire,
+        'harvest' : harvest,
+        'date_create' : date_create,
         }
     return render(request, template_name='product_description.html', context=context)
 

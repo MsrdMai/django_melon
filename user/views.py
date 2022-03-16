@@ -14,6 +14,9 @@ from django.contrib.auth.decorators import login_required
 import pandas as pd
 from django.db.models import Max
 from django.contrib.auth.decorators import user_passes_test
+import pythainlp
+import datetime
+from pythainlp.util import thai_strftime
 # Create your views here.
 
 
@@ -209,8 +212,15 @@ def chatTofarmer(request,id):
 
 def product_desc(request,id):
     data_product = Product.objects.get(id=id)
+    date_ex = data_product.date_expire
+    date_har = data_product.date_harvest
+    fmt = "%d %b %y"
+    expire = thai_strftime(date_ex, fmt)
+    harvest = thai_strftime(date_har, fmt)
     context = {
-        'data_product' : data_product
+        'data_product' : data_product,
+        'expire' : expire,
+        'harvest' : harvest
     }
     return render(request, template_name='product_desc.html', context=context)
 
