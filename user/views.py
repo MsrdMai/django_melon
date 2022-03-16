@@ -159,7 +159,7 @@ def orderstatus(request):
     count_sent = Order.objects.filter(User_id=user, State_id=4).count()
     count_waitpay = Order.objects.filter(User_id=user, State_id=1).count()
     count_prepar = Order.objects.filter(User_id=user, State_id=3).count()
-
+    product = Product.objects.all()
     my_record = Record.objects.all()
     list_img = CovertImage.objects.all()
 
@@ -185,6 +185,7 @@ def orderstatus(request):
         'count_sent' : count_sent,
         'my_record' : my_record,
         'list_img' : list_img,
+        'product' : product,
     }
     return render(request, template_name='orderstatus.html', context=context)
 
