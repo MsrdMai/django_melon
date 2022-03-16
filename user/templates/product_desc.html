@@ -336,16 +336,16 @@ input[type=number]::-webkit-outer-spin-button {
 <!-- ยืนยันการสั่งซื้อสินค้า -->
 <div class="modal fade" id="confirmorder" aria-hidden="true" aria-labelledby="confirmorder" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content w-100">
       <div class="modal-header">
         <h5 class="modal-title" id="confirmorder">ยืนยันการสั่งซื้อสินค้า</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form  method="POST" enctype="multipart/form-data" action="{% url 'order_product' id=data_product.id %}" id="confirmInput">
+      <form  method="POST" enctype="multipart/form-data" action="{% url 'order_product' id=data_product.id %}" id="confirmInput" style="margin-top: 0; padding: 0;">
         {% csrf_token %}
 
 
-      <div class="modal-body row g-3">
+      <div class="modal-body row g-2" style="padding-bottom: 0; height: 630px;">
         <div class="d-flex flex-column">
           <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ที่อยู่</label>
           <textarea class="form-control" maxlength="255" name="address" id="FormControlTextarea1" rows="3" required></textarea>
@@ -367,7 +367,7 @@ input[type=number]::-webkit-outer-spin-button {
               onchange="loadFile(event)">
              
               <div class="mt-2 d-flex justify-content-center">
-              <img id="output" class="mt-2" width="300px" height="200px"/>
+              <img id="output" class="mt-2 mb-0" width="280px" height="200px"/>
             </div>
             <br> <br>
         </div>
