@@ -18,6 +18,9 @@ import pythainlp
 import datetime
 from pythainlp.util import thai_strftime
 
+import os
+
+
 class GeneratePdf(View):
     def get(self, request, id, *args, **kwargs):
         product = Product.objects.get(id=id)
@@ -27,17 +30,20 @@ class GeneratePdf(View):
         fmt = "%Aที่ %-d %B พ.ศ. %Y เวลา %H:%M น."
         date = thai_strftime(today, fmt)
 
-
         open('templates/temp.html', "w", encoding='UTF-8').write(render_to_string('waybill.html', 
         {'product': product,
          'user' : user,
          'today': today,
-         'date' : date,}
+         'date' : date,
+         }
         ))
         # Converting the HTML template into a PDF file
         pdf = html_to_pdf('temp.html')
-         # rendering the template
-        return HttpResponse(pdf, content_type='application/pdf')
+
+        # rendering the template
+        response = HttpResponse(pdf, content_type='application/pdf')  
+        return response
+
 
 # Create your views here.
 @login_required

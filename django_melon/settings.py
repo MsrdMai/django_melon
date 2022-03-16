@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 import pymysql
 from django.conf.urls.static import static
-from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 # Application definition
 

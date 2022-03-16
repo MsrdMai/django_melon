@@ -1,0 +1,20 @@
+@font-face {
+    font-family: sarabun;
+    src: url({% static 'fonts/Sarabun-Regular.ttf' %})
+  }
+
+  h1 {
+    text-align: center;
+  }
+  td, th {
+    text-align: center;
+  }
+  body {
+    font-family: sarabun;
+    font-weight: 200;
+    font-size: 16px;
+    
+      }
+  p{
+    font-family: sarabun;
+  }

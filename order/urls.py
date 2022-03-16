@@ -3,7 +3,6 @@ from django.urls import path,include
 from . import views
 from .views import GeneratePdf
 
-
 urlpatterns = [
     path('order_product/<int:id>/', views.order_product, name='order_product'),
     path('send_payment/<int:id>/', views.send_payment, name='send_payment'),

@@ -6,6 +6,7 @@
 - python -m pip install mysqlclient
 - python -m pip install django-mathfilters
 - python -m pip install pythainlp
+- python -m pip install xhtml2pdf --upgrade pip 
 
 เพื่อติดตั้งหรือมีการเปลี่ยนแปลงฐานข้อมูล
 - python manage.py makemigrations
