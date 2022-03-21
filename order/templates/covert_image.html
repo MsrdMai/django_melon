@@ -1,13 +1,65 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
 
+
 <style>
+    i {
+      color: #9ABC66;
+      font-size: 100px;
+      line-height: 200px;
+      margin-left:-15px;
+    }
+    .card {
+      background: white;
+      padding: 60px;
+      padding-bottom: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 3px #C8D0D8;
+      display: inline-block;
+      margin: 0 auto;
+    }
+    .btnback {
+    position: relative;
+    display: inline-block;
+    padding: 20px 80px;
+    margin: 15px 30px;
+    border: none;
+    background: #f2f2f2;
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: light;
+    letter-spacing: 1px;
+    color: inherit;
+    transition: all 0.3s ease 0s;
+    }
+    .btnback:after {
+        content: "";
+        position: absolute;
+        transition: all 0.3s ease 0s;
+        z-index: -1;
+    }
+    .btnback:hover,
+    .btnback:focus {
+    color: #f8f8f8;
+    }
+
+    .btn-1:hover,
+    .btn-1:focus {
+    background-color: #88B04B;
+    }
+  </style>
+ <div class="card mt-4 mb-2">
+    <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+      <i class="checkmark">✓</i>
+    </div>
+      <h1 style="color: #88B04B; font-weight: 900; font-size: 40px; margin-bottom: 10px;">Success</h1> 
+      <p style="color: #404F5E; font-size:20px; margin: 0;">บันทึกรายงานสำเร็จ</p>
+      <a href="{% url 'report_order' id=get_order.id %}" class="btnback btn-1">
+        กลับไปดูรายงาน
+      </a>
+    </div>
 
 
-
-</style>
-
-
-<br><br>
+<!-- <br><br>
 <div class="container rounded shadow w-75"style="background-color: white;">
 <br></br>    
 
@@ -21,6 +73,6 @@
         <i class="bi bi-arrow-left-square-fill"></i> กลับไปดูรายงาน
     </a>
 </br><br></br>
-</div><br><br>
+</div><br><br> -->
 
 {% endblock %}
