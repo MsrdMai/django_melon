@@ -152,16 +152,16 @@
     <div class="container">
         <div class="border border-1">
             <button class="tablink " onclick="openPage('success', this, 'rgb(149, 192, 137)')" id="defaultOpen">
-                {% if count_complete != 0 %}
+                <!-- {% if count_complete != 0 %}
                     <div class="badge" style="background-color: rgb(255, 80, 80);">{{count_complete}}</div>
-                {% endif %}
+                {% endif %} -->
                     <img class="statusimg pb-2" src="{% static "icon/checked.png" %}" width="50px" />
                     <p><b>สำเร็จ</b></p>  
             </button>
             <button class="tablink" onclick="openPage('cancelorder', this, 'rgb(149, 192, 137)')">
-                {% if count_cancel != 0 %}
+                <!-- {% if count_cancel != 0 %}
                     <div class="badge" style="background-color: rgb(255, 80, 80);">{{count_cancel}}</div>
-                {% endif %}
+                {% endif %} -->
                     <img class="statusimg pb-2" src="{% static "icon/multiply.png" %}" width="50px" />
                     <p><b>ยกเลิก</b></p>
             </button>
