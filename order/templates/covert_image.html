@@ -11,6 +11,7 @@
     .card {
       background: white;
       padding: 60px;
+      padding-top: 20px;
       padding-bottom: 20px;
       border-radius: 4px;
       box-shadow: 0 2px 3px #C8D0D8;
@@ -47,7 +48,8 @@
     background-color: #88B04B;
     }
   </style>
- <div class="card mt-4 mb-2">
+ <div class="card my-4">
+    <!-- <img src={{get_img.covert_image.url}} height="300px" width="300px" style="object-fit: scale-down;" /> -->
     <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
       <i class="checkmark">✓</i>
     </div>
@@ -58,17 +60,17 @@
       </a>
     </div>
 
-
-<!-- <br><br>
+<!-- 
+<br><br>
 <div class="container rounded shadow w-75"style="background-color: white;">
-<br></br>    
+<br></br>     -->
 
 
-<div class="col d-flex justify-content-center">
+<!-- <div class="col d-flex justify-content-center">
     <img src={{get_img.covert_image.url}} height="300px" width="300px" style="object-fit: scale-down;" />
-</div>
+</div> -->
 
-<br></br>   
+<!-- <br></br>   
 <a href="{% url 'report_order' id=get_order.id %}" class="col-12 btn btn-warning btn-lg btn-block mb-1" id="btn-report-this-order" style="color: black;">
         <i class="bi bi-arrow-left-square-fill"></i> กลับไปดูรายงาน
     </a>
