@@ -230,6 +230,26 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
         height: 30px;
         width: 30px;
     }
+    
+    p{
+    color: #026417;
+    }
+
+    .img-report{
+    height: 300px;
+    width: 300px;
+    }
+    @media only screen and (max-width: 1000px) {
+    
+    .img-report{
+        height: 300px;
+        width: 300px;
+    }
+    p{
+        margin: 5px;
+    }
+    
+    }
 </style>
 </head>
 
@@ -629,10 +649,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
 
 
   {% for i in myorder %}
-         {% for k in my_record %}
-                {% if k.order_id_id == i.id %}
-                        {% for j in list_img %}
-                            {% if j.recode_id.id == k.id %}
+        
                             <div class="modal fade" id="track-{{i.id}}" tabindex="-1" aria-labelledby="trackmelon" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-xl">
                                     <div class="modal-content">
@@ -641,22 +658,26 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                                         </div>
                                         <div class="container">
                                             <div  style="background-color: white; border-radius: 30px;padding: 1%;">
-                                        
-                                            <h4>รายงานผลผลิต #Order {{i.id}}</h4>
+                                            <h4><b>รายงานผลผลิต #Order {{i.id}}</b></h4>
                                             <hr>
-
+                                        
+                                {% for k in my_record %}
+                                        {% if k.order_id_id == i.id %}
+                                            {% for j in list_img %}
+                                                {% if j.recode_id.id == k.id %}
                                             <div class="row">
                                             <div class="col-sm-1"></div>
-                                            <div class="col-sm-3">
-                                                <img src="{{k.recode_image.url}}" height="300px" width="300px"/>
+                                            <div class="col-sm-3 ">
+                                                <img src={{k.recode_image.url}} class="img-report"/>
                                             </div>
                                             <div class="col-sm-3">
-                                                <img src={{j.covert_image.url}} height="300px" width="300px"/>
+                                                <img src={{j.covert_image.url}} class="img-report"/>
                                             </div> 
                                             <div class="col-sm-1"></div> 
-                                            <div class="col-sm-3" style="text-align: start; margin: 1%;">
+                                            <div class="col-sm-3 ps-5 ps-md-2 mt-1 align-self-center" style="text-align: start;">
                                                 <br>
-                                                <p>บันทึกเมื่อ : {{k.recode_date}}</p>
+                                                <p style="font-size: small; background-color: #e2e8f0; border-radius: 30px; padding: 5%;"><b>บันทึกเมื่อ : {{k.recode_date}}</b></p>
+                                                <br>
                                                 <p>รายละเอียด : {{k.recode_description}}</p>
                                                 <p>น้ำหนัก : {{k.recode_weight}}  กิโลกรัม</p>
                                                 <p>ความหวาน :  {{k.sweetness}} บริกซ์</p>
@@ -665,6 +686,11 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                                          
                                             </div>
                                             <hr>
+                                            {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                {% endfor %}
+                                
                                             </div>
                                             </div>
                                         <div class="modal-footer">
@@ -673,10 +699,7 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                                     </div>
                                 </div>
                             </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-            {% endfor %}
+                          
 {% endfor %}
 
 <!-- confirmorder-->
