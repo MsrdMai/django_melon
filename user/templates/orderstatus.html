@@ -647,7 +647,28 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
   {% endfor %}
 
 
+<style>
+    p{
+  color: #026417;
+}
 
+.img-report{
+  height: 250px;
+  width: 250px;
+}
+@media only screen and (max-width: 1000px) {
+   
+  .img-report{
+    height: 150px;
+    width: 150px;
+  }
+  p{
+    margin: 5px;
+  }
+  
+}
+
+</style>
   {% for i in myorder %}
         
                             <div class="modal fade" id="track-{{i.id}}" tabindex="-1" aria-labelledby="trackmelon" aria-hidden="true">
@@ -665,7 +686,21 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                                         {% if k.order_id_id == i.id %}
                                             {% for j in list_img %}
                                                 {% if j.recode_id.id == k.id %}
-                                            <div class="row">
+                                                <div class="row d-flex justify-content-md-center justify-content-around">           
+                                                    <div class="col-sm-12 col-lg-7">
+                                                            <img class="img-report" src={{k.recode_image.url}} />
+                                                            <img class="img-report" src={{j.covert_image.url}}  />
+                                                    </div>
+                                                    <div class="col-sm-8 col-lg-5 ps-5 ps-md-2 mt-1 align-self-center" style="text-align: start;">
+                                                        <p class="mb-2" style="font-size: small; background-color: #e2e8f0; border-radius: 10px; padding: 2%;"><b>บันทึกเมื่อ : {{k.recode_date}}</b></p>
+                                                        <p><b>รายละเอียด :</b> {{k.recode_description}}</p>
+                                                        <p><b>น้ำหนัก :</b> {{k.recode_weight}} กิโลกรัม</p>
+                                                        <p><b>ความหวาน :</b> {{k.sweetness}} กิโลกรัม</p>
+                                                        <p><b>คุณภาพ :</b> {{k.quality_id.quality_name}}</p>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            <!-- <div class="row">
                                             <div class="col-sm-1"></div>
                                             <div class="col-sm-3 ">
                                                 <img src={{k.recode_image.url}} class="img-report"/>
@@ -680,12 +715,12 @@ swal("มีข้อผิดพลาด", "{{send_payment_error}}", "error");
                                                 <br>
                                                 <p>รายละเอียด : {{k.recode_description}}</p>
                                                 <p>น้ำหนัก : {{k.recode_weight}}  กิโลกรัม</p>
-                                                <p>ความหวาน :  {{k.sweetness}} บริกซ์</p>
+                                                <p>ความหวาน :  {{k.sweetness}} กิโลกรัม</p>
                                                 <p>คุณภาพ : {{k.quality_id.quality_name}}</p>
                                             </div>
                                          
                                             </div>
-                                            <hr>
+                                            <hr> -->
                                             {% endif %}
                                             {% endfor %}
                                         {% endif %}
