@@ -186,11 +186,11 @@
             {% else %}
             <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>พร้อมส่ง</b></p></div>
             {% endif %}
-            <p class="date ps-4 d-flex"><b>หมดอายุวันที่ : {{i.product_id.date_expire}}</b></p>
+            <p class="date ps-4 d-flex"><b>หมดอายุ : {{i.product_id.date_expire}}</b></p>
         </div>
                 <div class="col d-flex justify-content-md-start justify-content-between">
                         <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                        <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
+                        <h3 class="producttext ps-4" style="margin-top: 20px; font-size: larger;" ><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                 </div>
                 <div class="col-md-6 d-flex flex-column">
                     <!-- <p class="ps-4 d-flex justify-content-end pt-1"><b>ชำระภายใน 15/02/65</b></p> -->
@@ -223,7 +223,7 @@
         </div>
                 <div class="col d-flex justify-content-md-start justify-content-between">
                         <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                        <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
+                        <h3 class="producttext ps-4" style="margin-top: 20px; font-size: larger;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                 </div>
                 <div class="col-md-6 d-flex flex-column">
                     <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
@@ -256,7 +256,7 @@
         </div>
                 <div class="col d-flex justify-content-md-start justify-content-between">
                         <img class="rounded productimg" src="{{i.product_id.product_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
-                        <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
+                        <h3 class="producttext ps-4" style="margin-top: 20px; font-size: larger;"><b>{{i.product_id.product_name}}</b><br/>x{{i.amount}}</h3>
                 </div>
                 <div class="col-md-6 d-flex flex-column">
                     <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
