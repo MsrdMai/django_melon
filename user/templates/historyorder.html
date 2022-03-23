@@ -261,14 +261,14 @@
                 <div class="col-md-6 d-flex flex-column">
                     <h3 class="ps-4 d-flex justify-content-end align-items-end pricetext"><b>{{i.total_price|add:i.shipping_cost}} ฿</b></h3>
                     <div class="d-flex flex-wrap justify-content-end mt-1">
-                        <a type="button" class="cancel mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}">
+                        <a type="button" class="cancel mx-1 col-lg-3 col-12 mb-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}">
                             <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>เหตุผลที่ยกเลิก</b></h3>
                         </a>
-                        <a type="button" class="button2 mx-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#farm_refun-{{i.id}}">
+                        <a type="button" class="button2 mx-1 col-lg-5 col-12 mb-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#farm_refun-{{i.id}}">
                             <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>ได้รับเงินคืนจากฟาร์มแล้ว</b></h3>
                         </a>
-                        <a  class="chat mx-1" href="{% url 'chatTofarmer' id=i.id %}">
-                            <h3 class="mx-2 txtresp" style="margin-top: 0.5rem;"><b>สนทนา</b></h3>
+                        <a  class="chat mx-1 col-lg-2 col-12 mb-1" href="{% url 'chatTofarmer' id=i.id %}">
+                            <h3 class="mx-2 txtresp" style="margin-top: 0.5rem; font-size: 15px;"><b>สนทนา</b></h3>
                         </a>
                         
                     </div>

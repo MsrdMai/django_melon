@@ -205,21 +205,24 @@
         <td>
           <div class="row">
             <div class="col-sm-6 col-md-6 text-left">
-              <p class="text-2xl font-black  text-green-600 	">
-                Username : {{i.User_id.first_name}} {{ i.User_id.last_name }}
-              </p>
-              <p class="text-1xl text-gray-800 ">
-                จำนวน : {{i.amount}} <br></br>
-                ราคาทั้งหมด : {{i.total_price|add:i.shipping_cost}} ฿ <br></br>
-                เบอร์โทร : {{i.tel}} <br></br>
-                อีเมล : {{i.User_id.email}} <br></br>
-                ที่อยู่จัดส่ง : {{i.address}} <br></br>
-              </p>
-
-             
+              <div class="d-flex">
+              <img src="{% static "icon/user1.png" %}" width="30px;" height="30px;" alt="">
+              <p class="ms-3 text-2xl font-black text-green-600 " style="font-size:large">
+              <b>Username :</b> {{i.User_id.first_name}} {{ i.User_id.last_name }}
+              </p></div>
+              <div class="ms-5">
+                <p><b>เบอร์โทร :</b> {{i.tel}}</p> 
+                <p><b>อีเมล :</b> {{i.User_id.email}}</p> 
+                <p><b>ที่อยู่จัดส่ง :</b> {{i.address}}</p> 
+               
+                <hr style="width: 200px;">
+                 <p><b>จำนวน :</b> x {{i.amount}}</p> 
+                <p><b>ราคาทั้งหมด :</b>  ฿ {{i.total_price|add:i.shipping_cost}}</p> 
+              </div> 
+              
                   {% for c in order_carving %}
                       {% if c.order_id_id == i.id %}
-                        <p>รายละเอียด : {{c.carving_description}}</p>
+                        <p class="ms-5"><b>รายละเอียด :</b> {{c.carving_description}}</p>
                             <img 
                               src="{{c.image.url}}"
                               id="img-order-carving"
@@ -285,7 +288,7 @@
 
 
             {% endif %}
-             <br><br><br>
+             <br>
 
              <!-- {% if i.State_id.id == 3 %}
               <a
@@ -303,7 +306,7 @@
            
               {% if i.State_id.id == 2 or i.State_id.id == 3 or i.State_id.id == 4 or i.State_id.id == 6 %}
               <a
-              class="col-sm-6 btn btn-outline-info "
+              class="col-12 col-sm-8 btn btn-outline-info mb-1"
               href="{% url 'chatroom' id=i.id %}"
               >
               <img
@@ -342,7 +345,7 @@
               {% endif %}
 
               {% if i.State_id.id == 6 or  i.State_id.id == 7 %}
-              <a data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}"  class="col-12 btn btn-dark btn-lg btn-block mb-1" id="btn-resonCancel" style="color: white;">
+              <a data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}"  class="col-12 btn btn-lg btn-block mb-1" id="btn-resonCancel" style="color: black;">
                 <img src="{% static "icon/information.png" %}" width="30px" height="30px" style="display:inline-block;" />
                 เหตุผลที่ยกเลิก
               </a>

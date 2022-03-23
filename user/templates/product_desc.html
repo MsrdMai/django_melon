@@ -109,9 +109,19 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+.sizecon{
+  width: 75%;
+}
+
+@media only screen and (max-width: 500px) {
+  .sizecon{
+    width: 100%;
+  }
+}
 </style>
 
-<div class="container w-75">
+<div class="container sizecon">
 <div  style="background-color: white; ">
 
 <div class="row" style="margin: 2%;">
@@ -275,32 +285,6 @@ input[type=number]::-webkit-outer-spin-button {
       <div class="type_id" data-price="{{data_product.type_id_id}}" hidden>{{data_product.type_id_id}}</div>
       <div class="select_carv" id="select_carv" data-price="{{data_product.select_carving}}" hidden>{{data_product.select_carving}}</div>
       </div>
-      <!-- </div> -->
-<!-- 
-      
-      <div class="col" style="background-color: #f3f4f6; padding: 5%;">
-         <p style="color:#1f2937; text-align: end;">
-        ราคา : {{data_product.product_price}} ฿
-      </p>
-      <div class="col-sm">
-        <form class="mb-4 pt-1">
-          <div class="value-button pt-2" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-          <input type="number" id="number" value="1" min="1" max={{data_product.product_amount}} />
-          <div class="value-button pt-2" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-          <input type="submit">
-        </form>
-      </div>
-      
-      <p style="color:#1f2937; text-align: end;">
-        คลัง : {{data_product.product_amount}} -->
-      <!-- </p> -->
-    
-      <!-- <p style="color:#1f2937; text-align: end;">
-        ค่าส่ง : <span class="ship_price" data-price="{{data_product.shipping_cost}}">{{data_product.shipping_cost}}</span> ฿
-      </p>
-      <p style="color:#b90000; font-size: 30px; text-align: end;">
-        รวม : <span class="product-total-price" data-price="{{data_product.product_price}}">{{data_product.product_price}}</span> ฿ 
-      </p> -->
       
       {% if user.is_authenticated %} 
       {% for group in  request.user.groups.all %}
@@ -345,7 +329,7 @@ input[type=number]::-webkit-outer-spin-button {
         {% csrf_token %}
 
 
-      <div class="modal-body row g-2" style="padding-bottom: 0; height: 630px;">
+      <div class="modal-body row g-2" style="padding-bottom: 0;">
         <div class="d-flex flex-column">
           <label for="FormControlTextarea1" class="form-label" style="text-align: left;">ที่อยู่</label>
           <textarea class="form-control" maxlength="255" name="address" id="FormControlTextarea1" rows="3" required></textarea>
@@ -369,7 +353,6 @@ input[type=number]::-webkit-outer-spin-button {
               <div class="mt-2 d-flex justify-content-center">
               <img id="output" class="mt-2 mb-0" width="280px" height="200px"/>
             </div>
-            <br> <br>
         </div>
         {% endif %}
       </div>
