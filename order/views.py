@@ -17,7 +17,7 @@ import cv2
 import pythainlp
 import datetime
 from pythainlp.util import thai_strftime
-
+import pythainlp.util
 import os
 
 
@@ -163,13 +163,27 @@ def report_order(request, id):
         sweetness = request.POST.get('sweetness')
         recode_image = request.FILES.get('recode_image')
         quality = Quality.objects.get(id=quality_id)
-        new_record = Record.objects.create(order_id=order, recode_description=recode_description,recode_image=recode_image,
-        recode_weight=recode_weight, sweetness=sweetness, quality_id=quality)
-        new_record.save()
 
-        covert_image = CovertImage.objects.create(recode_id=new_record, covert_image=recode_image)
-        covert_image.save()
-        return redirect('covert_image', id=covert_image.id)
+
+        if ((pythainlp.util.countthai(request.FILES['recode_image'].name, ignore_chars=" 0123456789,.%-/*#@%& ")) > 0) and (recode_image == None):
+            error_img = 'กรุณาอัปโหลดรูปภาพ หรือกรุณาเปลี่ยนชื่อไฟร์เป็นภาษาอังกฤษ'
+            context = {'myStore' : myStore,
+                'totel_product' : totel_product,
+                'quality_list' :quality_list,
+                'order' : order,
+                'my_record' : my_record,
+                'list_img' : list_img,
+                'count_record' : count_record,
+                'error_img' : error_img,
+            }
+            return render(request, template_name='report_order.html', context=context)
+        else:
+            new_record = Record.objects.create(order_id=order, recode_description=recode_description,recode_image=recode_image,
+            recode_weight=recode_weight, sweetness=sweetness, quality_id=quality)
+            new_record.save()
+            covert_image = CovertImage.objects.create(recode_id=new_record, covert_image=recode_image)
+            covert_image.save()
+            return redirect('covert_image', id=covert_image.id)
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
@@ -191,34 +205,50 @@ def covert_image(request, id):
     get_img = CovertImage.objects.get(id=id)
     get_order = get_img.recode_id.order_id
 
-    img_main  = cv2.imread(get_img.covert_image.path, flags=cv2.IMREAD_COLOR)
-    img_gray = cv2.cvtColor(img_main, cv2.COLOR_BGR2GRAY)
-    # To calculate the gradients of an image it is best not to use uint8 since you will miss some edges
+    try:
+        img_main  = cv2.imread(get_img.covert_image.path, flags=cv2.IMREAD_COLOR)
+        img_gray = cv2.cvtColor(img_main, cv2.COLOR_BGR2GRAY)
+        # To calculate the gradients of an image it is best not to use uint8 since you will miss some edges
+        # Calculate gradients using the laplacian method
+        # Convert the image to using 64 bit floats and calculate the gradients afterwards
 
-    # Calculate gradients using the laplacian method
-    # Convert the image to using 64 bit floats and calculate the gradients afterwards
-    lap = cv2.Laplacian(img_gray,cv2.CV_64F)  
-    lap = np.uint8(np.absolute(lap))  # Convert the image back into uint8
-    # Calculate the edges using the Sobel method
+        lap = cv2.Laplacian(img_gray,cv2.CV_64F)  
+        lap = np.uint8(np.absolute(lap))  
+        # Convert the image back into uint8
+        # Calculate the edges using the Sobel method
+        # In the Sobel method the gradients are calculated both horizontally and vertically
+        sobel_x = cv2.Sobel(img_gray, cv2.CV_64F, 1, 0)  # Remember to convert into 64 bit floats
+        sobel_y = cv2.Sobel(img_gray, cv2.CV_64F, 0, 1)
 
-    # In the Sobel method the gradients are calculated both horizontally and vertically
-    sobel_x = cv2.Sobel(img_gray, cv2.CV_64F, 1, 0)  # Remember to convert into 64 bit floats
-    sobel_y = cv2.Sobel(img_gray, cv2.CV_64F, 0, 1)
+        sobel_x = np.uint8(np.absolute(sobel_x))  # remember to convert back into 8 bit unsigned integers
+        sobel_y = np.uint8(np.absolute(sobel_y))
+        sobel_combined = cv2.bitwise_or(sobel_x, sobel_y)
 
-    sobel_x = np.uint8(np.absolute(sobel_x))  # remember to convert back into 8 bit unsigned integers
-    sobel_y = np.uint8(np.absolute(sobel_y))
-    sobel_combined = cv2.bitwise_or(sobel_x, sobel_y)
+        ## Save CovertImage
+        cv2.imwrite(get_img.covert_image.path, sobel_combined)
 
-    ## Save CovertImage
-    cv2.imwrite(get_img.covert_image.path, sobel_combined)
+        success = 'บันทึกรายงานสำเร็จ'
+        context = {'get_img' : get_img,
+            'get_order' : get_order,
+            'myStore' : myStore,
+            'totel_product' : totel_product,
+            'success' : success
+        }
+        return render(request, template_name='covert_image.html', context=context)
+    except:
+        error_txt = 'มีข้อผิดพลาดในการอัปโหลดรูปภาพ'
+        advice = 'ข้อแนะนำ - เปลี่ยนชื่อไฟล์เป็นภาษาอังกฤษ'
+        context = {'get_img' : get_img,
+            'get_order' : get_order,
+            'myStore' : myStore,
+            'totel_product' : totel_product,
+            'error_txt' : error_txt,
+            'advice' : advice,
+        }
+        return render(request, template_name='covert_image.html', context=context)
 
-    context = {'get_img' : get_img,
-        'get_order' : get_order,
-        'myStore' : myStore,
-        'totel_product' : totel_product,
-       }
 
-    return render(request, template_name='covert_image.html', context=context)
+    
 
 @login_required
 def order_product(request, id):

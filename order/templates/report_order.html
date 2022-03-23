@@ -1,5 +1,10 @@
 {% extends "TopNavFarmer.html" %} {% load static %} {% block content %}
 
+{% if error_img %}
+<script>
+swal("มีข้อผิดพลาดในการส่งข้อมูล", "{{error_img}}", "error");
+</script>
+{%endif%}
 
 <style>
 
