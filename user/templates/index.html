@@ -284,7 +284,7 @@ swal("มีข้อผิดพลาดในการสั่งซื้�
 
 
 
-<div class="container mb-5">
+<!-- <div class="container mb-5">
 <div class="d-flex flex-wrap p-4 mt-5 justify-content-center">
   <h1 style="color: #005e14;" class="align-items-center"><b>บทความน่าสนใจ</b></h1>
   <img class="mx-3" src="{% static "icon/article.png" %}" width="50px" height="50px">
@@ -299,11 +299,76 @@ swal("มีข้อผิดพลาดในการสั่งซื้�
     <h3 style="color: #005e14;"><b>8 ประโยชน์<br>ของเมล่อน</b></h3>
 </div>
 </div>
+</div> -->
+<style>
+  * { box-sizing: border-box; }
+.carousel {
+  background: none;
+}
+
+.carousel-cell {
+  width: 50%;
+  height: 550px;
+  margin-right: 10px;
+  background: white;
+  border-radius: 5px;
+  counter-increment: gallery-cell;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  /* line-height: 200px;
+  font-size: 80px; */
+  color: white;
+}
+@media only screen and (max-width: 900px) {
+  .texthead{
+    font-size: 15px;
+  }
+  .textdesc{
+    font-size: 10px;
+  }
+  .carousel-cell{
+    width: 50%;
+    height: 400px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .carousel-cell{
+    width: 80%;
+    height: 420px;
+  }
+}
+</style>
+<div class="container mb-5">
+  <div class="d-flex flex-wrap p-4 mt-5 justify-content-center">
+    <h1 style="color: #005e14;" class="align-items-center"><b>บทความน่าสนใจ</b></h1>
+    <img class="mx-3" src="{% static "icon/article.png" %}" width="50px" height="50px">
+  </div>
+  <div class="carousel" data-flickity='{ "autoPlay": 2500, "pauseAutoPlayOnHover": false }'>
+    <div class="carousel-cell d-flex flex-column  align-items-center">
+      <img class="mx-3 col-4 " src="{% static "img/article1.jpg" %}" width="20%">
+      <h5 class="mt-4 texthead" style="color: #005e14;"><b>มารู้จักเรื่องราวและประโยชน์<br>ของเจ้าเมล่อนญี่ปุ่นกัน</b></h5>
+      <p class="mx-5 textdesc" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;ในฤดูร้อนที่ประเทศญี่ปุ่น หรือ ช่วงเดือนมิถุนายน ชาวญุี่ปุ่นจะนิยมทานผลไม้
+        ที่มีความหวานฉ่ำน้ำ เพื่อเป็นการคล้ายร้อนและเพิ่มความสดชื่นได้เป็นอย่างดี
+        ดังนั้น ไม่แปลกใจเลยที่ เมล่อนญี่ปุ่นจะเป็นที่นิยมอย่างมาก เนื่องจากเป็นผลไม้ที่หวานฉ่ำ อีกทั้งยังมีความหอมหวานจึงเป็นที่นิยม โดยเฉพาะ 
+        เมล่อนคุณภาพสูงเพราะเกษตรกรปลูกเมล่อนในเรือนกระจกและมีการควบคุมการเพาะปลูกเป็นอย่างดี เพื่อให้ได้ผลเมล่อนญี่มีความสมบรูณ์มากที่สุด</p>
+        <a type="button" href="https://www.rukkla.com/content/10765/%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B8%88%E0%B8%B1%E0%B8%81%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%A3%E0%B8%B2%E0%B8%A7%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%82%E0%B8%A2%E0%B8%8A%E0%B8%99%E0%B9%8C%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%A5%E0%B9%88%E0%B8%AD%E0%B8%99%E0%B8%8D%E0%B8%B5%E0%B9%88%E0%B8%9B%E0%B9%88%E0%B8%B8%E0%B8%99%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A?gclid=CjwKCAjwloCSBhAeEiwA3hVo_Wz75u0XwciAjvdkVzY9Slzrwqes-M9JFxp1cA5Ycvzra_e_VMl1mhoCTqgQAvD_BwE" target="_blank" 
+        class="btn btn-outline-secondary">อ่านต่อ</a>
+    </div>
+    <div class="carousel-cell d-flex flex-column  align-items-center">
+      <img class="mx-3 mb-lg-4 mb-0 mt-4 img_resp" src="{% static "img/article2.jpg" %}" width="50%">
+      <h5 class="mt-4 mb-2 texthead" style="color: #005e14;"><b>8 ประโยชน์ของเมล่อน</b></h5>
+      <p class="mx-5  mt-2 textdesc" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;เมล่อนช่วยเสริมสร้างคอลลาเจน เมล่อนช่วยบำรุงกระดูกและฟันได้ด้วย เมล่อนช่วยเพิ่มประสิทธิภาพในการลดน้ำหนักได้ด้วย เมล่อนช่วยต่อต้านอนุมูลอิสระได้ด้วย เมล่อนช่วยบำรุงหัวใจของคุณ เมล่อนช่วยลดการเกิดความจำเสื่อมได้ เมล่อนช่วยบำรุงระบบประสาทของคุณ เมล่อนช่วยบำรุงสายตาได้ด้วย</p>
+      <a type="button" href="https://www.youtube.com/watch?v=k410CC6UHJU" target="_blank" 
+        class="btn btn-outline-secondary mt-lg-5 mt-4 justify-content-end ">อ่านต่อ</a>
+    </div>
+  </div>  
 </div>
 
-<!-- test -->
-
-<!-- test -->
 
 <footer class="footer" style="background-color: #e5e5e5;">
   <div class="container">
