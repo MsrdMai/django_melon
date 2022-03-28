@@ -45,7 +45,52 @@
       border-radius: 30px;
       padding: 5%;
     }
+     
+    .img-resp{
+      width: 40px;
+      height:40px;
+    }
 
+    .card1{
+      background-color: #a78bfa5e;
+    }
+    .card2{
+      background-color: #8bfaa75e;
+    }
+    .card3{
+      background-color: #f8fa8b5e;
+    }
+    .card4{
+      background-color: #fa8b8b5e;
+    }
+
+    .bold{
+      background-color: black;
+      color: white;
+      border-radius: 30px;
+      padding: 4%;
+      width: 60%;
+      max-width: 80%;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .headtxt{
+        font-size: 15px;
+      }
+      .img-resp{
+        width: 30px;
+        height: 30px;
+      }
+    }
+    @media only screen and (max-width: 500px) {
+      .headtxt{
+        font-size: 20px;
+      }
+      .img-resp{
+        width: 50px;
+        height: 50px;
+      }
+    }
     </style>
 
   
@@ -96,40 +141,35 @@
                 <center>
 
               
-                  <div class="d-flex">
-                      <div class="col-sm m-4" style="border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
-                      <br>
-                      <h3>ยอดขายวันนี้</h3>
-                      <br>
-                      <h3>{{profit_day}}</h3>
+                  <div class="d-flex row justify-content-center">
+                      <div class="shadow card1 mt-4 mt-sm-1 col-12 col-sm m-1 m-lg-4 p-3" style="border-radius: 15px; border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
+                      <img class="mb-2 img-resp" src="{% static "icon/day.png" %}"></img>
+                      <h5 class="headtxt mb-3">ยอดขายวันนี้</h5>
+                      <h4 class="bold"><b>{{profit_day}}</b></h4>
                       </div>
 
-                      <div class="col-sm m-4" style="border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
-                        <br>
-                        <h3>ยอดขายสัปดาห์นี้</h3>
-                        <br>
-                        <h3>{{profit_week}}</h3>
+                      <div class="shadow card2 col-12 col-sm m-1 m-lg-4 p-3" style="border-radius: 15px; border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
+                        <img class="mb-2 img-resp" src="{% static "icon/week.png" %}"></img>
+                        <h5 class="headtxt mb-3">ยอดขายสัปดาห์นี้</h5>
+                        <h4 class="bold"><b>{{profit_week}}</b></h4>
                         </div>
 
-                      <div class="col-sm m-4" style="border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
-                        <br>
-                        <h3>ยอดขายเดือนนี้</h3>
-                        <br>
-                        <h3>{{profit_month}}</h3>
+                      <div class="shadow card3 col-12 col-sm m-1 m-lg-4 p-3" style="border-radius: 15px; border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
+                        <img class="mb-2 img-resp" src="{% static "icon/month.png" %}"></img>
+                        <h5 class="headtxt mb-3">ยอดขายเดือนนี้</h5>
+                        <h4 class="bold"><b>{{profit_month}}</b></h4>
                       </div>
 
-                      <div class="col-sm m-4" style="border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
-                        <br>
-                        <h3>ยอดขายปีนี้</h3>
-                        <br>
-                        <h3>{{profit_year}}</h3>
+                      <div class="shadow card4 col-12 col-sm m-1 m-lg-4 p-3" style="border-radius: 15px; border-color: #334155; border-width: 1rm; border-style: solid;width:100%;max-width:700px;">
+                        <img class="mb-2 img-resp" src="{% static "icon/year.png" %}"></img>
+                        <h5 class="headtxt mb-3">ยอดขายปีนี้</h5>
+                        <h4 class="bold"><b>{{profit_year}}</b></h4>
                       </div>
 
-                      <br>
                   </div> 
                   <br><br>
 
-                      <div class="col-sm" style="border-color: #334155; border-width: 1rm; border-style: solid;width:90%;">
+                      <div class="col-sm p-3" style="border-color: #334155; border-width: 1rm; border-style: solid;width:90%;">
                       <canvas id="product_quality" style="width:100%;"></canvas>
                       </div>
                 
