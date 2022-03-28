@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import user_passes_test
 import pythainlp
 import datetime
 from pythainlp.util import thai_strftime
+from django.http import HttpResponse, JsonResponse
+
 # Create your views here.
 
 
@@ -195,21 +197,31 @@ def chatTofarmer(request,id):
     user = request.user
     message = Message.objects.filter(order_id=id)
     order = Order.objects.get(id=id)
-    
     store = order.product_id.store_id
-
-    if request.method == 'POST':
-        content = request.POST.get('content')
-        myChat = Message.objects.create(order_id=order, content=content,User_id=user)
-        myChat.save()
-        return redirect('chatTofarmer', id=order.id)
 
     context = {
         'message': message,
         'order' : order,
         'store' :store,
+        'user' : user,
     }
     return render(request, template_name='chatTofarmer.html', context=context)
+
+@login_required
+def message_toFarm(request,id):
+    user = request.user
+    content = request.POST['content']
+    order = Order.objects.get(id=id)
+    new_message = Message.objects.create(order_id=order, content=content,User_id=user)
+    new_message.save()
+    return HttpResponse('Message sent successfully')
+
+@login_required
+def messages_fromFarm(request,id):
+    user = request.user
+    order = Order.objects.get(id=id)
+    message = Message.objects.filter(order_id=order.id)
+    return JsonResponse({"messages":list(message.values())})
 
 def product_desc(request,id):
     data_product = Product.objects.get(id=id)

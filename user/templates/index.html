@@ -36,9 +36,6 @@ swal("มีข้อผิดพลาดในการสั่งซื้�
   swal("{{order_complete_1}}", "{{order_complete_2}}", "success");
 </script>
 {%endif%}
-
-
-
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -349,6 +346,14 @@ swal("มีข้อผิดพลาดในการสั่งซื้�
     <img class="mx-3" src="{% static "icon/article.png" %}" width="50px" height="50px">
   </div>
   <div class="carousel" data-flickity='{ "autoPlay": 2500, "pauseAutoPlayOnHover": false }'>
+
+    <div class="carousel-cell d-flex flex-column  align-items-center">
+      <img class="mx-3 mb-lg-4 mb-0 mt-4 img_resp" src="{% static "img/article4.jpg" %}" width="40%">
+      <h5 class="mt-4 mb-2 texthead" style="color: #005e14;"><b>5 อันดับเมล่อนยอดฮิตที่คนญี่ปุ่นนิยมให้เป็นของขวัญในช่วงฤดูร้อน</b></h5>
+      <p class="mx-5  mt-2 textdesc" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;เมล่อนญี่ปุ่นมีหลากหลายพันธุ์ ซึ่งมีการดูแลจัดการในขั้นตอนการปลูกเป็นอย่างดีเพื่อให้ได้ผลผลิตคุณภาพดี มีรสชาติหอมหวานอร่อย ทำให้ผู้บริโภคยินดีจ่ายเงินซื้อแม้ว่าจะมีราคาแพง นอกจากนำมารับประทานเองแล้วคนญี่ปุ่นยังนิยมมอบเมล่อนเป็นของขวัญแทนใจที่ถูกใจผู้รับไม่น้อย</p>
+      <a type="button" href="https://th.anngle.org/j-gourmet/5melon-gift.html" target="_blank" 
+        class="btn btn-outline-secondary mt-lg-5 mt-4 justify-content-end ">อ่านต่อ</a>
+    </div>
     <div class="carousel-cell d-flex flex-column  align-items-center">
       <img class="mx-3 col-4 " src="{% static "img/article1.jpg" %}" width="20%">
       <h5 class="mt-4 texthead" style="color: #005e14;"><b>มารู้จักเรื่องราวและประโยชน์<br>ของเจ้าเมล่อนญี่ปุ่นกัน</b></h5>
@@ -366,6 +371,18 @@ swal("มีข้อผิดพลาดในการสั่งซื้�
       <a type="button" href="https://www.youtube.com/watch?v=k410CC6UHJU" target="_blank" 
         class="btn btn-outline-secondary mt-lg-5 mt-4 justify-content-end ">อ่านต่อ</a>
     </div>
+    <div class="carousel-cell d-flex flex-column  align-items-center">
+      <img class="mx-3 mb-lg-4 mb-0 mt-4 img_resp" src="{% static "img/article3.jpg" %}" width="30%">
+      <h5 class="mt-4 mb-2 texthead" style="color: #005e14;"><b>เผยเทคนิค แกะสลักเมล่อน เพิ่มมูลค่า 40 เท่าตัว</b></h5>
+      <p class="mx-5  mt-2 textdesc" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;เมล่อนของคุณไกรภูมิ หากขายตามท้องตลาดทั่วไป ราคาก็คงจะไม่แตกต่าง ชายหนุ่ม เลยเพิ่มจุดขายโดยการนำมาแกะสลักให้คล้ายกับ “ผลโกมุ โกมุ” ผลไม้หายากในการ์ตูนเรื่อง “วันพีช” รวมถึงแกะสลักชื่อ คำอวยพรต่างๆ เป็นการเพิ่มมูลค่าให้แก่ผลไม้ชนิดนี้ หลายเท่าตัวเลยทีเดียว</p>
+      <a type="button" href="https://www.sentangsedtee.com/farming-trendy/article_20820" target="_blank" 
+        class="btn btn-outline-secondary mt-lg-5 mt-4 justify-content-end ">อ่านต่อ</a>
+    </div>
+
+
+
+
+
   </div>  
 </div>
 
@@ -385,7 +402,7 @@ swal("มีข้อผิดพลาดในการสั่งซื้�
       <div class="col">
         <span>
           <p>
-            Contact <br/>
+            ติดต่อ <br/>
             090-725-5141<br/>
             091-030-1148
           </p></span
@@ -394,14 +411,9 @@ swal("มีข้อผิดพลาดในการสั่งซื้�
       <div class="col">
         <span>
           <p>
-            Links Github<br/>
-            <a href="https://github.com/pickapp112" style="color: black"
-              >K.Ploy</a
-            >
-            <br />
-            <a href="https://github.com/MsrdMai" style="color: black"
-              >K.Mai</a
-            >
+          ผู้พัฒนา<br/>
+           K.Ploy<br/>
+           K.Mai
           </p></span
         >
       </div>

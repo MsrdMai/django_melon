@@ -161,8 +161,6 @@
 
 </style>
 
-
-
 <br><br>
 <div class="container" style=" padding: 3%;">
 
@@ -177,44 +175,103 @@
         style="display:inline-block;"
       />
         <label style="text-align: start; padding: 2%; font-size: 24px;"><b>ห้องสนทนา :</b> OrderID# {{order.id}}</label>
-      
+        
+        <input type="hidden" id="user" value="{{request.user.id}}"/>
+
 
         <hr>
         <br>
-          <div style=" overflow-x: hidden;overflow-y: auto;width: 100%;height:400px;" id="scrollbar">
-
+          <!-- <div style="overflow-x: hidden;overflow-y: auto;width: 100%;height:400px;" id="scrollbar">
               {% for txt in message %}
-
               {% if txt.User_id == user %}
               <div class="msg msg_to">
               <div class="content">
                 {{txt.content}}</div>
               <div class="sender"><span class="icon"><img id="persona" src="{{myStore.store_logo.url}}"></span><span class="name">{{myStore.store_name}}</span><span class="time">{{txt.date_added}}</span></div>
             </div>
-              
             {% elif txt.User_id != user %}
             <div class="msg msg_from">
               <div class="recepient"><span class="icon"><img id="persona" src="{{ customer.socialaccount_set.all.0.get_avatar_url }}"></span><span class="name">{{user.username }}</span><span class="time">{{txt.date_added}}</span></div>
               <div class="content">{{txt.content}}</div>
             </div>
               {% endif %}
-
               {% endfor %}
+          </div> -->
 
-          </div>
+          <div style="overflow-x: hidden;overflow-y: auto;width: 100%;height:400px;" id="scrollbar">
 
-          <form method="POST" enctype="multipart/form-data" action="{% url 'chatroom' id=order.id %}" class="send-message">
+        </div>
+
+    <!-- getMessages -->
+    <script>
+      // ให้  javascript ทำงานเมื่อ borwser โหลดเว็บ html เรียบร้อย
+      $(document).ready(function(){
+        var url = "{% url 'getMessages' order.id %}"
+      
+      setInterval(function(){
+       
+          $.ajax({
+              type: 'GET',
+              url : url,
+              
+              success: function(response){
+                  $("#scrollbar").empty();
+                 
+                  userId = $('#user').val()
+         
+                  for (var key in response.messages)
+                  {
+                    if (response.messages[key].User_id_id == userId){
+                      var msg_from="<div class='msg msg_to'><div class='content'>" + response.messages[key].content +"</div> <br> <div class='sender'><span class='icon'><img id='persona' src='{{myStore.store_logo.url}}'></span><span class='name'>{{myStore.store_name}}</span><span class='time'>" +response.messages[key].date_added +"</span></div></div>";
+                      $("#scrollbar").append(msg_from);
+                    }
+                    else if(response.messages[key].User_id_id != userId) {
+                      var msg_to= "<div class='msg msg_from'><div class='content'>"+ response.messages[key].content +"</div> <br> <div class='recepient'><span class='icon'><img id='persona' src='{{customer.socialaccount_set.all.0.get_avatar_url }}'></span><span class='name'>{{user.username}}</span><span class='time'>" + response.messages[key].date_added +"</span></div></div>";
+                      $("#scrollbar").append(msg_to);
+                    }
+                      
+                  }
+              },
+              error: function(response){
+                  alert('Ops! Something Error')
+              }
+          });
+      },1000);
+      })
+      </script>
+
+          <!-- <form method="POST" enctype="multipart/form-data" action="{% url 'chatroom' id=order.id %}" class="send-message"> -->
+            <form class="send-message" id="send-message">
               {% csrf_token %}
             <div class="message-text">
-               <input type="text" name='content' placeholder="Send Message">
+               <input type="text" name='content' id='content' placeholder="Send Message">
             </div>
             <button type="submit" id="btn-chat"><i class="bi bi-arrow-right-circle"></i></button>
           </form>
           <br>
       </div>
-  
-
-  
     </div>
 <br><br> <br><br>
+
+
+      <!-- SendMessages -->
+      <script type="text/javascript">
+        var url = "{% url 'send_message' order.id %}"
+        $(document).on('submit','#send-message',function(e){
+          e.preventDefault();
+  
+          $.ajax({
+            type:'POST',
+             url: url,
+            data:{
+                content:$('#content').val(),
+              csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function(data){
+              //alert(data)
+            }
+          });
+          document.getElementById('content').value = ''
+        });
+      </script>
 {% endblock %}

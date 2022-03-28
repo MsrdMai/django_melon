@@ -18,8 +18,7 @@ import pythainlp
 import datetime
 from pythainlp.util import thai_strftime
 import pythainlp.util
-import os
-
+from django.http import HttpResponse, JsonResponse
 
 class GeneratePdf(View):
     def get(self, request, id, *args, **kwargs):
@@ -46,6 +45,31 @@ class GeneratePdf(View):
 
 
 # Create your views here.
+# @login_required
+# def chatroom(request, id):
+#     user = request.user
+#     myStore = Store.objects.get(user_id=user)
+#     totel_product = Product.objects.filter(store_id=myStore.id)
+#     totel_product = len(totel_product)
+
+#     message = Message.objects.filter(order_id=id)
+#     order = Order.objects.get(id=id)
+#     customer = order.User_id
+
+#     if request.method == 'POST':
+#         content = request.POST.get('content')
+#         myChat = Message.objects.create(order_id=order, content=content,User_id=user)
+#         myChat.save()
+#         return redirect('chatroom', id=order.id)
+
+#     context = {'myStore' : myStore,
+#         'totel_product' : totel_product,
+#         'order' : order,
+#         'message' : message,
+#         'customer' : customer,
+#         }
+
+#     return render(request, template_name='chatroom.html', context=context)
 @login_required
 def chatroom(request, id):
     user = request.user
@@ -53,24 +77,31 @@ def chatroom(request, id):
     totel_product = Product.objects.filter(store_id=myStore.id)
     totel_product = len(totel_product)
 
-    message = Message.objects.filter(order_id=id)
     order = Order.objects.get(id=id)
     customer = order.User_id
-
-    if request.method == 'POST':
-        content = request.POST.get('content')
-        myChat = Message.objects.create(order_id=order, content=content,User_id=user)
-        myChat.save()
-        return redirect('chatroom', id=order.id)
-
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
         'order' : order,
-        'message' : message,
+        'user' : user,
         'customer' : customer,
         }
-
     return render(request, template_name='chatroom.html', context=context)
+
+@login_required
+def send_message(request,id):
+    user = request.user
+    content = request.POST['content']
+    order = Order.objects.get(id=id)
+    new_message = Message.objects.create(order_id=order, content=content,User_id=user)
+    new_message.save()
+    return HttpResponse('Message sent successfully')
+
+@login_required
+def getMessages(request,id):
+    user = request.user
+    order = Order.objects.get(id=id)
+    message = Message.objects.filter(order_id=order.id)
+    return JsonResponse({"messages":list(message.values())})
 
 @login_required
 def order_list(request, id):
