@@ -18,6 +18,9 @@ import pythainlp
 import datetime
 from pythainlp.util import thai_strftime
 from django.http import HttpResponse, JsonResponse
+from datetime import datetime, timedelta
+from django.utils.timezone import datetime
+from django.utils import formats
 
 # Create your views here.
 
@@ -322,6 +325,13 @@ def admin_manager(request):
     count_order  =Order.objects.all().count()
     product =Product.objects.all()
     qulity = Quality.objects.all()
+    now = datetime.now()
+    month = now.strftime('%Y')
+    state_two = State.objects.get(id=2)
+    total_month = Order.objects.filter(date_time__year=month, State_id=state_two)
+    profit = 0
+    for i in total_month:
+        profit += i.total_price
     ## Product-Qulity
     q = []
     for i in qulity:
@@ -362,8 +372,9 @@ def admin_manager(request):
         'q' : q,
         'v' : v,
         'count_product_amont' : count_product_amont,
-        'max_pd' : max_pd
-
+        'max_pd' : max_pd,
+        'total_month' : total_month,
+        'profit' : profit
     }
 
     return render(request, template_name='admin_manager.html', context=context)
