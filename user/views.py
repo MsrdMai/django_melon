@@ -18,7 +18,7 @@ import pythainlp
 import datetime
 from pythainlp.util import thai_strftime
 from django.http import HttpResponse, JsonResponse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.utils.timezone import datetime
 from django.utils import formats
 
@@ -325,13 +325,36 @@ def admin_manager(request):
     count_order  =Order.objects.all().count()
     product =Product.objects.all()
     qulity = Quality.objects.all()
+
     now = datetime.now()
-    month = now.strftime('%Y')
-    state_two = State.objects.get(id=2)
-    total_month = Order.objects.filter(date_time__year=month, State_id=state_two)
-    profit = 0
-    for i in total_month:
-        profit += i.total_price
+    day = now.strftime('%d')
+    month = now.strftime('%m')
+    year = now.strftime('%Y')
+    
+    total_day = Order.objects.filter(date_time__day=day, date_time__year=year, date_time__month=month, State_id=8)
+    total_month  = Order.objects.filter(date_time__month=month,date_time__year=year, State_id=8)
+    total_year = Order.objects.filter(date_time__year=year, State_id=8)
+    profit_day = 0
+    profit_year = 0
+    profit_month = 0
+    profit_week = 0
+
+    one_week_ago = datetime.today() - timedelta(days=7)
+    total_week = Order.objects.filter(date_time__gte=one_week_ago, State_id=8)
+
+
+    for d in total_day:
+        profit_day += d.total_price
+
+    for y in total_year:
+        profit_year += y.total_price
+
+    for w in total_week:
+        profit_week += w.total_price
+
+    for m in total_month:
+        profit_month += m.total_price
+
     ## Product-Qulity
     q = []
     for i in qulity:
@@ -373,8 +396,10 @@ def admin_manager(request):
         'v' : v,
         'count_product_amont' : count_product_amont,
         'max_pd' : max_pd,
-        'total_month' : total_month,
-        'profit' : profit
+        'profit_day' : profit_day,
+        'profit_year' : profit_year,
+        'profit_month' : profit_month,
+        'profit_week' : profit_week
     }
 
     return render(request, template_name='admin_manager.html', context=context)
