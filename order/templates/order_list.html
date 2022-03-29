@@ -456,7 +456,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">ยกเลิกคำสั่งซื้อ OrderID#..</h5>
+          <h5 class="modal-title" id="exampleModalLabel">ยกเลิกคำสั่งซื้อ OrderID#{{i.id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
            <form  method="POST" enctype="multipart/form-data" action="{% url 'farmer_cancel' id=i.id %}">
