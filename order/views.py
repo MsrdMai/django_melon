@@ -195,8 +195,7 @@ def report_order(request, id):
         recode_image = request.FILES.get('recode_image')
         quality = Quality.objects.get(id=quality_id)
 
-
-        if ((pythainlp.util.countthai(request.FILES['recode_image'].name, ignore_chars=" 0123456789,.%-/*#@%& ")) > 0) and (recode_image == None):
+        if ((pythainlp.util.countthai(recode_image.name) > 0) or (recode_image == None)):
             error_img = 'กรุณาอัปโหลดรูปภาพ หรือกรุณาเปลี่ยนชื่อไฟร์เป็นภาษาอังกฤษ'
             context = {'myStore' : myStore,
                 'totel_product' : totel_product,
