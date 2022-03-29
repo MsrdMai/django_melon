@@ -43,7 +43,7 @@ def create_store(request):
         error_img = ''
 
 
-        if len(bank_id) > 13 or len(bank_id) < 10 or len(bank_id) == 12 or len(bank_id) <= 0:
+        if len(bank_id) < 10 or len(bank_id) <= 0:
             error_bankid = 'หมายเลขบัญชีต้องเป็น 10 หรือ 13 หลัก'
             count_error += 1
         if len(store_name) > 30 or len(store_name) <= 0:

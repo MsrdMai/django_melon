@@ -40,7 +40,7 @@
                   </div>
           <div class="mb-3">
             <label class="form-label float-start">ชื่อร้านค้า</label>
-            <input type="text" class="form-control" name="store_name" placeholder="ชื่อร้านค้า" required>
+            <input type="text" class="form-control" maxlength="60" name="store_name" placeholder="ชื่อร้านค้า" required>
             {% if error_storename %}
             <div class="invalid-feedback d-block">{{error_storename}}</div>
             {%endif%}
@@ -63,7 +63,7 @@
 
           <div class="mb-3">
             <label class="form-label float-start">เบอร์โทรศัพท์</label>
-            <input type="tel" class="form-control" name="store_phone" placeholder="หมายเลขโทรศัพท์ต้องมี 10 หลัก" required>
+            <input type="tel" class="form-control" maxlength="10" name="store_phone" placeholder="หมายเลขโทรศัพท์ต้องมี 10 หลัก" required>
             {% if error_phone %}
             <div class="invalid-feedback d-block">{{error_phone}}</div>
             {%endif%}
@@ -96,7 +96,7 @@
             
             <div class="mb-3 col-sm-6 my-1">
                 <label class="form-label float-start">ชื่อบัญชี</label>
-                <input type="text" class="form-control" name="bank_account" placeholder="ชื่อเจ้าของบัญชี" required>
+                <input type="text" class="form-control" maxlength="100" name="bank_account" placeholder="ชื่อเจ้าของบัญชี" required>
                 {% if error_account %}
                 <div class="invalid-feedback d-block">{{error_account}}</div>
                 {%endif%}
@@ -128,7 +128,7 @@
             </div>
              <div class="mb-3 col-sm-6 my-1">
                 <label class="form-label float-start">เลขบัญชี</label>
-                <input type="text" class="form-control" name="bank_id" placeholder="หมายเลขบัญชีต้องเป็น 10 หรือ 13 หลัก" required>
+                <input type="text" class="form-control" name="bank_id" maxlength="13" placeholder="หมายเลขบัญชีต้องเป็น 10 หรือ 13 หลัก" required>
               </div>
               {% if error_bankid %}
               <div class="invalid-feedback d-block">{{error_bankid}}</div>

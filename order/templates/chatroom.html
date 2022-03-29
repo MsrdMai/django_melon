@@ -226,7 +226,7 @@
                       $("#scrollbar").append(msg_from);
                     }
                     else if(response.messages[key].User_id_id != userId) {
-                      var msg_to= "<div class='msg msg_from'><div class='content'>"+ response.messages[key].content +"</div> <br> <div class='recepient'><span class='icon'><img id='persona' src='{{customer.socialaccount_set.all.0.get_avatar_url }}'></span><span class='name'>{{user.username}}</span><span class='time'>" + response.messages[key].date_added +"</span></div></div>";
+                      var msg_to= "<div class='msg msg_from'><div class='content'>"+ response.messages[key].content +"</div> <br> <div class='recepient'><span class='icon'><img id='persona' src='{{customer.socialaccount_set.all.0.get_avatar_url }}'></span><span class='name'>{{customer.username}}</span><span class='time'>" + response.messages[key].date_added +"</span></div></div>";
                       $("#scrollbar").append(msg_to);
                     }
                       
