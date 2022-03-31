@@ -326,7 +326,12 @@ def admin_manager(request):
     product =Product.objects.all()
     qulity = Quality.objects.all()
 
+
+
     now = datetime.now()
+
+    fmt = "%d %b %y เวลา: %H:%M:%S"
+    time_now = thai_strftime(now, fmt)
     day = now.strftime('%d')
     month = now.strftime('%m')
     year = now.strftime('%Y')
@@ -398,7 +403,8 @@ def admin_manager(request):
         'profit_day' : profit_day,
         'profit_year' : profit_year,
         'profit_month' : profit_month,
-        'profit_week' : profit_week
+        'profit_week' : profit_week,
+        'time_now' :time_now
     }
 
     return render(request, template_name='admin_manager.html', context=context)
