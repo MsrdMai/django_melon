@@ -1,5 +1,5 @@
 from email import message
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from user.models import TypeUser, UserInType
 from .models import Review, State, Order, Message, Disease, Bug, OrderCarving, Payment, CancelOrder, Portage, Record, CovertImage
 from store.models import Store, Quality, Product
@@ -11,7 +11,6 @@ from .process import html_to_pdf
 from django.template.loader import render_to_string
 from django.urls import reverse
 import matplotlib.pyplot as plt
-from .utils import get_filtered_image
 import numpy as np
 import cv2
 import pythainlp
@@ -277,9 +276,6 @@ def covert_image(request, id):
         }
         return render(request, template_name='covert_image.html', context=context)
 
-
-    
-
 @login_required
 def order_product(request, id):
     product = Product.objects.get(id=id)
@@ -351,8 +347,14 @@ def cancel_order(request, id):
     order = Order.objects.get(id=id)
     cancel_description = request.POST.get('cancel_description')
     refund_contact = request.POST.get('refund_contact')
-    state = State.objects.get(id=7)
-    order.State_id = state
+
+    if order.State_id == 1:
+        state = State.objects.get(id=7)
+        order.State_id = state
+
+    elif order.State_id == 3:
+        state = State.objects.get(id=6)
+        order.State_id = state
 
     product = Product.objects.get(id=order.product_id_id)
     product.product_amount = product.product_amount + order.amount
@@ -368,7 +370,6 @@ def cancel_order(request, id):
 @login_required
 def farmer_cancel(request, id):
     order = Order.objects.get(id=id)
-
     if request.method == 'POST':
         cancel_description = request.POST.get('cancel_description')
         refund_contact = request.POST.get('refund_contact')
@@ -386,18 +387,6 @@ def farmer_cancel(request, id):
         return redirect('order_list', id=order.product_id.id)
     else:
         return redirect('order_list', id=order.product_id.id)
-
-
-@login_required
-def farm_refun(request, id):
-    order = Order.objects.get(id=id)
-    if order.State_id == 1:
-        state = State.objects.get(id=7)
-    else:
-        state = State.objects.get(id=6)
-    order.State_id = state
-    order.save()
-    return redirect('orderstatus')
 
 @login_required
 def send_portage(request, id):
@@ -419,6 +408,14 @@ def confirmorder(request, id):
     order.save()
     return redirect('orderstatus')
     
+@login_required
+def farm_refund(request, id):
+    order = Order.objects.get(id=id)
+    state = State.objects.get(id=7)
+    order.State_id = state
+    order.save()
+    return redirect('historyorder')
+
 @login_required
 def send_review(request, id):
     order = Order.objects.get(id=id)

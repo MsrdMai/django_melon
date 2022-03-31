@@ -264,7 +264,7 @@
                         <a type="button" class="cancel mx-1 col-lg-3 col-12 mb-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#resonCancel-{{i.id}}">
                             <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>เหตุผลที่ยกเลิก</b></h3>
                         </a>
-                        <a type="button" class="button2 mx-1 col-lg-5 col-12 mb-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#farm_refun-{{i.id}}">
+                        <a type="button" class="button2 mx-1 col-lg-5 col-12 mb-1" style="margin-right: 0px;"  data-bs-toggle="modal" data-bs-target="#farmRefun-{{i.id}}">
                             <h3 class="mx-3" style="margin-top: 0.5rem; font-size: 15px;"><b>ได้รับเงินคืนจากฟาร์มแล้ว</b></h3>
                         </a>
                         <a  class="chat mx-1 col-lg-2 col-12 mb-1" href="{% url 'chatTofarmer' id=i.id %}">
@@ -282,11 +282,11 @@
 <!-- farm_refun-->
 
 {% for i in myorder %}
-<div class="modal fade" id="farm_refun-{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="farmRefun-{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">ยืนยันการได้รับเงินคืนจากฟาร์ม</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">ยืนยันการได้รับเงินคืนจากฟาร์ม Order# {{i.id}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -294,7 +294,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-        <a type="button" class="btn btn-danger" href="{% url 'farm_refun' id=i.id %}">ยืนยัน</a>
+        <a href="{% url 'farm_refund' id=i.id %}" class="btn btn-danger">ยืนยัน</a>
       </div>
     </div>
   </div>
