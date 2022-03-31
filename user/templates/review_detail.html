@@ -38,9 +38,9 @@
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
     </center>
     <script>
-        var xValues = ["ดีมาก", "ดี", "ปานกลาง", "แย่", "แย่มาก"];
+        var xValues = ["ดีมาก", "ดี", "ปานกลาง", "แย่", "แย่มาก",'รับไม่ได้'];
         var yValues = {{yValues|safe}};
-        var barColors = ["#22c55e", "#bef264","orange","#f97316","#dc2626"];
+        var barColors = ["#22c55e", "#bef264","orange","#f97316","#dc2626",'#991b1b'];
         
         new Chart("myChart", {
           type: "bar",
@@ -78,7 +78,9 @@
                                 <div class="border border-3 ms-2 pt-sm-0 pt-1 ms-sm-4 px-4 border-success"><p><b>{{product.type_id.name}}</b></p></div>
                             </div>
                                     <div class="col d-flex justify-content-md-start justify-content-between">
+                                          
                                             <img class="rounded productimg" src="{{review.review_image.url}}" height="150px" width="150px" style="object-fit: scale-down;" alt="Product" />
+                                         
                                             <h3 class="producttext ps-4" style="margin-top: 20px;"><b>{{product.product_name}}</b><br/>x{{order.amount}}</h3>   
                                     </div>
                                     <div class="col-md-6 d-flex flex-column">
@@ -122,7 +124,10 @@
                                             {% endif %}
                                         </div>
                                         <br>
+                                        {% if review.review_description == '' %}
+                                        {% else %}
                                         <p class="form-control form-control-lg my-2" id="message-text">{{review.review_description}}</p>
+                                        {% endif %}
                                         <p class="d-flex justify-content-end my-1 flex-wrap ">รีวิวโดย {{order.User_id.username}}</p>
                                     </div> 
                             </div>

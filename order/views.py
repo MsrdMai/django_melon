@@ -422,12 +422,16 @@ def confirmorder(request, id):
 @login_required
 def send_review(request, id):
     order = Order.objects.get(id=id)
+    product = order.product_id.product_image
     state = State.objects.get(id=8)
     order.State_id = state
     order.save()
     review_description = request.POST.get('review_description')
     review_rating = request.POST.get('review_rating')
     review_image = request.FILES.get('review_image')
-    my_review = Review.objects.create(review_description=review_description, review_rating=review_rating, review_image=review_image, order_id=order)
+    if review_image == None:
+        my_review = Review.objects.create(review_description=review_description, review_rating=review_rating, review_image=product, order_id=order)
+    else:
+        my_review = Review.objects.create(review_description=review_description, review_rating=review_rating, review_image=review_image, order_id=order)
     my_review.save()
     return redirect('orderstatus')
