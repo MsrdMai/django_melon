@@ -467,9 +467,20 @@
                   <textarea  class="form-control" name="cancel_description" rows="5" maxlength="255" required></textarea>
                 </div>
                <br>
+
+               {% if i.State_id_id == 1 %}
+               <div class="form-group">
+                   <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
+                   <textarea  class="form-control" name="refund_contact" rows="2" value="สถานะรอชำระ ไม่ต้องทำการคืนเงิน" readonly>สถานะรอชำระ ไม่ต้องทำการคืนเงิน</textarea></div> 
+       <br>
+                {% else %}   
                 <div class="form-group">
-                  <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
-                  <textarea  class="form-control" name="refund_contact" rows="3" maxlength="255" required></textarea>                </div> 
+                    <label class="form-label float-start">ช่องทางติดต่อคืนเงิน</label>
+                    <textarea  class="form-control" name="refund_contact" rows="2" maxlength="255" required></textarea></div> 
+                <br>
+                {% endif %}      
+
+               
               <br>
                 <div class="form-group">
                   <label class="form-label float-start">แมลงที่เกี่ยวข้อง</label>

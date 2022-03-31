@@ -348,11 +348,11 @@ def cancel_order(request, id):
     cancel_description = request.POST.get('cancel_description')
     refund_contact = request.POST.get('refund_contact')
 
-    if order.State_id == 1:
+    if order.State_id_id == 1:
         state = State.objects.get(id=7)
         order.State_id = state
 
-    elif order.State_id == 3:
+    else:
         state = State.objects.get(id=6)
         order.State_id = state
 
@@ -373,7 +373,12 @@ def farmer_cancel(request, id):
     if request.method == 'POST':
         cancel_description = request.POST.get('cancel_description')
         refund_contact = request.POST.get('refund_contact')
-        state = State.objects.get(id=6)
+
+        if order.State_id_id == 1:
+            state = State.objects.get(id=7)
+        else:
+            state = State.objects.get(id=6)
+            
         order.State_id = state
         product = Product.objects.get(id=order.product_id_id)
         product.product_amount = product.product_amount + order.amount
