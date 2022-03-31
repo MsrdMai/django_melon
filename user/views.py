@@ -330,18 +330,17 @@ def admin_manager(request):
     day = now.strftime('%d')
     month = now.strftime('%m')
     year = now.strftime('%Y')
+    week = now.strftime('%V')
     
-    total_day = Order.objects.filter(date_time__day=day, date_time__year=year, date_time__month=month, State_id=8)
-    total_month  = Order.objects.filter(date_time__month=month,date_time__year=year, State_id=8)
+    total_day = Order.objects.filter(date_time__day=day, State_id=8)
+    total_month  = Order.objects.filter(date_time__month=month,State_id=8)
     total_year = Order.objects.filter(date_time__year=year, State_id=8)
+    # one_week_ago = datetime.today() - timedelta(days=7)
+    total_week = Order.objects.filter(date_time__week=week, State_id=8)
     profit_day = 0
     profit_year = 0
     profit_month = 0
     profit_week = 0
-
-    one_week_ago = datetime.today() - timedelta(days=7)
-    total_week = Order.objects.filter(date_time__gte=one_week_ago, State_id=8)
-
 
     for d in total_day:
         profit_day += d.total_price
