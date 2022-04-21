@@ -92,20 +92,8 @@ WSGI_APPLICATION = 'django_melon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': 'melon_system',
-#             'USER' : 'root',
-#             'HOST' : '127.0.0.1',
-#             'PASSWORD' : 'Maimsrd', #แก้ตรง site id ด้วยนะใหม่ ตอนนี้แก้ให้เป็นเลข1ไม่ได้อะะะ
-#             'PORT' : '3306',
-#             'OPTIONS': {
-#                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-#         }}
-# }
-
 DATABASES = {
+    'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'melon_system',
             'USER' : 'root',
@@ -116,6 +104,18 @@ DATABASES = {
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         }}
 }
+
+# DATABASES = {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'melon_system',
+#             'USER' : 'root',
+#             'HOST' : '127.0.0.1',
+#             'PASSWORD' : 'ploy30725', #แก้ตรง site id ด้วยนะใหม่ ตอนนี้แก้ให้เป็นเลข1ไม่ได้อะะะ
+#             'PORT' : '3306',
+#             'OPTIONS': {
+#                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#         }}
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

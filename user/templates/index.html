@@ -179,6 +179,118 @@
   </div>
 </div>
 
+<!-- container -->
+<div class="container mt-5 d-flex flex-wrap p-4 justify-content-center">
+  <h1 style="color: #b88b1c; font-size:40px; text-shadow: 2px 2px #cfcfcf;" class="align-items-center"><b>ทำไมต้อง <span style="color: #005e14;">Melon Tracking</span></b></h1>
+  <img class="mx-3" src="{% static "icon/question.png" %}" width="50px" height="50px">
+</div>
+<div class="card">
+  <div class="card-left">
+    <img src="{% static "icon/melonindex.png" %}" >
+    <h1 style="color: #005e14;"><b>แกะสลักลายเมล่อน</b></h1>
+    <h5 style="color: black; font-weight: 500;">เลือกสลักลายเมล่อนเพื่อเป็นของขวัญให้บุคคลสำคัญก็ได้นะ แถมยังเพิ่มมูลค่าของเมล่อนให้เจ้าของฟาร์มได้อีกด้วย !</h5>
+  </div>
+  
+  <div class="card-right">
+    <img src="{% static "icon/melonindex.png" %}" width="220px" height="220px">
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-left">
+    <img src="{% static "icon/growing.png" %}" >
+    <h1 style="color: #005e14;"><b>ติดตามผลผลิต</b></h1>
+    <h5 style="color: black; font-weight: 500;">ติดตามการเจริญเติบโตเมล่อนของเรา ตั้งแต่แรกจนถึงตอนเก็บเกี่ยวได้เลย เห็นลายที่เราเลือกแกะลายชัดเจนมากขึ้นด้วย !</h5>
+  </div>
+  
+  <div class="card-right">
+    <img src="{% static "icon/growing.png" %}" width="200px" height="200px">
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-left">
+    <img src="{% static "icon/shopping-cart.png" %}" >
+    <h1 style="color: #005e14;"><b>เมล่อนหลากหลาย</b></h1>
+    <h5 style="color: black; font-weight: 500;">ที่เดียวจบ รวบรวมเมล่อนจากฟาร์มต่างๆ มากมาย ให้ผู้ซื้อเลือกซื้อได้ตามต้องการ ดูรีวิวสินค้าก่อนตัดสินใจสั่งซื้อได้ด้วย !</h5>
+  </div>
+  
+  <div class="card-right">
+    <img src="{% static "icon/shopping-cart.png" %}" width="200px" height="200px">
+  </div>
+</div>
+  
+<style>
+  .card {
+    width: 50%;
+    margin: 20px auto;
+    margin-bottom: 60px;
+    padding: 20px;
+    padding-left: 50px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+    border-radius: 40px;
+  }
+  .card-left {
+      width: 50%;
+      text-align: left;
+  }
+  .card-left img { width: 40px; display: none;}
+  .card-left h1 { margin-bottom: 20px; }
+  .card-left h5 { line-height: 30px; }
+
+  .card-right {
+      width: 220px;
+      position: absolute;
+      top: 20px;
+      right: 50px;
+      transition: transform .2s;
+      transform: rotate(20deg);
+    }
+  .card-right:hover{
+    transform: scale(1.2);
+  }
+  @media only screen and (max-width: 900px) {
+    .card{
+      width: 80%;
+      margin-bottom: 40px;
+    }
+}
+@media only screen and (max-width: 1200px) and (max-height: 850px) and (min-width: 700px){
+    .card{
+      width: 75%;
+      margin-bottom: 40px;
+    }
+  }
+@media only screen and (max-width: 450px) {
+  .card{
+      width: 75%;
+      margin-bottom: 40px;
+      padding-left: 20px;
+    }
+  .card-left {
+      width: 100%;
+      text-align: center;
+  }
+  .card-right{
+    /* position: relative;
+    top: 0px;
+    right: 0px;
+    width: 100px; */
+    display: none;
+  }
+  .card-left img {
+    display: block;
+    width: 100px;
+    margin-bottom: 20px;
+    margin-left: 25%;
+  }
+}
+</style>
+
 <!-- container2 -->
 <div class="mt-5 w-75 container" style="border-radius: 40px;" >
   <div class="row mt-5 m-xl-5 p-xl-5 m-md-2 p-md-2 m-xs-0 p-xs-0">
@@ -252,44 +364,7 @@
   </div>
 </div>
 
-<!-- container4 -->
-<!-- <div class="bg-white mt-5 w-75 container px-lg-5 px-md-2" style="border-radius: 40px;" >
-  <div class="d-flex flex-wrap p-4 justify-content-center">
-    <h1 style="color: #005e14;" class="align-items-center"><b>บทความน่าสนใจ</b></h1>
-    <img class="mx-3" src="{% static "icon/article.png" %}" width="50px" height="50px">
-  </div>
-  <div>
-    <div class="row d-flex justify-content-around gap-2">
-      <div class="bg-white shadow col-xl-6 py-3 mb-4" style="border-radius: 40px;" max-width="200px">
-        <img class="mx-3 my-3" src="{% static "img/article1.jpg" %}" width="auto" height="200px">
-        <p style="color: #005e14;"><b>มารู้จักเรื่องราวและประโยชน์<br>ของเจ้าเมล่อนญี่ปุ่นกัน</b></p>
-      </div>
-      <div class="bg-white shadow col-xl-6 py-3 mb-4" style="border-radius: 40px;" max-width="200px">
-        <img class="mx-3 my-3" src="{% static "img/article2.jpg" %}" width="auto" height="200px">
-        <p style="color: #005e14;"><b>8 ประโยชน์ของเมล่อน <br>ที่มีมากกว่าความอร่อย</b></p>
-      </div>
-    </div>
-  </div>
-</div> -->
 
-
-
-<!-- <div class="container mb-5">
-<div class="d-flex flex-wrap p-4 mt-5 justify-content-center">
-  <h1 style="color: #005e14;" class="align-items-center"><b>บทความน่าสนใจ</b></h1>
-  <img class="mx-3" src="{% static "icon/article.png" %}" width="50px" height="50px">
-</div>
-<div class="carousel w-75 row" data-flickity='{ "autoPlay": 2500, "pauseAutoPlayOnHover": false }'>
-    <div class="col d-flex flex-wrap carousel-cell bg-white d-flex justify-content-center justify-content-md-around align-items-center" style="border-radius: 40px;">
-      <img class="mx-3" src="{% static "img/article1.jpg" %}" width="250px">
-      <h3 style="color: #005e14;"><b>มารู้จักเรื่องราวและประโยชน์<br>ของเจ้าเมล่อนญี่ปุ่นกัน</b></h3>
-  </div>
-  <div class="col d-flex flex-wrap carousel-cell bg-white d-flex justify-content-center justify-content-md-around align-items-center" style="border-radius: 40px;">
-    <img class="mx-3" src="{% static "img/article2.jpg" %}" width="250px">
-    <h3 style="color: #005e14;"><b>8 ประโยชน์<br>ของเมล่อน</b></h3>
-</div>
-</div>
-</div> -->
 <style>
   * { box-sizing: border-box; }
 .carousel {
@@ -335,7 +410,7 @@
 </style>
 <div class="container mb-5">
   <div class="d-flex flex-wrap p-4 mt-5 justify-content-center">
-    <h1 style="color: #005e14;" class="align-items-center"><b>บทความน่าสนใจ</b></h1>
+    <h1 style="color: #005e14; text-shadow: 2px 2px #7d7d7d;" class="align-items-center"><b>บทความน่าสนใจ</b></h1>
     <img class="mx-3" src="{% static "icon/article.png" %}" width="50px" height="50px">
   </div>
   <div class="carousel" data-flickity='{ "autoPlay": 2500, "pauseAutoPlayOnHover": false }'>
