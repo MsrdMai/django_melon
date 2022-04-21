@@ -181,8 +181,8 @@
 
 <!-- container -->
 <div class="container mt-5 d-flex flex-wrap p-4 justify-content-center">
-  <h1 style="color: #b88b1c; font-size:40px; text-shadow: 2px 2px #cfcfcf;" class="align-items-center"><b>ทำไมต้อง <span style="color: #005e14;">Melon Tracking</span></b></h1>
-  <img class="mx-3" src="{% static "icon/question.png" %}" width="50px" height="50px">
+  <h1 class="txtsize" style="color: #b88b1c; text-shadow: 2px 2px #cfcfcf;" class="align-items-center"><b>ทำไมต้อง <span style="color: #005e14;">Melon Tracking</span></b></h1>
+  <img class="mx-3 imghead" src="{% static "icon/question.png" %}" width="50px" height="50px">
 </div>
 <div class="card">
   <div class="card-left">
@@ -253,6 +253,9 @@
   .card-right:hover{
     transform: scale(1.2);
   }
+  .txtsize {
+    font-size: 40px; 
+  }
   @media only screen and (max-width: 900px) {
     .card{
       width: 80%;
@@ -287,6 +290,12 @@
     width: 100px;
     margin-bottom: 20px;
     margin-left: 25%;
+  }
+  .txtsize { 
+    font-size: 30px; 
+  }
+  .imghead {
+    display: none;
   }
 }
 </style>
