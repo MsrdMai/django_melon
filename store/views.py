@@ -1,4 +1,3 @@
-from email import message
 from django.shortcuts import render, redirect
 from user.models import TypeUser, UserInType
 from order.models import State, Order, Review
@@ -119,11 +118,23 @@ def my_store(request):
         return redirect(to='create_store')
     else:
         myStore = Store.objects.get(user_id=user)
-        totel_product = Product.objects.filter(store_id=myStore)
-        totel_product = len(totel_product)
+        product = Product.objects.filter(store_id=myStore)
+        waitcheck_order = 0
+        waitpay_order = 0
+        refund_order = 0
+        for p in product:
+            waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+            waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+            refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+        count_all = waitcheck_order + waitpay_order + refund_order
+        totel_product = len(product)
         latitude = myStore.latitude
         longitude = myStore.longitude
         context = {'myStore' : myStore,
+         'waitcheck_order' : waitcheck_order,
+         'waitpay_order' : waitpay_order,
+         'refund_order' : refund_order,
+         'count_all' : count_all,
         'latitude' : latitude,
         'longitude' : longitude,
         'totel_product' : totel_product,
@@ -136,8 +147,16 @@ def my_store(request):
 def product_store(request):
     user = request.user
     myStore =  Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
     type_product = TypeeOrder.objects.all()  
 
     search_txt = request.GET.get('inputSearch', '')
@@ -162,6 +181,10 @@ def product_store(request):
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'type_product' :type_product,
         'object_list' : object_list,
         'outofstock' : outofstock,}
@@ -173,8 +196,16 @@ def product_description(request, id):
     # tabfarmer
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
 
     # product_description
     product_des = Product.objects.get(id=id)
@@ -187,6 +218,10 @@ def product_description(request, id):
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'product_des' : product_des,
         'expire' : expire,
         'harvest' : harvest,
@@ -271,8 +306,17 @@ def edit_store(request, id):
 def create_product(request):
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
+
     quality_list = Quality.objects.all()
     type_list = TypeeOrder.objects.all()
     range_product = Product.objects.all().count()
@@ -299,6 +343,10 @@ def create_product(request):
             checkImg = 'กรุณาอัปโหลดรูปภาพสินค้า !'
             context = {'myStore' : myStore,
                 'totel_product' : totel_product,
+                'waitcheck_order' : waitcheck_order,
+                'waitpay_order' : waitpay_order,
+                'refund_order' : refund_order,
+                'count_all' : count_all,
                 'quality_list' :quality_list,
                 'type_list' : type_list,
                 'checkImg' : checkImg
@@ -310,6 +358,10 @@ def create_product(request):
             checkd = 'วันที่เก็บเกี่ยวไม่สามารถเลือกก่อนวันที่หมดอายุได้ !'
             context = {'myStore' : myStore,
                 'totel_product' : totel_product,
+                'waitcheck_order' : waitcheck_order,
+                'waitpay_order' : waitpay_order,
+                'refund_order' : refund_order,
+                'count_all' : count_all,
                 'quality_list' :quality_list,
                 'type_list' : type_list,
                 'checkd' : checkd
@@ -321,6 +373,10 @@ def create_product(request):
             checkw = 'กรุณาใส่เป็นตัวเลขหรือเลขทศนิยม'
             context = {'myStore' : myStore,
                 'totel_product' : totel_product,
+                'waitcheck_order' : waitcheck_order,
+                'waitpay_order' : waitpay_order,
+                'refund_order' : refund_order,
+                'count_all' : count_all,
                 'quality_list' :quality_list,
                 'type_list' : type_list,
                 'checkw' : checkw
@@ -332,6 +388,10 @@ def create_product(request):
             checkType = 'กรุณาเลือกประเภทสินค้า !'
             context = {'myStore' : myStore,
                 'totel_product' : totel_product,
+                'waitcheck_order' : waitcheck_order,
+                'waitpay_order' : waitpay_order,
+                'refund_order' : refund_order,
+                'count_all' : count_all,
                 'quality_list' :quality_list,
                 'type_list' : type_list,
                 'checkType' : checkType
@@ -344,6 +404,10 @@ def create_product(request):
                 checkSelect = 'กรุณาเลือกการแกะสลักลาย !'
                 context = {'myStore' : myStore,
                     'totel_product' : totel_product,
+                     'waitcheck_order' : waitcheck_order,
+                    'waitpay_order' : waitpay_order,
+                    'refund_order' : refund_order,
+                    'count_all' : count_all,
                     'quality_list' :quality_list,
                     'type_list' : type_list,
                     'checkSelect' : checkSelect
@@ -354,7 +418,11 @@ def create_product(request):
                 checkCarving = 'กรุณาระบุราคาค่าแกะสลักลาย !'
                 context = {'myStore' : myStore,
                     'totel_product' : totel_product,
+                    'waitcheck_order' : waitcheck_order,
+                    'waitpay_order' : waitpay_order,
+                    'refund_order' : refund_order,
                     'quality_list' :quality_list,
+                    'count_all' : count_all,
                     'type_list' : type_list,
                     'checkCarving' : checkCarving
                     }
@@ -384,6 +452,10 @@ def create_product(request):
                 successful_NewProduct = 'สร้างข้อมูลสินค้าสำเร็จ'
                 context = {'myStore' : myStore,
                 'totel_product' : totel_product,
+                'waitcheck_order' : waitcheck_order,
+                'waitpay_order' : waitpay_order,
+                'refund_order' : refund_order,
+                'count_all' : count_all,
                 'quality_list' :quality_list,
                 'type_list' : type_list,
                 'successful_NewProduct' : successful_NewProduct,
@@ -405,6 +477,10 @@ def create_product(request):
                 successful_NewProduct = 'สร้างข้อมูลสินค้าสำเร็จ'
                 context = {'myStore' : myStore,
                 'totel_product' : totel_product,
+                'waitcheck_order' : waitcheck_order,
+                'waitpay_order' : waitpay_order,
+                'refund_order' : refund_order,
+                'count_all' : count_all,
                 'quality_list' :quality_list,
                 'type_list' : type_list,
                 'successful_NewProduct' : successful_NewProduct,
@@ -413,6 +489,10 @@ def create_product(request):
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'quality_list' :quality_list,
         'type_list' : type_list,
         }
@@ -423,11 +503,18 @@ def create_product(request):
 def order_farm(request):
     user = request.user
     myStore =  Store.objects.get(user_id=user.id)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
+
     type_product = TypeeOrder.objects.all()
-
-
     search_txt = request.GET.get('inputSearch', '')
     print(search_txt)
     input_Typeproduct = request.GET.get('input_Typeproduct', '')
@@ -451,6 +538,10 @@ def order_farm(request):
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'type_product' :type_product,
         'object_list': object_list,
         'outofstock': outofstock}
@@ -493,8 +584,16 @@ def product_close(request, id):
 def review_farm(request):
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
     list_review = Review.objects.all()
     list_order = Order.objects.all()
     list_product = Product.objects.filter(store_id=myStore)
@@ -529,6 +628,10 @@ def review_farm(request):
     
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'list_review' : list_review,
         'list_order' : list_order,
         'list_product' : list_product,

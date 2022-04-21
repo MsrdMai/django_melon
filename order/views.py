@@ -1,4 +1,3 @@
-from email import message
 from django.shortcuts import render, redirect
 from user.models import TypeUser, UserInType
 from .models import Review, State, Order, Message, Disease, Bug, OrderCarving, Payment, CancelOrder, Portage, Record, CovertImage
@@ -9,7 +8,6 @@ from django.http import HttpResponse
 from django.views.generic import View
 from .process import html_to_pdf 
 from django.template.loader import render_to_string
-from django.urls import reverse
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
@@ -73,13 +71,25 @@ class GeneratePdf(View):
 def chatroom(request, id):
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore.id)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
 
     order = Order.objects.get(id=id)
     customer = order.User_id
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'order' : order,
         'user' : user,
         'customer' : customer,
@@ -106,8 +116,16 @@ def getMessages(request,id):
 def order_list(request, id):
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore.id)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
     type_state = State.objects.all()
     product_order = Product.objects.get(id=id)
 
@@ -132,6 +150,10 @@ def order_list(request, id):
     order_carving = OrderCarving.objects.all()
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'product_order' : product_order,
         'type_state' :type_state,
         'bug' : bug,
@@ -149,14 +171,26 @@ def order_list(request, id):
 def payment_order(request,id):
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore.id)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore.id)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
 
     order = Order.objects.get(id=id)
     payment = Payment.objects.get(order_id=order)
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'order' : order,
         'payment' : payment
 
@@ -181,8 +215,16 @@ def report_order(request, id):
     count_record = Record.objects.filter(order_id=id).count()
     list_img = CovertImage.objects.all()
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore.id)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
     quality_list = Quality.objects.all()
     order = Order.objects.get(id=id)
 
@@ -216,6 +258,10 @@ def report_order(request, id):
 
     context = {'myStore' : myStore,
         'totel_product' : totel_product,
+        'waitcheck_order' : waitcheck_order,
+        'waitpay_order' : waitpay_order,
+        'refund_order' : refund_order,
+        'count_all' : count_all,
         'quality_list' :quality_list,
         'order' : order,
         'my_record' : my_record,
@@ -228,8 +274,16 @@ def report_order(request, id):
 def covert_image(request, id):
     user = request.user
     myStore = Store.objects.get(user_id=user)
-    totel_product = Product.objects.filter(store_id=myStore.id)
-    totel_product = len(totel_product)
+    product = Product.objects.filter(store_id=myStore)
+    waitcheck_order = 0
+    waitpay_order = 0
+    refund_order = 0
+    for p in product:
+        waitcheck_order += Order.objects.filter(product_id=p.id, State_id=2).count()
+        waitpay_order += Order.objects.filter(product_id=p.id, State_id=1).count()
+        refund_order += Order.objects.filter(product_id=p.id, State_id=6).count()
+    count_all = waitcheck_order + waitpay_order + refund_order
+    totel_product = len(product)
 
     get_img = CovertImage.objects.get(id=id)
     get_order = get_img.recode_id.order_id
@@ -271,6 +325,10 @@ def covert_image(request, id):
             'get_order' : get_order,
             'myStore' : myStore,
             'totel_product' : totel_product,
+            'waitcheck_order' : waitcheck_order,
+            'waitpay_order' : waitpay_order,
+            'refund_order' : refund_order,
+            'count_all' : count_all,
             'error_txt' : error_txt,
             'advice' : advice,
         }
@@ -293,7 +351,7 @@ def order_product(request, id):
         if carving_img == None:
             error_img = 'กรุณาสั่งซื้อใหม่ เนื่องจากไม่มีข้อมูลรูปภาพที่ต้องการแกะลาย'
             context = {'error_img' : error_img}
-            return render(request, template_name='index.html', context=context)
+            return redirect('product_desc', id=product.id)
         if amount != 1:
             error_amount = 'กรุณาสั่งซื้อใหม่ เนื่องจากไม่มีการแกะลายสามารถสั่งได้ทีละลูก'
             context = {'error_amount' : error_amount}
@@ -378,7 +436,7 @@ def farmer_cancel(request, id):
         cancel_description = request.POST.get('cancel_description')
         refund_contact = request.POST.get('refund_contact')
 
-        if order.State_id_id == 1:
+        if order.State_id.id == 1:
             state = State.objects.get(id=7)
         else:
             state = State.objects.get(id=6)

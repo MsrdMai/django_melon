@@ -24,13 +24,6 @@
 </script>
 {%endif%}
 
-{% if error_img %}
-<script>
-swal("มีข้อผิดพลาดในการสั่งซื้อ", "{{error_img}}", "error");
-</script>
-{%endif%}
-
-
 {% if order_complete_1 %}
 <script>
   swal("{{order_complete_1}}", "{{order_complete_2}}", "success");

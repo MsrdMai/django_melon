@@ -167,17 +167,26 @@
         
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+           <li class="btn nav-item dropdown dropdown-menu-right">  
 
-          <!-- <li class="btn nav-item dropdown dropdown-menu-right">
-            <a class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" style="color: #807b7b;"> 
+          {% if count_all == 0 %}
+            <a class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" style="color: #807b7b;">
               <i class="fa fa-bell"><span class="badge badge-secondary">0</span></i></a>
+          {% else %}
+              <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"> 
+                <i class="fa fa-bell"><span class="badge badge-danger">{{count_all}}</span></i></a>
+              </a>
+          {% endif %}
                 <div class="dropdown-content dropdown-menu dropdown-position-bottomleft" aria-labelledby="navbarDropdown">
                   <h6 class="dropdown-header"><b>แจ้งเตือน</b></h6>
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>มีการแจ้งชำระเงิน!</strong><br>OrderID# 1 โปรดตรวจสอบข้อมูล
-                  </div>
+                    <strong>มีการแจ้งชำระเงิน!</strong>{{waitcheck_order}} โปรดตรวจสอบข้อมูล
+                    <strong>มีการรอชำระเงิน!</strong>{{waitpay_order}} โปรดตรวจสอบข้อมูล
+                    <strong>มีการคืนเงินเงิน!</strong>{{refund_order}} โปรดตรวจสอบข้อมูล
+                  </div>                  
                 </div>
-          </li> -->
+          </li>
+         
 
           
             <div class="d-grid gap-2">       
