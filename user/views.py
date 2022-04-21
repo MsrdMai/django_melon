@@ -232,10 +232,12 @@ def product_desc(request,id):
     fmt = "%d %b %y"
     expire = thai_strftime(date_ex, fmt)
     harvest = thai_strftime(date_har, fmt)
+    ordered = Order.objects.filter(product_id=data_product, State_id=8).count()
     context = {
         'data_product' : data_product,
         'expire' : expire,
-        'harvest' : harvest
+        'harvest' : harvest,
+        'ordered' : ordered,
     }
     return render(request, template_name='product_desc.html', context=context)
 
