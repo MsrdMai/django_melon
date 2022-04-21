@@ -1,4 +1,11 @@
 {% extends "TopnavUser.html" %} {% load static %} {% block content %}
+
+{% if error_amount %}
+<script>
+swal("มีข้อผิดพลาดในการสั่งซื้อ", "{{error_amount}}", "error");
+</script>
+{%endif%}
+
 <br><br>
 
 <style>
@@ -174,6 +181,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 
       </div>
+
+      <div class="col mt-3 mb-0">
+        <h5 style="text-align: left;"><span class="badge rounded-pill bg-warning text-dark">ขายแล้ว  : {{ordered}} ชิ้น</span></h5>
+      </div>
+      <br>
+
       <div class="col mt-3 mb-0">
         <p style="color:#1f2937; text-align: left; margin-bottom: 0px;">
           รายละเอียดสินค้า
@@ -200,7 +213,7 @@ input[type=number]::-webkit-outer-spin-button {
         <div class="col">
           <br>
           <p style="color:#1f2937; text-align: left;">
-            คุณภาพ : {{data_product.quality_id.quality_name}}
+            คุณภาพ : <span class="badge rounded-pill bg-danger ">{{data_product.quality_id.quality_name}}</span>
           </p>
           <p style="color:#1f2937; text-align: left;">
             รอบตัด : {{harvest}}
@@ -211,6 +224,11 @@ input[type=number]::-webkit-outer-spin-button {
         </div>
         </div>
         <hr>
+        <div class="col mt-3 mb-2">
+          <span class="badge rounded-pill bg-success float-start" style="margin:5px;">{{data_product.plant_place}}</span>
+          <span class="badge rounded-pill bg-primary float-start" style="margin:5px;">{{data_product.water_source}}</span>
+      </div>
+      <br>
         <div class="col mt-3 mb-0">
           <p style="color:#1f2937; text-align: left;">
             {{data_product.product_description}}
@@ -304,9 +322,9 @@ input[type=number]::-webkit-outer-spin-button {
       {% endif %}
 
     </div>
-    
-    <small class="float-end" style="padding: 1%;">สร้างเมื่อวันที่ : {{data_product.date_create}}</small>
-    <br><br>
+    <br>
+    <p style="padding: 2%; text-align: right;">สร้างเมื่อวันที่ : {{data_product.date_create}}</smll>    <br><br>
+
     <div class="col-lg-1"></div>
 
   </div>

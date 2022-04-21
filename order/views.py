@@ -294,6 +294,10 @@ def order_product(request, id):
             error_img = 'กรุณาสั่งซื้อใหม่ เนื่องจากไม่มีข้อมูลรูปภาพที่ต้องการแกะลาย'
             context = {'error_img' : error_img}
             return render(request, template_name='index.html', context=context)
+        if amount != 1:
+            error_amount = 'กรุณาสั่งซื้อใหม่ เนื่องจากไม่มีการแกะลายสามารถสั่งได้ทีละลูก'
+            context = {'error_amount' : error_amount}
+            return redirect('product_desc', id=product.id)
 
         else:
             product.product_amount = product.product_amount - amount
@@ -348,7 +352,7 @@ def cancel_order(request, id):
     cancel_description = request.POST.get('cancel_description')
     refund_contact = request.POST.get('refund_contact')
 
-    if order.State_id_id == 1:
+    if order.State_id.id == 1:
         state = State.objects.get(id=7)
         order.State_id = state
 
