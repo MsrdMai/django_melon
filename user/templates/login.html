@@ -1,22 +1,44 @@
 {% extends "TopnavUser.html" %} {% load static %}{% load socialaccount %}{% providers_media_js %} {% block content %}
-
-      <div 
+<style>
+    @media only screen and (max-width: 400px) {
+    .size-text{
+        font-size: 15px;
+    }
+    #loginform{
+      height: 460px;
+    }
+ }
+ @media only screen and (max-width: 900px) {
+    #loginform{
+      height: 460px;
+    }
+ }
+ @media only screen and (max-height: 1200px) and (max-width: 850px) and (min-width: 700px){
+  .bg{
+    height: 1000px;
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+ }
+</style>
+      <div class="bg"
       style="background : url('{% static "img/bg2.jpg" %}') no-repeat; 
       background-size : cover;
       margin: 0;"
+      
       >
       <br/><br/>
 
       <div class="container">
       <center>
        
-      <div id="loginform" class="col-sm-5" >
+      <div id="loginform" class="col-sm-5 col-md-8 col-lg-6 col-xl-4 px-5 py-4" >
       
-        <form  class="form-info" method="POST" action="{% url 'login_page' %}">
+        <form  class="form-info w-100" method="POST" action="{% url 'login_page' %}">
             {% csrf_token %}
 
-            <h1><b>Sign In</b></h1>
-            <br/>
+            <h1 class="mt-2 mb-4"><b>Sign In</b></h1>
 
             <div class="mb-3">
               <label for="Username" class="form-label float-start">Username</label>
@@ -33,12 +55,12 @@
 
     
     
-            <div class="d-grid gap-2">
+            <div class="d-grid gap-md-5">
             <button type="submit" class="btn my-2 my-sm-0 btn-lg btn-block" style="background-color: #34D399;color: white;">เข้าสู่ระบบ</button>
           </form>
         
-          <br/> <br/>
-        <a class="btn btn-light my-2 my-sm-0 btn-lg btn-block" href="{% provider_login_url 'google'%}" style="border-style: solid;border-color: black; background-color:white;">
+          
+        <a class="size-text btn btn-light  mt-5 my-2 my-sm-0 btn-lg btn-block" href="{% provider_login_url 'google'%}" style="border-style: solid;border-color: black; background-color:white;">
             <img src="{% static "icon/google.png" %}" width="30px" height="auto"  class="float-start"/>
             Sign in With Google</a>
 
